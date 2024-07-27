@@ -1,4 +1,18 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const video = document.getElementById('bgVideo');
+    const fallbackImage = document.getElementById('bgFallback');
+
+    function handleVideoError() {
+        if (video && fallbackImage) {
+            video.style.display = 'none';
+            fallbackImage.style.display = 'block';
+        }
+    }
+
+    if (video) {
+        video.addEventListener('error', handleVideoError);
+        video.play().catch(handleVideoError);
+    }
     fetch('content.json')
         .then(response => response.json())
         .then(content => {

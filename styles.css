@@ -36,6 +36,28 @@ body {
     transform: translateX(-50%) translateY(-50%);
 }
 
+/* Background Image Styles */
+.bg-image-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+#bgImage {
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
 /* Header Styles */
 header {
     padding: 1rem;
@@ -51,7 +73,7 @@ header {
 
 .logo {
     display: flex;
-    flex-direction: column; /* Ensures text is below the logo */
+    flex-direction: column;
     align-items: center;
     text-align: center;
 }
@@ -64,7 +86,7 @@ header {
 
 .logo a {
     display: flex;
-    flex-direction: column; /* Ensures text is below the logo */
+    flex-direction: column;
     align-items: center;
     text-decoration: none;
     color: inherit;
@@ -129,7 +151,7 @@ main {
     text-align: center;
     color: #3B3964;
     width: 100%;
-    margin-bottom: 2rem; /* Add margin bottom to create space */
+    margin-bottom: 2rem;
 }
 
 .mission-statement p {
@@ -166,7 +188,7 @@ main {
     font-size: 1.5rem;
     font-weight: bold;
     margin: 0.5rem 0;
-    color: #ffffff; /* Adjust color as needed */
+    color: #ffffff;
 }
 
 .focal-item:hover {
@@ -183,7 +205,7 @@ main {
     flex-wrap: wrap;
     gap: 1rem;
     justify-content: center;
-    width: 100%; /* Ensure it takes up the full width of the container */
+    width: 100%;
 }
 
 .post-thumbnail {
@@ -219,27 +241,48 @@ main {
     background-color: rgba(255, 255, 255, 0.9);
 }
 
-
-/* Background Image Styles */
-.bg-image-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
+.index-content {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+    width: 90vw;
+    height: 90vw;
+    max-width: 500px;
+    max-height: 500px;
+    margin: 2rem auto;
+    background-color: rgba(59, 57, 100, 0.8);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     overflow: hidden;
 }
 
-#bgImage {
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
+.index-content h2 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    margin-bottom: 0.5em;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.index-content ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0.5em 0;
+}
+
+.index-content li {
+    font-size: clamp(0.9rem, 3vw, 1.2rem);
+    margin-bottom: 0.3em;
+    font-weight: bold;
+}
+
+.index-content .tagline {
+    font-size: clamp(0.8rem, 2.5vw, 1.2rem);
+    font-style: italic;
+    margin-top: 0.5em;
+    max-width: 80%;
 }
 
 /* Contact page specific styles */
@@ -282,12 +325,11 @@ main {
 .contact-info a {
     color: rgba(255, 255, 255, 0.9);
     text-decoration: none;
-    display: flex; /* This helps with alignment */
+    display: flex;
     align-items: center;
     justify-content: center;
-    width: 24px; /* Adjust based on your icon size */
-    height: 24px; /* Adjust based on your icon size */
-    
+    width: 24px;
+    height: 24px;
 }
 
 .contact-info i,
@@ -302,8 +344,8 @@ main {
 .contact-us {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* This will push items to the edges */
-    flex-wrap: wrap; /* Allows wrapping on smaller screens */
+    justify-content: space-between;
+    flex-wrap: wrap;
     margin-top: 1rem;
 }
 
@@ -315,16 +357,16 @@ main {
 .contact-us p {
     margin: 0;
     font-weight: bold;
-    line-height: 1; /* Adjust if needed to match icon height */
+    line-height: 1;
 }
 
 #contactInfoTitle {
-    margin-right: 1rem; /* Space between "Contact Us:" and icons */
+    margin-right: 1rem;
 }
 
 #scheduleTitle {
-    margin-left: auto; /* This pushes the schedule text to the right */
-    padding-left: 2rem; /* Adds some space between icons and schedule text */
+    margin-left: auto;
+    padding-left: 2rem;
 }
 
 .small-text {
@@ -370,108 +412,115 @@ footer {
         margin-top: 0.5rem;
     }
 
+    main {
+        padding: 0.5rem;
+        justify-content: flex-start;
+        min-height: 100vh;
+    }
+
+    .mission-statement {
+        margin-bottom: 0.5rem;
+    }
+
+    .mission-statement p {
+        font-size: 1.2rem;
+        max-width: 100%;
+        padding: 0 0.5rem;
+    }
+
     .focal-area {
         flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding: 0;
+        gap: 0.5rem;
     }
 
     .focal-item {
         width: 100%;
+        max-width: none;
+        margin-bottom: 0.5rem;
+        padding: 0.75rem;
     }
 
-    .mission-statement p {
-        font-size: 2rem;
+    .focal-item h2 {
+        font-size: 1rem;
+        margin-bottom: 0.25rem;
     }
 
-    .focal-area {
-        margin-top: 2rem; /* Adjust space above focal components on small screens */
+    .focal-item .tagline {
+        font-size: 0.9rem;
+        margin-bottom: 0.25rem;
     }
-}
-.index-content {
-    text-align: center;
-    color: rgba(255, 255, 255, 0.8);
-    width: 90vw;
-    height: 90vw;
-    max-width: 500px;
-    max-height: 500px;
-    margin: 2rem auto;
-    background-color:rgba(59, 57, 100, 0.8);;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 5%;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-}
 
-.index-content h2 {
-    font-size: clamp(1.5rem, 4vw, 2rem);
-    margin-bottom: 0.5em;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-}
+    .posts-container {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
 
-.index-content ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0.5em 0;
-}
+    .post-thumbnail {
+        flex: 1 1 100%;
+        max-width: 100%;
+        margin-bottom: 0.25rem;
+    }
 
-.index-content li {
-    font-size: clamp(0.9rem, 3vw, 1.2rem);
-    margin-bottom: 0.3em;
-    font-weight: bold;
-}
+    .post-thumbnail p {
+        font-size: 0.8rem;
+        margin: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+    }
 
-.index-content .tagline {
-    font-size: clamp(0.8rem, 2.5vw, 1.2rem);
-    font-style: italic;
-    margin-top: 0.5em;
-    max-width: 80%;
-}
-
-@media (max-width: 480px) {
+    /* Index content adjustments */
     .index-content {
-        padding: 10%;
+        width: 90%;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        max-width: 300px;
+        max-height: 300px;
+        margin: 1rem auto;
+        padding: 0.5rem;
     }
 
     .index-content h2 {
-        font-size: clamp(1.2rem, 5vw, 1.5rem);
-    }
-
-    .index-content li {
-        font-size: clamp(0.8rem, 4vw, 1rem);
-    }
-
-    .index-content .tagline {
-        font-size: clamp(0.7rem, 3.5vw, 0.9rem);
-    }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-    .focal-item h2 {
         font-size: 1rem;
     }
 
-    .focal-item p {
-        font-size: 0.9rem;
-    }
-}
-
-@media (min-width: 1025px) {
-    body {
-        font-size: 18px;
+    .index-content li {
+        font-size: 0.8rem;
     }
 
-    .logo img {
-        max-width: 120px;
+    .index-content .tagline {
+        font-size: 0.7rem;
     }
 
-    .focal-item h2 {
-        font-size: 1.4rem;
+    /* Contact page mobile styles */
+    .contact-container {
+        padding: 1rem;
+        width: calc(100% - 1rem);
+        margin: 0.5rem;
+        max-width: none;
     }
-}
-@media (max-width: 768px) {
+
+    .contact-container h4 {
+        font-size: 1rem;
+    }
+
+    .contact-container p,
+    .contact-container ul {
+        font-size: 0.8rem;
+    }
+
+    .contact-info {
+        justify-content: center;
+    }
+
+    .calendly-inline-widget {
+        height: 500px !important;
+    }
+
     .contact-us {
         flex-direction: column;
         align-items: flex-start;
@@ -480,6 +529,6 @@ footer {
     #scheduleTitle {
         margin-left: 0;
         padding-left: 0;
-        margin-top: 1rem;
+        margin-top: 0.5rem;
     }
 }
