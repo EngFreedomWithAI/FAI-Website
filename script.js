@@ -1,19 +1,27 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Fetch the JSON content
     fetch('content.json')
         .then(response => response.json())
         .then(content => {
             loadSocialIcons(content);
-            if (document.body.contains(document.getElementById('focalArea'))) {
+            loadMissionStatement(content);
+            
+            if (document.body.contains(document.getElementById('indexContent'))) {
+                loadIndexContent(content);
+            } else if (document.body.contains(document.getElementById('focalArea'))) {
                 loadFocalAreas(content);
             } else if (document.body.contains(document.querySelector('.contact-container'))) {
-                loadAdditionalContactInfo(content);
-            } else if (document.body.contains(document.querySelector('.posts-container'))) {
-                loadDedicatedPageContent(content);
+                loadContactInfo(content);
             }
         })
-        .catch(error => console.error('Error fetching content:', error));
+        .catch(error => {
+            console.error('Error fetching content:', error);
+            const fallbackContent = '<p>Unable to load content at this time. Please try again later.</p>';
+            document.querySelectorAll('.content-section').forEach(container => {
+                container.innerHTML = fallbackContent;
+            });
+        });
 });
+
 
 function loadSocialIcons(content) {
     const socialIcons = document.getElementById('socialIcons');
@@ -37,7 +45,26 @@ function loadSocialIcons(content) {
         socialIcons.appendChild(a);
     });
 }
-
+function loadMissionStatement(content) {
+    const missionStatement = document.getElementById('missionStatement');
+    if (missionStatement) {
+        missionStatement.innerHTML = `<p>${content.main.missionStatement}</p>`;
+    }
+}
+function loadIndexContent(content) {
+    const indexContent = document.getElementById('indexContent');
+    const newContent = content.main.indexContent;
+    
+    let html = `
+        <h2>${newContent.title}</h2>
+        <ul>
+            ${newContent.points.map(point => `<li>${point}</li>`).join('')}
+        </ul>
+        <p class="tagline">${newContent.tagline}</p>
+    `;
+    
+    indexContent.innerHTML = html;
+}
 function loadFocalAreas(content) {
     const focalArea = document.getElementById('focalArea');
     content.main.focalAreas.forEach(area => {
@@ -55,33 +82,60 @@ function loadFocalAreas(content) {
         div.innerHTML = `
             <h2>${area.title}</h2>
             <p class="tagline">${area.tagline}</p>
-            <div class="posts-container">${postsHtml}</div>
-            <a href="${area.pageUrl}" class="view-more">View More</a>`;
+            <div class="posts-container">${postsHtml}</div>`;
         focalArea.appendChild(div);
     });
 }
+function loadContactInfo(content) {
+    const contactInfo = content.contact;
 
-function loadDedicatedPageContent(content) {
-    const pageId = document.body.id;
-    const pageContent = document.querySelector('.content-section .posts-container');
-    const focalArea = content.main.focalAreas.find(area => area.pageUrl.includes(pageId));
-    let postsHtml = '';
-    focalArea.posts.forEach(post => {
-        postsHtml += `
-            <div class="post-thumbnail">
-                <a href="${post.url}" target="_blank">
-                    <p>${post.title}</p>
-                </a>
-            </div>`;
-    });
-    pageContent.innerHTML = postsHtml;
-}
-
-function loadAdditionalContactInfo(content) {
-    const contactList = document.querySelector('.contact-container ul');
-    content.contact.socialLinks.forEach(link => {
+    document.getElementById('contactTitle').textContent = contactInfo.title;
+    document.getElementById('contactIntro').textContent = contactInfo.intro;
+    
+    const pointsList = document.getElementById('contactPoints');
+    contactInfo.points.forEach(point => {
         const li = document.createElement('li');
-        li.innerHTML = `${link.platform}: <a href="${link.url}" target="_blank">${link.handle}</a>`;
-        contactList.appendChild(li);
+        const strong = document.createElement('strong');
+        strong.textContent = point.preface;
+        li.appendChild(strong);
+        li.appendChild(document.createTextNode(` ${point.description}`));
+        pointsList.appendChild(li);
     });
+
+    document.getElementById('contactConclusion').textContent = contactInfo.conclusion;
+    document.getElementById('contactInfoTitle').textContent = contactInfo.contactInfoTitle;
+
+    const methodsList = document.getElementById('contactMethods');
+    contactInfo.contactMethods.forEach(method => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = method.contact;
+        a.setAttribute('aria-label', method.type);
+        if (method.iconClass) {
+            const i = document.createElement('i');
+            i.className = method.iconClass;
+            a.appendChild(i);
+        } else if (method.iconUrl) {
+            const img = document.createElement('img');
+            img.src = method.iconUrl;
+            img.alt = `${method.type} Icon`;
+            a.appendChild(img);
+        }
+        li.appendChild(a);
+        methodsList.appendChild(li);
+    });
+
+    document.getElementById('scheduleTitle').textContent = contactInfo.scheduleTitle;
+    
+    const calendlyWidget = document.getElementById('calendlyWidget');
+    calendlyWidget.setAttribute('data-url', contactInfo.calendlyUrl);
+
+    const script = document.createElement('script');
+    script.src = "https://assets.calendly.com/assets/external/widget.js";
+    script.async = true;
+    document.body.appendChild(script);
 }
+
+
+
+

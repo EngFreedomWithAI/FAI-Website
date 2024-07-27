@@ -1,89 +1,137 @@
 {
-    "header": {
-      "logoAlt": "Freedom with AI Logo",
-      "placeholderText": "Freedom With AI",
-      "connectButtonText": "Let's Connect"
+  "header": {
+    "logoAlt": "Freedom with AI Logo",
+    "placeholderText": "Freedom With AI",
+    "connectButtonText": "Let's Connect"
+  },
+  "main": {
+    "missionStatement": "Equipping Bold Businesses To Thrive With AI",
+    "indexContent": {
+      "title": "Unlock Your AI Potential",
+      "points": [
+        "Boost Efficiency",
+        "Spark Innovation",
+        "Outpace Competition",
+        "Future-Proof Your Business"
+      ],
+      "tagline": "Bold solutions for forward-thinking companies."
     },
-    "main": {
-      "focalAreas": [
-        {
-          "title": "Discover AI",
-          "tagline": "What?",
-          "posts": [
-            {
-              "title": "What is AI?",
-              "thumbnail": "Assets/thumbnail-post1.jpg",
-              "url": "https://www.youtube.com/watch?v=FzQeH7qSp74"
-            },
-            {
-              "title": "What are AI Models?",
-              "thumbnail": "Assets/thumbnail-post2.jpg",
-              "url": "https://youtu.be/LOnKRErXn3E"
-            }
-          ],
-          "pageUrl": "discover-ai.html"
-        },
-        {
-          "title": "Accelerate Your Business",
-          "tagline": "How?",
-          "posts": [
-            {
-              "title": "How to Leverage AI Assistants?",
-              "thumbnail": "Assets/thumbnail-business1.jpg",
-              "url": "https://youtu.be/bsiWiumWL6Q"
-            },
-            {
-              "title": "How to use AI-powered Communication Tools?",
-              "thumbnail": "Assets/thumbnail-business2.jpg",
-              "url": "https://youtu.be/UBJVcY0Hews"
-            }
-          ],
-          "pageUrl": "accelerate-business.html"
-        },
-        {
-          "title": "Experience Freedom",
-          "tagline": "Why?",
-          "posts": [
-            {
-              "title": "Embrace AI",
-              "thumbnail": "Assets/thumbnail-freedom1.jpg",
-              "url": "https://x.com/FreedomWithAI/status/1702889340169498942"
-            },
-            {
-              "title": "Our greatest threat: Stagnation",
-              "thumbnail": "Assets/thumbnail-freedom2.jpg",
-              "url": "https://x.com/FreedomWithAI/status/1762699497694748932"
-            }
-          ],
-          "pageUrl": "experience-freedom.html"
-        }
-      ]
-    },
-    "footer": {
-      "copyright": "© Freedom With AI 2024",
-      "socialLinks": [
-        {
-          "name": "YouTube",
-          "url": "https://www.youtube.com/@FreedomWith-AI"
-        },
-        {
-          "name": "X",
-          "url": "https://x.com/freedomwithai"
-        },
-        {
-          "name": "Facebook",
-          "url": "https://facebook.com/freedomwithai"
-        }
-      ]
-    },
-    "contact": {
-      "title": "Contact Us",
-      "intro": "Reach out to us:",
-      "email": "contact@freedomwithai.com",
-      "scheduleTitle": "Schedule a Session",
-      "socialLinks": [
-        { "platform": "X", "handle": "@freedomwithai", "url": "https://x.com/FreedomWithAI" },
-        { "platform": "Facebook", "handle": "Freedom with AI", "url": "https://facebook.com/freedomwithai" }
-      ]
-    }
+    "focalAreas": [
+      {
+        "title": "Discover AI",
+        "tagline": "What?",
+        "posts": [
+          {
+            "title": "What is AI?",
+            "thumbnail": "Assets/thumbnail-post1.jpg",
+            "url": "https://www.youtube.com/watch?v=FzQeH7qSp74"
+          },
+          {
+            "title": "What are AI Models?",
+            "thumbnail": "Assets/thumbnail-post2.jpg",
+            "url": "https://youtu.be/LOnKRErXn3E"
+          }
+        ],
+        "pageUrl": "discover-ai.html"
+      },
+      {
+        "title": "Accelerate Your Business",
+        "tagline": "How?",
+        "posts": [
+          {
+            "title": "How to Leverage AI Assistants?",
+            "thumbnail": "Assets/thumbnail-business1.jpg",
+            "url": "https://youtu.be/bsiWiumWL6Q"
+          },
+          {
+            "title": "How to use AI-powered Communication Tools?",
+            "thumbnail": "Assets/thumbnail-business2.jpg",
+            "url": "https://youtu.be/UBJVcY0Hews"
+          }
+        ],
+        "pageUrl": "accelerate-business.html"
+      },
+      {
+        "title": "Experience Freedom",
+        "tagline": "Why?",
+        "posts": [
+          {
+            "title": "Embrace AI",
+            "thumbnail": "Assets/thumbnail-freedom1.jpg",
+            "url": "https://x.com/FreedomWithAI/status/1702889340169498942"
+          },
+          {
+            "title": "Our greatest threat: Stagnation",
+            "thumbnail": "Assets/thumbnail-freedom2.jpg",
+            "url": "https://x.com/FreedomWithAI/status/1762699497694748932"
+          }
+        ],
+        "pageUrl": "experience-freedom.html"
+      }
+    ]
+  },
+  "footer": {
+    "copyright": "© Freedom With AI 2024",
+    "socialLinks": [
+      {
+        "name": "YouTube",
+        "url": "https://www.youtube.com/@FreedomWith-AI"
+      },
+      {
+        "name": "X",
+        "url": "https://x.com/freedomwithai"
+      },
+      {
+        "name": "Facebook",
+        "url": "https://facebook.com/freedomwithai"
+      }
+    ]
+  },
+  "contact": {
+    "title": "At Freedom with AI, we transform businesses with cutting-edge AI solutions.",
+    "intro": "Our unique, hands-on approach offers:",
+    "points": [
+      {
+        "preface": "Insight Gathering:",
+        "description": "Stakeholder interviews to understand your business"
+      },
+      {
+        "preface": "Gap Analysis:",
+        "description": "Identifying opportunities for AI integration"
+      },
+      {
+        "preface": "AI Education:",
+        "description": "Training stakeholders on relevant tools and practices"
+      },
+      {
+        "preface": "Process Enhancement:",
+        "description": "Automating and augmenting for efficiency and innovation"
+      },
+      {
+        "preface": "Continuous Improvement:",
+        "description": "Regular reviews to maintain relevance"
+      }
+    ],
+    "conclusion": "Partner with us to unlock your business's full AI potential and drive transformative change.",
+    "contactInfoTitle": "Contact Us:",
+    "contactMethods": [
+      {
+        "type": "email",
+        "iconClass": "fas fa-envelope",
+        "contact": "mailto:contact@freedomwithai.com"
+      },
+      {
+        "type": "x",
+        "iconUrl": "Assets/Xlogo.svg",
+        "contact": "https://x.com/freedomwithai"
+      },
+      {
+        "type": "facebook",
+        "iconClass": "fab fa-facebook",
+        "contact": "https://facebook.com/freedomwithai"
+      }
+    ],
+    "scheduleTitle": "Schedule a Free Session:",
+    "calendlyUrl": "https://calendly.com/engineering-freedomwith/accelerateyourbusiness"
   }
+}

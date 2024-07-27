@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Contact - Freedom with AI</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-468Q292Q89"></script>
@@ -16,11 +17,8 @@
   gtag('config', 'G-468Q292Q89');
 </script>
 <body>
-    <div class="bg-video-container">
-        <video autoplay muted loop playsinline poster="Assets/13-futuristic_utopia_for_humanity.png" id="bgVideo">
-            <source src="Assets/FAI.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+    <div class="bg-image-container">
+        <img src="Assets/StaticUtopia.svg" alt="Static Background Image" id="bgImage">
     </div>
     
     <header>
@@ -28,25 +26,33 @@
             <div class="logo">
                 <a href="index.html">
                     <img src="Assets/Logo-_3B3964.svg" alt="Freedom with AI Logo" class="logo-img">
+                    <p class="logo-text">Freedom With AI</p>
                 </a>
-                <p class="logo-text">Freedom With AI</p>
             </div>
+            <nav>
+                <a href="resources.html" class="nav-link">Resources</a>
+                <a href="contact.html" class="connect-button">
+                    <img src="Assets/Connect.svg" alt="Connect Icon">
+                    <span>Let's Connect</span>
+                </a>
+            </nav>
         </div>
     </header>
 
     <main>
         <div class="contact-container">
-            <h1>Contact Us</h1>
-            <p>Reach out to us:</p>
-            <ul>
-                <li>Email: <a href="mailto:contact@freedomwithai.com">contact@freedomwithai.com</a></li>
-                <!-- Additional contact methods will be loaded by JavaScript -->
-            </ul>
-            <h2>Schedule a Session</h2>
-            <!-- Calendly inline widget begin -->
-            <div class="calendly-inline-widget" data-url="https://calendly.com/engineering-freedomwith/accelerateyourbusiness" style="min-width:320px;height:700px;"></div>
-            <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-            <!-- Calendly inline widget end -->
+            <h5 id="contactTitle"></h5>
+            <p id="contactIntro" class="small-text"></p>
+            <ul id="contactPoints" class="small-text"></ul>
+            <p id="contactConclusion" class="small-text"></p>
+            <div class="contact-us">
+                <div class="contact-info-group">
+                    <p id="contactInfoTitle"></p>
+                    <ul id="contactMethods" class="contact-info"></ul>
+                </div>
+                <p id="scheduleTitle"></p>
+            </div>
+            <div id="calendlyWidget" class="calendly-inline-widget" style="min-width:320px;height:700px;"></div>
         </div>
     </main>
 
