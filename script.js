@@ -84,15 +84,14 @@ function loadFocalAreas(content) {
     content.main.focalAreas.forEach(area => {
         const div = document.createElement('div');
         div.className = 'focal-item';
-        let postsHtml = '';
+        let postsHtml = '<ul>';
         area.posts.forEach(post => {
             postsHtml += `
-                <div class="post-thumbnail">
-                    <a href="${post.url}" target="_blank">
-                        <p>${post.title}</p>
-                    </a>
-                </div>`;
+                <li>
+                    <a href="${post.url}" target="_blank">${post.title}</a>
+                </li>`;
         });
+        postsHtml += '</ul>';
         div.innerHTML = `
             <h2>${area.title}</h2>
             <div class="posts-container">${postsHtml}</div>`;
