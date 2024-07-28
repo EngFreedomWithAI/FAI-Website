@@ -162,6 +162,7 @@ main {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
+
 .focal-area {
     display: flex;
     justify-content: center;
@@ -170,10 +171,22 @@ main {
     width: 100%;
 }
 
+/* Link highlighting */
+a {
+    color: #5A587D; /* A lighter shade of the primary color for better visibility */
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  a:hover, a:focus {
+    color: #2A2847; /* A darker shade for hover/focus states */
+    text-decoration: underline;
+  }
+
 .focal-item {
     background-color: rgba(59, 57, 100, 0.8);
     color: white;
-    padding: 1.5rem;
+    padding: 1rem;
     border-radius: 5px;
     transition: transform 0.3s ease;
     flex: 1;
@@ -221,9 +234,13 @@ main {
 }
 
 .post-thumbnail p {
-    margin: 0.5rem 0 0;
-    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0.25rem 0 0;
+    color: #3ABFEF;
     font-size: 1rem;
+    max-width: 100%;
 }
 
 .view-more {

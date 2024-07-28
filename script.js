@@ -95,7 +95,6 @@ function loadFocalAreas(content) {
         });
         div.innerHTML = `
             <h2>${area.title}</h2>
-            <p class="tagline">${area.tagline}</p>
             <div class="posts-container">${postsHtml}</div>`;
         focalArea.appendChild(div);
     });

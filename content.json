@@ -18,8 +18,7 @@
     },
     "focalAreas": [
       {
-        "title": "Discover AI",
-        "tagline": "What?",
+        "title": "Discover AI [What?]",
         "posts": [
           {
             "title": "What is AI?",
@@ -35,8 +34,7 @@
         "pageUrl": "discover-ai.html"
       },
       {
-        "title": "Accelerate Your Business",
-        "tagline": "How?",
+        "title": "Accelerate Your Business [How?]",
         "posts": [
           {
             "title": "How to Leverage AI Assistants?",
@@ -52,8 +50,7 @@
         "pageUrl": "accelerate-business.html"
       },
       {
-        "title": "Experience Freedom",
-        "tagline": "Why?",
+        "title": "Experience Freedom [Why?]",
         "posts": [
           {
             "title": "Embrace AI",
