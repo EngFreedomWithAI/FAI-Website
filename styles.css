@@ -321,6 +321,19 @@ a {
     margin-top: 0.5em;
     max-width: 80%;
 }
+/* Infographic Styles */
+.infographic-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 2rem auto;
+    text-align: center;
+}
+
+.infographic {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+}
 
 /* Contact page specific styles */
 .contact-container {
@@ -409,6 +422,7 @@ a {
 .small-text {
     font-size: 0.9rem;
 }
+
 
 /* Footer Styles */
 footer {
@@ -532,6 +546,13 @@ footer {
 
     .index-content .tagline {
         font-size: 0.7rem;
+    }
+    @media (max-width: 768px) {
+        /* ... (existing mobile styles) ... */
+    
+        .infographic-container {
+            margin: 1rem auto;
+        }
     }
 
     /* Contact page mobile styles */
