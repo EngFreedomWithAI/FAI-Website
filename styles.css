@@ -547,12 +547,9 @@ footer {
     .index-content .tagline {
         font-size: 0.7rem;
     }
-    @media (max-width: 768px) {
-        /* ... (existing mobile styles) ... */
     
-        .infographic-container {
-            margin: 1rem auto;
-        }
+    .infographic-container {
+        margin: 1rem auto;
     }
 
     /* Contact page mobile styles */
