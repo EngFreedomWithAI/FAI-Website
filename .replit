@@ -1,6 +1,6 @@
-run = "export PATH=$PATH:/home/runner/.nix-profile/bin && node_modules/.bin/live-server --port=5500 --host=0.0.0.0"
+run = "export PATH=$PATH:/home/runner/.nix-profile/bin && node_modules/.bin/http-server -p 8080 -a 0.0.0.0"
 
 [[ports]]
-localPort = 5500
-externalPort = 5500
+localPort = 8080
+externalPort = 8080
 exposeLocalhost = true
