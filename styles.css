@@ -339,6 +339,42 @@ a {
     min-width: 800px; /* Set a minimum width to prevent it from becoming too small */
 }
 
+/* General Image Styling */
+.fai-concept-image {
+    max-width: 80%; /* Limit image to 80% of the screen width */
+    height: auto; /* Maintain the aspect ratio */
+    display: block; /* Center the image */
+    margin: 10px auto; /* Add space around the image */
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+    .fai-concept-image {
+        max-width: 100%; /* Full width on mobile */
+        margin: 10px auto; /* Adjust the margin for smaller devices */
+    }
+}
+
+.fai-canvas-heading {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 1rem;
+    color: #3B3964;  /* Adjust the color to match your theme */
+}
+
+.fai-canvas-subheading {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 0%;
+    margin-top: 5px;
+    color: #3B3964;  /* Adjust the color to match your theme */
+    line-height: 2;
+}
+.fai-canvas-container {
+    margin-top: .1px; /* Adjust this to move the image up */
+}
+
 /* Contact page specific styles */
 .contact-container {
     background-color: #3B3964;

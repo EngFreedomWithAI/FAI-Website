@@ -4,6 +4,10 @@
     "placeholderText": "Freedom With AI",
     "connectButtonText": "Let's Connect"
   },
+  "faiCanvasPage": {
+    "heading": "FAI Canvas: The Blueprint",
+    "subheading": "From <strong>Red Oceans</strong> to <strong>Blue Skies</strong>: Escape the competitive struggle.<br>Answer the critical business questions - <strong>Why, Who, What, How, When, and Where</strong> - with AI."
+  },
   "main": {
     "missionStatement": "Helping Bold Businesses Thrive with AI",
     "indexContent": {
@@ -16,6 +20,7 @@
       ],
       "tagline": "Bold solutions for forward-thinking companies."
     },
+    
     "focalAreas": [
       {
         "title": "Discover AI [What?]",

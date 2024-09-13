@@ -25,6 +25,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 loadFocalAreas(content);
             } else if (document.body.contains(document.querySelector('.contact-container'))) {
                 loadContactInfo(content);
+            } else if (document.body.contains(document.querySelector('.fai-canvas-container'))) {
+                loadFAICanvasContent(content);
             }
         })
         .catch(error => {
@@ -78,6 +80,34 @@ function loadIndexContent(content) {
     `;
     
     indexContent.innerHTML = html;
+}
+function loadFAICanvasContent(content) {
+    console.log('Loading FAI Canvas content...');
+
+    if (content.faiCanvasPage) {
+        const heading = content.faiCanvasPage.heading;
+        const subheading = content.faiCanvasPage.subheading;
+
+        const headingElement = document.createElement('h1');
+        headingElement.textContent = heading;
+        headingElement.className = 'fai-canvas-heading';  // Add a class for styling
+
+        const subheadingElement = document.createElement('p');
+        subheadingElement.innerHTML = subheading;  // Use innerHTML to interpret <br> tags
+        subheadingElement.className = 'fai-canvas-subheading';  // Add a class for styling
+
+        const canvasContainer = document.querySelector('.fai-canvas-container');
+        
+        if (canvasContainer) {
+            console.log('FAI Canvas container found, adding content...');
+            canvasContainer.prepend(subheadingElement);
+            canvasContainer.prepend(headingElement);
+        } else {
+            console.error('FAI Canvas container not found!');
+        }
+    } else {
+        console.error('faiCanvasPage content is missing or undefined!');
+    }
 }
 function loadFocalAreas(content) {
     const focalArea = document.getElementById('focalArea');
