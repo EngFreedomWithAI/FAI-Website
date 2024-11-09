@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" id="home">
+<html lang="en" id="contact">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Freedom with AI</title>
+    <title>Contact - Freedom with AI</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-468Q292Q89"></script>
@@ -16,13 +17,8 @@
   gtag('config', 'G-468Q292Q89');
 </script>
 <body>
-    <div class="bg-video-container">
-        <video autoplay muted loop id="bgVideo">
-            <source src="Assets/FAI.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <img src="Assets/StaticUtopia.svg" alt="Fallback background" id="bgFallback">
-</div>
+    <div class="bg-image-container">
+        <img src="Assets/StaticUtopia.svg" alt="Static Background Image" id="bgImage">
     </div>
     
     <header>
@@ -36,7 +32,7 @@
             <nav>
                 <a href="faicanvas.html" class="nav-link">FAI Canvas</a>
                 <a href="resources.html" class="nav-link">Resources</a>
-               <!-- contact page OUT<a href="contact.html" class="connect-button"> 
+                <!-- contact page OUT<a href="contact.html" class="connect-button"> 
                 <img src="Assets/Connect.svg" alt="Connect Icon">
                 <span>Let's Connect</span> 
                 </a> -->
@@ -45,15 +41,20 @@
     </header>
 
     <main>
-        <section id="missionStatement" class="mission-statement">
-            <!-- Mission statement will be loaded by JavaScript -->
-        </section>
-        <section id="indexContent" class="index-content">
-            <!-- New index content will be loaded by JavaScript -->
-        </section>
-        <section id="infographicContainer" class="infographic-container">
-            <img src="Assets/HomeInfo.svg" alt="Infographic" class="infographic">
-        </section>
+        <div class="contact-container">
+            <h5 id="contactTitle"></h5>
+            <p id="contactIntro" class="small-text"></p>
+            <ul id="contactPoints" class="small-text"></ul>
+            <p id="contactConclusion" class="small-text"></p>
+            <div class="contact-us">
+                <div class="contact-info-group">
+                    <p id="contactInfoTitle"></p>
+                    <ul id="contactMethods" class="contact-info"></ul>
+                </div>
+                <p id="scheduleTitle"></p>
+            </div>
+            <div id="calendlyWidget" class="calendly-inline-widget" style="min-width:320px;height:700px;"></div>
+        </div>
     </main>
 
     <footer>
