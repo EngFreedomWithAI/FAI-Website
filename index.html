@@ -1,68 +1,51 @@
 <!DOCTYPE html>
-<html lang="en" id="home">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Freedom with AI</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="0; url=https://faibuddy.com">
+    <title>Redirecting to FAI Buddy...</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-468Q292Q89"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-468Q292Q89');
+    </script>
+    <script>
+        // Immediate JavaScript redirect as fallback
+        window.location.replace("https://faibuddy.com");
+    </script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .redirect-message {
+            text-align: center;
+            padding: 2rem;
+        }
+        .redirect-message h1 {
+            margin-bottom: 1rem;
+        }
+        .redirect-message a {
+            color: white;
+            text-decoration: underline;
+        }
+    </style>
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-468Q292Q89"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-468Q292Q89');
-</script>
 <body>
-    <div class="bg-video-container">
-        <video autoplay muted loop id="bgVideo">
-            <source src="Assets/FAI.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <img src="Assets/StaticUtopia.svg" alt="Fallback background" id="bgFallback">
-</div>
+    <div class="redirect-message">
+        <h1>Redirecting...</h1>
+        <p>You are being redirected to <a href="https://faibuddy.com">faibuddy.com</a></p>
+        <p>If you are not redirected automatically, <a href="https://faibuddy.com">click here</a>.</p>
     </div>
-    
-    <header>
-        <div class="header-content">
-            <div class="logo">
-                <a href="index.html">
-                    <img src="Assets/Logo-_3B3964.svg" alt="Freedom with AI Logo" class="logo-img">
-                    <p class="logo-text">Freedom With AI</p>
-                </a>
-            </div>
-            <nav>
-                <a href="faicanvas.html" class="nav-link">FAI Canvas</a>
-                <a href="resources.html" class="nav-link">Resources</a>
-               <!-- contact page OUT<a href="contact.html" class="connect-button"> 
-                <img src="Assets/Connect.svg" alt="Connect Icon">
-                <span>Let's Connect</span> 
-                </a> -->
-            </nav>
-        </div>
-    </header>
-
-    <main>
-        <section id="missionStatement" class="mission-statement">
-            <!-- Mission statement will be loaded by JavaScript -->
-        </section>
-        <section id="indexContent" class="index-content">
-            <!-- New index content will be loaded by JavaScript -->
-        </section>
-        <section id="infographicContainer" class="infographic-container">
-            <img src="Assets/HomeInfo.svg" alt="Infographic" class="infographic">
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; Freedom With AI 2024</p>
-        <div id="socialIcons" class="social-icons">
-            <!-- Social icons will be loaded by JavaScript -->
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>
