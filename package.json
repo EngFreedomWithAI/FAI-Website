@@ -1,5 +1,15 @@
 {
+  "name": "fai-website",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
   "dependencies": {
+    "astro": "^5.7.0"
+  },
+  "devDependencies": {
     "http-server": "^14.1.1",
     "live-server": "^1.2.2"
   }

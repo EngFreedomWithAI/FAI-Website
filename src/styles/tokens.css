@@ -1,0 +1,98 @@
+:root {
+  /* ---------- PRIMITIVES: color ---------- */
+  --paper:        #f7f4ed;
+  --paper-2:      #f0ece1;
+  --card:         #fffdf8;
+  --ink:          #15181b;
+  --ink-2:        #52555a;
+  --ink-3:        #8c8f93;
+  --line:         rgba(21,24,27,.12);
+  --line-2:       rgba(21,24,27,.07);
+  --dark:         #0f1419;
+  --dark-2:       #161b22;
+  --dark-3:       #232a33;
+  --on-dark:      #f4f6f8;
+  --on-dark-2:    rgba(244,246,248,.62);
+  --on-dark-line: rgba(255,255,255,.12);
+  --blue:         #1a73e8;
+  --blue-2:       #1557b0;
+  --blue-soft:    rgba(26,115,232,.10);
+  --blue-on-dark: #7fb0ff;
+
+  /* ---------- SEMANTIC: color (components use these) ---------- */
+  --color-bg:                var(--paper);
+  --color-bg-alt:            var(--paper-2);
+  --color-surface:           var(--card);
+  --color-text:              var(--ink);
+  --color-text-muted:        var(--ink-2);
+  --color-text-subtle:       var(--ink-3);
+  --color-border:            var(--line);
+  --color-border-subtle:     var(--line-2);
+  --color-accent:            var(--blue);
+  --color-accent-strong:     var(--blue-2);
+  --color-accent-soft:       var(--blue-soft);
+  --color-inverse-bg:        var(--dark);
+  --color-inverse-surface:   var(--dark-2);
+  --color-inverse-surface-2: var(--dark-3);
+  --color-on-inverse:        var(--on-dark);
+  --color-on-inverse-muted:  var(--on-dark-2);
+  --color-on-inverse-border: var(--on-dark-line);
+  --color-accent-on-inverse: var(--blue-on-dark);
+
+  /* ---------- TYPOGRAPHY ---------- */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --text-xs:   .75rem;
+  --text-sm:   .85rem;
+  --text-base: 1rem;
+  --text-md:   1.15rem;
+  --text-lg:   1.4rem;
+  --text-xl:   clamp(1.5rem, 2.4vw, 2rem);
+  --text-2xl:  clamp(2rem, 5vw, 3.4rem);
+  --text-hero: clamp(2.5rem, 7.2vw, 5.1rem);
+  --leading-tight:   1.1;
+  --leading-normal:  1.5;
+  --leading-relaxed: 1.65;
+
+  /* ---------- SPACING (4px base) ---------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 72px;
+  --space-9: 96px;
+
+  /* ---------- RADII ---------- */
+  --r-sm: 9px;
+  --r:    14px;
+  --r-lg: 20px;
+
+  /* ---------- SHADOWS ---------- */
+  --shadow-sm:     0 16px 32px rgba(21,24,27,.08);
+  --shadow-md:     0 16px 34px rgba(21,24,27,.12);
+  --shadow-accent: 0 6px 18px rgba(26,115,232,.22);
+  --ring-accent:   0 0 0 3px var(--color-accent-soft);
+
+  /* ---------- MOTION ---------- */
+  --dur-fast: .15s;
+  --dur:      .2s;
+  --ease:     ease;
+
+  /* ---------- LAYOUT ---------- */
+  --maxw:  1080px;
+  --readw: 680px;
+}
+
+/* Dark punctuation context: apply to footer and optional CTA strip */
+.on-dark {
+  --color-bg:            var(--color-inverse-bg);
+  --color-surface:       var(--color-inverse-surface);
+  --color-text:          var(--color-on-inverse);
+  --color-text-muted:    var(--color-on-inverse-muted);
+  --color-border:        var(--color-on-inverse-border);
+  --color-accent:        var(--color-accent-on-inverse);
+  background: var(--color-bg);
+  color: var(--color-text);
+}
