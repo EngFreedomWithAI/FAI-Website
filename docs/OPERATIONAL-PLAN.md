@@ -10,9 +10,11 @@ Style rule for all copy in this project: no em dashes.
 
 - **Mission:** Helping corporate professionals succeed as AI entrepreneurs.
 - **Tagline and arc:** Corporate to AI Entrepreneur (shown as "Corporate -> AI Entrepreneur", with the arrow treated as a leap).
-- **Umbrella brand:** Freedom with AI, with four pillars: faibuddy (product), advisory, content (YouTube and writing), and workshops (later).
+- **Umbrella brand:** Freedom with AI, with four pillars: faibuddy (product), advisory, content (YouTube and writing), and events (talks, showcases, and gatherings, the live human layer).
 - **Big goal:** 100M by 2032, with the four pillars feeding each other as discovery and distribution.
-- **Near term engine:** content first. Content drives discovery and distribution, feeds product customer discovery, seeds workshops, and surfaces advisory clients.
+- **Near term engine:** content first. Content drives discovery and distribution, feeds product customer discovery, seeds events, and surfaces advisory clients.
+
+**Content vs events.** Content is the always-on, async engine (YouTube and writing) that draws people in at scale. Events are the live, synchronous, human layer (gatherings, talks, showcases, AMAs, and later workshops as one event type) that deepens relationships and converts the right few into advisory. Workshops are no longer a separate pillar; they are one possible kind of event if and when we run them.
 
 ### Audience (ICP)
 Corporate professionals on the arc from corporate to AI entrepreneur, at three stages:
@@ -52,10 +54,15 @@ Work with us (contact form)
 Footer (dark)
 ```
 
-Cut for now: workshops, empty content placeholders, any "book a discovery call" language, and any listed prices.
+Cut for now: empty content placeholders, any "book a discovery call" language, and any listed prices.
 
 ### Nav
-Freedom with AI · How we help · Advisory · Watch · Contact · [Try faibuddy]
+Freedom with AI · Advisory · Watch · Events · About · Contact · [Try faibuddy]
+
+### Events (`/events`)
+> Where we show up in the room. The premium stays on being human. Alongside the videos and writing, we host, speak at, and join gatherings for corporate professionals becoming AI entrepreneurs. Recaps land here as we go.
+
+Data-driven, just like the YouTube feed: each event is an entry in `src/data/events.ts` with name, ISO date, optional time and location, role (Hosted, Co-hosted, Spoke, Attended), a short summary or recap, and an optional link. The page renders them newest first with no layout changes, and shows a graceful subscribe-first empty state when there are none. Join-the-list capture sits at the bottom of the page.
 
 ### Hero
 - Display: Corporate -> AI Entrepreneur (arrow as a big leap, arc rising from Corporate to AI Entrepreneur)
@@ -86,7 +93,7 @@ Freedom with AI · How we help · Advisory · Watch · Contact · [Try faibuddy]
 > CTA: Try it free (faibuddy.com)
 
 **Advisory. Work with me.**
-> Advising has been part of my work throughout my career in product, tech, and AI. I work with a small number of corporate professionals becoming AI entrepreneurs, whether you are planning your exit, finding your footing, or pushing through the early stage of building. Engagements are paid, deliberately few, and shaped around you.
+> Senior advisory for corporate professionals becoming AI entrepreneurs, whether you are planning your exit, finding your footing, or pushing through the early stage of building. A small number of engagements, each shaped around you.
 > CTA: Request an engagement
 
 ### Watch (auto fed)
@@ -99,8 +106,15 @@ Freedom with AI · How we help · Advisory · Watch · Contact · [Try faibuddy]
 > Our edge is simple. We stay ahead of the curve, we build and use this ourselves, and we love helping others do the same. We are early and intentionally small, which means direct access and a real point of view, not templated playbooks.
 
 ### Advisory section (full, on its own block or expanded from the door)
-> I am Sonia. Advising has been part of my work throughout my career in product, tech, and AI: helping people think clearly, back themselves, and take the next real step. I work with a small number of corporate professionals becoming AI entrepreneurs, whether you are planning your exit, finding your footing after leaving, or pushing through the messy early stage of building. Engagements are paid and kept deliberately few, each shaped around you. Tell me where you are and what you are building, and I will reply if it is a fit.
+Voice is "I" (Sonia). Two paragraphs: credibility first, then who she works with and the invitation. Lead with the real track record, no testimonials needed.
+
+> I am Sonia Sarao. I spent a decade as a product executive scaling venture-backed startups. Most recently I was VP of Product at Groove, where I helped drive the growth that led to its acquisition by Clari. Before that I built a 50-person product and engineering organization and helped grow an earlier startup 10x. In mid-2023 I delivered the exit and walked away to build on my own terms. Today I build faibuddy, an AI-native product for early founders, entirely myself. You get someone who has operated at scale, made the leap you are making, and is still in the arena building today, not someone narrating from the sidelines.
+
+> I work with a small number of corporate professionals becoming AI entrepreneurs, whether you are planning your exit, finding your footing after leaving, or pushing through the messy early stage of building. This is high-touch, bespoke, and by invitation. Tell me where you are and what you are building, and I will reply if it is a fit.
 > CTA: Request an engagement
+
+How I work (the shape of the one partnership, no packages):
+> We work weekly. Direct access between sessions. The full arc, idea to first customers. faibuddy as your co-pilot. Engagements are paid and kept deliberately few, and we work in seasons, not one-off calls.
 
 ### Follow along (email capture)
 > Get our field notes and new videos as they land. No noise, just what is worth your time.
@@ -113,8 +127,8 @@ Freedom with AI · How we help · Advisory · Watch · Contact · [Try faibuddy]
 > - Name (required)
 > - Email (required)
 > - Which best describes you: Still inside, planning my move / Just left, finding my footing / Building, but stuck / Just exploring
-> - What are you working toward (a few sentences)
-> - Anything to share (optional link)
+> - What do you want to be different in 90 days, and why now (a few sentences). This is the real qualifier: high-agency people answer it crisply.
+> - LinkedIn or what you are building (optional link)
 
 ### Final CTA
 > Ready to stop commuting to someone else's dream?
@@ -145,20 +159,26 @@ Freedom with AI · How we help · Advisory · Watch · Contact · [Try faibuddy]
 
 ## 5. Advisory offer and pricing
 
-Structure is shaped on the outside, bespoke on the inside. A few clear ways in, fully tailored within. Prices are never listed on the site. Price is revealed in conversation after a request, then sent as a private Stripe link or invoice.
+One high-touch, bespoke advisory partnership. No packages and no fixed deliverables, because no two journeys are the same. The offer is shaped on the outside (a clear, confident container) and bespoke on the inside (the work is built around each client). Prices are never listed on the site. Price is revealed in conversation after a request, then sent as a private Stripe link or invoice.
 
-| Offer | Length | What it is | Founding (first 3 to 5 clients) | Standard (after proof) |
-|-------|--------|------------|----------------------------------|-------------------------|
-| Intensive | 2 to 3 weeks | Clarity and an AI leveraged 90 day plan | 1,500 | 2,500 |
-| Engagement | 3 months | The core arc: validate, build the AI workflow, move toward first customers, with direct access and accountability | 6,000 | 9,000 |
-| Continuity | Monthly, later | Lighter ongoing access after an engagement | n/a yet | 1,500 per month |
+The shape (what every partnership includes):
+- **We work weekly.** A standing weekly session to set direction, make the real decisions, and keep moving.
+- **Direct access between sessions** for the questions and calls that matter.
+- **The full arc, idea to first customers:** validation, positioning, the build, and the path to revenue, adapted to where the client actually is.
+- **faibuddy as a co-pilot** in the work, so progress continues between sessions.
 
-Mechanics:
-- Founding rate is framed as a selective founding cohort, not a discount, in exchange for a candid case study and testimonial. Rate rises after.
-- The intensive credits toward the engagement if the client continues within 30 days.
-- Payment is fixed price, taken as a deposit to start plus one or two milestone payments. Never sell hours.
-- Room to raise the standard engagement to 12,000 to 15,000 as proof and demand grow.
-- One honest line on the site signals this is a paid engagement, to filter out free advice seekers, without listing a number.
+Positioning:
+- Invitation based and deliberately few. High touch, premium, by fit.
+- We work in seasons, not one-off calls. Orient around a 3 month minimum, then continue month to month or in renewed seasons.
+- Delivered by Sonia, in the "I" voice. Credibility is carried by track record, not testimonials: VP of Product at Groove (acquired by Clari), built a 50 person product and engineering org, grew an earlier startup 10x, still building faibuddy today.
+
+Internal pricing guidance (never shown on the site):
+- Premium monthly engagement, roughly 5,000 to 10,000 per month per client depending on intensity and stage.
+- Target is about 20,000 to 30,000 per month at roughly 50 percent focus, which is 3 to 6 high fit clients, not a high volume practice.
+- A selective founding rate may be offered to the first few clients in exchange for a candid case study, framed as a founding cohort, not a discount. Rate rises after.
+- Equity, or cash plus equity, is possible for very early, high potential founders (precedent: a Rippleworks startup offered equity to retain her advice).
+- Always priced as an engagement, never sold by the hour.
+- One honest line on the site signals this is a paid, selective engagement, to filter out free advice seekers, without listing a number.
 
 ---
 
@@ -180,6 +200,7 @@ Chosen path: managed and serverless to avoid server overhead now, with a documen
 | Payments | Stripe | Private links or invoices (existing) |
 | Baseline analytics | Google Analytics 4 | Standard web metrics |
 | Product analytics | PostHog cloud | Funnels and events, scales easily for our volume |
+| Social posting (distribution) | [Zernio](https://zernio.com/) | Unified API for X, LinkedIn, and later Instagram. We own the queue and approval; Zernio is the transport layer behind a thin Worker adapter. Account OAuth is done in Zernio, not in our repo. |
 | Social and Google auth | Existing OAuth | Reuse faibuddy apps where possible |
 
 Deferred upgrade: Hetzner VPS with local Postgres for owned, deep analytics (Umami or a first party pipeline) once traffic justifies the overhead. Not the faibuddy box, a separate small instance.
@@ -189,11 +210,12 @@ Deferred upgrade: Hetzner VPS with local Postgres for owned, deep analytics (Uma
 ## 7. Data model (Cloudflare D1)
 
 - **subscribers:** id, email, status (pending, confirmed, unsubscribed), source, created_at, unsubscribe_token
-- **advisory_requests:** id, name, email, stage (inside, just_left, building, exploring), message, link, status (new, replied, engaged, declined), created_at
-- **payments:** id, request_id, stripe_id, offer (intensive, engagement, continuity), amount, status, created_at
+- **advisory_requests:** id, name, email, stage (inside, just_left, building, exploring), message, link, status (new, replied, engaged, declined), stripe_customer_id, stripe_subscription_id, created_at
+- **payments:** id, request_id, stripe_id, cadence (monthly, milestone, one_time), amount, status, created_at. The offer is a single bespoke partnership, so there is no package enum; cadence and amount capture how each engagement is billed.
 - **broadcasts_sent:** id, content_slug, sent_at, recipient_count
+- **social_posts:** id, source_type (video, post, event), source_ref, platform (x, linkedin, instagram), draft_text, media_url, status (draft, approved, scheduled, posted, failed), scheduled_for, zernio_post_id, error, created_at
 
-Analytics events live in PostHog and GA4. D1 holds only what must be owned: the list, requests, payments, and send records.
+Analytics events live in PostHog and GA4. D1 holds only what must be owned: the list, requests, payments, send records, and the social approval queue.
 
 ---
 
@@ -214,9 +236,13 @@ Analytics events live in PostHog and GA4. D1 holds only what must be owned: the 
 1. Visitor submits the request form (name, email, stage, what they are building, optional link).
 2. Worker writes an advisory_requests row, alerts Sonia through SES, and auto acknowledges the requester.
 3. Sonia qualifies manually and has the conversation. Stays human on purpose.
-4. If a fit, Sonia agrees scope and sends a private Stripe link or invoice for the chosen shape at founding or standard pricing.
+4. If a fit, Sonia agrees scope and sends a private Stripe link or invoice for the bespoke partnership, at a founding or standard rate and the agreed cadence (usually monthly).
 5. Stripe processes payment and fires a webhook to a Worker.
 6. Worker records a payment, sends a confirmation through SES, and Sonia sends the calendar invite manually.
+
+No custom admin portal (Level 0). The Stripe Dashboard and hosted Customer Portal are the admin surface for everything money related: creating customers and subscriptions, sending links and invoices, dunning, refunds, and letting clients update their own card. Requests arrive by SES alert and live in D1. At this client volume, linking a checkout to a request is a one time manual paste of the request id into Stripe metadata, so no portal is built or planned for now.
+
+Linking a payment to its request: the link is set when the checkout is created, not guessed later. Create the Stripe Customer first with metadata.request_id and the client email, then create the Checkout Session for that customer with client_reference_id and metadata.request_id both set to the advisory_requests id. On checkout.session.completed the Worker reads metadata.request_id, finds the row, and stores stripe_customer_id and stripe_subscription_id on it. Recurring invoice.paid events do not carry the request id, so the Worker looks the request up by the stored stripe_customer_id or stripe_subscription_id. Email is only a sanity check, never the key. Store processed Stripe event ids (or dedupe payments on the Stripe invoice id) for idempotency.
 
 ### D. YouTube inbound content
 1. New upload on the channel.
@@ -233,10 +259,16 @@ Analytics events live in PostHog and GA4. D1 holds only what must be owned: the 
 3. Worker records a broadcasts_sent row so nothing double sends.
 4. Every email carries a one click unsubscribe that hits a Worker and updates D1.
 
-### G. Social repurposing, approve then post (later)
-1. A draft post is generated from a published piece.
-2. Sonia or Cammie approves it in the queue.
-3. A scheduled Worker publishes to X, LinkedIn, and later Instagram through their APIs, as access for each is sorted.
+### G. Social repurposing, approve then post (Phase 2, via Zernio)
+Principle: create once, distribute everywhere. Ingest and drafting are automated; judgment and voice stay human.
+
+1. A trigger fires when new content lands: a YouTube upload (flow D), a published essay or note (flow E), or a new event in `src/data/events.ts`.
+2. An AI draft Worker generates per-platform variants (X, LinkedIn, later Instagram) from the source, using our brand voice prompt. Drafts are written to `social_posts` with status `draft`.
+3. Sonia or Cammie reviews and approves (email-approve links to start; no custom admin portal). Status moves to `approved`, with an optional `scheduled_for`.
+4. A cron Worker picks up approved posts that are due and calls Zernio through a thin distribution adapter (`POST` to Zernio with per-platform text and media URLs). We do not build or maintain native X, LinkedIn, or Instagram integrations.
+5. Zernio webhooks (or polling on failure) update `social_posts` to `posted` or `failed`, storing `zernio_post_id` for traceability.
+
+Zernio accounts (X, LinkedIn) are connected once in the Zernio dashboard. Start with a 2-week pilot on the free tier before wiring the full queue.
 
 ### H. Cross channel analytics rollup (later)
 1. Scheduled Workers pull YouTube, X, LinkedIn, Stripe, and SES numbers.
@@ -260,7 +292,8 @@ Stored as Cloudflare Worker secrets and environment, never in the repo:
 - Stripe secret key and webhook signing secret
 - SES sending credentials
 - PostHog project key and GA4 measurement id
-- YouTube and social API tokens via OAuth
+- Zernio API key (social distribution adapter)
+- YouTube API key (feed ingest only)
 - An admin token to protect the manual send and request views
 
 ---
@@ -316,8 +349,9 @@ Pattern: distribution and capture are automated, judgment and relationships stay
 - Privacy and terms pages
 
 **Phase 2**
-- Social repurposing with approval, starting with the easiest platform to authorize
-- Double opt in polish and a richer private admin
+- Zernio pilot: connect X and LinkedIn, post manually via API to validate personal LinkedIn and reliability
+- Social repurposing pipeline: AI draft Worker, `social_posts` queue, email-approve, Zernio distribution adapter, webhooks
+- Double opt in polish and a richer private admin (only if email-approve becomes painful)
 
 **Phase 3**
 - Cross channel analytics dashboard
@@ -330,13 +364,19 @@ Pattern: distribution and capture are automated, judgment and relationships stay
 - Stop the redirect, build the real hub on freedomwith.ai.
 - Managed serverless stack, VPS deferred.
 - No booking SaaS. Advisory is request, qualify, then private payment.
+- Advisory billing is a monthly Stripe subscription at a bespoke per-client rate, created privately after a fit, with a 3 month minimum held contractually (not enforced in Stripe). Quarter upfront offered to those who prefer it. One-offs and equity are exceptions handled outside the subscription.
+- No custom admin portal (Level 0). Stripe Dashboard and the hosted Customer Portal are the admin surface. Not revisiting other phases for this now.
 - No prices on the site.
-- Shaped offer with a founding cohort.
+- One bespoke advisory partnership, no packages or fixed deliverables, with an optional founding cohort rate. The shape (weekly momentum, direct access, full arc, faibuddy as co-pilot) is fixed, the work inside is tailored.
+- Advisory bio leads with real track record (VP of Product at Groove, acquired by Clari, 50 person org, grew an earlier startup 10x, still building faibuddy). No testimonials needed.
+- Full names (Sonia Sarao, Cammie Clay) on the About founder cards and the advisory bio's first mention. First names elsewhere for warmth.
+- Contact form qualifier is "What do you want to be different in 90 days, and why now". No budget question on the form.
 - All light theme, dark footer only.
 - Hero is the arrow as a leap, no separate emotional headline.
 - Voice is "we" for the brand, "I" for advisory (Sonia).
 - Plain markdown content with a template. Manual newsletter send.
-- Approve first, then automate social. Plan for X, LinkedIn, and possibly Instagram.
+- Social distribution via Zernio (https://zernio.com/). We own the AI draft + approval queue in D1; Zernio is the transport layer behind a thin Worker adapter, swappable later if needed. Platforms: X and LinkedIn first, Instagram when relevant. No native platform API integrations.
+- Approve first, then automate social. Email-approve for v1 of the queue; no custom admin portal unless volume demands it.
 - No em dashes in any copy.
 
 ---
@@ -348,4 +388,5 @@ Pattern: distribution and capture are automated, judgment and relationships stay
 - Final founding cohort size (suggest 3 to 5).
 - Email HTML template design.
 - Privacy and terms content.
-- Which social platform to authorize first for posting (X paid tier, LinkedIn approval, Instagram business account are the gating items).
+- Create Zernio account, connect X and LinkedIn, run the 2-week pilot before building the full queue.
+- Confirm Zernio supports LinkedIn personal profile posting for Sonia's advisory voice (verify in pilot).

@@ -1,0 +1,110 @@
+---
+interface Props {
+  variant?: 'primary' | 'secondary';
+  href?: string;
+  type?: 'button' | 'submit';
+  size?: 'default' | 'large';
+  external?: boolean;
+  class?: string;
+}
+
+const {
+  variant = 'primary',
+  href,
+  type = 'button',
+  size = 'default',
+  external = false,
+  class: className = '',
+} = Astro.props;
+
+const classes = [
+  'btn',
+  `btn--${variant}`,
+  size === 'large' && 'btn--lg',
+  className,
+]
+  .filter(Boolean)
+  .join(' ');
+
+const rel = external ? 'noopener noreferrer' : undefined;
+const target = external ? '_blank' : undefined;
+---
+
+{href ? (
+  <a href={href} class={classes} rel={rel} target={target}>
+    <slot />
+  </a>
+) : (
+  <button type={type} class={classes}>
+    <slot />
+  </button>
+)}
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    border-radius: var(--r);
+    padding: var(--space-3) var(--space-5);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text);
+    cursor: pointer;
+    text-decoration: none;
+    transition:
+      transform var(--dur-fast) var(--ease),
+      background var(--dur) var(--ease),
+      border-color var(--dur) var(--ease),
+      box-shadow var(--dur) var(--ease),
+      color var(--dur-fast) var(--ease);
+    white-space: nowrap;
+  }
+
+  .btn:hover {
+    transform: translateY(calc(var(--space-1) * -0.25));
+  }
+
+  .btn--primary {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-on-inverse);
+    box-shadow: var(--shadow-accent);
+  }
+
+  .btn--primary:hover {
+    background: var(--color-accent-strong);
+    border-color: var(--color-accent-strong);
+    box-shadow: var(--shadow-accent);
+    color: var(--color-on-inverse);
+  }
+
+  .btn--secondary {
+    background: var(--color-surface);
+  }
+
+  .btn--secondary:hover {
+    border-color: var(--color-text);
+    color: var(--color-text);
+  }
+
+  .btn--lg {
+    padding: var(--space-4) var(--space-6);
+    font-size: var(--text-md);
+  }
+
+  .on-dark .btn--secondary {
+    background: transparent;
+    border-color: var(--color-border);
+    color: var(--color-text);
+  }
+
+  .on-dark .btn--secondary:hover {
+    background: color-mix(in srgb, var(--color-text) 6%, transparent);
+    border-color: var(--color-text-muted);
+    color: var(--color-text);
+  }
+
+</style>

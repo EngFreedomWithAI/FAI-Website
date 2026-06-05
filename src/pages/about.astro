@@ -1,0 +1,146 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import CtaStrip from '../components/CtaStrip.astro';
+import TeamAvatar from '../components/TeamAvatar.astro';
+import { site } from '../config/site';
+import '../styles/content-pages.css';
+
+const pageTitle = 'About | Freedom with AI';
+const pageDescription =
+  'Meet Sonia and Cammie. We help corporate professionals succeed as AI entrepreneurs with product, advisory, and content.';
+
+const storyParagraphs = [
+  'For years, I did work that looked impressive on paper but felt hollow in practice. The long commutes, the windowless conference rooms, the meetings that led nowhere. My career was on track for a comfortable retirement if I could just endure the grind for another 25 years. The money was good and the work was simple, and even though I was miserable, I stayed. But something essential was missing, and it was draining my energy not just for work, but for life.',
+  'I craved independence and the freedom to do something meaningful while calling my own shots. I had dozens of ideas, but that fearful little voice always showed up. What if I fail? How do I cover the bills, insurance, retirement? So day after day, I kept going to work.',
+  'Then I started paying attention to people outside the office who had found a way to work for themselves. They seemed genuinely happy, doing things they cared about that brought real value to others. I started asking a different question. Could this be possible for me too?',
+  'The shift was slow. Full time became part time, then contract work, then semi independent gigs. It was my first real taste of autonomy.',
+  'At the same time, my future co founder, Sonia, was standing at her own crossroads. She had spent years as a software executive and was quietly preparing for her own exit. On the surface our backgrounds were different, but the pull was identical. Neither of us wanted to keep laboring for someone else\'s vision. We wanted to build something that reflected our own values.',
+  'In late 2022, when large language models arrived, the timing was perfect. We teamed up and dove headfirst into AI. We had no idea where to begin, but for the first time we had a capable partner with us every step of the way. We used these tools for everything, and we began sharing what we learned about entrepreneurship, AI, and the freedom we were starting to feel.',
+  'In mid 2023, Sonia helped lead her company\'s acquisition by Clari as VP of Product. She delivered the win, and then she walked away. Her liberation day had arrived.',
+  'Then we saw something bigger, still unfolding. As AI capability grows, the distribution of labor is changing for good. Entrepreneurship is no longer a luxury or a passion project. For many, it is becoming a necessity. We did not just want to help a few people through consulting. We wanted to codify our own escape and share it widely.',
+  'The mission became clear: to help corporate professionals build something of their own, with AI as their leverage. Everything we learned while building became faibuddy, the product we wished we had on day zero. Freedom with AI is how we share the whole path: the product, advisory, and what we keep learning out loud.',
+];
+---
+
+<Base title={pageTitle} description={pageDescription}>
+  <Nav />
+
+  <main id="main-content">
+    <section class="page-hero page-hero--center" aria-labelledby="about-heading">
+      <div class="container">
+        <SectionHeader index="01" label="About" />
+        <h1 id="about-heading" class="page-hero__title">Why Freedom with AI</h1>
+        <p class="page-hero__lede">
+          We are Sonia and Cammie, two independent minded builders who love to learn, work with the latest
+          tools, and share what we find. We believe the premium will always be on being human. Connecting
+          deeply, breaking bread together, telling good stories. AI changes the work, not that. Our edge is
+          simple. We stay ahead of the curve, we build and use this ourselves, and we love helping others do
+          the same. We are early and intentionally small, which means direct access and a real point of view,
+          not templated playbooks.
+        </p>
+      </div>
+    </section>
+
+    <section class="page-section page-section--alt" aria-labelledby="founders-heading">
+      <div class="container">
+        <SectionHeader index="02" label="Founders" align="left" />
+        <h2 id="founders-heading" class="page-section__heading">Sonia and Cammie</h2>
+
+        <div class="founder-grid">
+          <article class="founder-card">
+            <div class="founder-card__photo">
+              <TeamAvatar member="sonia" />
+            </div>
+            <h3>Sonia Sarao</h3>
+            <p>
+              Sonia spent a decade as a product executive, most recently VP of Product at Groove, where she
+              helped drive the growth that led to its acquisition by Clari. She built a 50-person product and
+              engineering organization and grew an earlier startup 10x. In mid-2023 she delivered the exit and
+              walked away to build on her own terms. She helps people think clearly, back themselves, and take
+              the next real step.
+            </p>
+            <a href={site.profiles.soniaLinkedIn} target="_blank" rel="noopener noreferrer">
+              LinkedIn <span aria-hidden="true">→</span>
+            </a>
+          </article>
+
+          <article class="founder-card">
+            <div class="founder-card__photo">
+              <TeamAvatar member="cammie" />
+            </div>
+            <h3>Cammie Clay</h3>
+            <p>
+              Cammie spent years in corporate work that looked good on paper but felt hollow in practice. She
+              charted a slow path toward independence through part time work, contracts, and semi independent
+              gigs before teaming up with Sonia to build in AI. She loves to learn, work with the latest
+              tools, and share what we find.
+            </p>
+            <a href={site.profiles.cammieLinkedIn} target="_blank" rel="noopener noreferrer">
+              LinkedIn <span aria-hidden="true">→</span>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section" aria-labelledby="story-heading">
+      <div class="container story">
+        <SectionHeader index="03" label="Our story" align="left" />
+        <h2 id="story-heading" class="page-section__heading">How we got here</h2>
+        <p class="story__byline">By Cammie</p>
+
+        <div class="story__body">
+          {storyParagraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <CtaStrip>
+      <span slot="heading">Start with faibuddy, or work with us.</span>
+      <Button
+        slot="actions"
+        variant="primary"
+        href={site.faibuddyUrl}
+        external
+        size="large"
+      >
+        Try faibuddy free
+      </Button>
+      <Button slot="actions" variant="secondary" href="/contact" size="large">
+        Request an engagement
+      </Button>
+    </CtaStrip>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  .story__byline {
+    margin-top: var(--space-3);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text-subtle);
+  }
+
+  .story__body {
+    margin-top: var(--space-6);
+    max-width: var(--readw);
+  }
+
+  .story__body p {
+    font-size: var(--text-md);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-muted);
+  }
+
+  .story__body p + p {
+    margin-top: var(--space-5);
+  }
+</style>

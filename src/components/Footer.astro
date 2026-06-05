@@ -1,0 +1,164 @@
+---
+import { site } from '../config/site';
+
+const copyrightYear = 2026;
+---
+
+<footer class="site-footer on-dark">
+  <div class="container">
+    <div class="site-footer__grid">
+      <div class="site-footer__brand-col">
+        <a class="site-footer__brand" href="/" aria-label={`${site.brand} home`}>
+          <img
+            class="site-footer__logo"
+            src="/images/logo.svg"
+            alt=""
+            width="30"
+            height="25"
+          />
+          <span>{site.brand}</span>
+        </a>
+        <p class="site-footer__blurb">
+          {site.brand}. {site.mission}
+        </p>
+      </div>
+
+      <div>
+        <h2 class="site-footer__heading">Explore</h2>
+        {site.footerExplore.map((item) => (
+          <a href={item.href}>{item.label}</a>
+        ))}
+      </div>
+
+      <div>
+        <h2 class="site-footer__heading">Product</h2>
+        {site.footerProduct.map((item) => (
+          <a
+            href={item.href}
+            target={item.external ? '_blank' : undefined}
+            rel={item.external ? 'noopener noreferrer' : undefined}
+          >
+            {item.label} {item.external ? '↗' : ''}
+          </a>
+        ))}
+      </div>
+
+      <div>
+        <h2 class="site-footer__heading">Connect</h2>
+        {site.footerConnect.map((item) => (
+          <a
+            href={item.href}
+            target={item.external ? '_blank' : undefined}
+            rel={item.external ? 'noopener noreferrer' : undefined}
+          >
+            {item.label}
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div class="site-footer__bottom">
+      <p>© {site.brand} {copyrightYear}</p>
+      <p class="site-footer__legal">
+        {site.legal.map((item, i) => (
+          <>
+            {i > 0 && <span aria-hidden="true"> · </span>}
+            <a href={item.href}>{item.label}</a>
+          </>
+        ))}
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    padding-block: var(--space-8) var(--space-6);
+  }
+
+  .site-footer__grid {
+    display: grid;
+    grid-template-columns: 1.7fr repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+
+  .site-footer__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 700;
+  }
+
+  .site-footer__brand:hover {
+    color: var(--color-text);
+  }
+
+  .site-footer__logo {
+    height: var(--space-6);
+    width: auto;
+    filter: brightness(0) invert(1);
+  }
+
+  .site-footer__blurb {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    margin-top: var(--space-3);
+    max-width: 26ch;
+    line-height: var(--leading-relaxed);
+  }
+
+  .site-footer__heading {
+    font-size: var(--text-xs);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin: 0 0 var(--space-3);
+    font-weight: 700;
+  }
+
+  .site-footer__grid a {
+    display: block;
+    color: var(--color-text);
+    font-size: var(--text-sm);
+    margin: var(--space-2) 0;
+    opacity: 0.82;
+    text-decoration: none;
+    transition:
+      opacity var(--dur-fast) var(--ease),
+      color var(--dur-fast) var(--ease);
+  }
+
+  .site-footer__grid a:hover {
+    opacity: 1;
+    color: var(--color-accent);
+  }
+
+  .site-footer__bottom {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    margin-top: var(--space-7);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+  }
+
+  .site-footer__legal a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+  }
+
+  .site-footer__legal a:hover {
+    color: var(--color-accent);
+  }
+
+  @media (max-width: 55rem) {
+    .site-footer__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

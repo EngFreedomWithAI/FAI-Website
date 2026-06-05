@@ -1,0 +1,100 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import CtaStrip from '../components/CtaStrip.astro';
+import TeamAvatar from '../components/TeamAvatar.astro';
+import { site } from '../config/site';
+import { advisoryApproach } from '../data/advisory-engagements';
+import '../styles/content-pages.css';
+
+const pageTitle = 'Advisory | Freedom with AI';
+const pageDescription =
+  'Senior advisory for corporate professionals becoming AI entrepreneurs. Paid engagements, deliberately few, each shaped around you.';
+---
+
+<Base title={pageTitle} description={pageDescription}>
+  <Nav />
+
+  <main id="main-content">
+    <section class="page-hero" aria-labelledby="advisory-heading">
+      <div class="container profile-split">
+        <div class="profile-split__photo">
+          <TeamAvatar member="sonia" />
+        </div>
+        <div class="profile-split__copy">
+          <SectionHeader index="01" label="Advisory" align="left" />
+          <h1 id="advisory-heading">Work with me</h1>
+          <p>
+            I am Sonia Sarao. I spent a decade as a product executive scaling venture-backed startups. Most
+            recently I was VP of Product at Groove, where I helped drive the growth that led to its
+            acquisition by Clari. Before that I built a 50-person product and engineering organization and
+            helped grow an earlier startup 10x. In mid-2023 I delivered the exit and walked away to build on
+            my own terms. Today I build faibuddy, an AI-native product for early founders, entirely myself.
+            You get someone who has operated at scale, made the leap you are making, and is still in the
+            arena building today, not someone narrating from the sidelines.
+          </p>
+          <p>
+            I work with a small number of corporate professionals becoming AI entrepreneurs, whether you are
+            planning your exit, finding your footing after leaving, or pushing through the messy early stage
+            of building. This is high-touch, bespoke, and by invitation. Tell me where you are and what you
+            are building, and I will reply if it is a fit.
+          </p>
+          <a
+            class="profile-split__link"
+            href={site.profiles.soniaLinkedIn}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Sonia on LinkedIn <span aria-hidden="true">→</span>
+          </a>
+          <div class="page-hero__cta">
+            <Button variant="primary" href="/contact" size="large">
+              Request an engagement
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section page-section--alt" aria-labelledby="engagements-heading">
+      <div class="container">
+        <SectionHeader index="02" label="How I work" align="left" />
+        <h2 id="engagements-heading" class="page-section__heading">
+          One partnership, shaped around you
+        </h2>
+        <p class="page-section__sub">
+          There are no packages or fixed deliverables, because no two journeys are the same. Instead there
+          is one high-touch partnership with a clear shape, and the work inside it is built around you.
+        </p>
+
+        <ul class="engagement-grid">
+          {advisoryApproach.map((item) => (
+            <li>
+              <article class="engagement-card">
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </article>
+            </li>
+          ))}
+        </ul>
+
+        <p class="page-section__sub page-section__sub--spaced">
+          Engagements are paid and kept deliberately few, and we work in seasons, not one-off calls. If you
+          want free general advice, our videos and faibuddy are the better place to start.
+        </p>
+      </div>
+    </section>
+
+    <CtaStrip>
+      <span slot="heading">Tell me where you are and what you are building.</span>
+      <Button slot="actions" variant="primary" href="/contact" size="large">
+        Request an engagement
+      </Button>
+    </CtaStrip>
+  </main>
+
+  <Footer />
+</Base>

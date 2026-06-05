@@ -1,0 +1,179 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import FollowBand from '../components/FollowBand.astro';
+import { events } from '../data/events';
+import '../styles/content-pages.css';
+
+const pageTitle = 'Events | Freedom with AI';
+const pageDescription =
+  'Where we gather, speak, and show up in the room. Talks, showcases, and meetups for corporate professionals becoming AI entrepreneurs.';
+
+const sorted = [...events].sort((a, b) => b.date.localeCompare(a.date));
+
+const formatDate = (iso: string) =>
+  new Intl.DateTimeFormat('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  }).format(new Date(`${iso}T00:00:00`));
+---
+
+<Base title={pageTitle} description={pageDescription}>
+  <Nav />
+
+  <main id="main-content">
+    <section class="page-hero" aria-labelledby="events-heading">
+      <div class="container">
+        <SectionHeader index="01" label="Events" align="left" />
+        <h1 id="events-heading" class="page-hero__title">Where we show up in the room</h1>
+        <p class="page-hero__lede">
+          The premium stays on being human. Alongside the videos and writing, we host, speak at, and join
+          gatherings for corporate professionals becoming AI entrepreneurs. Recaps land here as we go.
+        </p>
+      </div>
+    </section>
+
+    <section class="page-section page-section--alt" aria-labelledby="events-list-heading">
+      <div class="container">
+        <h2 id="events-list-heading" class="sr-only">Past and upcoming events</h2>
+
+        {
+          sorted.length > 0 ? (
+            <ul class="event-list">
+              {sorted.map((event) => (
+                <li>
+                  <article class="event-card">
+                    <div class="event-card__meta">
+                      <span class="event-card__role">{event.role}</span>
+                      <span class="event-card__date">
+                        {formatDate(event.date)}
+                        {event.time ? `, ${event.time}` : ''}
+                      </span>
+                      {event.location ? (
+                        <span class="event-card__location">{event.location}</span>
+                      ) : null}
+                    </div>
+                    <h3 class="event-card__name">{event.name}</h3>
+                    <p class="event-card__summary">{event.summary}</p>
+                    {event.link ? (
+                      <a
+                        class="event-card__link"
+                        href={event.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {event.linkLabel ?? 'Read the recap'} <span aria-hidden="true">→</span>
+                      </a>
+                    ) : null}
+                  </article>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div class="empty-state" aria-live="polite">
+              <p class="empty-state__lead">Gatherings and talks, shared here as we go.</p>
+              <p class="empty-state__hint">
+                Join the list below to hear about what is coming and read the recaps.
+              </p>
+            </div>
+          )
+        }
+      </div>
+    </section>
+
+    <FollowBand
+      index="02"
+      heading="Know when the next one is happening."
+      note="Join the list and we will share upcoming events and recaps."
+      inputId="events-follow-email"
+    />
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .event-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .event-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--r-lg);
+    padding: var(--space-6);
+  }
+
+  .event-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: var(--text-sm);
+    color: var(--color-text-subtle);
+  }
+
+  .event-card__role {
+    font-weight: 700;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .event-card__date::before,
+  .event-card__location::before {
+    content: '·';
+    margin-right: var(--space-3);
+    color: var(--color-text-subtle);
+  }
+
+  .event-card__name {
+    margin-top: var(--space-3);
+    font-size: var(--text-lg);
+    font-weight: 700;
+  }
+
+  .event-card__summary {
+    margin-top: var(--space-3);
+    font-size: var(--text-md);
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
+    max-width: var(--readw);
+  }
+
+  .event-card__link {
+    display: inline-block;
+    margin-top: var(--space-4);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  @media (max-width: 30rem) {
+    .event-card__date::before,
+    .event-card__location::before {
+      content: none;
+      margin-right: 0;
+    }
+
+    .event-card__meta {
+      gap: var(--space-2) var(--space-4);
+    }
+  }
+</style>

@@ -1,0 +1,497 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Card from '../components/Card.astro';
+import CtaStrip from '../components/CtaStrip.astro';
+import FollowBand from '../components/FollowBand.astro';
+import TeamAvatar from '../components/TeamAvatar.astro';
+import { site } from '../config/site';
+import { isThisYouCards } from '../data/is-this-you';
+import { howWeHelpDoors } from '../data/how-we-help';
+
+const [faibuddyDoor, advisoryDoor, contentDoor] = howWeHelpDoors;
+
+const pageTitle = 'Corporate to AI Entrepreneur | Freedom with AI';
+const pageDescription =
+  'We help corporate professionals succeed as AI entrepreneurs. Start with faibuddy today, and work with us when you want a guide.';
+---
+
+<Base title={pageTitle} description={pageDescription}>
+  <Nav />
+
+  <main id="main-content">
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="container hero__inner">
+        <h1 id="hero-heading" class="hero__title">
+          <span class="sr-only">Corporate to AI Entrepreneur</span>
+          <span class="hero__leap" aria-hidden="true">
+            <span class="hero__leap-row">
+              <span class="hero__word">Corporate</span>
+              <svg
+                class="hero__arrow"
+                viewBox="0 0 64 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 12 H54"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-linecap="round"></path>
+                <path
+                  d="M45 4 L57 12 L45 20"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+              <span class="hero__word hero__word--accent">AI Entrepreneur</span>
+            </span>
+          </span>
+        </h1>
+
+        <p class="hero__lede read-width">
+          {site.mission} Make the leap and build something that pays, with AI as
+          your leverage.
+        </p>
+
+        <div class="hero__cta">
+          <Button variant="primary" href={site.faibuddyUrl} external size="large">
+            Try faibuddy free <span aria-hidden="true">→</span>
+          </Button>
+          <Button variant="secondary" href="/contact" size="large">
+            Request an engagement
+          </Button>
+        </div>
+
+        <p class="hero__support">
+          Start with faibuddy today, and work with us when you want a guide.
+        </p>
+      </div>
+    </section>
+
+    <section class="section-block" id="is-this-you" aria-labelledby="is-this-you-heading">
+      <div class="container section-block__center">
+        <SectionHeader index="01" label="Is this you" />
+        <h2 id="is-this-you-heading" class="section-block__heading">
+          This is not for everyone. It might be for you.
+        </h2>
+
+        <ul class="card-grid card-grid--three">
+          {isThisYouCards.map((card, i) => (
+            <li>
+              <Card
+                variant="audience"
+                index={i + 1}
+                title={card.title}
+                body={card.body}
+              />
+            </li>
+          ))}
+        </ul>
+
+        <p class="routing-line">
+          Not sure yet? Start with faibuddy and our videos, and come back when you
+          want a guide.
+          <a href={site.faibuddyUrl} target="_blank" rel="noopener noreferrer">
+            Try faibuddy →
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <section class="section-block" id="how-we-help" aria-labelledby="how-we-help-heading">
+      <div class="container section-block__center">
+        <SectionHeader index="02" label="How we help" />
+        <h2 id="how-we-help-heading" class="section-block__heading">
+          One mission, a few ways in.
+        </h2>
+        <p class="section-block__sub read-width">
+          A product to start today, advisory when you want a guide, and content
+          that keeps you ahead of the curve.
+        </p>
+
+        <div class="door-grid">
+          <Card
+            variant="door"
+            primary
+            tag={faibuddyDoor.tag}
+            title={faibuddyDoor.title}
+            body={faibuddyDoor.body}
+            ctaLabel={faibuddyDoor.ctaLabel}
+            ctaHref={faibuddyDoor.ctaHref}
+            ctaExternal
+          />
+          <Card
+            variant="door"
+            tag={advisoryDoor.tag}
+            title={advisoryDoor.title}
+            body={advisoryDoor.body}
+            ctaLabel={advisoryDoor.ctaLabel}
+            ctaHref={advisoryDoor.ctaHref}
+          />
+        </div>
+
+        <Card
+          variant="teaser"
+          title={contentDoor.title}
+          tag={contentDoor.tag}
+          ctaLabel={contentDoor.ctaLabel}
+          ctaHref={contentDoor.ctaHref}
+        />
+      </div>
+    </section>
+
+    <section class="section-block section-block--tight" id="watch" aria-labelledby="watch-heading">
+      <div class="container">
+        <div class="watch-head">
+          <div>
+            <SectionHeader index="03" label="Watch" align="left" />
+            <h2 id="watch-heading">Founder stories and field notes.</h2>
+            <p class="watch-head__sub read-width">
+              Founder interviews with people making the leap, plus what we are
+              learning about AI as we go.
+            </p>
+          </div>
+          <Button variant="primary" href={site.socials.youtube} external>
+            Subscribe on YouTube <span aria-hidden="true">→</span>
+          </Button>
+        </div>
+
+        <div class="watch-empty">
+          <p class="watch-empty__lead">Founder interviews and field notes, published as we go.</p>
+          <p class="watch-empty__hint">
+            Subscribe on YouTube so the new ones reach you the day they land.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="section-block human-teaser"
+      id="about-teaser"
+      aria-labelledby="about-teaser-heading"
+    >
+      <div class="container human-teaser__grid">
+        <div class="human-teaser__photos">
+          <div class="human-teaser__photo">
+            <TeamAvatar member="sonia" />
+          </div>
+          <div class="human-teaser__photo">
+            <TeamAvatar member="cammie" />
+          </div>
+        </div>
+        <div class="human-teaser__copy">
+          <h2 id="about-teaser-heading">Who we are</h2>
+          <p>
+            We are <a href={site.profiles.soniaLinkedIn} target="_blank" rel="noopener noreferrer">Sonia</a>
+            and <a href={site.profiles.cammieLinkedIn} target="_blank" rel="noopener noreferrer">Cammie</a>,
+            two builders who love to learn, work with the latest tools, and share what we find. We stay
+            ahead of the curve, we build and use this ourselves, and we help others do the same.
+          </p>
+          <p class="human-teaser__more">
+            <a href="/about">More about us →</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <FollowBand
+      index="04"
+      heading="Get our field notes and new videos as they land."
+      note="No noise, just what is worth your time."
+    />
+
+    <CtaStrip>
+      <span slot="heading">Start with faibuddy, or work with us.</span>
+      <Button
+        slot="actions"
+        variant="primary"
+        href={site.faibuddyUrl}
+        external
+        size="large"
+      >
+        Try faibuddy free
+      </Button>
+      <Button slot="actions" variant="secondary" href="/contact" size="large">
+        Request an engagement
+      </Button>
+    </CtaStrip>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .hero {
+    padding-block: var(--space-8) var(--space-7);
+    text-align: center;
+  }
+
+  .hero__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero__title {
+    margin: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+  }
+
+  .hero__leap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero__leap-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(var(--space-1), 2vw, var(--space-4));
+    flex-wrap: wrap;
+  }
+
+  .hero__word {
+    font-size: var(--text-hero);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: var(--leading-tight);
+    color: var(--color-text);
+  }
+
+  .hero__word--accent {
+    color: var(--color-accent);
+  }
+
+  .hero__arrow {
+    height: 0.5em;
+    width: auto;
+    flex: 0 0 auto;
+    color: var(--color-accent);
+  }
+
+  .hero__lede {
+    margin-top: var(--space-5);
+    font-size: var(--text-md);
+    line-height: var(--leading-normal);
+    color: var(--color-text-muted);
+  }
+
+  .hero__cta {
+    display: flex;
+    gap: var(--space-3);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: var(--space-7);
+  }
+
+  .hero__support {
+    margin-top: var(--space-5);
+    font-size: var(--text-sm);
+    color: var(--color-text-subtle);
+  }
+
+  .section-block {
+    padding-block: var(--space-9);
+  }
+
+  .section-block--tight {
+    padding-block: var(--space-8);
+  }
+
+  .section-block__center {
+    text-align: center;
+  }
+
+  .section-block__heading {
+    font-size: var(--text-2xl);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    max-width: var(--readw);
+    margin-inline: auto;
+  }
+
+  .section-block__sub {
+    margin-top: var(--space-4);
+    margin-inline: auto;
+    font-size: var(--text-md);
+    line-height: var(--leading-normal);
+    color: var(--color-text-muted);
+  }
+
+  .card-grid {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-7) 0 0;
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .card-grid--three {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .card-grid li {
+    height: 100%;
+  }
+
+  .card-grid li > :global(article) {
+    height: 100%;
+  }
+
+  .routing-line {
+    margin-top: var(--space-6);
+    font-size: var(--text-md);
+    color: var(--color-text-muted);
+  }
+
+  .routing-line a {
+    font-weight: 600;
+    margin-left: var(--space-1);
+  }
+
+  .door-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5);
+    margin-top: var(--space-7);
+    text-align: left;
+  }
+
+  .watch-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-5);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-6);
+  }
+
+  .watch-head h2 {
+    font-size: var(--text-2xl);
+    font-weight: 800;
+    margin-top: var(--space-3);
+  }
+
+  .watch-head__sub {
+    margin-top: var(--space-3);
+    font-size: var(--text-md);
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
+  }
+
+  .watch-empty {
+    text-align: center;
+    padding: var(--space-7);
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--r-lg);
+  }
+
+  .watch-empty__lead {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .watch-empty__hint {
+    margin-top: var(--space-3);
+    font-size: var(--text-md);
+    color: var(--color-text-muted);
+    max-width: var(--readw);
+    margin-inline: auto;
+  }
+
+  .human-teaser {
+    background: var(--color-bg-alt);
+    border-block: 1px solid var(--color-border-subtle);
+  }
+
+  .human-teaser__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 14rem) 1fr;
+    gap: var(--space-7);
+    align-items: center;
+  }
+
+  .human-teaser__photos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+  }
+
+  .human-teaser__photo {
+    aspect-ratio: 1;
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-md);
+  }
+
+  .human-teaser__copy h2 {
+    font-size: var(--text-2xl);
+    font-weight: 800;
+    max-width: 18ch;
+  }
+
+  .human-teaser__copy p {
+    margin-top: var(--space-5);
+    font-size: var(--text-md);
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
+    max-width: 56ch;
+  }
+
+  .human-teaser__more {
+    margin-top: var(--space-5);
+  }
+
+  .human-teaser__more a {
+    font-weight: 600;
+  }
+
+  @media (max-width: 55rem) {
+    .card-grid--three,
+    .door-grid,
+    .human-teaser__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .human-teaser__photos {
+      max-width: 14rem;
+    }
+
+    .section-block {
+      padding-block: var(--space-8);
+    }
+
+    .hero__leap-row {
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+
+    .hero__arrow {
+      transform: rotate(90deg);
+      height: 0.66em;
+      margin-block: var(--space-1);
+    }
+  }
+</style>

@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Base
+  title="Privacy | Freedom with AI"
+  description="Privacy policy for Freedom with AI."
+>
+  <Nav />
+  <main id="main-content" class="container legal-page">
+    <h1>Privacy</h1>
+    <p class="read-width">
+      This is a placeholder privacy policy. A full policy will be published before
+      launch. Questions? Use the contact page.
+    </p>
+    <p>
+      <a href="/contact">Contact us</a>
+    </p>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .legal-page {
+    padding-block: var(--space-8);
+  }
+
+  .legal-page h1 {
+    margin-bottom: var(--space-5);
+  }
+
+  .legal-page p {
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
+  }
+
+  .legal-page p + p {
+    margin-top: var(--space-4);
+  }
+</style>

@@ -1,0 +1,137 @@
+---
+import SectionHeader from './SectionHeader.astro';
+import Button from './Button.astro';
+
+interface Props {
+  index?: string;
+  label?: string;
+  heading?: string;
+  note?: string;
+  inputId?: string;
+}
+
+const {
+  index = '04',
+  label = 'Follow along',
+  heading = 'Get our field notes and new videos as they land.',
+  note = 'No noise, just what is worth your time.',
+  inputId = 'follow-email',
+} = Astro.props;
+---
+
+<section class="follow-band" aria-labelledby={`${inputId}-heading`}>
+  <div class="container section-block section-block--tight">
+    <div class="follow-band__inner">
+      <div class="follow-band__copy">
+        <SectionHeader index={index} label={label} align="left" />
+        <h2 id={`${inputId}-heading`}>{heading}</h2>
+        <p>{note}</p>
+      </div>
+      <form class="follow-band__form" aria-label="Email signup" novalidate data-follow-form>
+        <label class="sr-only" for={inputId}>Your email</label>
+        <input
+          id={inputId}
+          type="email"
+          name="email"
+          placeholder="you@work.com"
+          autocomplete="email"
+          required
+        />
+        <Button type="submit" variant="primary">Keep me posted</Button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('[data-follow-form]').forEach((form) => {
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+    });
+  });
+</script>
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .section-block {
+    padding-block: var(--space-9);
+  }
+
+  .section-block--tight {
+    padding-block: var(--space-8);
+  }
+
+  .follow-band {
+    background: var(--color-bg-alt);
+    border-block: 1px solid var(--color-border-subtle);
+  }
+
+  .follow-band__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+  }
+
+  .follow-band__copy h2 {
+    font-size: var(--text-xl);
+    font-weight: 800;
+  }
+
+  .follow-band__copy p {
+    margin-top: var(--space-2);
+    color: var(--color-text-muted);
+    max-width: 42ch;
+  }
+
+  .follow-band__form {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    flex: 0 0 auto;
+  }
+
+  .follow-band__form input {
+    min-width: min(100%, 15rem);
+    flex: 1 1 15rem;
+    color: var(--color-text);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--r);
+    padding: var(--space-3) var(--space-4);
+    outline: none;
+    transition:
+      border-color var(--dur-fast) var(--ease),
+      box-shadow var(--dur-fast) var(--ease);
+  }
+
+  .follow-band__form input::placeholder {
+    color: var(--color-text-subtle);
+  }
+
+  .follow-band__form input:focus {
+    border-color: var(--color-accent);
+    box-shadow: var(--ring-accent);
+  }
+
+  @media (max-width: 55rem) {
+    .follow-band__inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .follow-band__form {
+      width: 100%;
+    }
+  }
+</style>

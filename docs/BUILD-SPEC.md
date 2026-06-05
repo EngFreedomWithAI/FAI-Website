@@ -59,6 +59,7 @@ src/
   data/
     is-this-you.ts     # the three audience cards (structured)
     how-we-help.ts     # the doors (structured)
+    events.ts          # events list (name, date, role, summary, link), newest first
   content/
     essays/            # markdown collection
     notes/             # markdown collection
@@ -246,7 +247,7 @@ Canonical copy is in `OPERATIONAL-PLAN.md` section 3. Apply the review fixes bel
 
 ### Home (`/`)
 Sections in order:
-1. **Nav.** Logo to home, links: Advisory, Watch, About, Contact, plus a Try faibuddy button to https://faibuddy.com. Mobile menu.
+1. **Nav.** Logo to home, links: Advisory, Watch, Events, About, Contact, plus a Try faibuddy button to https://faibuddy.com. Mobile menu.
 2. **Hero.** The arrow as a leap, Corporate to AI Entrepreneur. Subheading is the mission line. Two CTAs: Try faibuddy free (faibuddy.com) and Request an engagement (/advisory or /contact). FIX: do not render the headline text twice. The arrow treatment is the H1 (styled, still a real `h1` for SEO). Remove the duplicate plain text "Corporate to AI Entrepreneur" line beneath it.
 3. **01 Is this you.** Three cards (still inside, just left, building but stuck) plus the routing line to faibuddy.
 4. **02 How we help.** Three lanes: faibuddy (Try it free), Advisory (Request an engagement, to /advisory), Content (Watch and read, to /watch).
@@ -257,21 +258,26 @@ Sections in order:
 9. **Footer.** Dark. Brand line, Explore links, Product faibuddy, Connect YouTube @FreedomWith-AI and X @FreedomWithAI and Contact. FIX: Privacy and Terms must be real links to `/privacy` and `/terms`, not plain text.
 
 ### Advisory (`/advisory`)
-- Full advisory copy from the plan, in Sonia's voice: advising has been part of my work throughout my career, engagements are paid and kept deliberately few, each shaped around you, reply if it is a fit.
-- Must carry the paid engagement signal so free advice seekers self filter. No prices.
+- Full advisory bio from the plan, in Sonia's "I" voice, leading with the real track record (VP of Product at Groove, acquired by Clari, 50 person org, grew an earlier startup 10x, still building faibuddy). First mention uses the full name "Sonia Sarao". Two paragraphs: credibility, then who she works with and the invitation.
+- Must carry the paid, selective engagement signal so free advice seekers self filter. No prices.
 - Sonia photo, with a LinkedIn link (https://www.linkedin.com/in/sonia-sarao/) as a credibility signal. Primary CTA Request an engagement to the contact form (or an embedded request form here).
-- Optionally describe the shaped engagements at a high level without prices.
+- Describe the one bespoke partnership at a high level: no packages, one shape (we work weekly, direct access between sessions, the full arc from idea to first customers, faibuddy as co-pilot), deliberately few, seasons not one-off calls. No prices.
 
 ### Watch (`/watch`)
 - Subscribe to YouTube, the auto fed video grid (latest from @FreedomWith-AI), and a reading area for essays and notes from the content collections.
 - Graceful empty states for both video and writing until content exists.
+
+### Events (`/events`)
+- The fourth pillar, the live human layer. Data-driven from `src/data/events.ts` (name, ISO date, optional time and location, role of Hosted/Co-hosted/Spoke/Attended, a short summary or recap, optional link). Renders newest first.
+- Same pattern as the YouTube feed: adding an event is a data entry, no layout change.
+- Graceful subscribe-first empty state when there are no events. Email capture (FollowBand) at the bottom of the page.
 
 ### About (`/about`)
 - The Why Freedom with AI content from the plan, in "we" voice, Sonia and Cammie. The human and worldview beat: premium on being human, breaking bread, storytelling, AI changes the work not that, early and intentionally small.
 - Sonia and Cammie photos, each with a short bio and a LinkedIn link: Sonia https://www.linkedin.com/in/sonia-sarao/ , Cammie https://www.linkedin.com/in/cammieclay/ .
 
 ### Contact (`/contact`)
-- Request form. Fields: Name (required), Email (required), Which best describes you (Still inside planning my move, Just left finding my footing, Building but stuck, Just exploring), What are you working toward (textarea), Anything to share (optional link).
+- Heading in Sonia's "I" voice ("Work with me"). Request form. Fields: Name (required), Email (required), Which best describes you (Still inside planning my move, Just left finding my footing, Building but stuck, Just exploring), What do you want to be different in 90 days, and why now (textarea, the real qualifier), LinkedIn or what you are building (optional link).
 - Posts to the Worker endpoint (section 9). Success and error states.
 
 ### Privacy (`/privacy`) and Terms (`/terms`)
@@ -317,7 +323,8 @@ Principle: configure what repeats, what is referenced in multiple places, or wha
 - **YouTube feed:** scheduled Worker or upload webhook refreshes latest videos into KV, the Watch page reads the cache.
 - **Stripe:** payment links or invoices are sent privately and manually. A Worker verifies the Stripe webhook, records the payment, and sends a confirmation via SES. No public pricing, no checkout button on the site.
 - **Unsubscribe:** one click link to a Worker that updates D1. Required.
-- Secrets via environment, never in the repo.
+- **Social distribution (Phase 2):** AI draft Worker writes to `social_posts` in D1. After email-approve, a cron Worker posts via [Zernio](https://zernio.com/) through a thin adapter (not native X/LinkedIn APIs). Zernio webhooks update post status. See operational plan flow G.
+- Secrets via environment, never in the repo. Includes `ZERNIO_API_KEY` when Phase 2 is live.
 
 ---
 
@@ -338,10 +345,10 @@ Principle: configure what repeats, what is referenced in multiple places, or wha
 
 ## 11. Out of scope for v1
 
-- Social posting and the approve then post engine (X, LinkedIn, Instagram).
+- Social posting and the approve then post engine (Phase 2). Distribution provider is Zernio; we build the queue and adapter, not native platform APIs.
 - Cross channel analytics dashboard.
 - Hetzner VPS and owned analytics migration.
-- Workshops.
+- Event ticketing, registration, or RSVP flows. The `/events` page is a simple data-driven list of talks, showcases, and recaps for v1. Workshops, if run later, are just another event entry, not a separate system.
 - Any booking or payment to calendar automation.
 
 These are documented in `OPERATIONAL-PLAN.md` phases 2 and 3.

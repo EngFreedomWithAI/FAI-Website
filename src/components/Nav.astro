@@ -1,0 +1,230 @@
+---
+import { site } from '../config/site';
+import Button from './Button.astro';
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="container site-header__bar">
+    <a class="site-header__brand" href="/" aria-label={`${site.brand} home`}>
+      <img class="site-header__logo" src="/images/logo.svg" alt="" width="32" height="27" />
+      <span class="site-header__name">{site.brand}</span>
+    </a>
+
+    <nav class="site-header__nav" aria-label="Primary">
+      <ul class="site-header__links">
+        {site.nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class:list={[currentPath === item.href && 'is-active']}
+              aria-current={currentPath === item.href ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="site-header__cta">
+      <Button variant="primary" href={site.faibuddyUrl} external>
+        Try faibuddy
+      </Button>
+    </div>
+
+    <button
+      type="button"
+      class="site-header__menu-btn"
+      id="menuBtn"
+      aria-expanded="false"
+      aria-controls="mobileMenu"
+    >
+      Menu
+    </button>
+  </div>
+
+  <nav
+    class="site-header__mobile"
+    id="mobileMenu"
+    aria-label="Mobile"
+    hidden
+  >
+    {site.nav.map((item) => (
+      <a href={item.href}>{item.label}</a>
+    ))}
+    <a href={site.faibuddyUrl} target="_blank" rel="noopener noreferrer">
+      Try faibuddy →
+    </a>
+  </nav>
+</header>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  if (menuBtn && mobileMenu) {
+    const focusableSelector = 'a[href], button:not([disabled])';
+
+    const setOpen = (open: boolean) => {
+      menuBtn.setAttribute('aria-expanded', String(open));
+      mobileMenu.hidden = !open;
+      if (open) {
+        const first = mobileMenu.querySelector<HTMLElement>(focusableSelector);
+        first?.focus();
+      } else {
+        menuBtn.focus();
+      }
+    };
+
+    menuBtn.addEventListener('click', () => {
+      const open = menuBtn.getAttribute('aria-expanded') === 'true';
+      setOpen(!open);
+    });
+
+    mobileMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setOpen(false));
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+      }
+    });
+  }
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--color-bg) 82%, transparent);
+    backdrop-filter: saturate(140%) blur(var(--space-2));
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .site-header__bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    min-height: var(--space-8);
+  }
+
+  .site-header__brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    text-decoration: none;
+    color: var(--color-text);
+    flex-shrink: 0;
+  }
+
+  .site-header__brand:hover {
+    color: var(--color-text);
+  }
+
+  .site-header__logo {
+    height: var(--space-6);
+    width: auto;
+  }
+
+  .site-header__name {
+    font-weight: 700;
+    font-size: var(--text-md);
+    letter-spacing: -0.02em;
+  }
+
+  .site-header__nav {
+    margin-left: auto;
+  }
+
+  .site-header__links {
+    list-style: none;
+    display: flex;
+    gap: var(--space-1);
+    padding: 0;
+    margin: 0;
+  }
+
+  .site-header__links a {
+    display: block;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--r-sm);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition:
+      color var(--dur-fast) var(--ease),
+      background var(--dur-fast) var(--ease);
+  }
+
+  .site-header__links a:hover,
+  .site-header__links a.is-active {
+    color: var(--color-text);
+    background: color-mix(in srgb, var(--color-text) 4%, transparent);
+  }
+
+  .site-header__links a.is-active {
+    font-weight: 600;
+    background: color-mix(in srgb, var(--color-text) 7%, transparent);
+  }
+
+  .site-header__cta {
+    display: flex;
+    gap: var(--space-2);
+  }
+
+  .site-header__menu-btn {
+    display: none;
+    margin-left: auto;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    border-radius: var(--r-sm);
+    padding: var(--space-2) var(--space-3);
+    font: inherit;
+    font-weight: 600;
+    font-size: var(--text-sm);
+    color: var(--color-text);
+    cursor: pointer;
+  }
+
+  .site-header__mobile {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-2) var(--space-5) var(--space-5);
+    gap: var(--space-1);
+    border-bottom: 1px solid var(--color-border-subtle);
+    background: var(--color-bg);
+  }
+
+  .site-header__mobile[hidden] {
+    display: none;
+  }
+
+  .site-header__mobile a {
+    padding: var(--space-3) var(--space-2);
+    font-weight: 600;
+    color: var(--color-text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .site-header__mobile a:last-child {
+    border-bottom: 0;
+    color: var(--color-accent);
+  }
+
+  @media (max-width: 55rem) {
+    .site-header__nav,
+    .site-header__cta {
+      display: none;
+    }
+
+    .site-header__menu-btn {
+      display: block;
+    }
+  }
+</style>

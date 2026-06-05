@@ -1,18 +1,23 @@
 ---
 import '../styles/tokens.css';
 import '../styles/global.css';
+import { site } from '../config/site';
 
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
 }
 
 const {
-  title = 'Freedom with AI',
-  description = 'Practical AI guidance for people who want more freedom, not more noise.',
+  title = `${site.brand} | Corporate to AI Entrepreneur`,
+  description = `${site.mission} Start with faibuddy today, and work with us when you want a guide.`,
+  image = '/images/og-default.png',
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://freedomwith.ai');
+const siteOrigin = Astro.site ?? 'https://freedomwith.ai';
+const canonicalURL = new URL(Astro.url.pathname, siteOrigin);
+const imageURL = new URL(image, siteOrigin);
 ---
 
 <!doctype html>
@@ -23,6 +28,21 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://freedomw
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
     <title>{title}</title>
+
+    <link rel="icon" href="/images/logo.svg" type="image/svg+xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.brand} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={imageURL} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageURL} />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -31,6 +51,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://freedomw
     />
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <slot />
   </body>
 </html>

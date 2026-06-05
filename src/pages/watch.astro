@@ -1,0 +1,87 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import FollowBand from '../components/FollowBand.astro';
+import { site } from '../config/site';
+import '../styles/content-pages.css';
+
+const pageTitle = 'Watch | Freedom with AI';
+const pageDescription =
+  'Founder interviews with people making the leap, plus field notes on AI, tech, and building.';
+
+/** M5: replace with YouTube cache feed */
+const videos: { href: string; title: string; channel: string }[] = [];
+/** M4: replace with essays and notes collections */
+const articles: { href: string; title: string }[] = [];
+---
+
+<Base title={pageTitle} description={pageDescription}>
+  <Nav />
+
+  <main id="main-content">
+    <section class="page-section" aria-labelledby="watch-heading">
+      <div class="container">
+        <div class="watch-head">
+          <div>
+            <SectionHeader index="01" label="Watch" align="left" />
+            <h1 id="watch-heading">Founder stories and field notes.</h1>
+            <p class="watch-head__sub read-width">
+              Founder interviews with people making the leap, plus what we are learning about AI as we go.
+            </p>
+          </div>
+          <Button variant="primary" href={site.socials.youtube} external>
+            Subscribe on YouTube <span aria-hidden="true">→</span>
+          </Button>
+        </div>
+
+        {
+          videos.length > 0 ? (
+            <ul class="video-grid" />
+          ) : (
+            <div class="empty-state" aria-live="polite">
+              <p class="empty-state__lead">Founder interviews and field notes, published as we go.</p>
+              <p class="empty-state__hint">
+                Subscribe on YouTube so the new ones reach you the day they land.
+              </p>
+            </div>
+          )
+        }
+      </div>
+    </section>
+
+    <section class="page-section page-section--alt" aria-labelledby="reading-heading">
+      <div class="container">
+        <SectionHeader index="02" label="Read" align="left" />
+        <h2 id="reading-heading" class="page-section__heading">Essays and notes</h2>
+        <p class="page-section__sub">
+          Longer writing on AI, building, and the leap from corporate to entrepreneur.
+        </p>
+
+        {
+          articles.length > 0 ? (
+            <ul class="reading-list" />
+          ) : (
+            <div class="empty-state" aria-live="polite">
+              <p class="empty-state__lead">We publish essays and notes here as we write them.</p>
+              <p class="empty-state__hint">
+                Join the list below to get new pieces the moment they go live.
+              </p>
+            </div>
+          )
+        }
+      </div>
+    </section>
+
+    <FollowBand
+      index="03"
+      heading="Be first when new videos and writing land."
+      note="Join the list and get founder interviews and field notes as we publish them."
+      inputId="watch-follow-email"
+    />
+  </main>
+
+  <Footer />
+</Base>

@@ -1,0 +1,55 @@
+---
+interface Props {
+  index: string;
+  label: string;
+  align?: 'center' | 'left';
+}
+
+const { index, label, align = 'center' } = Astro.props;
+---
+
+<div class:list={['section-header', align === 'left' && 'section-header--left']}>
+  {align === 'center' && <span class="section-header__line" aria-hidden="true"></span>}
+  <span class="section-header__index">{index}</span>
+  <span class="section-header__label">{label}</span>
+  {align === 'center' && <span class="section-header__line" aria-hidden="true"></span>}
+</div>
+
+<style>
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-5);
+  }
+
+  .section-header--left {
+    justify-content: flex-start;
+  }
+
+  .section-header__index {
+    font-variant-numeric: tabular-nums;
+    font-weight: 800;
+    font-size: var(--text-sm);
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+    border-radius: var(--r-sm);
+    padding: var(--space-1) var(--space-2);
+    letter-spacing: 0.02em;
+  }
+
+  .section-header__label {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-text-subtle);
+  }
+
+  .section-header__line {
+    flex: 0 0 var(--space-7);
+    height: 1px;
+    background: var(--color-border);
+  }
+</style>

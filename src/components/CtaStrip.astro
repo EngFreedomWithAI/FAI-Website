@@ -1,0 +1,44 @@
+---
+---
+
+<section class="cta-strip on-dark" aria-labelledby="cta-strip-heading">
+  <div class="container cta-strip__inner">
+    <h2 id="cta-strip-heading">
+      <slot name="heading" />
+    </h2>
+    <div class="cta-strip__actions">
+      <slot name="actions" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-strip {
+    padding-block: var(--space-8);
+  }
+
+  .cta-strip__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-5);
+    flex-wrap: wrap;
+    background: var(--color-surface);
+    border-radius: var(--r-lg);
+    padding: var(--space-7) var(--space-7);
+  }
+
+  .cta-strip h2 {
+    color: var(--color-text);
+    max-width: 18ch;
+    font-size: var(--text-xl);
+    font-weight: 800;
+    line-height: var(--leading-tight);
+  }
+
+  .cta-strip__actions {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+</style>

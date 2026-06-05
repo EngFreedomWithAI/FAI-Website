@@ -1,0 +1,224 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Field from '../components/Field.astro';
+import { contactStageOptions } from '../data/contact-form';
+import '../styles/content-pages.css';
+
+const pageTitle = 'Contact | Freedom with AI';
+const pageDescription =
+  'Tell me where you are and what you are building. I read every message and reply if it is a fit.';
+---
+
+<Base title={pageTitle} description={pageDescription}>
+  <Nav />
+
+  <main id="main-content">
+    <section class="page-hero" aria-labelledby="contact-heading">
+      <div class="container">
+        <SectionHeader index="01" label="Contact" align="left" />
+        <h1 id="contact-heading">Work with me</h1>
+        <p class="page-hero__lede">
+          Tell me where you are and what you are building. I read every message and reply if it is a fit.
+        </p>
+
+        <div
+          id="form-success"
+          class="form-banner form-banner--success"
+          role="status"
+          tabindex="-1"
+          hidden
+        >
+          Thanks for reaching out. I read every message and reply if it is a fit.
+        </div>
+
+        <div
+          id="form-error"
+          class="form-banner form-banner--error"
+          role="alert"
+          hidden
+        >
+          Something went wrong. Please check the fields below and try again.
+        </div>
+
+        <form
+          id="request-form"
+          class="contact-form"
+          novalidate
+          aria-label="Request an engagement"
+        >
+          <Field id="contact-name" name="name" label="Name" type="text" required />
+          <Field id="contact-email" name="email" label="Email" type="email" required />
+          <Field
+            id="contact-stage"
+            name="stage"
+            label="Which best describes you"
+            type="select"
+            required
+            options={contactStageOptions}
+          />
+          <Field
+            id="contact-message"
+            name="message"
+            label="What do you want to be different in 90 days, and why now"
+            type="textarea"
+            required
+            placeholder="A few sentences on where you are, what you want to build, and why this is the moment."
+          />
+          <Field
+            id="contact-link"
+            name="link"
+            label="LinkedIn or what you are building"
+            type="url"
+            optional
+            placeholder="https://"
+          />
+
+          <Button type="submit" variant="primary" size="large">
+            Send request
+          </Button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Base>
+
+<script>
+  const form = document.getElementById('request-form') as HTMLFormElement | null;
+  const successBanner = document.getElementById('form-success');
+  const errorBanner = document.getElementById('form-error');
+
+  const fieldLabels: Record<string, string> = {
+    name: 'Name',
+    email: 'Email',
+    stage: 'Which best describes you',
+    message: 'What do you want to be different in 90 days, and why now',
+    link: 'LinkedIn or what you are building',
+  };
+
+  const showFieldError = (name: string, message: string) => {
+    const wrapper = form?.querySelector(`[data-field="${name}"]`);
+    const control = wrapper?.querySelector<HTMLElement>('.field__control');
+    const errorEl = wrapper?.querySelector<HTMLElement>('.field__error');
+    if (!wrapper || !control || !errorEl) return;
+    wrapper.classList.add('field--invalid');
+    control.setAttribute('aria-invalid', 'true');
+    errorEl.textContent = message;
+    errorEl.hidden = false;
+  };
+
+  const clearFieldErrors = () => {
+    form?.querySelectorAll('[data-field]').forEach((wrapper) => {
+      wrapper.classList.remove('field--invalid');
+      const control = wrapper.querySelector<HTMLElement>('.field__control');
+      const errorEl = wrapper.querySelector<HTMLElement>('.field__error');
+      control?.removeAttribute('aria-invalid');
+      if (errorEl) {
+        errorEl.textContent = '';
+        errorEl.hidden = true;
+      }
+    });
+  };
+
+  const isValidUrl = (value: string) => {
+    if (!value.trim()) return true;
+    try {
+      const url = new URL(value);
+      return url.protocol === 'http:' || url.protocol === 'https:';
+    } catch {
+      return false;
+    }
+  };
+
+  if (form) {
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      clearFieldErrors();
+      successBanner?.setAttribute('hidden', '');
+      errorBanner?.setAttribute('hidden', '');
+
+      const data = new FormData(form);
+      let valid = true;
+
+      const name = String(data.get('name') ?? '').trim();
+      const email = String(data.get('email') ?? '').trim();
+      const stage = String(data.get('stage') ?? '').trim();
+      const message = String(data.get('message') ?? '').trim();
+      const link = String(data.get('link') ?? '').trim();
+
+      if (!name) {
+        showFieldError('name', `${fieldLabels.name} is required.`);
+        valid = false;
+      }
+
+      if (!email) {
+        showFieldError('email', `${fieldLabels.email} is required.`);
+        valid = false;
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showFieldError('email', 'Enter a valid email address.');
+        valid = false;
+      }
+
+      if (!stage) {
+        showFieldError('stage', `${fieldLabels.stage} is required.`);
+        valid = false;
+      }
+
+      if (!message) {
+        showFieldError('message', `${fieldLabels.message} is required.`);
+        valid = false;
+      }
+
+      if (link && !isValidUrl(link)) {
+        showFieldError('link', 'Enter a valid link starting with http:// or https://.');
+        valid = false;
+      }
+
+      if (!valid) {
+        errorBanner?.removeAttribute('hidden');
+        const firstInvalid = form.querySelector<HTMLElement>('.field--invalid .field__control');
+        firstInvalid?.focus();
+        return;
+      }
+
+      // TODO(M5): POST to the Cloudflare Worker advisory endpoint (or Web3Forms fallback)
+      // per docs/OPERATIONAL-PLAN.md. Include name, email, stage, message, link. No secrets in repo.
+      console.info('Advisory request (stub):', { name, email, stage, message, link });
+
+      form.reset();
+      successBanner?.removeAttribute('hidden');
+      successBanner?.focus();
+    });
+
+    form.querySelectorAll('.field__control').forEach((control) => {
+      control.addEventListener('input', () => {
+        const wrapper = control.closest('[data-field]');
+        if (!wrapper?.classList.contains('field--invalid')) return;
+        wrapper.classList.remove('field--invalid');
+        control.removeAttribute('aria-invalid');
+        const errorEl = wrapper.querySelector<HTMLElement>('.field__error');
+        if (errorEl) {
+          errorEl.textContent = '';
+          errorEl.hidden = true;
+        }
+      });
+    });
+  }
+</script>
+
+<style>
+  .page-hero .form-banner {
+    margin-top: var(--space-5);
+    max-width: var(--readw);
+  }
+
+  .page-hero .form-banner:focus {
+    outline: none;
+    box-shadow: var(--ring-accent);
+  }
+</style>
