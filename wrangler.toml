@@ -17,7 +17,7 @@ database_id = "397b2112-743f-46a7-8b24-b8c9b5c0c2b0"
 [vars]
 AWS_REGION = "us-east-1"
 SES_FROM = "hello@freedomwith.ai"
-CONTACT_TO = "sonia@freedomwith.ai"
+CONTACT_TO = "soniasarao@freedomwith.ai"
 SITE_URL = "https://freedomwith.ai"
 
 # Encrypted secrets only — set in Pages dashboard (Production + Preview), not in this file:

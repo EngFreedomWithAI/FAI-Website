@@ -315,7 +315,7 @@ Decided: **own the audience in our own database; email providers are swappable t
 - **Secrets/env** (Cloudflare Pages → Settings → Variables, set for both Production and Preview; never in repo):
   - `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`
   - `SES_FROM` (verified sender, e.g. `hello@freedomwith.ai`)
-  - `CONTACT_TO` (where advisory alerts go, e.g. `sonia@freedomwith.ai`)
+  - `CONTACT_TO` (where advisory alerts go, e.g. `soniasarao@freedomwith.ai`)
   - `SITE_URL` (origin used to build confirm/unsubscribe links)
   - `DB` is a D1 **binding**, not a secret.
 - **Local dev:** static pages run under `astro dev` as today; the Functions + D1 run under `wrangler pages dev` with a local D1. Form endpoints only exist when served via wrangler or on a Pages deploy.
@@ -454,7 +454,7 @@ Approval is often same-day to a few business days. Until approved, test only wit
 | `AWS_SECRET_ACCESS_KEY` | Secret (encrypt) | from IAM |
 | `AWS_REGION` | Plain text | `us-east-1` |
 | `SES_FROM` | Plain text | `hello@freedomwith.ai` |
-| `CONTACT_TO` | Plain text | `sonia@freedomwith.ai` |
+| `CONTACT_TO` | Plain text | `soniasarao@freedomwith.ai` |
 
 `SITE_URL` is already `https://freedomwith.ai`. Redeploy after adding secrets (Deployments → **Retry deployment** or push a commit).
 
