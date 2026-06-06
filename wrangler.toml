@@ -19,7 +19,7 @@ database_id = "397b2112-743f-46a7-8b24-b8c9b5c0c2b0"
 NODE_VERSION = "20"
 SITE = "https://freedomwith.ai"
 SITE_URL = "https://freedomwith.ai"
-AWS_REGION = "us-east-1"
+AWS_REGION = "us-east-2"
 SES_FROM = "hello@freedomwith.ai"
 CONTACT_TO = "soniasarao@freedomwith.ai"
 
