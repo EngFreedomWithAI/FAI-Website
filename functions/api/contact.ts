@@ -92,13 +92,8 @@ ${message}`,
   } catch (err) {
     console.error('contact: SES alert failed', err);
     // The request is safely stored in D1; surface a soft failure.
-    // TEMP: include the SES error detail to diagnose; remove once email is confirmed working.
     return json(
-      {
-        ok: false,
-        error: 'We saved your request but the notification failed. We will still see it.',
-        debug: err instanceof Error ? err.message : String(err),
-      },
+      { ok: false, error: 'We saved your request but the notification failed. We will still see it.' },
       502
     );
   }

@@ -341,12 +341,13 @@ What Sonia does in the consoles. The code is in the repo; these steps wire it to
 5. ~~Deploy~~ — Pages build + Functions publish green (June 6, 2026). Live: privacy/terms, robots, sitemap, canonicals on prod domain.
 6. **Confirm** — D1 binding `DB` → `fai-website-db` in Pages dashboard (Production + Preview) if not already visible under Bindings.
 
-**AWS SES — next (section 10d)**
-1. Verify domain identity `freedomwith.ai` in SES (`us-east-2` / Ohio).
-2. Add DKIM CNAMEs (+ SPF/DMARC) in Cloudflare DNS.
-3. Create IAM user with `ses:SendEmail` only; generate API access key.
-4. Request production access (leave sandbox).
-5. Add AWS secrets to Cloudflare Pages (Production + Preview); redeploy; test forms.
+**AWS SES — done (June 6, 2026)**
+1. ~~Verify domain identity~~ — `freedomwith.ai` verified in **us-east-2 (Ohio)** with Easy DKIM; `soniasarao@freedomwith.ai` verified for alerts/testing.
+2. ~~DNS~~ — DKIM CNAMEs + SPF + DMARC in Cloudflare (Gmail MX preserved).
+3. ~~IAM~~ — `fai-website-ses` user; inline policy `ses:SendEmail`/`SendRawEmail` on `arn:aws:ses:*:604443115104:identity/*`.
+4. ~~Secrets~~ — `AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY` in Pages (Production + Preview); `AWS_REGION`/`SES_FROM`/`CONTACT_TO` in `wrangler.toml`.
+5. ~~Tested~~ — `hello@freedomwith.ai` send confirmed (200 / MessageId); contact alert + auto-ack working on prod.
+6. **Sandbox vs production:** confirm whether the account is out of the SES sandbox in us-east-2. If still sandboxed, only verified recipients receive mail — request production access before launch to email arbitrary subscribers.
 
 ---
 
@@ -582,16 +583,18 @@ A running snapshot of what is in the repo versus what still needs doing. Keep th
 - Section numbers removed site-wide (card badges 01–03 kept on audience cards).
 - Responsive footer tiers; legal pages (privacy, terms); SEO (robots, sitemap, JSON-LD, llms.txt).
 
-**Forms (code + D1 ready; email pending SES)**
-- Pages Functions: `/api/subscribe`, `/api/confirm`, `/api/unsubscribe`, `/api/contact`.
-- Contact + follow forms wired with loading/success/error states.
-- Writes go to D1 once `DB` binding is confirmed in Pages dashboard.
+**Forms + email (live, tested end-to-end)**
+- Pages Functions: `/api/subscribe`, `/api/confirm`, `/api/unsubscribe`, `/api/contact`; `DB` bound (Production + Preview).
+- Contact + follow forms wired with loading/success/error states; writes land in D1.
+- AWS SES verified in **us-east-2 (Ohio)**; `fai-website-ses` IAM user (region-agnostic `identity/*` send policy); `hello@freedomwith.ai` sending confirmed (200 / MessageId).
+- Contact alert (reply-to requester) + auto-ack tested on prod.
 
-### In progress — AWS SES (section 10d)
-
-- Domain verify, DKIM/SPF/DMARC in Cloudflare DNS, IAM send key, sandbox exit.
-- Add secrets to Pages: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`, `SES_FROM`, `CONTACT_TO`.
-- Test subscribe (double opt-in) + contact (alert + auto-ack) on prod.
+### AWS SES — resolved gotchas (for future reference)
+The 502s during setup traced to four stacked issues, fixed in order:
+1. `aws4fetch` default 10 retries on a failing call → ~60s hang → generic edge 502. Fixed: `retries: 0` + 8s AbortController timeout.
+2. Whitespace pasted into a credential corrupted the SigV4 Authorization header. Fixed: strip all whitespace from creds in code.
+3. Access key value was wrong/missing (secret only shows once). Fixed: recreated key, re-entered both values.
+4. **Region mismatch** — identities are verified in **us-east-2**, config used us-east-1 ("Email address is not verified in US-EAST-1"). Fixed: `AWS_REGION = us-east-2`, IAM policy ARN region wildcard.
 
 ### Pending (not blocking site)
 
