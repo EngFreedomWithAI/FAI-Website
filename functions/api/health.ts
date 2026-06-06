@@ -38,10 +38,11 @@ export const onRequestGet: PagesFunction<Env> = async ({ env, request }) => {
 
 async function trySesSend(env: Env): Promise<Record<string, unknown>> {
   try {
-    const region = (env.AWS_REGION ?? '').trim();
+    const clean = (v: string): string => (v ?? '').replace(/\s+/g, '');
+    const region = clean(env.AWS_REGION ?? '');
     const client = new AwsClient({
-      accessKeyId: (env.AWS_ACCESS_KEY_ID ?? '').trim(),
-      secretAccessKey: (env.AWS_SECRET_ACCESS_KEY ?? '').trim(),
+      accessKeyId: clean(env.AWS_ACCESS_KEY_ID ?? ''),
+      secretAccessKey: clean(env.AWS_SECRET_ACCESS_KEY ?? ''),
       service: 'ses',
       region,
       retries: 0,
