@@ -17,10 +17,15 @@ const asArray = (v: string | string[]): string[] => (Array.isArray(v) ? v : [v])
  */
 export async function sendEmail(env: Env, msg: EmailMessage): Promise<void> {
   const region = env.AWS_REGION.trim();
-  // Region/service are inferred from the email.{region}.amazonaws.com host (aws4fetch default).
+  // The SES host is email.{region}.amazonaws.com but the SigV4 service name is "ses",
+  // so set both explicitly — otherwise aws4fetch infers service "email" and SES rejects (403).
+  // retries: 0 so a rejected request fails fast instead of backing off ~10x and timing out.
   const client = new AwsClient({
     accessKeyId: env.AWS_ACCESS_KEY_ID.trim(),
     secretAccessKey: env.AWS_SECRET_ACCESS_KEY.trim(),
+    service: 'ses',
+    region,
+    retries: 0,
   });
 
   const endpoint = `https://email.${region}.amazonaws.com/v2/email/outbound-emails`;
@@ -40,11 +45,20 @@ export async function sendEmail(env: Env, msg: EmailMessage): Promise<void> {
     },
   };
 
-  const res = await client.fetch(endpoint, {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify(body),
-  });
+  // Hard timeout so a slow/hanging SES call can never block the Pages Function.
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 8000);
+  let res: Response;
+  try {
+    res = await client.fetch(endpoint, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(body),
+      signal: controller.signal,
+    });
+  } finally {
+    clearTimeout(timeout);
+  }
 
   if (!res.ok) {
     const detail = await res.text();
