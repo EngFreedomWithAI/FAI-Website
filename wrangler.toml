@@ -13,7 +13,14 @@ binding = "DB"
 database_name = "fai-website-db"
 database_id = "397b2112-743f-46a7-8b24-b8c9b5c0c2b0"
 
-# Secrets/env are NOT stored here. Set these in the Cloudflare Pages project
-# (Settings > Environment variables & secrets) for Production and Preview:
-#   AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION,
-#   SES_FROM, CONTACT_TO, SITE_URL
+# Plain env vars for Pages Functions (wrangler.toml is the source of truth when linked).
+[vars]
+AWS_REGION = "us-east-1"
+SES_FROM = "hello@freedomwith.ai"
+CONTACT_TO = "sonia@freedomwith.ai"
+SITE_URL = "https://freedomwith.ai"
+
+# Encrypted secrets only — set in Pages dashboard (Production + Preview), not in this file:
+#   AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
+#
+# Astro build still uses SITE in the Pages dashboard (same value as SITE_URL for prod).

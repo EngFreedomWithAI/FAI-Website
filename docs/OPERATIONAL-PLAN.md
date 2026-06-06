@@ -333,12 +333,176 @@ What Sonia does in the consoles. The code is in the repo; these steps wire it to
 4. **Request production access** to leave the SES sandbox. Until then, SES only delivers to verified recipient addresses (fine for testing).
 5. Note the region for `AWS_REGION`.
 
-**Cloudflare**
-1. Create the D1 database: `npx wrangler d1 create fai-website-db`, then paste the returned `database_id` into `wrangler.toml`.
-2. Apply the schema: `npx wrangler d1 execute fai-website-db --remote --file=./migrations/0001_init.sql`.
-3. In the **Pages project → Settings → Functions → D1 bindings**, bind `DB` to `fai-website-db` for **Production and Preview** (or rely on `wrangler.toml`).
-4. In **Pages project → Settings → Environment variables & secrets**, add the secrets/env from section 10b for **Production and Preview** (encrypt the AWS keys).
-5. Redeploy. Test on the `*.pages.dev` preview first (with a verified recipient while SES is still in sandbox).
+**Cloudflare — done (June 6, 2026)**
+1. ~~Connect domain~~ — `freedomwith.ai` on Cloudflare DNS (nameservers: `mike` + `monika.ns.cloudflare.com`). Gmail MX preserved.
+2. ~~Pages custom domain~~ — `freedomwith.ai` + `www` → `fai-website.pages.dev`. Old GitHub redirect removed.
+3. ~~Production env~~ — `SITE` + `SITE_URL` = `https://freedomwith.ai`, `NODE_VERSION` = `20`.
+4. ~~D1 database~~ — `fai-website-db` created; `database_id` in `wrangler.toml`; migration `0001_init.sql` applied remotely.
+5. ~~Deploy~~ — Pages build + Functions publish green (June 6, 2026). Live: privacy/terms, robots, sitemap, canonicals on prod domain.
+6. **Confirm** — D1 binding `DB` → `fai-website-db` in Pages dashboard (Production + Preview) if not already visible under Bindings.
+
+**AWS SES — next (section 10d)**
+1. Verify domain identity `freedomwith.ai` in SES (`us-east-1`).
+2. Add DKIM CNAMEs (+ SPF/DMARC) in Cloudflare DNS.
+3. Create IAM user with `ses:SendEmail` only; generate API access key.
+4. Request production access (leave sandbox).
+5. Add AWS secrets to Cloudflare Pages (Production + Preview); redeploy; test forms.
+
+---
+
+## 10d. AWS SES setup walkthrough (step-by-step)
+
+**Goal:** transactional mail from `hello@freedomwith.ai` — subscriber confirm, advisory alert to Sonia, advisory auto-ack. Region: **`us-east-1`**.
+
+**faibuddy already uses SES.** Do not touch the faibuddy.com identity, DNS, or IAM keys. Add freedomwith.ai as a **second** identity in the same AWS account. See **section 10e** for what stays separate vs what is shared.
+
+### A. Open SES and verify the domain
+
+1. Sign in to [AWS Console](https://console.aws.amazon.com/) → **Amazon SES** → switch region to **US East (N. Virginia) / us-east-1** (top-right).
+2. Left nav: **Configuration** → **Identities** → **Create identity**.
+3. Identity type: **Domain**. Domain: `freedomwith.ai`.
+4. Enable **Easy DKIM** (signing key length 2048-bit is fine).
+5. Leave custom MAIL FROM off for v1 (optional later).
+6. Create identity. SES shows **3 DKIM CNAME records** — keep this tab open.
+
+### B. DNS in Cloudflare (keep Gmail receiving)
+
+In **Cloudflare** → `freedomwith.ai` → **DNS** → **Records**:
+
+**DKIM (from SES)** — add each CNAME SES gives you (names look like `xxxx._domainkey.freedomwith.ai` → `xxxx.dkim.amazonses.com`). Proxy status: **DNS only** (grey cloud).
+
+**SPF** — one TXT on `@` (merge with Google if you already have Gmail MX):
+
+```
+v=spf1 include:_spf.google.com include:amazonses.com ~all
+```
+
+If no SPF record exists yet, use the line above. If you already have Google-only SPF, add `include:amazonses.com` before `~all`.
+
+**DMARC** — TXT on `_dmarc`:
+
+```
+v=DMARC1; p=none; rua=mailto:sonia@freedomwith.ai; pct=100; adkim=r; aspf=r
+```
+
+Start with `p=none` (monitor only). Tighten to `quarantine`/`reject` after a few weeks of clean sending.
+
+**Do not change** existing **MX** records (Gmail stays as-is).
+
+Back in SES → Identities → `freedomwith.ai` — wait until **Verification status** and **DKIM** show **Verified** (often 5–30 minutes).
+
+### C. Verify test recipients (sandbox only)
+
+While SES is in **sandbox**, you can only send **to** verified addresses.
+
+1. SES → Identities → **Create identity** → **Email address**.
+2. Verify `sonia@freedomwith.ai` (and any personal inbox you will test with). Click the link in each verification email.
+
+`hello@freedomwith.ai` does **not** need a separate email identity once the **domain** is verified — that is your `SES_FROM`.
+
+### D. IAM user for Pages Functions (API keys, not SMTP)
+
+**New user only** — do **not** reuse faibuddy's access keys in Cloudflare Pages. faibuddy keeps its existing IAM user and secrets wherever that app stores them.
+
+1. IAM → **Users** → **Create user** → name e.g. `fai-website-ses` (leave faibuddy's IAM user unchanged).
+2. **Do not** attach admin policies. **Create inline policy** scoped to the freedomwith.ai identity (replace `ACCOUNT_ID`):
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "SendFromFreedomWithAiOnly",
+      "Effect": "Allow",
+      "Action": ["ses:SendEmail", "ses:SendRawEmail"],
+      "Resource": "arn:aws:ses:us-east-1:ACCOUNT_ID:identity/freedomwith.ai"
+    }
+  ]
+}
+```
+
+If the scoped ARN is awkward to copy, a broader `Resource: "*"` on a **dedicated** `fai-website-ses` user is still fine — the important part is **separate keys**, not shared with faibuddy.
+
+3. **Security credentials** → **Create access key** → use case **Application running outside AWS**.
+4. Copy **Access key ID** and **Secret access key** once — these go into **Cloudflare Pages only**. Do not commit them. Do not paste them into faibuddy config.
+
+### E. Production access (sandbox)
+
+SES sandbox and production status are **per AWS account**, not per domain. If faibuddy already has **production access**, skip the request — just verify the `freedomwith.ai` identity and you can send (once DKIM is live).
+
+If the account is **still in sandbox**, SES → **Account dashboard** → **Request production access**:
+
+Suggested answers:
+
+| Field | Value |
+|-------|-------|
+| Mail type | Transactional |
+| Website URL | `https://freedomwith.ai` |
+| Use case | Double opt-in newsletter confirmations; contact-form alerts and auto-replies for advisory inquiries |
+| List hygiene | Own D1 database; no purchased lists; one-click unsubscribe on every mail |
+| Bounce/complaint | Unsubscribe links; manual review via inbox |
+
+Approval is often same-day to a few business days. Until approved, test only with verified recipient addresses.
+
+### F. Cloudflare Pages secrets
+
+**Workers & Pages** → **fai-website** → **Settings** → **Environment variables** — set for **Production** and **Preview**:
+
+| Name | Type | Value |
+|------|------|-------|
+| `AWS_ACCESS_KEY_ID` | Secret (encrypt) | from IAM |
+| `AWS_SECRET_ACCESS_KEY` | Secret (encrypt) | from IAM |
+| `AWS_REGION` | Plain text | `us-east-1` |
+| `SES_FROM` | Plain text | `hello@freedomwith.ai` |
+| `CONTACT_TO` | Plain text | `sonia@freedomwith.ai` |
+
+`SITE_URL` is already `https://freedomwith.ai`. Redeploy after adding secrets (Deployments → **Retry deployment** or push a commit).
+
+### G. Test on production
+
+1. **Contact** — https://freedomwith.ai/contact — submit a real request. Expect: row in D1 `advisory_requests`, alert to `CONTACT_TO`, auto-ack to requester (sandbox: requester must be a verified SES email).
+2. **Subscribe** — footer or /follow band — enter email, click confirm link from inbox. Expect: `pending` → `confirmed` in D1 `subscribers`.
+3. **Unsubscribe** — use link from a mail; expect `unsubscribed` in D1.
+
+If mail fails, check **Pages** → **Functions** → real-time logs, or SES → **Suppression list** / **Account dashboard** for bounces.
+
+### H. Checklist (tick as you go)
+
+- [ ] SES domain `freedomwith.ai` verified (us-east-1)
+- [ ] DKIM CNAMEs in Cloudflare (DNS only)
+- [ ] SPF includes `amazonses.com` + Google
+- [ ] DMARC TXT on `_dmarc`
+- [ ] IAM user + access key created
+- [ ] Production access requested (or sandbox test emails verified)
+- [ ] Five env vars/secrets in Pages (Production + Preview)
+- [ ] Redeploy + contact + subscribe tested
+
+---
+
+## 10e. SES separation: freedomwith.ai vs faibuddy
+
+Two products, one AWS account is fine. Keep these **separate** so a change on the marketing site never breaks product mail (and vice versa).
+
+| Layer | faibuddy | freedomwith.ai (this site) |
+|-------|----------|----------------------------|
+| **SES identity** | `faibuddy.com` (existing) | `freedomwith.ai` (add new) |
+| **From address** | faibuddy's sender (e.g. `hello@faibuddy.com`) | `hello@freedomwith.ai` (`SES_FROM`) |
+| **DNS / DKIM** | faibuddy.com DNS zone — **do not edit** for FAI | Cloudflare `freedomwith.ai` only |
+| **IAM access keys** | faibuddy app's existing user/keys | **New** user `fai-website-ses` → Cloudflare Pages secrets |
+| **Subscriber / request data** | faibuddy's database | Cloudflare D1 (`fai-website-db`) |
+| **Code / deploy** | faibuddy repo / infra | this repo + Cloudflare Pages |
+
+**Shared at the AWS account level (unavoidable):** sending quota, account sandbox/production flag, and the account suppression list. Bad bounces or complaints on either domain affect the whole account — so both products keep unsubscribe links and list hygiene.
+
+**What to do now**
+
+1. In SES (same region faibuddy uses, likely `us-east-1`), confirm `faibuddy.com` is listed under Identities — leave it alone.
+2. **Create identity** for `freedomwith.ai` (section 10d-A).
+3. Add DKIM/SPF/DMARC only in **Cloudflare** for `freedomwith.ai` — not in faibuddy DNS.
+4. Create **`fai-website-ses`** IAM user + new access key; put keys in **Pages secrets only**.
+5. Set `SES_FROM=hello@freedomwith.ai` — never faibuddy's from address on this site.
+
+**Do not:** reuse faibuddy IAM keys in Cloudflare, change faibuddy SPF/DKIM, or send freedomwith.ai mail with a `@faibuddy.com` From.
 
 ---
 
@@ -401,53 +565,39 @@ Goal: rank in classic search **and** be the answer AI tools (ChatGPT, Claude, Pe
 
 ---
 
-## 13c. Build status (as of June 6, 2026)
+## 13c. Build status (as of June 6, 2026, evening)
 
 A running snapshot of what is in the repo versus what still needs doing. Keep this current.
 
-### Done (in the repo, builds green)
+### Done — live on https://freedomwith.ai
 
-**Site / design**
-- Homepage "How we help" reduced to two matched cards (faibuddy + advisory), CTAs aligned and same accent treatment; "Two ways to move forward" copy; content teaser removed.
-- "Is this you" cards have icons; the routing line is now a contained full-width routing bar.
-- Section numbers removed across all pages (home, advisory, watch, about, events, contact, follow band). The 01/02/03 badges remain only on the "Is this you" cards.
-- Hero has a placeholder line-art illustration below the CTAs (to be replaced; see pending).
-- Footer is responsive in tiers (3 columns tablet, 2 columns phone, brand full-width).
-- Removed legacy `live-server`/`http-server` dev deps that were breaking the local file watcher (fsevents).
+**Infrastructure**
+- Cloudflare DNS active; domain cutover complete (no faibuddy redirect).
+- Cloudflare Pages **fai-website** deployed with Functions; production build green.
+- `SITE` + `SITE_URL` = `https://freedomwith.ai` in Pages env.
+- D1 **fai-website-db** created, migrated (`subscribers`, `advisory_requests`), `database_id` in `wrangler.toml`.
 
-**Content / legal**
-- Privacy and Terms pages have real content (shared `legal.css`). Governing law set to California as a placeholder.
+**Site / design (in repo + on prod)**
+- Homepage: two matched How we help cards, Is this you icons + routing bar, hero placeholder illustration.
+- Section numbers removed site-wide (card badges 01–03 kept on audience cards).
+- Responsive footer tiers; legal pages (privacy, terms); SEO (robots, sitemap, JSON-LD, llms.txt).
 
-**SEO / AIEO**
-- `robots.txt` (welcomes AI crawlers, links sitemap), `sitemap.xml`, JSON-LD (`Organization` + `WebSite` + founders) on every page, `llms.txt`. `Base.astro` accepts a per-page `schema` prop.
-
-**Email capture (code complete, not yet wired to live infra)**
-- D1 schema: `migrations/0001_init.sql` (`subscribers`, `advisory_requests`).
-- `wrangler.toml` with the `DB` binding (needs the real `database_id`).
+**Forms (code + D1 ready; email pending SES)**
 - Pages Functions: `/api/subscribe`, `/api/confirm`, `/api/unsubscribe`, `/api/contact`.
-- SES v2 HTTPS sender (`aws4fetch` SigV4), shared util + types, honeypot spam protection.
-- Contact form and follow/subscribe band wired to the endpoints with loading/success/error states.
-- `package.json`: added `aws4fetch`, `wrangler`, `@cloudflare/workers-types`, and `db:*` / `cf:dev` scripts.
+- Contact + follow forms wired with loading/success/error states.
+- Writes go to D1 once `DB` binding is confirmed in Pages dashboard.
 
-### Pending
+### In progress — AWS SES (section 10d)
 
-**Needs Sonia (manual console work, section 10c)**
-- AWS SES: verify domain + sender, add DKIM/SPF/DMARC, create IAM send key, request production access (leave sandbox), note region.
-- Cloudflare: create D1 (`db:create`), paste `database_id` into `wrangler.toml`, run migration (`db:migrate`), bind `DB` for Production + Preview, set the 6 env secrets (`AWS_*`, `SES_FROM`, `CONTACT_TO`, `SITE_URL`), redeploy.
-- Test contact + subscribe on the `*.pages.dev` preview with a verified recipient.
+- Domain verify, DKIM/SPF/DMARC in Cloudflare DNS, IAM send key, sandbox exit.
+- Add secrets to Pages: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`, `SES_FROM`, `CONTACT_TO`.
+- Test subscribe (double opt-in) + contact (alert + auto-ack) on prod.
 
-**Needs design / decisions**
-- Commissioned hero image to replace the placeholder (brief delivered: ~1600x800, 2:1, transparent, brand palette).
-- Legal review of Privacy/Terms and confirm governing-law state before launch.
+### Pending (not blocking site)
 
-**Engineering backlog (later phases)**
-- Per-page schema (`Person` on About, `Event` on Events, `Article` on writing, `VideoObject` on Watch) via the `schema` prop.
-- GA4 + PostHog wiring (M5).
-- Newsletter broadcast (flow F) — deferred; reads the confirmed D1 list when built.
-- Stripe advisory flow (Level 0 manual for now).
-- YouTube feed ingest to KV (Watch currently shows the empty state).
-- Production cutover: `freedomwith.ai` still redirects to faibuddy; keep Cloudflare Pages `SITE` pointed at the preview until cutover.
-- Remaining events entries and any further Cammie-mockup items (split hero option, watch thumbnails, one together photo).
+- Hero image commission (~1600×800, 2:1).
+- Legal review of Privacy/Terms; confirm governing-law state.
+- GA4 + PostHog; per-page schema; YouTube feed; Stripe; newsletter broadcast; remaining mockup/events items.
 
 ---
 
