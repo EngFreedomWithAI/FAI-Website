@@ -13,14 +13,15 @@ binding = "DB"
 database_name = "fai-website-db"
 database_id = "397b2112-743f-46a7-8b24-b8c9b5c0c2b0"
 
-# Plain env vars for Pages Functions (wrangler.toml is the source of truth when linked).
+# Plain env vars (wrangler.toml is the source of truth — dashboard only accepts secrets).
+# NODE_VERSION is also pinned via .nvmrc for the Pages build image.
 [vars]
+NODE_VERSION = "20"
+SITE = "https://freedomwith.ai"
+SITE_URL = "https://freedomwith.ai"
 AWS_REGION = "us-east-1"
 SES_FROM = "hello@freedomwith.ai"
 CONTACT_TO = "soniasarao@freedomwith.ai"
-SITE_URL = "https://freedomwith.ai"
 
 # Encrypted secrets only — set in Pages dashboard (Production + Preview), not in this file:
 #   AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
-#
-# Astro build still uses SITE in the Pages dashboard (same value as SITE_URL for prod).
