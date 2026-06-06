@@ -71,6 +71,37 @@ const pageDescription =
         <p class="hero__support">
           Start with faibuddy today, and work with us when you want a guide.
         </p>
+
+        <svg
+          class="hero__art"
+          viewBox="0 0 640 220"
+          fill="none"
+          aria-hidden="true"
+          role="presentation"
+        >
+          <circle class="hero__art-sun" cx="168" cy="66" r="26" />
+          <path class="hero__art-ground" d="M36 200 H604" stroke-linecap="round" />
+          <path
+            class="hero__art-mountain"
+            d="M92 200 L214 120 L336 200"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            class="hero__art-mountain hero__art-mountain--back"
+            d="M300 200 L460 56 L604 200"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            class="hero__art-path"
+            d="M70 198 C150 185 205 174 252 158 C322 136 362 108 412 88 C436 78 451 68 460 58"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path class="hero__art-flag-pole" d="M460 58 V22" stroke-linecap="round" />
+          <path class="hero__art-flag" d="M460 24 L490 33 L460 43 Z" />
+        </svg>
       </div>
     </section>
 
@@ -297,6 +328,54 @@ const pageDescription =
     margin-top: var(--space-5);
     font-size: var(--text-sm);
     color: var(--color-text-subtle);
+  }
+
+  .hero__art {
+    width: 100%;
+    max-width: 34rem;
+    height: auto;
+    margin-top: var(--space-7);
+  }
+
+  .hero__art-ground {
+    stroke: var(--color-border);
+    stroke-width: 2;
+  }
+
+  .hero__art-mountain {
+    stroke: var(--color-text-subtle);
+    stroke-width: 2.25;
+  }
+
+  .hero__art-mountain--back {
+    stroke: color-mix(in srgb, var(--color-text-subtle) 75%, var(--color-accent));
+  }
+
+  .hero__art-sun {
+    stroke: color-mix(in srgb, var(--color-accent) 45%, var(--color-border));
+    stroke-width: 2.25;
+  }
+
+  .hero__art-path {
+    stroke: var(--color-accent);
+    stroke-width: 3;
+    stroke-dasharray: 1 9;
+  }
+
+  .hero__art-flag-pole {
+    stroke: var(--color-accent);
+    stroke-width: 2.5;
+  }
+
+  .hero__art-flag {
+    fill: var(--color-accent);
+  }
+
+  @media (max-width: 40rem) {
+    .hero__art {
+      max-width: 22rem;
+      margin-top: var(--space-6);
+    }
   }
 
   .section-block {

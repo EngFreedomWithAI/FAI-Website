@@ -161,21 +161,11 @@ const indexLabel = index !== undefined ? String(index).padStart(2, '0') : undefi
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
+    height: 100%;
   }
 
   .card-door--primary {
-    border-color: color-mix(in srgb, var(--color-accent) 40%, var(--color-border));
-    background: linear-gradient(
-        180deg,
-        var(--color-accent-soft),
-        transparent 60%
-      ),
-      var(--color-surface);
-  }
-
-  .card-door--primary .card-door__chip {
     border-color: color-mix(in srgb, var(--color-accent) 45%, var(--color-border));
-    color: var(--color-accent);
   }
 
   .card-door__top {
@@ -197,26 +187,37 @@ const indexLabel = index !== undefined ? String(index).padStart(2, '0') : undefi
     text-transform: uppercase;
     padding: var(--space-1) var(--space-3);
     border-radius: var(--r-lg);
-    border: 1px solid var(--color-border);
-    color: var(--color-text-muted);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 30%, var(--color-border));
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
     flex-shrink: 0;
   }
 
   .card-door__cta {
-    margin-top: var(--space-2);
+    margin-top: auto;
+    padding-top: var(--space-4);
   }
 
   .card-door__cta a {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: var(--space-2);
     font-weight: 600;
-    color: var(--color-accent);
+    font-size: var(--text-sm);
+    color: var(--color-on-inverse);
+    background: var(--color-accent);
+    padding: var(--space-3) var(--space-5);
+    border-radius: var(--r);
     text-decoration: none;
+    transition:
+      background var(--dur) var(--ease),
+      box-shadow var(--dur) var(--ease);
   }
 
-  .card-door:not(.card-door--primary) .card-door__cta a {
-    color: var(--color-text);
+  .card-door__cta a:hover {
+    background: var(--color-accent-strong);
+    box-shadow: var(--shadow-accent);
   }
 
   .card-door__cta a:hover .card-door__arrow {

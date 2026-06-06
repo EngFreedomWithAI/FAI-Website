@@ -158,7 +158,18 @@ const copyrightYear = 2026;
 
   @media (max-width: 55rem) {
     .site-footer__grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .site-footer__brand-col {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .site-footer__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-5);
     }
   }
 </style>
