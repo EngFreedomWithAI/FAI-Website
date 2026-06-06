@@ -5,13 +5,13 @@ compatibility_date = "2026-06-05"
 pages_build_output_dir = "dist"
 
 # D1 database binding. Create it once with:
-#   npx wrangler d1 create fai-website-db
+#   npm run db:create
 # then paste the returned database_id below (and bind DB in the Pages dashboard too,
 # for Production and Preview).
 [[d1_databases]]
 binding = "DB"
 database_name = "fai-website-db"
-database_id = "REPLACE_WITH_D1_DATABASE_ID"
+database_id = "397b2112-743f-46a7-8b24-b8c9b5c0c2b0"
 
 # Secrets/env are NOT stored here. Set these in the Cloudflare Pages project
 # (Settings > Environment variables & secrets) for Production and Preview:
