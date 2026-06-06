@@ -192,7 +192,7 @@ Chosen path: managed and serverless to avoid server overhead now, with a documen
 | DNS | Cloudflare | Free, nameservers point here |
 | Public site | Cloudflare Pages | Astro static build |
 | Code and written content | GitHub repo | Markdown content collections |
-| Dynamic functions | Cloudflare Workers | Forms, Stripe webhook, YouTube feed, newsletter send |
+| Dynamic functions | Cloudflare Pages Functions (Workers runtime) | Forms and email in v1; Stripe webhook, YouTube feed, newsletter send later. Standalone Workers only if a job outgrows Pages Functions |
 | Scheduled jobs | Cloudflare Cron Triggers | Feed refresh, later rollups and social |
 | App data | Cloudflare D1 | Subscribers, requests, payments, sends |
 | Caching and short state | Cloudflare KV | YouTube feed cache |
@@ -204,6 +204,8 @@ Chosen path: managed and serverless to avoid server overhead now, with a documen
 | Social and Google auth | Existing OAuth | Reuse faibuddy apps where possible |
 
 Deferred upgrade: Hetzner VPS with local Postgres for owned, deep analytics (Umami or a first party pipeline) once traffic justifies the overhead. Not the faibuddy box, a separate small instance.
+
+**Email sending mechanism (SES on Cloudflare).** Cloudflare Pages serves the static Astro build; it cannot run server code directly. Form handling and email send run in a serverless function: either a Cloudflare Pages Function (`/functions/api/*`) bundled with the Pages deploy, or a standalone Worker. Important constraint: the Workers runtime cannot open raw SMTP/TCP connections, so we do **not** use SES SMTP. We call the **SES v2 HTTPS API** (`SendEmail`) with AWS SigV4 signing (lightweight `aws4fetch`, or AWS SDK v3). AWS access key, secret, and region are stored as Pages/Worker secrets, never in the repo. SES domain identity (DKIM/SPF/DMARC) for freedomwith.ai must be verified and the account moved out of the SES sandbox before production sends. This works the same on the `*.pages.dev` preview and on the prod domain.
 
 ---
 
@@ -298,6 +300,48 @@ Stored as Cloudflare Worker secrets and environment, never in the repo:
 
 ---
 
+## 10b. Forms and email — v1 implementation (locked)
+
+Decided: **own the audience in our own database; email providers are swappable transports.** The subscriber list lives in Cloudflare D1 (our system of record), never inside a third-party list tool. This keeps the data portable and avoids lock-in, so the broadcast tool can be chosen later with zero migration.
+
+- **Entry points: Cloudflare Pages Functions** (`/functions/api/*`), deployed with the Pages site. No standalone Worker in v1. Where flows B/C/F say "a Worker," v1 means a Pages Function (same Workers runtime).
+  - `POST /api/subscribe` — newsletter signup. Writes a `pending` subscriber to D1 and sends a confirm email (double opt-in).
+  - `GET /api/confirm?token=…` — marks the subscriber `confirmed`.
+  - `GET /api/unsubscribe?token=…` — marks the subscriber `unsubscribed` (one-click, no login).
+  - `POST /api/contact` — advisory request. Writes an `advisory_requests` row, emails Sonia (reply-to = requester), and auto-acknowledges the requester.
+- **Data: Cloudflare D1**, binding name `DB`. Tables per section 7. Schema lives in `/migrations` and is applied with wrangler.
+- **Email: AWS SES v2 HTTPS API** via `aws4fetch` (SigV4). v1 sends transactional only: subscriber confirm, advisory alert, advisory auto-ack. No SMTP (Workers cannot open SMTP/TCP).
+- **Broadcast/newsletter (flow F) is deferred.** When added, it reads the `confirmed` list from D1. The broadcast sender (own-it on SES, or a managed broadcaster like Resend/Loops) is a later, reversible choice precisely because D1 is the source of truth.
+- **Secrets/env** (Cloudflare Pages → Settings → Variables, set for both Production and Preview; never in repo):
+  - `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`
+  - `SES_FROM` (verified sender, e.g. `hello@freedomwith.ai`)
+  - `CONTACT_TO` (where advisory alerts go, e.g. `sonia@freedomwith.ai`)
+  - `SITE_URL` (origin used to build confirm/unsubscribe links)
+  - `DB` is a D1 **binding**, not a secret.
+- **Local dev:** static pages run under `astro dev` as today; the Functions + D1 run under `wrangler pages dev` with a local D1. Form endpoints only exist when served via wrangler or on a Pages deploy.
+
+---
+
+## 10c. Cloudflare and AWS SES setup checklist (manual, one-time)
+
+What Sonia does in the consoles. The code is in the repo; these steps wire it to real infrastructure.
+
+**AWS SES**
+1. Pick a region (e.g. `us-east-1`) and **verify the domain identity** `freedomwith.ai`. SES gives DKIM CNAME records — add them in Cloudflare DNS, plus an SPF TXT and a DMARC TXT record.
+2. **Verify the From address** (`SES_FROM`, e.g. `hello@freedomwith.ai`) and your own email for testing.
+3. Create an **IAM user** (or role) with a least-privilege policy allowing `ses:SendEmail` only. Generate an **access key + secret** — these become `AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY`. (Not SMTP credentials; we use the API.)
+4. **Request production access** to leave the SES sandbox. Until then, SES only delivers to verified recipient addresses (fine for testing).
+5. Note the region for `AWS_REGION`.
+
+**Cloudflare**
+1. Create the D1 database: `npx wrangler d1 create fai-website-db`, then paste the returned `database_id` into `wrangler.toml`.
+2. Apply the schema: `npx wrangler d1 execute fai-website-db --remote --file=./migrations/0001_init.sql`.
+3. In the **Pages project → Settings → Functions → D1 bindings**, bind `DB` to `fai-website-db` for **Production and Preview** (or rely on `wrangler.toml`).
+4. In **Pages project → Settings → Environment variables & secrets**, add the secrets/env from section 10b for **Production and Preview** (encrypt the AWS keys).
+5. Redeploy. Test on the `*.pages.dev` preview first (with a verified recipient while SES is still in sandbox).
+
+---
+
 ## 11. Build and deploy
 
 - GitHub is the source of truth for code and content.
@@ -335,6 +379,78 @@ Pattern: distribution and capture are automated, judgment and relationships stay
 
 ---
 
+## 13b. SEO, AIEO, and discoverability
+
+Goal: rank in classic search **and** be the answer AI tools (ChatGPT, Claude, Perplexity, Google AI Overviews) give about going corporate-to-AI-entrepreneur. Optimize for two audiences: search crawlers and the models that summarize us.
+
+**Done (foundations, in repo):**
+- Per-page `<title>`, meta description, canonical URL, Open Graph + Twitter cards (in `Base.astro`).
+- `robots.txt` (dynamic) that allows all crawlers and **explicitly welcomes AI agents** (GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-Web, anthropic-ai, PerplexityBot, Google-Extended, Applebot-Extended, CCBot) and links the sitemap.
+- `sitemap.xml` (dynamic) listing all public pages, domain-aware via `Astro.site`.
+- JSON-LD structured data on every page: `Organization` + `WebSite` with founders (Sonia Sarao, Cammie Clay) and socials. `Base.astro` accepts a `schema` prop for per-page additions.
+- `llms.txt` (public/) — the emerging AIEO standard: a clean markdown brief of the business, the two ways in, key pages, and founders, written for AI tools to read.
+
+**Backlog (come back to this):**
+- Per-page schema via the `schema` prop: `Person` on About (Sonia, Cammie), `Event` on Events, `Article` on writing pieces, `BreadcrumbList` sitewide, `VideoObject` on Watch.
+- Wire GA4 + PostHog (M5) so SEO/AIEO results are measurable; add Search Console + Bing Webmaster, submit sitemap.
+- Question-led content in the Watch/writing pillar (titles as real questions the audience asks) — primary engine for both SEO and AI citations.
+- Entity consistency across site, LinkedIn, YouTube, X so models confidently link the brand and founders.
+- Consider `llms-full.txt` (expanded) and keep `llms.txt` in sync as pages change.
+- Image `alt` text audit and the real OG image per page once the hero/brand art lands.
+- Distribution (videos, posts, citations) is what actually moves rankings and AI mentions; the site is the hub the pillars feed.
+
+---
+
+## 13c. Build status (as of June 6, 2026)
+
+A running snapshot of what is in the repo versus what still needs doing. Keep this current.
+
+### Done (in the repo, builds green)
+
+**Site / design**
+- Homepage "How we help" reduced to two matched cards (faibuddy + advisory), CTAs aligned and same accent treatment; "Two ways to move forward" copy; content teaser removed.
+- "Is this you" cards have icons; the routing line is now a contained full-width routing bar.
+- Section numbers removed across all pages (home, advisory, watch, about, events, contact, follow band). The 01/02/03 badges remain only on the "Is this you" cards.
+- Hero has a placeholder line-art illustration below the CTAs (to be replaced; see pending).
+- Footer is responsive in tiers (3 columns tablet, 2 columns phone, brand full-width).
+- Removed legacy `live-server`/`http-server` dev deps that were breaking the local file watcher (fsevents).
+
+**Content / legal**
+- Privacy and Terms pages have real content (shared `legal.css`). Governing law set to California as a placeholder.
+
+**SEO / AIEO**
+- `robots.txt` (welcomes AI crawlers, links sitemap), `sitemap.xml`, JSON-LD (`Organization` + `WebSite` + founders) on every page, `llms.txt`. `Base.astro` accepts a per-page `schema` prop.
+
+**Email capture (code complete, not yet wired to live infra)**
+- D1 schema: `migrations/0001_init.sql` (`subscribers`, `advisory_requests`).
+- `wrangler.toml` with the `DB` binding (needs the real `database_id`).
+- Pages Functions: `/api/subscribe`, `/api/confirm`, `/api/unsubscribe`, `/api/contact`.
+- SES v2 HTTPS sender (`aws4fetch` SigV4), shared util + types, honeypot spam protection.
+- Contact form and follow/subscribe band wired to the endpoints with loading/success/error states.
+- `package.json`: added `aws4fetch`, `wrangler`, `@cloudflare/workers-types`, and `db:*` / `cf:dev` scripts.
+
+### Pending
+
+**Needs Sonia (manual console work, section 10c)**
+- AWS SES: verify domain + sender, add DKIM/SPF/DMARC, create IAM send key, request production access (leave sandbox), note region.
+- Cloudflare: create D1 (`db:create`), paste `database_id` into `wrangler.toml`, run migration (`db:migrate`), bind `DB` for Production + Preview, set the 6 env secrets (`AWS_*`, `SES_FROM`, `CONTACT_TO`, `SITE_URL`), redeploy.
+- Test contact + subscribe on the `*.pages.dev` preview with a verified recipient.
+
+**Needs design / decisions**
+- Commissioned hero image to replace the placeholder (brief delivered: ~1600x800, 2:1, transparent, brand palette).
+- Legal review of Privacy/Terms and confirm governing-law state before launch.
+
+**Engineering backlog (later phases)**
+- Per-page schema (`Person` on About, `Event` on Events, `Article` on writing, `VideoObject` on Watch) via the `schema` prop.
+- GA4 + PostHog wiring (M5).
+- Newsletter broadcast (flow F) — deferred; reads the confirmed D1 list when built.
+- Stripe advisory flow (Level 0 manual for now).
+- YouTube feed ingest to KV (Watch currently shows the empty state).
+- Production cutover: `freedomwith.ai` still redirects to faibuddy; keep Cloudflare Pages `SITE` pointed at the preview until cutover.
+- Remaining events entries and any further Cammie-mockup items (split hero option, watch thumbnails, one together photo).
+
+---
+
 ## 14. Phasing
 
 **Phase 1, the core (v1)**
@@ -346,7 +462,8 @@ Pattern: distribution and capture are automated, judgment and relationships stay
 - Private Stripe flow for advisory (links or invoices, sent manually)
 - GA4 plus PostHog
 - Markdown content with template, newsletter manual send, unsubscribe handling
-- Privacy and terms pages
+- Privacy and terms pages — **done** (real content; confirm governing-law state + legal review before launch)
+- SEO/AIEO foundations — **done** (robots.txt, sitemap.xml, JSON-LD, llms.txt); see section 13b for backlog
 
 **Phase 2**
 - Zernio pilot: connect X and LinkedIn, post manually via API to validate personal LinkedIn and reliability
@@ -375,6 +492,7 @@ Pattern: distribution and capture are automated, judgment and relationships stay
 - Hero is the arrow as a leap, no separate emotional headline.
 - Voice is "we" for the brand, "I" for advisory (Sonia).
 - Plain markdown content with a template. Manual newsletter send.
+- Email capture: Cloudflare D1 is the system of record for subscribers and advisory requests (we own the list, providers are swappable). Form endpoints are Cloudflare Pages Functions; transactional email is AWS SES via its HTTPS API (no SMTP). Subscribers use double opt-in. Newsletter broadcast tool is deferred and reads the D1 list when added. See sections 10b and 10c.
 - Social distribution via Zernio (https://zernio.com/). We own the AI draft + approval queue in D1; Zernio is the transport layer behind a thin Worker adapter, swappable later if needed. Platforms: X and LinkedIn first, Instagram when relevant. No native platform API integrations.
 - Approve first, then automate social. Email-approve for v1 of the queue; no custom admin portal unless volume demands it.
 - No em dashes in any copy.

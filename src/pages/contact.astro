@@ -77,6 +77,15 @@ const pageDescription =
             placeholder="https://"
           />
 
+          <input
+            type="text"
+            name="company"
+            tabindex="-1"
+            autocomplete="off"
+            class="contact-form__hp"
+            aria-hidden="true"
+          />
+
           <Button type="submit" variant="primary" size="large">
             Send request
           </Button>
@@ -135,8 +144,10 @@ const pageDescription =
     }
   };
 
+  const submitButton = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+
   if (form) {
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', async (event) => {
       event.preventDefault();
       clearFieldErrors();
       successBanner?.setAttribute('hidden', '');
@@ -186,13 +197,55 @@ const pageDescription =
         return;
       }
 
-      // TODO(M5): POST to the Cloudflare Worker advisory endpoint (or Web3Forms fallback)
-      // per docs/OPERATIONAL-PLAN.md. Include name, email, stage, message, link. No secrets in repo.
-      console.info('Advisory request (stub):', { name, email, stage, message, link });
+      const originalLabel = submitButton?.textContent;
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Sending...';
+      }
 
-      form.reset();
-      successBanner?.removeAttribute('hidden');
-      successBanner?.focus();
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ name, email, stage, message, link }),
+        });
+        const result = (await res.json().catch(() => ({}))) as {
+          ok?: boolean;
+          error?: string;
+          errors?: Record<string, string>;
+        };
+
+        if (!res.ok || !result.ok) {
+          if (result.errors) {
+            for (const [field, msg] of Object.entries(result.errors)) {
+              showFieldError(field, msg);
+            }
+          }
+          if (errorBanner) {
+            errorBanner.textContent =
+              result.error ?? 'Something went wrong. Please check the fields below and try again.';
+            errorBanner.removeAttribute('hidden');
+          }
+          const firstInvalid = form.querySelector<HTMLElement>('.field--invalid .field__control');
+          firstInvalid?.focus();
+          return;
+        }
+
+        form.reset();
+        successBanner?.removeAttribute('hidden');
+        successBanner?.focus();
+      } catch {
+        if (errorBanner) {
+          errorBanner.textContent =
+            'We could not reach the server. Please try again in a moment.';
+          errorBanner.removeAttribute('hidden');
+        }
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = originalLabel ?? 'Send request';
+        }
+      }
     });
 
     form.querySelectorAll('.field__control').forEach((control) => {
@@ -220,5 +273,14 @@ const pageDescription =
   .page-hero .form-banner:focus {
     outline: none;
     box-shadow: var(--ring-accent);
+  }
+
+  .contact-form__hp {
+    position: absolute !important;
+    left: -9999px !important;
+    width: 1px !important;
+    height: 1px !important;
+    opacity: 0;
+    pointer-events: none;
   }
 </style>

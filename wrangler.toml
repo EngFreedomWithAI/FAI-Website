@@ -1,0 +1,19 @@
+# Cloudflare Pages config for Freedom with AI.
+# Static site is built by Astro into ./dist; Pages Functions live in ./functions.
+name = "fai-website"
+compatibility_date = "2026-06-05"
+pages_build_output_dir = "dist"
+
+# D1 database binding. Create it once with:
+#   npx wrangler d1 create fai-website-db
+# then paste the returned database_id below (and bind DB in the Pages dashboard too,
+# for Production and Preview).
+[[d1_databases]]
+binding = "DB"
+database_name = "fai-website-db"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+
+# Secrets/env are NOT stored here. Set these in the Cloudflare Pages project
+# (Settings > Environment variables & secrets) for Production and Preview:
+#   AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION,
+#   SES_FROM, CONTACT_TO, SITE_URL

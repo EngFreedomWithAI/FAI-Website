@@ -2,41 +2,114 @@
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import { site } from '../config/site';
+import '../styles/legal.css';
+
+const lastUpdated = 'June 5, 2026';
 ---
 
 <Base
-  title="Terms | Freedom with AI"
-  description="Terms of use for Freedom with AI."
+  title="Terms of Use | Freedom with AI"
+  description="The terms that govern your use of the Freedom with AI website."
 >
   <Nav />
   <main id="main-content" class="container legal-page">
-    <h1>Terms</h1>
-    <p class="read-width">
-      This is a placeholder terms page. Full terms will be published before launch.
-      Questions? Use the contact page.
-    </p>
-    <p>
-      <a href="/contact">Contact us</a>
-    </p>
+    <div class="legal-page__inner">
+      <h1>Terms of Use</h1>
+      <p class="legal-page__updated">Last updated: {lastUpdated}</p>
+
+      <p class="legal-page__lede">
+        These Terms of Use (&ldquo;Terms&rdquo;) govern your use of the
+        <strong>freedomwith.ai</strong> website operated by {site.brand}
+        (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;). By using the site, you
+        agree to these Terms. If you do not agree, please do not use the site.
+      </p>
+
+      <h2>Scope</h2>
+      <p>
+        These Terms apply to this website only. Our product,
+        <a href={site.faibuddyUrl} target="_blank" rel="noopener noreferrer">faibuddy</a>,
+        and any advisory engagement are governed by their own separate agreements.
+      </p>
+
+      <h2>Use of the site</h2>
+      <p>You agree to use the site lawfully and not to:</p>
+      <ul>
+        <li>Disrupt, damage, or attempt to gain unauthorized access to the site or its systems.</li>
+        <li>Copy, scrape, or reuse our content beyond what these Terms allow.</li>
+        <li>Use the site to send spam or to misrepresent your identity.</li>
+        <li>Infringe the rights of others or violate any applicable law.</li>
+      </ul>
+
+      <h2>Intellectual property</h2>
+      <p>
+        The site and its content&mdash;including text, design, graphics, logos, and
+        videos&mdash;are owned by {site.brand} or our licensors and are protected by
+        intellectual property laws. You may view and share our content for personal,
+        non-commercial purposes with attribution. Any other use requires our prior written
+        permission.
+      </p>
+
+      <h2>Inquiries and advisory</h2>
+      <p>
+        Contacting us or applying to work with us does not create a client relationship or
+        any obligation on either side. Advisory engagements are selective and begin only
+        under a separate written agreement. Nothing on this site is a promise or guarantee
+        of any particular outcome or result.
+      </p>
+
+      <h2>No professional advice</h2>
+      <p>
+        Content on this site is provided for general informational and educational purposes.
+        It is not legal, financial, tax, investment, or other professional advice, and it is
+        not a substitute for advice tailored to your situation. You are responsible for your
+        own decisions.
+      </p>
+
+      <h2>Third-party links</h2>
+      <p>
+        The site links to third-party services such as faibuddy, YouTube, X, and LinkedIn.
+        We do not control and are not responsible for the content, policies, or practices of
+        those services. Accessing them is at your own risk and subject to their terms.
+      </p>
+
+      <h2>Disclaimers</h2>
+      <p>
+        The site is provided &ldquo;as is&rdquo; and &ldquo;as available,&rdquo; without
+        warranties of any kind, whether express or implied, including fitness for a
+        particular purpose and non-infringement. We do not warrant that the site will be
+        uninterrupted, error-free, or secure.
+      </p>
+
+      <h2>Limitation of liability</h2>
+      <p>
+        To the fullest extent permitted by law, {site.brand} will not be liable for any
+        indirect, incidental, special, consequential, or punitive damages, or any loss of
+        profits, data, or goodwill, arising from your use of the site.
+      </p>
+
+      <h2>Changes</h2>
+      <p>
+        We may update these Terms from time to time. Changes take effect when posted, and we
+        will revise the &ldquo;Last updated&rdquo; date above. Your continued use of the site
+        means you accept the updated Terms.
+      </p>
+
+      <h2>Governing law</h2>
+      <p>
+        These Terms are governed by the laws of the State of California, United States,
+        without regard to its conflict-of-laws rules, and you agree to the exclusive
+        jurisdiction of the courts located there.
+      </p>
+
+      <div class="legal-page__contact">
+        <h2>Contact us</h2>
+        <p>
+          Questions about these Terms? Reach us through our
+          <a href="/contact"> contact page</a>.
+        </p>
+      </div>
+    </div>
   </main>
   <Footer />
 </Base>
-
-<style>
-  .legal-page {
-    padding-block: var(--space-8);
-  }
-
-  .legal-page h1 {
-    margin-bottom: var(--space-5);
-  }
-
-  .legal-page p {
-    color: var(--color-text-muted);
-    line-height: var(--leading-relaxed);
-  }
-
-  .legal-page p + p {
-    margin-top: var(--space-4);
-  }
-</style>

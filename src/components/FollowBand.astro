@@ -37,16 +37,81 @@ const {
           autocomplete="email"
           required
         />
+        <input
+          type="text"
+          name="company"
+          tabindex="-1"
+          autocomplete="off"
+          class="follow-band__hp"
+          aria-hidden="true"
+        />
         <Button type="submit" variant="primary">Keep me posted</Button>
       </form>
+      <p class="follow-band__status" data-follow-status role="status" aria-live="polite" hidden></p>
     </div>
   </div>
 </section>
 
 <script>
-  document.querySelectorAll('[data-follow-form]').forEach((form) => {
-    form.addEventListener('submit', (event) => {
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  document.querySelectorAll<HTMLFormElement>('[data-follow-form]').forEach((form) => {
+    const wrapper = form.parentElement;
+    const status = wrapper?.querySelector<HTMLElement>('[data-follow-status]');
+    const input = form.querySelector<HTMLInputElement>('input[name="email"]');
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+    const setStatus = (message: string, kind: 'success' | 'error') => {
+      if (!status) return;
+      status.textContent = message;
+      status.dataset.kind = kind;
+      status.hidden = false;
+    };
+
+    form.addEventListener('submit', async (event) => {
       event.preventDefault();
+      const email = (input?.value ?? '').trim();
+      const company = String(new FormData(form).get('company') ?? '');
+
+      if (!emailRe.test(email)) {
+        setStatus('Enter a valid email address.', 'error');
+        input?.focus();
+        return;
+      }
+
+      const originalLabel = button?.textContent;
+      if (button) {
+        button.disabled = true;
+        button.textContent = 'Sending...';
+      }
+
+      try {
+        const res = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ email, company, source: window.location.pathname }),
+        });
+        const result = (await res.json().catch(() => ({}))) as {
+          ok?: boolean;
+          error?: string;
+          message?: string;
+        };
+
+        if (!res.ok || !result.ok) {
+          setStatus(result.error ?? 'Something went wrong. Please try again.', 'error');
+          return;
+        }
+
+        form.reset();
+        setStatus(result.message ?? 'Check your inbox to confirm your subscription.', 'success');
+      } catch {
+        setStatus('We could not reach the server. Please try again in a moment.', 'error');
+      } finally {
+        if (button) {
+          button.disabled = false;
+          button.textContent = originalLabel ?? 'Keep me posted';
+        }
+      }
     });
   });
 </script>
@@ -122,6 +187,29 @@ const {
   .follow-band__form input:focus {
     border-color: var(--color-accent);
     box-shadow: var(--ring-accent);
+  }
+
+  .follow-band__hp {
+    position: absolute !important;
+    left: -9999px !important;
+    width: 1px !important;
+    height: 1px !important;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .follow-band__status {
+    margin-top: var(--space-3);
+    font-size: var(--text-sm);
+    width: 100%;
+  }
+
+  .follow-band__status[data-kind='success'] {
+    color: var(--color-accent);
+  }
+
+  .follow-band__status[data-kind='error'] {
+    color: #b3261e;
   }
 
   @media (max-width: 55rem) {

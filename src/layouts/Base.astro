@@ -7,18 +7,51 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  schema?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
   title = `${site.brand} | Corporate to AI Entrepreneur`,
   description = `${site.mission} Start with faibuddy today, and work with us when you want a guide.`,
   image = '/images/og-default.png',
+  schema,
 } = Astro.props;
 
 const siteOrigin = Astro.site ?? Astro.url.origin;
 const canonicalURL = new URL(Astro.url.pathname, siteOrigin);
 const imageURL = new URL(image, siteOrigin);
 const ogImageAlt = `${site.brand}. Corporate to AI Entrepreneur.`;
+const origin = new URL(siteOrigin).origin;
+
+const organizationSchema = {
+  '@type': 'Organization',
+  '@id': `${origin}/#organization`,
+  name: site.brand,
+  url: `${origin}/`,
+  logo: new URL('/images/logo.svg', origin).href,
+  description: site.mission,
+  sameAs: [site.socials.youtube, site.socials.x],
+  founder: [
+    { '@type': 'Person', name: 'Sonia Sarao', sameAs: site.profiles.soniaLinkedIn },
+    { '@type': 'Person', name: 'Cammie Clay', sameAs: site.profiles.cammieLinkedIn },
+  ],
+};
+
+const websiteSchema = {
+  '@type': 'WebSite',
+  '@id': `${origin}/#website`,
+  name: site.brand,
+  url: `${origin}/`,
+  description,
+  publisher: { '@id': `${origin}/#organization` },
+};
+
+const pageSchemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [organizationSchema, websiteSchema, ...pageSchemas],
+};
 ---
 
 <!doctype html>
@@ -47,6 +80,8 @@ const ogImageAlt = `${site.brand}. Corporate to AI Entrepreneur.`;
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageURL} />
     <meta name="twitter:image:alt" content={ogImageAlt} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
