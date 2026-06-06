@@ -7,12 +7,13 @@ import SectionHeader from '../components/SectionHeader.astro';
 import Card from '../components/Card.astro';
 import CtaStrip from '../components/CtaStrip.astro';
 import FollowBand from '../components/FollowBand.astro';
+import RoutingBar from '../components/RoutingBar.astro';
 import TeamAvatar from '../components/TeamAvatar.astro';
 import { site } from '../config/site';
 import { isThisYouCards } from '../data/is-this-you';
 import { howWeHelpDoors } from '../data/how-we-help';
 
-const [faibuddyDoor, advisoryDoor, contentDoor] = howWeHelpDoors;
+const [faibuddyDoor, advisoryDoor] = howWeHelpDoors;
 
 const pageTitle = 'Corporate to AI Entrepreneur | Freedom with AI';
 const pageDescription =
@@ -86,6 +87,7 @@ const pageDescription =
               <Card
                 variant="audience"
                 index={i + 1}
+                icon={card.icon}
                 title={card.title}
                 body={card.body}
               />
@@ -93,13 +95,12 @@ const pageDescription =
           ))}
         </ul>
 
-        <p class="routing-line">
-          Not sure yet? Start with faibuddy and our videos, and come back when you
-          want a guide.
-          <a href={site.faibuddyUrl} target="_blank" rel="noopener noreferrer">
-            Try faibuddy →
-          </a>
-        </p>
+        <RoutingBar
+          text="Not sure yet? Start with faibuddy and our videos, and come back when you want a guide."
+          ctaLabel="Try faibuddy"
+          ctaHref={site.faibuddyUrl}
+          ctaExternal
+        />
       </div>
     </section>
 
@@ -107,11 +108,10 @@ const pageDescription =
       <div class="container section-block__center">
         <SectionHeader label="How we help" />
         <h2 id="how-we-help-heading" class="section-block__heading">
-          One mission, a few ways in.
+          Two ways to move forward.
         </h2>
         <p class="section-block__sub read-width">
-          A product to start today, advisory when you want a guide, and content
-          that keeps you ahead of the curve.
+          Start with the product, or work directly with us.
         </p>
 
         <div class="door-grid">
@@ -134,14 +134,6 @@ const pageDescription =
             ctaHref={advisoryDoor.ctaHref}
           />
         </div>
-
-        <Card
-          variant="teaser"
-          title={contentDoor.title}
-          tag={contentDoor.tag}
-          ctaLabel={contentDoor.ctaLabel}
-          ctaHref={contentDoor.ctaHref}
-        />
       </div>
     </section>
 
@@ -149,7 +141,7 @@ const pageDescription =
       <div class="container">
         <div class="watch-head">
           <div>
-            <SectionHeader index="03" label="Watch" align="left" />
+            <SectionHeader label="Watch" align="left" />
             <h2 id="watch-heading">Founder stories and field notes.</h2>
             <p class="watch-head__sub read-width">
               Founder interviews with people making the leap, plus what we are
@@ -200,7 +192,6 @@ const pageDescription =
     </section>
 
     <FollowBand
-      index="04"
       heading="Get our field notes and new videos as they land."
       note="No noise, just what is worth your time."
     />
@@ -354,17 +345,6 @@ const pageDescription =
 
   .card-grid li > :global(article) {
     height: 100%;
-  }
-
-  .routing-line {
-    margin-top: var(--space-6);
-    font-size: var(--text-md);
-    color: var(--color-text-muted);
-  }
-
-  .routing-line a {
-    font-weight: 600;
-    margin-left: var(--space-1);
   }
 
   .door-grid {

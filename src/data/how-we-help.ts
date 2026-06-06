@@ -15,17 +15,10 @@ export const howWeHelpDoors: HelpDoor[] = [
     ctaHref: 'https://faibuddy.com',
   },
   {
-    tag: 'Advisory, selective',
+    tag: 'High-touch 1:1 advisory',
     title: 'Work with us',
-    body: 'Senior advisory for corporate professionals becoming AI entrepreneurs, whether you are planning your exit, finding your footing, or pushing through the early stage of building. A small number of engagements, each shaped around you.',
+    body: 'Get strategic guidance, practical tools, and accountability as you build. We work closely with a small number of clients, so you never have to figure out what comes next alone.',
     ctaLabel: 'Request an engagement',
     ctaHref: '/advisory',
-  },
-  {
-    tag: 'Content, field notes and videos as we learn',
-    title: 'Content that keeps you ahead',
-    body: '',
-    ctaLabel: 'Watch and read',
-    ctaHref: '/watch',
   },
 ];

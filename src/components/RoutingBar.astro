@@ -1,0 +1,102 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  text: string;
+  ctaLabel: string;
+  ctaHref: string;
+  ctaExternal?: boolean;
+}
+
+const { text, ctaLabel, ctaHref, ctaExternal = false } = Astro.props;
+---
+
+<aside class="routing-bar" aria-label="Not sure where to start?">
+  <span class="routing-bar__icon" aria-hidden="true">
+    <Icon name="lightbulb" size={22} />
+  </span>
+  <p class="routing-bar__text">{text}</p>
+  <a
+    class="routing-bar__cta"
+    href={ctaHref}
+    rel={ctaExternal ? 'noopener noreferrer' : undefined}
+    target={ctaExternal ? '_blank' : undefined}
+  >
+    {ctaLabel}
+    <Icon name="arrow-right" size={18} class="routing-bar__cta-arrow" />
+  </a>
+</aside>
+
+<style>
+  .routing-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    width: 100%;
+    margin-top: var(--space-6);
+    padding: var(--space-5) var(--space-6);
+    text-align: left;
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--color-accent-soft) 70%, var(--color-bg-alt)),
+      var(--color-bg-alt)
+    );
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--r-lg);
+  }
+
+  .routing-bar__icon {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: var(--space-7);
+    height: var(--space-7);
+    border-radius: var(--r-sm);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    color: var(--color-accent);
+  }
+
+  .routing-bar__text {
+    flex: 1;
+    margin: 0;
+    font-size: var(--text-md);
+    line-height: var(--leading-normal);
+    color: var(--color-text-muted);
+  }
+
+  .routing-bar__cta {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--color-accent);
+    white-space: nowrap;
+  }
+
+  .routing-bar__cta:hover {
+    color: var(--color-accent-strong);
+  }
+
+  .routing-bar__cta :global(.routing-bar__cta-arrow) {
+    transition: transform var(--dur-fast) var(--ease);
+  }
+
+  .routing-bar__cta:hover :global(.routing-bar__cta-arrow) {
+    transform: translateX(2px);
+  }
+
+  @media (max-width: 42rem) {
+    .routing-bar {
+      flex-wrap: wrap;
+    }
+
+    .routing-bar__cta {
+      width: 100%;
+      padding-left: calc(var(--space-7) + var(--space-4));
+    }
+  }
+</style>
