@@ -19,6 +19,11 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     return json({ ok: false, error: 'Enter a valid email address.' }, 400);
   }
 
+  if (!env.DB) {
+    console.error('subscribe: DB binding missing');
+    return json({ ok: false, error: 'Server misconfigured (database). Please try again later.' }, 500);
+  }
+
   const existing = await env.DB.prepare(
     'SELECT status, unsubscribe_token FROM subscribers WHERE email = ?'
   )

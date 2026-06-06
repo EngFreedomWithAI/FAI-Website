@@ -16,14 +16,14 @@ const asArray = (v: string | string[]): string[] => (Array.isArray(v) ? v : [v])
  * No SMTP: the Workers runtime cannot open raw TCP, so we POST to the REST API.
  */
 export async function sendEmail(env: Env, msg: EmailMessage): Promise<void> {
+  const region = env.AWS_REGION.trim();
+  // Region/service are inferred from the email.{region}.amazonaws.com host (aws4fetch default).
   const client = new AwsClient({
-    accessKeyId: env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
-    region: env.AWS_REGION,
-    service: 'ses',
+    accessKeyId: env.AWS_ACCESS_KEY_ID.trim(),
+    secretAccessKey: env.AWS_SECRET_ACCESS_KEY.trim(),
   });
 
-  const endpoint = `https://email.${env.AWS_REGION}.amazonaws.com/v2/email/outbound-emails`;
+  const endpoint = `https://email.${region}.amazonaws.com/v2/email/outbound-emails`;
 
   const body = {
     FromEmailAddress: env.SES_FROM,

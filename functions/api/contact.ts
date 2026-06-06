@@ -4,7 +4,16 @@ import { sendEmail } from '../_lib/ses';
 
 const STAGES = new Set(['inside', 'just_left', 'building', 'exploring']);
 
-export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
+export const onRequestPost: PagesFunction<Env> = async (context) => {
+  try {
+    return await handleContactPost(context);
+  } catch (err) {
+    console.error('contact: unhandled', err);
+    return json({ ok: false, error: 'Unexpected server error. Please try again later.' }, 500);
+  }
+};
+
+const handleContactPost: PagesFunction<Env> = async ({ request, env }) => {
   const data = await readBody(request);
 
   // Honeypot.
