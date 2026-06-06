@@ -342,7 +342,7 @@ What Sonia does in the consoles. The code is in the repo; these steps wire it to
 6. **Confirm** — D1 binding `DB` → `fai-website-db` in Pages dashboard (Production + Preview) if not already visible under Bindings.
 
 **AWS SES — next (section 10d)**
-1. Verify domain identity `freedomwith.ai` in SES (`us-east-1`).
+1. Verify domain identity `freedomwith.ai` in SES (`us-east-2` / Ohio).
 2. Add DKIM CNAMEs (+ SPF/DMARC) in Cloudflare DNS.
 3. Create IAM user with `ses:SendEmail` only; generate API access key.
 4. Request production access (leave sandbox).
@@ -352,13 +352,13 @@ What Sonia does in the consoles. The code is in the repo; these steps wire it to
 
 ## 10d. AWS SES setup walkthrough (step-by-step)
 
-**Goal:** transactional mail from `hello@freedomwith.ai` — subscriber confirm, advisory alert to Sonia, advisory auto-ack. Region: **`us-east-1`**.
+**Goal:** transactional mail from `hello@freedomwith.ai` — subscriber confirm, advisory alert to Sonia, advisory auto-ack. Region: **`us-east-2` (Ohio)** — the identities are verified in Ohio, so `AWS_REGION`, the SES endpoint, and the IAM policy ARN must all be `us-east-2`. A region mismatch causes a misleading "Email address is not verified" error.
 
 **faibuddy already uses SES.** Do not touch the faibuddy.com identity, DNS, or IAM keys. Add freedomwith.ai as a **second** identity in the same AWS account. See **section 10e** for what stays separate vs what is shared.
 
 ### A. Open SES and verify the domain
 
-1. Sign in to [AWS Console](https://console.aws.amazon.com/) → **Amazon SES** → switch region to **US East (N. Virginia) / us-east-1** (top-right).
+1. Sign in to [AWS Console](https://console.aws.amazon.com/) → **Amazon SES** → switch region to **US East (Ohio) / us-east-2** (top-right) — the region the identities live in.
 2. Left nav: **Configuration** → **Identities** → **Create identity**.
 3. Identity type: **Domain**. Domain: `freedomwith.ai`.
 4. Enable **Easy DKIM** (signing key length 2048-bit is fine).
@@ -415,7 +415,7 @@ While SES is in **sandbox**, you can only send **to** verified addresses.
       "Sid": "SendFromFreedomWithAiOnly",
       "Effect": "Allow",
       "Action": ["ses:SendEmail", "ses:SendRawEmail"],
-      "Resource": "arn:aws:ses:us-east-1:ACCOUNT_ID:identity/freedomwith.ai"
+      "Resource": "arn:aws:ses:*:604443115104:identity/*"
     }
   ]
 }
@@ -452,7 +452,7 @@ Approval is often same-day to a few business days. Until approved, test only wit
 |------|------|-------|
 | `AWS_ACCESS_KEY_ID` | Secret (encrypt) | from IAM |
 | `AWS_SECRET_ACCESS_KEY` | Secret (encrypt) | from IAM |
-| `AWS_REGION` | Plain text | `us-east-1` |
+| `AWS_REGION` | Plain text | `us-east-2` |
 | `SES_FROM` | Plain text | `hello@freedomwith.ai` |
 | `CONTACT_TO` | Plain text | `soniasarao@freedomwith.ai` |
 
@@ -468,7 +468,7 @@ If mail fails, check **Pages** → **Functions** → real-time logs, or SES → 
 
 ### H. Checklist (tick as you go)
 
-- [ ] SES domain `freedomwith.ai` verified (us-east-1)
+- [ ] SES domain `freedomwith.ai` verified (us-east-2 / Ohio)
 - [ ] DKIM CNAMEs in Cloudflare (DNS only)
 - [ ] SPF includes `amazonses.com` + Google
 - [ ] DMARC TXT on `_dmarc`
