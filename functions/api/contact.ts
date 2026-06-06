@@ -1,8 +1,14 @@
 import type { Env } from '../_lib/types';
-import { json, isValidEmail, isValidUrl, readBody, escapeHtml } from '../_lib/util';
+import { json, isValidEmail, readBody, escapeHtml } from '../_lib/util';
 import { sendEmail } from '../_lib/ses';
 
-const STAGES = new Set(['inside', 'just_left', 'building', 'exploring']);
+const TOPICS = new Set(['general', 'speaking', 'events', 'partnership']);
+const TOPIC_LABELS: Record<string, string> = {
+  general: 'General question',
+  speaking: 'Speaking or podcast invitation',
+  events: 'Events',
+  partnership: 'Partnership or collaboration',
+};
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   try {
@@ -21,17 +27,15 @@ const handleContactPost: PagesFunction<Env> = async ({ request, env }) => {
 
   const name = data.name ?? '';
   const email = (data.email ?? '').toLowerCase();
-  const stage = data.stage ?? '';
+  const topic = data.topic || 'general';
   const message = data.message ?? '';
-  const link = data.link ?? '';
 
   const errors: Record<string, string> = {};
   if (!name) errors.name = 'Name is required.';
   if (!email) errors.email = 'Email is required.';
   else if (!isValidEmail(email)) errors.email = 'Enter a valid email address.';
-  if (!stage || !STAGES.has(stage)) errors.stage = 'Please choose what best describes you.';
-  if (!message) errors.message = 'Please tell us what you want to be different.';
-  if (link && !isValidUrl(link)) errors.link = 'Enter a valid link starting with http:// or https://.';
+  if (!TOPICS.has(topic)) errors.topic = 'Please choose a topic.';
+  if (!message) errors.message = 'Please enter a message.';
 
   if (Object.keys(errors).length > 0) {
     return json({ ok: false, errors }, 400);
@@ -44,77 +48,70 @@ const handleContactPost: PagesFunction<Env> = async ({ request, env }) => {
 
   try {
     await env.DB.prepare(
-      `INSERT INTO advisory_requests (name, email, stage, message, link)
-       VALUES (?, ?, ?, ?, ?)`
+      `INSERT INTO contact_messages (name, email, topic, message)
+       VALUES (?, ?, ?, ?)`
     )
-      .bind(name, email, stage, message, link || null)
+      .bind(name, email, topic, message)
       .run();
   } catch (err) {
     console.error('contact: D1 insert failed', err);
-    return json({ ok: false, error: 'Could not save your request. Please try again later.' }, 500);
+    return json({ ok: false, error: 'Could not send your message. Please try again later.' }, 500);
   }
 
   if (!env.AWS_ACCESS_KEY_ID || !env.AWS_SECRET_ACCESS_KEY || !env.AWS_REGION || !env.SES_FROM || !env.CONTACT_TO) {
-    console.error('contact: email env missing', {
-      hasKey: Boolean(env.AWS_ACCESS_KEY_ID),
-      hasSecret: Boolean(env.AWS_SECRET_ACCESS_KEY),
-      region: env.AWS_REGION,
-      from: env.SES_FROM,
-      to: env.CONTACT_TO,
-    });
+    console.error('contact: email env missing');
     return json(
-      { ok: false, error: 'We saved your request but email is not configured yet. We will still see it.' },
+      { ok: false, error: 'We saved your message but email is not configured yet. We will still see it.' },
       502
     );
   }
 
-  // Alert Sonia (reply-to the requester so she can respond directly).
+  const topicLabel = TOPIC_LABELS[topic] ?? topic;
+
+  // Alert Sonia (reply-to the sender so she can respond directly).
   try {
     await sendEmail(env, {
       to: env.CONTACT_TO,
       replyTo: email,
-      subject: `New advisory request from ${name}`,
+      subject: `New ${topicLabel} message from ${name}`,
       text: `Name: ${name}
 Email: ${email}
-Stage: ${stage}
-Link: ${link || '(none)'}
+Topic: ${topicLabel}
 
 Message:
 ${message}`,
-      html: `<h2>New advisory request</h2>
+      html: `<h2>New contact message</h2>
 <p><strong>Name:</strong> ${escapeHtml(name)}<br />
 <strong>Email:</strong> ${escapeHtml(email)}<br />
-<strong>Stage:</strong> ${escapeHtml(stage)}<br />
-<strong>Link:</strong> ${link ? `<a href="${escapeHtml(link)}">${escapeHtml(link)}</a>` : '(none)'}</p>
+<strong>Topic:</strong> ${escapeHtml(topicLabel)}</p>
 <p><strong>Message:</strong></p>
 <p>${escapeHtml(message).replace(/\n/g, '<br />')}</p>`,
     });
   } catch (err) {
     console.error('contact: SES alert failed', err);
-    // The request is safely stored in D1; surface a soft failure.
     return json(
-      { ok: false, error: 'We saved your request but the notification failed. We will still see it.' },
+      { ok: false, error: 'We saved your message but the notification failed. We will still see it.' },
       502
     );
   }
 
-  // Auto-acknowledge the requester (best effort; do not fail the request if this bounces).
+  // Auto-acknowledge the sender (best effort).
   try {
     await sendEmail(env, {
       to: email,
       subject: 'Thanks for reaching out to Freedom with AI',
       text: `Hi ${name},
 
-Thanks for reaching out. I read every message and reply if it is a fit.
+Thanks for your message. We read everything and will get back to you soon.
 
-— Sonia, Freedom with AI`,
+— Freedom with AI`,
       html: `<p>Hi ${escapeHtml(name)},</p>
-<p>Thanks for reaching out. I read every message and reply if it is a fit.</p>
-<p>&mdash; Sonia, Freedom with AI</p>`,
+<p>Thanks for your message. We read everything and will get back to you soon.</p>
+<p>&mdash; Freedom with AI</p>`,
     });
   } catch {
     // Ignore: acknowledgement is non-critical.
   }
 
-  return json({ ok: true, message: 'Thanks for reaching out. I read every message and reply if it is a fit.' });
+  return json({ ok: true, message: 'Thanks for your message. We will get back to you soon.' });
 };
