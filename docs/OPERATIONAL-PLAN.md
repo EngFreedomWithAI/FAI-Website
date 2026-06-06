@@ -284,7 +284,7 @@ Zernio accounts (X, LinkedIn) are connected once in the Zernio dashboard. Start 
 - Namecheap stays the registrar, nameservers point to Cloudflare.
 - freedomwith.ai resolves to Cloudflare Pages. The old GitHub redirect is retired.
 - SES domain identity verified for freedomwith.ai with DKIM, SPF, and DMARC so mail lands in inboxes.
-- Sends come from an address on the domain, for example hello@freedomwith.ai or sonia@freedomwith.ai.
+- Sends come from an address on the domain, for example hello@freedomwith.ai or soniasarao@freedomwith.ai.
 
 ---
 
@@ -382,7 +382,7 @@ If no SPF record exists yet, use the line above. If you already have Google-only
 **DMARC** — TXT on `_dmarc`:
 
 ```
-v=DMARC1; p=none; rua=mailto:sonia@freedomwith.ai; pct=100; adkim=r; aspf=r
+v=DMARC1; p=none; rua=mailto:soniasarao@freedomwith.ai; pct=100; adkim=r; aspf=r
 ```
 
 Start with `p=none` (monitor only). Tighten to `quarantine`/`reject` after a few weeks of clean sending.
@@ -396,7 +396,7 @@ Back in SES → Identities → `freedomwith.ai` — wait until **Verification st
 While SES is in **sandbox**, you can only send **to** verified addresses.
 
 1. SES → Identities → **Create identity** → **Email address**.
-2. Verify `sonia@freedomwith.ai` (and any personal inbox you will test with). Click the link in each verification email.
+2. Verify `soniasarao@freedomwith.ai` (and any personal inbox you will test with). Click the link in each verification email.
 
 `hello@freedomwith.ai` does **not** need a separate email identity once the **domain** is verified — that is your `SES_FROM`.
 

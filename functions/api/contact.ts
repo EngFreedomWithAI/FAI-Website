@@ -28,12 +28,36 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     return json({ ok: false, errors }, 400);
   }
 
-  await env.DB.prepare(
-    `INSERT INTO advisory_requests (name, email, stage, message, link)
-     VALUES (?, ?, ?, ?, ?)`
-  )
-    .bind(name, email, stage, message, link || null)
-    .run();
+  if (!env.DB) {
+    console.error('contact: DB binding missing');
+    return json({ ok: false, error: 'Server misconfigured (database). Please try again later.' }, 500);
+  }
+
+  try {
+    await env.DB.prepare(
+      `INSERT INTO advisory_requests (name, email, stage, message, link)
+       VALUES (?, ?, ?, ?, ?)`
+    )
+      .bind(name, email, stage, message, link || null)
+      .run();
+  } catch (err) {
+    console.error('contact: D1 insert failed', err);
+    return json({ ok: false, error: 'Could not save your request. Please try again later.' }, 500);
+  }
+
+  if (!env.AWS_ACCESS_KEY_ID || !env.AWS_SECRET_ACCESS_KEY || !env.AWS_REGION || !env.SES_FROM || !env.CONTACT_TO) {
+    console.error('contact: email env missing', {
+      hasKey: Boolean(env.AWS_ACCESS_KEY_ID),
+      hasSecret: Boolean(env.AWS_SECRET_ACCESS_KEY),
+      region: env.AWS_REGION,
+      from: env.SES_FROM,
+      to: env.CONTACT_TO,
+    });
+    return json(
+      { ok: false, error: 'We saved your request but email is not configured yet. We will still see it.' },
+      502
+    );
+  }
 
   // Alert Sonia (reply-to the requester so she can respond directly).
   try {
@@ -57,6 +81,7 @@ ${message}`,
 <p>${escapeHtml(message).replace(/\n/g, '<br />')}</p>`,
     });
   } catch (err) {
+    console.error('contact: SES alert failed', err);
     // The request is safely stored in D1; surface a soft failure.
     return json(
       { ok: false, error: 'We saved your request but the notification failed. We will still see it.' },
