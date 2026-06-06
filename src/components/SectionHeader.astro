@@ -1,6 +1,6 @@
 ---
 interface Props {
-  index: string;
+  index?: string;
   label: string;
   align?: 'center' | 'left';
 }
@@ -10,7 +10,7 @@ const { index, label, align = 'center' } = Astro.props;
 
 <div class:list={['section-header', align === 'left' && 'section-header--left']}>
   {align === 'center' && <span class="section-header__line" aria-hidden="true"></span>}
-  <span class="section-header__index">{index}</span>
+  {index && <span class="section-header__index">{index}</span>}
   <span class="section-header__label">{label}</span>
   {align === 'center' && <span class="section-header__line" aria-hidden="true"></span>}
 </div>
