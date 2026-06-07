@@ -211,7 +211,7 @@ Deferred upgrade: Hetzner VPS with local Postgres for owned, deep analytics (Uma
 
 ## 7. Data model (Cloudflare D1)
 
-- **subscribers:** id, email, status (pending, confirmed, unsubscribed), source, created_at, unsubscribe_token
+- **subscribers:** id, email, status (confirmed, unsubscribed; `pending` retained in schema but unused under single opt-in), source, created_at, confirmed_at, unsubscribe_token
 - **advisory_requests:** id, name, email, stage (inside, just_left, building, exploring), message, link, status (new, replied, engaged, declined), stripe_customer_id, stripe_subscription_id, created_at
 - **payments:** id, request_id, stripe_id, cadence (monthly, milestone, one_time), amount, status, created_at. The offer is a single bespoke partnership, so there is no package enum; cadence and amount capture how each engagement is billed.
 - **broadcasts_sent:** id, content_slug, sent_at, recipient_count
@@ -228,11 +228,11 @@ Analytics events live in PostHog and GA4. D1 holds only what must be owned: the 
 2. GA4 and PostHog fire, page and event data recorded.
 3. Clicks to faibuddy, YouTube, and CTAs tracked as events for discovery data.
 
-### B. Email capture
+### B. Email capture (single opt-in)
 1. Visitor submits the follow along form.
-2. A Worker validates and writes a pending subscriber with an unsubscribe token.
-3. Worker sends a confirm email through SES.
-4. On confirm click, Worker sets status to confirmed.
+2. A Pages Function validates and writes a `confirmed` subscriber with an unsubscribe token.
+3. The site shows a success toast. No confirmation email is sent.
+4. Every newsletter we later send carries a one-click unsubscribe link (`/api/unsubscribe`).
 
 ### C. Advisory request to engagement to payment
 1. Visitor submits the request form (name, email, stage, what they are building, optional link).
@@ -305,12 +305,12 @@ Stored as Cloudflare Worker secrets and environment, never in the repo:
 Decided: **own the audience in our own database; email providers are swappable transports.** The subscriber list lives in Cloudflare D1 (our system of record), never inside a third-party list tool. This keeps the data portable and avoids lock-in, so the broadcast tool can be chosen later with zero migration.
 
 - **Entry points: Cloudflare Pages Functions** (`/functions/api/*`), deployed with the Pages site. No standalone Worker in v1. Where flows B/C/F say "a Worker," v1 means a Pages Function (same Workers runtime).
-  - `POST /api/subscribe` — newsletter signup. Writes a `pending` subscriber to D1 and sends a confirm email (double opt-in).
-  - `GET /api/confirm?token=…` — marks the subscriber `confirmed`.
+  - `POST /api/subscribe` — newsletter signup. **Single opt-in:** writes a `confirmed` subscriber to D1 immediately, no confirmation email. The site shows a small success toast. A unique `unsubscribe_token` is still stored so every newsletter can carry a one-click unsubscribe link. Honeypot blocks bots.
   - `GET /api/unsubscribe?token=…` — marks the subscriber `unsubscribed` (one-click, no login).
-  - `POST /api/contact` — advisory request. Writes an `advisory_requests` row, emails Sonia (reply-to = requester), and auto-acknowledges the requester.
+  - `POST /api/advisory` — advisory request. Writes an `advisory_requests` row, emails Sonia (reply-to = requester), and auto-acknowledges the requester.
+  - `POST /api/contact` — general contact (speaking/events/partnership/general). Writes a `contact_messages` row, emails Sonia (reply-to = sender), auto-acknowledges the sender.
 - **Data: Cloudflare D1**, binding name `DB`. Tables per section 7. Schema lives in `/migrations` and is applied with wrangler.
-- **Email: AWS SES v2 HTTPS API** via `aws4fetch` (SigV4). v1 sends transactional only: subscriber confirm, advisory alert, advisory auto-ack. No SMTP (Workers cannot open SMTP/TCP).
+- **Email: AWS SES v2 HTTPS API** via `aws4fetch` (SigV4). v1 sends transactional only: advisory alert + auto-ack, general contact alert + auto-ack. Newsletter signup sends **no** email (single opt-in). No SMTP (Workers cannot open SMTP/TCP).
 - **Broadcast/newsletter (flow F) is deferred.** When added, it reads the `confirmed` list from D1. The broadcast sender (own-it on SES, or a managed broadcaster like Resend/Loops) is a later, reversible choice precisely because D1 is the source of truth.
 - **Secrets/env** (Cloudflare Pages → Settings → Variables, set for both Production and Preview; never in repo):
   - `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`
@@ -462,7 +462,7 @@ Approval is often same-day to a few business days. Until approved, test only wit
 ### G. Test on production
 
 1. **Contact** — https://freedomwith.ai/contact — submit a real request. Expect: row in D1 `advisory_requests`, alert to `CONTACT_TO`, auto-ack to requester (sandbox: requester must be a verified SES email).
-2. **Subscribe** — footer or /follow band — enter email, click confirm link from inbox. Expect: `pending` → `confirmed` in D1 `subscribers`.
+2. **Subscribe** — follow band — enter email; expect a success toast and a `confirmed` row in D1 `subscribers` (single opt-in, no email).
 3. **Unsubscribe** — use link from a mail; expect `unsubscribed` in D1.
 
 If mail fails, check **Pages** → **Functions** → real-time logs, or SES → **Suppression list** / **Account dashboard** for bounces.
@@ -584,7 +584,7 @@ A running snapshot of what is in the repo versus what still needs doing. Keep th
 - Responsive footer tiers; legal pages (privacy, terms); SEO (robots, sitemap, JSON-LD, llms.txt).
 
 **Forms + email (live, tested end-to-end)**
-- Pages Functions: `/api/subscribe`, `/api/confirm`, `/api/unsubscribe`, `/api/contact`; `DB` bound (Production + Preview).
+- Pages Functions: `/api/subscribe` (single opt-in), `/api/unsubscribe`, `/api/advisory`, `/api/contact`; `DB` bound (Production + Preview).
 - Contact + follow forms wired with loading/success/error states; writes land in D1.
 - AWS SES verified in **us-east-2 (Ohio)**; `fai-website-ses` IAM user (region-agnostic `identity/*` send policy); `hello@freedomwith.ai` sending confirmed (200 / MessageId).
 - Contact alert (reply-to requester) + auto-ack tested on prod.
@@ -609,7 +609,7 @@ The 502s during setup traced to four stacked issues, fixed in order:
 **Phase 1, the core (v1)**
 - Site on Cloudflare Pages, all light, design in parallel
 - YouTube feed auto fed onto the Watch section
-- Email capture with confirm
+- Email capture (single opt-in)
 - Advisory request to inbox and D1, with auto acknowledgement
 - SES confirmations
 - Private Stripe flow for advisory (links or invoices, sent manually)
@@ -645,7 +645,7 @@ The 502s during setup traced to four stacked issues, fixed in order:
 - Hero is the arrow as a leap, no separate emotional headline.
 - Voice is "we" for the brand, "I" for advisory (Sonia).
 - Plain markdown content with a template. Manual newsletter send.
-- Email capture: Cloudflare D1 is the system of record for subscribers and advisory requests (we own the list, providers are swappable). Form endpoints are Cloudflare Pages Functions; transactional email is AWS SES via its HTTPS API (no SMTP). Subscribers use double opt-in. Newsletter broadcast tool is deferred and reads the D1 list when added. See sections 10b and 10c.
+- Email capture: Cloudflare D1 is the system of record for subscribers, advisory requests, and general contact messages (we own the list, providers are swappable). Form endpoints are Cloudflare Pages Functions; transactional email is AWS SES via its HTTPS API (no SMTP). Newsletter is **single opt-in** (no confirmation email; one-click unsubscribe on every send). Advisory and general contact are separate forms/tables. Newsletter broadcast tool is deferred and reads the D1 list when added. See sections 10b and 10c.
 - Social distribution via Zernio (https://zernio.com/). We own the AI draft + approval queue in D1; Zernio is the transport layer behind a thin Worker adapter, swappable later if needed. Platforms: X and LinkedIn first, Instagram when relevant. No native platform API integrations.
 - Approve first, then automate social. Email-approve for v1 of the queue; no custom admin portal unless volume demands it.
 - No em dashes in any copy.

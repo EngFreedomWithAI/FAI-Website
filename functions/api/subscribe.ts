@@ -1,12 +1,17 @@
 import type { Env } from '../_lib/types';
 import { json, isValidEmail, newToken, readBody } from '../_lib/util';
-import { sendEmail } from '../_lib/ses';
 
 interface SubscriberRow {
   status: string;
-  unsubscribe_token: string;
 }
 
+const DONE = { ok: true, message: "You're on the list. Thanks for subscribing!" };
+
+/**
+ * Single opt-in: add the subscriber as confirmed immediately, no confirmation email.
+ * Every newsletter we send carries a one-click unsubscribe link (/api/unsubscribe),
+ * which is why we still store an unsubscribe_token per subscriber.
+ */
 export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   const data = await readBody(request);
   const email = (data.email ?? '').toLowerCase();
@@ -24,62 +29,37 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     return json({ ok: false, error: 'Server misconfigured (database). Please try again later.' }, 500);
   }
 
-  const existing = await env.DB.prepare(
-    'SELECT status, unsubscribe_token FROM subscribers WHERE email = ?'
-  )
-    .bind(email)
-    .first<SubscriberRow>();
-
-  // Already confirmed: succeed quietly, no duplicate email.
-  if (existing && existing.status === 'confirmed') {
-    return json({ ok: true, message: "You're already on the list." });
-  }
-
-  let token: string;
-  if (existing) {
-    // pending or previously unsubscribed: reset to pending, fresh token, resend.
-    token = newToken();
-    await env.DB.prepare(
-      `UPDATE subscribers
-         SET status = 'pending', unsubscribe_token = ?, source = ?,
-             unsubscribed_at = NULL
-       WHERE email = ?`
-    )
-      .bind(token, source, email)
-      .run();
-  } else {
-    token = newToken();
-    await env.DB.prepare(
-      `INSERT INTO subscribers (email, status, source, unsubscribe_token)
-       VALUES (?, 'pending', ?, ?)`
-    )
-      .bind(email, source, token)
-      .run();
-  }
-
-  const confirmUrl = `${env.SITE_URL}/api/confirm?token=${token}`;
-
   try {
-    await sendEmail(env, {
-      to: email,
-      subject: 'Confirm your subscription to Freedom with AI',
-      text: `Thanks for subscribing to Freedom with AI.
+    const existing = await env.DB.prepare('SELECT status FROM subscribers WHERE email = ?')
+      .bind(email)
+      .first<SubscriberRow>();
 
-Please confirm your email by opening this link:
-${confirmUrl}
+    if (existing && existing.status === 'confirmed') {
+      return json({ ok: true, message: "You're already on the list." });
+    }
 
-If you did not request this, you can ignore this message.`,
-      html: `<p>Thanks for subscribing to <strong>Freedom with AI</strong>.</p>
-<p>Please confirm your email to start receiving field notes and new videos:</p>
-<p><a href="${confirmUrl}">Confirm my subscription</a></p>
-<p style="color:#52555a;font-size:14px">If you did not request this, you can ignore this message.</p>`,
-    });
+    if (existing) {
+      // Previously unsubscribed (or stale pending): re-confirm, fresh token.
+      await env.DB.prepare(
+        `UPDATE subscribers
+           SET status = 'confirmed', confirmed_at = datetime('now'),
+               unsubscribe_token = ?, source = ?, unsubscribed_at = NULL
+         WHERE email = ?`
+      )
+        .bind(newToken(), source, email)
+        .run();
+    } else {
+      await env.DB.prepare(
+        `INSERT INTO subscribers (email, status, source, unsubscribe_token, confirmed_at)
+         VALUES (?, 'confirmed', ?, ?, datetime('now'))`
+      )
+        .bind(email, source, newToken())
+        .run();
+    }
   } catch (err) {
-    return json(
-      { ok: false, error: 'We could not send the confirmation email. Please try again.' },
-      502
-    );
+    console.error('subscribe: D1 write failed', err);
+    return json({ ok: false, error: 'Could not add you right now. Please try again later.' }, 500);
   }
 
-  return json({ ok: true, message: 'Check your inbox to confirm your subscription.' });
+  return json(DONE);
 };
