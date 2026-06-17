@@ -1,43 +1,50 @@
 :root {
-  /* ---------- PRIMITIVES: color ---------- */
-  --paper:        #f7f4ed;
-  --paper-2:      #f0ece1;
-  --card:         #fffdf8;
-  --ink:          #15181b;
-  --ink-2:        #52555a;
-  --ink-3:        #8c8f93;
-  --line:         rgba(21,24,27,.12);
-  --line-2:       rgba(21,24,27,.07);
-  --dark:         #0f1419;
-  --dark-2:       #161b22;
-  --dark-3:       #232a33;
-  --on-dark:      #f4f6f8;
-  --on-dark-2:    rgba(244,246,248,.62);
-  --on-dark-line: rgba(255,255,255,.12);
+  color-scheme: dark;
+
+  /* ---------- PRIMITIVES: color (faibuddy dark-first palette) ---------- */
+  --surface-primary:   #0f1419; /* main background — near-black, cool cast */
+  --surface-secondary: #1a1f26; /* cards, elevated surfaces */
+  --surface-tertiary:  #374151; /* hover / active items */
+  --surface-hover:        rgba(255, 255, 255, 0.02);
+  --surface-hover-strong: rgba(255, 255, 255, 0.05);
+
+  --fg-primary:   #f4f6f8; /* primary text */
+  --fg-secondary: #b0b5bd; /* secondary text */
+  --fg-muted:     #8b919d; /* muted text */
+  --fg-dim:       #6b7280; /* decorative only */
+  --fg-on-interactive: #ffffff;
+
+  --border-default: #2d3748;
+  --border-subtle:  #1f2937;
+  --border-hover:   #4a5568;
+  --border-card:    rgba(255, 255, 255, 0.06);
+
   --blue:         #1a73e8;
   --blue-2:       #1557b0;
-  --blue-soft:    rgba(26,115,232,.10);
-  --blue-on-dark: #7fb0ff;
+  --blue-soft:    rgba(26, 115, 232, 0.16);
+  --blue-glow:    rgba(26, 115, 232, 0.30);
+  --link:         #4285f4;
+  --link-hover:   #34a853;
 
   /* ---------- SEMANTIC: color (components use these) ---------- */
-  --color-bg:                var(--paper);
-  --color-bg-alt:            var(--paper-2);
-  --color-surface:           var(--card);
-  --color-text:              var(--ink);
-  --color-text-muted:        var(--ink-2);
-  --color-text-subtle:       var(--ink-3);
-  --color-border:            var(--line);
-  --color-border-subtle:     var(--line-2);
+  --color-bg:                var(--surface-primary);
+  --color-bg-alt:            var(--surface-secondary);
+  --color-surface:           var(--surface-secondary);
+  --color-text:              var(--fg-primary);
+  --color-text-muted:        var(--fg-secondary);
+  --color-text-subtle:       var(--fg-muted);
+  --color-border:            var(--border-default);
+  --color-border-subtle:     var(--border-subtle);
   --color-accent:            var(--blue);
   --color-accent-strong:     var(--blue-2);
-  --color-accent-soft:       var(--blue-soft);
-  --color-inverse-bg:        var(--dark);
-  --color-inverse-surface:   var(--dark-2);
-  --color-inverse-surface-2: var(--dark-3);
-  --color-on-inverse:        var(--on-dark);
-  --color-on-inverse-muted:  var(--on-dark-2);
-  --color-on-inverse-border: var(--on-dark-line);
-  --color-accent-on-inverse: var(--blue-on-dark);
+  --color-accent-soft:       var(--blue-glow);
+  --color-inverse-bg:        var(--surface-primary);
+  --color-inverse-surface:   var(--surface-secondary);
+  --color-inverse-surface-2: var(--surface-tertiary);
+  --color-on-inverse:        var(--fg-primary);
+  --color-on-inverse-muted:  var(--fg-secondary);
+  --color-on-inverse-border: var(--border-card);
+  --color-accent-on-inverse: var(--link);
 
   /* ---------- TYPOGRAPHY ---------- */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
@@ -69,10 +76,10 @@
   --r:    14px;
   --r-lg: 20px;
 
-  /* ---------- SHADOWS ---------- */
-  --shadow-sm:     0 16px 32px rgba(21,24,27,.08);
-  --shadow-md:     0 16px 34px rgba(21,24,27,.12);
-  --shadow-accent: 0 6px 18px rgba(26,115,232,.22);
+  /* ---------- SHADOWS (tuned for dark ground) ---------- */
+  --shadow-sm:     0 12px 28px rgba(0, 0, 0, .35);
+  --shadow-md:     0 16px 34px rgba(0, 0, 0, .45);
+  --shadow-accent: 0 6px 18px rgba(26, 115, 232, .35);
   --ring-accent:   0 0 0 3px var(--color-accent-soft);
 
   /* ---------- MOTION ---------- */
@@ -81,11 +88,15 @@
   --ease:     ease;
 
   /* ---------- LAYOUT ---------- */
-  --maxw:  1080px;
+  --maxw:  1320px;
   --readw: 680px;
 }
 
-/* Dark punctuation context: apply to footer and optional CTA strip */
+/*
+ * Dark-punctuation context. The whole site is dark-first now, so .on-dark
+ * keeps backward compatibility for footer / CTA strips that opted in — it
+ * simply pins the same dark surfaces explicitly.
+ */
 .on-dark {
   --color-bg:            var(--color-inverse-bg);
   --color-surface:       var(--color-inverse-surface);

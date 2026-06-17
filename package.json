@@ -2,7 +2,7 @@
   "name": "fai-website",
   "type": "module",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "bash scripts/dev.sh",
     "build": "astro build",
     "preview": "astro preview",
     "cf:dev": "wrangler pages dev dist",

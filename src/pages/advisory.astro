@@ -7,94 +7,167 @@ import SectionHeader from '../components/SectionHeader.astro';
 import Field from '../components/Field.astro';
 import TeamAvatar from '../components/TeamAvatar.astro';
 import { site } from '../config/site';
-import { advisoryApproach } from '../data/advisory-engagements';
 import { advisoryStageOptions } from '../data/contact-form';
 import '../styles/content-pages.css';
 
 const pageTitle = 'Advisory | Freedom with AI';
 const pageDescription =
-  'Senior advisory for corporate professionals becoming AI entrepreneurs. Paid engagements, deliberately few, each shaped around you.';
+  'Fractional co-founder advisory for founders who have left, or are about to. Two AI-native co-founders building with you from idea to first customers. Paid, deliberately few.';
 ---
 
 <Base title={pageTitle} description={pageDescription}>
   <Nav />
 
   <main id="main-content">
-    <section class="page-hero" aria-labelledby="advisory-heading">
-      <div class="container profile-split">
-        <div class="profile-split__photo">
-          <TeamAvatar member="sonia" />
+    <section class="page-hero page-hero--center" aria-labelledby="advisory-heading">
+      <div class="container">
+        <SectionHeader label="Fractional co-founder advisory" />
+        <h1 id="advisory-heading" class="page-hero__title">
+          The full arc. Idea to first customers.
+        </h1>
+        <p class="page-hero__lede">
+          Validation. Positioning. The build. The path to revenue. We work it with you, adapted to where you
+          actually are.
+        </p>
+        <div class="page-hero__cta page-hero__cta--center">
+          <Button variant="primary" href="#request" size="large">
+            Request an engagement
+          </Button>
         </div>
-        <div class="profile-split__copy">
-          <SectionHeader label="Advisory" align="left" />
-          <h1 id="advisory-heading">Work with me</h1>
-          <p>
-            I am Sonia Sarao. I spent a decade as a product executive scaling venture-backed startups. Most
-            recently I was VP of Product at Groove, where I helped drive the growth that led to its
-            acquisition by Clari. Before that I built a 50-person product and engineering organization and
-            helped grow an earlier startup 10x. In mid-2023 I delivered the exit and walked away to build on
-            my own terms. Today I build faibuddy, an AI-native product for early founders, entirely myself.
-            You get someone who has operated at scale, made the leap you are making, and is still in the
-            arena building today, not someone narrating from the sidelines.
-          </p>
-          <p>
-            I work with a small number of corporate professionals becoming AI entrepreneurs, whether you are
-            planning your exit, finding your footing after leaving, or pushing through the messy early stage
-            of building. This is high-touch, bespoke, and by invitation. Tell me where you are and what you
-            are building, and I will reply if it is a fit.
-          </p>
-          <a
-            class="profile-split__link"
-            href={site.profiles.soniaLinkedIn}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Sonia on LinkedIn <span aria-hidden="true">→</span>
-          </a>
-          <div class="page-hero__cta">
-            <Button variant="primary" href="#request" size="large">
-              Request an engagement
-            </Button>
-          </div>
+        <p class="page-hero__micro">
+          Hands-on, outcome-focused, all in. We win when you win.
+        </p>
+      </div>
+    </section>
+
+    <section class="page-section page-section--alt" aria-labelledby="who-heading">
+      <div class="container">
+        <SectionHeader label="Who this is for" align="left" />
+        <h2 id="who-heading" class="page-section__heading">You've made the leap. Or you're about to.</h2>
+        <p class="page-section__sub">
+          You want partners who've done it. Who'll tell you the truth. Who'll do the hard parts with you. We
+          meet you where you are:
+        </p>
+
+        <ul class="lede-list">
+          <li>
+            <span class="lede-list__lead">Planning your exit</span>
+            <span class="lede-list__body">Line up the leap so day one is a business, not a blank page.</span>
+          </li>
+          <li>
+            <span class="lede-list__lead">Just left, finding your footing</span>
+            <span class="lede-list__body">Turn the leap into a business that actually pays.</span>
+          </li>
+          <li>
+            <span class="lede-list__lead">Building, but stuck</span>
+            <span class="lede-list__body">Get a sharper path and an honest second brain in your corner.</span>
+          </li>
+          <li>
+            <span class="lede-list__lead">Have traction, need leverage</span>
+            <span class="lede-list__body">
+              Add fractional technical and go-to-market firepower to move faster.
+            </span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="page-section" aria-label="Your advisors">
+      <div class="container">
+        <SectionHeader label="Your advisors" align="left" />
+        <p class="page-section__sub">
+          We're both AI-native. We run our business on AI, we build our own AI product,
+          <a href={site.faibuddyUrl} target="_blank" rel="noopener noreferrer">faibuddy</a>, and we help you
+          leverage it for your venture.
+        </p>
+
+        <div class="founder-grid">
+          <article class="founder-card">
+            <div class="founder-card__photo">
+              <TeamAvatar member="sonia" />
+            </div>
+            <h3>Sonia Sarao</h3>
+            <p class="founder-card__role">Product + Technical Advisor</p>
+            <p>
+              Product and engineering executive who has led teams through growth and a successful exit. She
+              now builds <a href={site.faibuddyUrl} target="_blank" rel="noopener noreferrer">faibuddy</a>
+              hands-on with AI and brings sharp technical judgment and strong product
+              instinct to every advisory engagement. She cuts through complexity fast. Whether she's building
+              with you, guiding your team, or helping you choose the right AI tools, her focus is always the
+              same: get to real value quickly without wasting time or money on the wrong path.
+            </p>
+            <a href={site.profiles.soniaLinkedIn} target="_blank" rel="noopener noreferrer">
+              Sonia on LinkedIn <span aria-hidden="true">→</span>
+            </a>
+          </article>
+
+          <article class="founder-card">
+            <div class="founder-card__photo">
+              <TeamAvatar member="cammie" />
+            </div>
+            <h3>Cammie Clay</h3>
+            <p class="founder-card__role">Customer Discovery + GTM Advisor</p>
+            <p>
+              High-stakes finance turned go-to-market operator and serious AI practitioner. She brings
+              customer signal, positioning clarity, and the relentless push that turns motion into traction.
+              She makes the hard parts feel doable, and won't let you avoid the work that creates real
+              momentum.
+            </p>
+            <a href={site.profiles.cammieLinkedIn} target="_blank" rel="noopener noreferrer">
+              Cammie on LinkedIn <span aria-hidden="true">→</span>
+            </a>
+          </article>
         </div>
       </div>
     </section>
 
-    <section class="page-section page-section--alt" aria-labelledby="engagements-heading">
-      <div class="container">
-        <SectionHeader label="How I work" align="left" />
-        <h2 id="engagements-heading" class="page-section__heading">
-          One partnership, shaped around you
-        </h2>
-        <p class="page-section__sub">
-          There are no packages or fixed deliverables, because no two journeys are the same. Instead there
-          is one high-touch partnership with a clear shape, and the work inside it is built around you.
-        </p>
+    <section class="page-section page-section--alt" aria-labelledby="work-heading">
+      <div class="container work-split">
+        <div class="work-split__main">
+          <SectionHeader label="How we work" align="left" />
+          <h2 id="work-heading" class="page-section__heading">First chapter, then partnership</h2>
+          <p class="page-section__sub">
+            Every engagement is unique, so there's no fixed package. We start with a focused first chapter: a
+            defined opening phase on whatever matters most right now. Prove fit, build momentum, and grow into
+            an ongoing partnership from there.
+          </p>
 
-        <ul class="engagement-grid">
-          {advisoryApproach.map((item) => (
-            <li>
-              <article class="engagement-card">
-                <h3>{item.title}</h3>
-                <p>{item.body}</p>
-              </article>
-            </li>
-          ))}
-        </ul>
+          <p class="rhythm-label">What stays constant</p>
+          <ul class="check-list">
+            <li>Close to the work, not a monthly check-in</li>
+            <li>Accountability both ways</li>
+            <li>Momentum you can feel</li>
+          </ul>
+        </div>
 
-        <p class="page-section__sub page-section__sub--spaced">
-          Engagements are paid and kept deliberately few, and we work in seasons, not one-off calls. If you
-          want free general advice, our videos and faibuddy are the better place to start.
-        </p>
+        <aside class="fit-card">
+          <h3 class="fit-card__title">Is this a fit?</h3>
+          <p>
+            A dual commitment: we go all in, so do you. Engagements are paid and deliberately few, a handful
+            of founders at a time.
+          </p>
+          <p>
+            This is for you if you're serious and ready to do the work: show up, make the calls, ship the
+            thing.
+          </p>
+          <Button variant="primary" href="#request" size="large">
+            Request an engagement
+          </Button>
+          <p class="fit-card__note">
+            Prefer to move at your own pace first? Start with
+            <a href={site.faibuddyUrl} target="_blank" rel="noopener noreferrer">faibuddy</a>, our AI
+            product, and bring us in when you're ready.
+          </p>
+        </aside>
       </div>
     </section>
 
     <section class="page-section" id="request" aria-labelledby="request-heading">
       <div class="container">
         <SectionHeader label="Request an engagement" align="left" />
-        <h2 id="request-heading" class="page-section__heading">Tell me where you are</h2>
+        <h2 id="request-heading" class="page-section__heading">Tell us where you are</h2>
         <p class="page-section__sub">
-          A few details so I can understand your stage and what you are building. I read every request and
+          A few details so we can understand your stage and what you are building. We read every request and
           reply if it is a fit.
         </p>
 
@@ -105,7 +178,7 @@ const pageDescription =
           tabindex="-1"
           hidden
         >
-          Thanks for reaching out. I read every message and reply if it is a fit.
+          Thanks for reaching out. We read every message and reply if it is a fit.
         </div>
 
         <div id="form-error" class="form-banner form-banner--error" role="alert" hidden>
@@ -327,6 +400,137 @@ const pageDescription =
 </script>
 
 <style>
+  .page-hero__cta--center {
+    justify-content: center;
+  }
+
+  .page-hero__micro {
+    margin-top: var(--space-4);
+    font-size: var(--text-sm);
+    color: var(--color-text-subtle);
+  }
+
+  .founder-card__role {
+    margin-top: var(--space-2) !important;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+
+  .lede-list {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-6) 0 0;
+    display: grid;
+    gap: var(--space-4);
+    max-width: var(--readw);
+  }
+
+  .lede-list li {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding-left: var(--space-4);
+    border-left: 2px solid var(--color-accent);
+  }
+
+  .lede-list__lead {
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .lede-list__body {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
+  }
+
+  .check-list {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-6) 0 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3) var(--space-5);
+    max-width: var(--readw);
+  }
+
+  .check-list li {
+    position: relative;
+    padding-left: var(--space-5);
+    font-size: var(--text-md);
+    color: var(--color-text);
+    line-height: var(--leading-relaxed);
+  }
+
+  .check-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--color-accent);
+  }
+
+  .rhythm-label {
+    margin-top: var(--space-6);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-text-subtle);
+  }
+
+  .work-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 23rem);
+    gap: var(--space-7);
+    align-items: start;
+  }
+
+  .fit-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--r-lg);
+    padding: var(--space-6);
+  }
+
+  .fit-card__title {
+    font-size: var(--text-lg);
+    font-weight: 700;
+  }
+
+  .fit-card p {
+    margin-top: var(--space-3);
+    font-size: var(--text-md);
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
+  }
+
+  .fit-card .btn {
+    margin-top: var(--space-5);
+  }
+
+  .fit-card__note {
+    margin-top: var(--space-4) !important;
+    font-size: var(--text-sm) !important;
+    color: var(--color-text-subtle) !important;
+  }
+
+  @media (max-width: 55rem) {
+    .work-split {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 40rem) {
+    .check-list {
+      grid-template-columns: 1fr;
+    }
+  }
+
   .page-section .form-banner {
     margin-top: var(--space-5);
     max-width: var(--readw);

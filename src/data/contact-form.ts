@@ -3,15 +3,15 @@ export interface SelectOption {
   label: string;
 }
 
-/** Advisory request qualifier — where the person is in their journey. */
+/** Advisory request qualifier: where the person is in their journey. */
 export const advisoryStageOptions: SelectOption[] = [
-  { value: 'inside', label: 'Still inside, planning my move' },
+  { value: 'inside', label: 'Planning my exit' },
   { value: 'just_left', label: 'Just left, finding my footing' },
   { value: 'building', label: 'Building, but stuck' },
-  { value: 'exploring', label: 'Just exploring' },
+  { value: 'traction', label: 'Have traction, need leverage' },
 ];
 
-/** General contact reason — routes the inquiry. */
+/** General contact reason: routes the inquiry. */
 export const contactTopicOptions: SelectOption[] = [
   { value: 'general', label: 'General question' },
   { value: 'speaking', label: 'Speaking or podcast invitation' },

@@ -14,8 +14,9 @@ export const site = {
   mission: 'Helping corporate professionals succeed as AI entrepreneurs.',
   nav: [
     { label: 'Advisory', href: '/advisory' },
-    { label: 'Watch', href: '/watch' },
-    { label: 'Events', href: '/events' },
+    // Hidden for now — Watch and Events pages temporarily removed from nav.
+    // { label: 'Watch', href: '/watch' },
+    // { label: 'Events', href: '/events' },
     { label: 'About', href: '/about' },
     { label: 'Contact', href: '/contact' },
   ] satisfies NavItem[],
@@ -34,8 +35,9 @@ export const site = {
   },
   footerExplore: [
     { label: 'Advisory', href: '/advisory' },
-    { label: 'Watch', href: '/watch' },
-    { label: 'Events', href: '/events' },
+    // Hidden for now — Watch and Events pages temporarily removed from footer.
+    // { label: 'Watch', href: '/watch' },
+    // { label: 'Events', href: '/events' },
     { label: 'About', href: '/about' },
     { label: 'Contact', href: '/contact' },
   ] satisfies NavItem[],

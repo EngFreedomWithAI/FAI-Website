@@ -1,556 +1,494 @@
 ---
+import { getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import Button from '../components/Button.astro';
-import SectionHeader from '../components/SectionHeader.astro';
-import Card from '../components/Card.astro';
-import CtaStrip from '../components/CtaStrip.astro';
 import FollowBand from '../components/FollowBand.astro';
-import RoutingBar from '../components/RoutingBar.astro';
-import TeamAvatar from '../components/TeamAvatar.astro';
 import { site } from '../config/site';
-import { isThisYouCards } from '../data/is-this-you';
-import { howWeHelpDoors } from '../data/how-we-help';
-
-const [faibuddyDoor, advisoryDoor] = howWeHelpDoors;
+import heroDesktop from '../assets/hero-desktop.jpg';
+import heroMobile from '../assets/hero-mobile.jpg';
 
 const pageTitle = 'Corporate to AI Entrepreneur | Freedom with AI';
 const pageDescription =
-  'We help corporate professionals succeed as AI entrepreneurs. Start with faibuddy today, and work with us when you want a guide.';
+  'Helping corporate professionals succeed as AI entrepreneurs. Start with faibuddy today, or bring us in as advisors who work like co-founders to build it with you.';
+
+// Art-directed hero: wide scene on desktop, portrait scene on mobile. WebP + responsive srcset.
+const heroDesktopImg = await getImage({ src: heroDesktop, widths: [1280, 1920, 2560], format: 'webp' });
+const heroMobileImg = await getImage({ src: heroMobile, widths: [720, 1080, 1440], format: 'webp' });
 ---
 
 <Base title={pageTitle} description={pageDescription}>
+  <!-- Whole-page background: art-directed illustration fixed behind all content -->
+  <div class="page-bg" aria-hidden="true">
+    <picture>
+      <source
+        media="(max-width: 860px)"
+        type="image/webp"
+        srcset={heroMobileImg.srcSet.attribute}
+        sizes="100vw"
+      />
+      <img
+        src={heroDesktopImg.src}
+        srcset={heroDesktopImg.srcSet.attribute}
+        sizes="100vw"
+        alt=""
+        fetchpriority="high"
+        decoding="async"
+      />
+    </picture>
+  </div>
+  <div class="page-topshade" aria-hidden="true"></div>
+
   <Nav />
 
   <main id="main-content">
+    <!-- Hero -->
     <section class="hero" aria-labelledby="hero-heading">
       <div class="container hero__inner">
-        <h1 id="hero-heading" class="hero__title">
-          <span class="sr-only">Corporate to AI Entrepreneur</span>
-          <span class="hero__leap" aria-hidden="true">
-            <span class="hero__leap-row">
-              <span class="hero__word">Corporate</span>
-              <svg
-                class="hero__arrow"
-                viewBox="0 0 64 24"
-                fill="none"
-                aria-hidden="true"
-              >
-                <path
-                  d="M3 12 H54"
-                  stroke="currentColor"
-                  stroke-width="3"
-                  stroke-linecap="round"></path>
-                <path
-                  d="M45 4 L57 12 L45 20"
-                  stroke="currentColor"
-                  stroke-width="3"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"></path>
-              </svg>
-              <span class="hero__word hero__word--accent">AI Entrepreneur</span>
-            </span>
-          </span>
-        </h1>
-
-        <p class="hero__lede read-width">
-          {site.mission} Make the leap and build something that pays, with AI as
-          your leverage.
-        </p>
-
-        <div class="hero__cta">
-          <Button variant="primary" href={site.faibuddyUrl} external size="large">
-            Try faibuddy free <span aria-hidden="true">→</span>
-          </Button>
-          <Button variant="secondary" href="/advisory" size="large">
-            Request an engagement
-          </Button>
-        </div>
-
-        <p class="hero__support">
-          Start with faibuddy today, and work with us when you want a guide.
-        </p>
-
-        <svg
-          class="hero__art"
-          viewBox="0 0 640 220"
-          fill="none"
-          aria-hidden="true"
-          role="presentation"
-        >
-          <circle class="hero__art-sun" cx="168" cy="66" r="26" />
-          <path class="hero__art-ground" d="M36 200 H604" stroke-linecap="round" />
-          <path
-            class="hero__art-mountain"
-            d="M92 200 L214 120 L336 200"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-          <path
-            class="hero__art-mountain hero__art-mountain--back"
-            d="M300 200 L460 56 L604 200"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-          <path
-            class="hero__art-path"
-            d="M70 198 C150 185 205 174 252 158 C322 136 362 108 412 88 C436 78 451 68 460 58"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-          <path class="hero__art-flag-pole" d="M460 58 V22" stroke-linecap="round" />
-          <path class="hero__art-flag" d="M460 24 L490 33 L460 43 Z" />
-        </svg>
-      </div>
-    </section>
-
-    <section class="section-block" id="is-this-you" aria-labelledby="is-this-you-heading">
-      <div class="container section-block__center">
-        <SectionHeader label="Is this you" />
-        <h2 id="is-this-you-heading" class="section-block__heading">
-          This is not for everyone. It might be for you.
-        </h2>
-
-        <ul class="card-grid card-grid--three">
-          {isThisYouCards.map((card, i) => (
-            <li>
-              <Card
-                variant="audience"
-                index={i + 1}
-                icon={card.icon}
-                title={card.title}
-                body={card.body}
-              />
-            </li>
-          ))}
-        </ul>
-
-        <RoutingBar
-          text="Not sure yet? Start with faibuddy and our videos, and come back when you want a guide."
-          ctaLabel="Try faibuddy"
-          ctaHref={site.faibuddyUrl}
-          ctaExternal
-        />
-      </div>
-    </section>
-
-    <section class="section-block" id="how-we-help" aria-labelledby="how-we-help-heading">
-      <div class="container section-block__center">
-        <SectionHeader label="How we help" />
-        <h2 id="how-we-help-heading" class="section-block__heading">
-          Two ways to move forward.
-        </h2>
-        <p class="section-block__sub read-width">
-          Start with the product, or work directly with us.
-        </p>
-
-        <div class="door-grid">
-          <Card
-            variant="door"
-            primary
-            tag={faibuddyDoor.tag}
-            title={faibuddyDoor.title}
-            body={faibuddyDoor.body}
-            ctaLabel={faibuddyDoor.ctaLabel}
-            ctaHref={faibuddyDoor.ctaHref}
-            ctaExternal
-          />
-          <Card
-            variant="door"
-            tag={advisoryDoor.tag}
-            title={advisoryDoor.title}
-            body={advisoryDoor.body}
-            ctaLabel={advisoryDoor.ctaLabel}
-            ctaHref={advisoryDoor.ctaHref}
-          />
+        <div class="hero__copy">
+          <h1 id="hero-heading" class="hero__title">
+            <span class="hero__word">Corporate</span> <span class="hero__arrow" aria-hidden="true">→</span><br class="hero__br" />
+            <span class="hero__accent">AI Entrepreneur</span>
+          </h1>
+          <p class="hero__sub">
+            We keep you alive by stopping the early mistakes that bury most ventures. Fractional
+            co-founder advisory: hands-on, outcome-focused, all in. We win when you win.
+          </p>
+          <div class="cta-row">
+            <Button variant="primary" href={site.faibuddyUrl} external size="large">
+              Try faibuddy <span aria-hidden="true">→</span>
+            </Button>
+            <Button variant="secondary" href="/advisory" size="large">Explore Advisory</Button>
+          </div>
+          <p class="hero__micro">
+            Start with faibuddy, or explore what working with us looks like.
+          </p>
         </div>
       </div>
     </section>
 
-    <section class="section-block section-block--tight" id="watch" aria-labelledby="watch-heading">
+    <!-- Why us -->
+    <section class="block" aria-labelledby="why-heading">
       <div class="container">
-        <div class="watch-head">
-          <div>
-            <SectionHeader label="Watch" align="left" />
-            <h2 id="watch-heading">Founder stories and field notes.</h2>
-            <p class="watch-head__sub read-width">
-              Founder interviews with people making the leap, plus what we are
-              learning about AI as we go.
+        <div class="sec-head">
+          <h2 id="why-heading">We've made the mistakes, but you don't have to.</h2>
+          <p class="sec-head__sub">
+            We left corporate to build with AI, and we're in the arena ourselves. Operator experience and a
+            successful exit behind us, plus the scars of building a venture right now. That's exactly why we
+            know the early traps, and how to get you past them.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Two ways in -->
+    <section class="block" id="ways" aria-labelledby="ways-heading">
+      <div class="container">
+        <div class="sec-head">
+          <h2 id="ways-heading">Same promise, different depth.</h2>
+          <p class="sec-head__sub">
+            Start with faibuddy if you want to move on your own. Bring us in when you want partners
+            beside you, or come straight to us if you've already leapt.
+          </p>
+        </div>
+
+        <div class="ways">
+          <article class="way way--product">
+            <span class="way__tag">Try the product · open to everyone</span>
+            <h3 class="way__title"><span class="way__name">faibuddy</span>, your digital AI advisor</h3>
+            <p class="way__lead">
+              Knows your business, structures your thinking, and keeps you on the shortest path to
+              paying customers.
             </p>
-          </div>
-          <Button variant="primary" href={site.socials.youtube} external>
-            Subscribe on YouTube <span aria-hidden="true">→</span>
-          </Button>
-        </div>
+            <ul class="way__list">
+              <li>Blueprint, market research, and a plan from one conversation</li>
+              <li>Honest feedback in your corner, without the flattery</li>
+            </ul>
+            <div class="way__foot">
+              <Button variant="primary" href={site.faibuddyUrl} external>
+                Try faibuddy <span aria-hidden="true">→</span>
+              </Button>
+            </div>
+          </article>
 
-        <div class="watch-empty">
-          <p class="watch-empty__lead">Founder interviews and field notes, published as we go.</p>
-          <p class="watch-empty__hint">
-            Subscribe on YouTube so the new ones reach you the day they land.
-          </p>
+          <article class="way way--advisory">
+            <span class="way__tag">Work with us · selective by design</span>
+            <h3 class="way__title"><span class="way__name">Advisory</span>, in the trenches with you</h3>
+            <p class="way__lead">
+              One leads go-to-market, one leads the technical. We treat your venture like our own.
+            </p>
+            <ul class="way__list">
+              <li>In it with you: pressure-test, discovery, prototype, hiring, funding</li>
+              <li>Close to the work, not a monthly check-in</li>
+              <li>A dual commitment: we go all in, so do you</li>
+            </ul>
+            <div class="way__foot">
+              <Button variant="secondary" href="/advisory">
+                Explore Advisory <span aria-hidden="true">→</span>
+              </Button>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <section
-      class="section-block human-teaser"
-      id="about-teaser"
-      aria-labelledby="about-teaser-heading"
-    >
-      <div class="container human-teaser__grid">
-        <div class="human-teaser__photos">
-          <div class="human-teaser__photo">
-            <TeamAvatar member="sonia" />
-          </div>
-          <div class="human-teaser__photo">
-            <TeamAvatar member="cammie" />
-          </div>
+    {/* Community proof: hidden for now (links to Watch/Events pages temporarily removed).
+    <section class="block community" id="community" aria-labelledby="community-heading">
+      <div class="container">
+        <div class="sec-head">
+          <h2 id="community-heading">Builders helping builders.</h2>
         </div>
-        <div class="human-teaser__copy">
-          <h2 id="about-teaser-heading">Who we are</h2>
-          <p>
-            We are <a href={site.profiles.soniaLinkedIn} target="_blank" rel="noopener noreferrer">Sonia</a>
-            and <a href={site.profiles.cammieLinkedIn} target="_blank" rel="noopener noreferrer">Cammie</a>,
-            two builders who love to learn, work with the latest tools, and share what we find. We stay
-            ahead of the curve, we build and use this ourselves, and we help others do the same.
-          </p>
-          <p class="human-teaser__more">
-            <a href="/about">More about us →</a>
-          </p>
+        <div class="proof">
+          <div class="proof__item">
+            <h3 class="proof__title">Founder interviews</h3>
+            <p>Conversations with people making the leap.</p>
+            <a href="/watch">See all <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="proof__item">
+            <h3 class="proof__title">Events</h3>
+            <p>We co-host the San Diego AI Showcase and run our own gatherings.</p>
+            <a href="/events">Next event <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="proof__item">
+            <h3 class="proof__title">Field notes &amp; news</h3>
+            <p>What's worth your time in entrepreneurship, as it lands.</p>
+            <a href="/watch">Read <span aria-hidden="true">→</span></a>
+          </div>
         </div>
       </div>
     </section>
+    */}
 
     <FollowBand
-      heading="Get our field notes and new videos as they land."
-      note="No noise, just what is worth your time."
+      heading="Get new founder interviews and articles as they land."
+      note="Real stories and practical insights to help you build."
     />
-
-    <CtaStrip>
-      <span slot="heading">Start with faibuddy, or work with us.</span>
-      <Button
-        slot="actions"
-        variant="primary"
-        href={site.faibuddyUrl}
-        external
-        size="large"
-      >
-        Try faibuddy free
-      </Button>
-      <Button slot="actions" variant="secondary" href="/advisory" size="large">
-        Request an engagement
-      </Button>
-    </CtaStrip>
   </main>
 
   <Footer />
 </Base>
 
 <style>
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    clip-path: inset(50%);
-    white-space: nowrap;
-  }
-
-  .hero {
-    padding-block: var(--space-8) var(--space-7);
-    text-align: center;
-  }
-
-  .hero__inner {
+  /* ---------- shared ---------- */
+  .cta-row {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .hero__title {
-    margin: 0;
-    font-size: inherit;
-    font-weight: inherit;
-    line-height: inherit;
-  }
-
-  .hero__leap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .hero__leap-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: clamp(var(--space-1), 2vw, var(--space-4));
     flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+  }
+  .block {
+    padding-block: clamp(56px, 8vw, 104px);
   }
 
-  .hero__word {
-    font-size: var(--text-hero);
+  .sec-head {
+    max-width: 60ch;
+  }
+  .sec-head h2 {
+    font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+    line-height: 1.18;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .sec-head__sub {
+    font-size: var(--text-md);
+    color: var(--color-text-muted);
+    margin-top: var(--space-4);
+    line-height: 1.4;
+  }
+
+  /* ---------- hero-anchored background (dissolves into the dark page) ---------- */
+  :global(body) {
+    background: transparent;
+  }
+  .page-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: clamp(640px, 96vh, 920px);
+    z-index: -3;
+    /* Soft gradient mask so the image melts into the page (no hard edge). */
+    -webkit-mask-image: linear-gradient(
+      180deg,
+      #000 0%,
+      #000 42%,
+      rgba(0, 0, 0, 0.55) 72%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      180deg,
+      #000 0%,
+      #000 42%,
+      rgba(0, 0, 0, 0.55) 72%,
+      transparent 100%
+    );
+  }
+  .page-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  /* Tall, gradual shade behind the nav so it stays legible with no header bar. */
+  .page-topshade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 240px;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      rgba(15, 20, 25, 0.72) 0%,
+      rgba(15, 20, 25, 0.34) 42%,
+      transparent 100%
+    );
+  }
+
+  /* ---------- hero ---------- */
+  .hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: clamp(540px, 80vh, 780px);
+    /* Nudge the centered copy up so it sits in the upper third. */
+    padding-bottom: clamp(140px, 26vh, 320px);
+  }
+  /* Soft radial pool behind the copy for legibility, fades out in every direction,
+     so there's no hard edge or "border" against the image. */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    /* Whisper-light scrim: just enough to lift white text off bright spots. */
+    background: radial-gradient(
+      130% 115% at 8% 55%,
+      rgba(15, 20, 25, 0.5) 0%,
+      rgba(15, 20, 25, 0.28) 32%,
+      rgba(15, 20, 25, 0.1) 52%,
+      transparent 70%
+    );
+    /* Fade the scrim's top AND bottom so it has no hard edge on any side. */
+    -webkit-mask-image: linear-gradient(
+      180deg,
+      transparent 0%,
+      #000 24%,
+      #000 55%,
+      transparent 92%
+    );
+    mask-image: linear-gradient(180deg, transparent 0%, #000 24%, #000 55%, transparent 92%);
+  }
+  .hero__inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+  }
+  .hero__copy {
+    max-width: 80rem;
+  }
+  .hero__title {
+    font-size: clamp(2.8rem, 5.4vw, 4.8rem);
+    line-height: 1.03;
     font-weight: 800;
-    letter-spacing: -0.04em;
-    line-height: var(--leading-tight);
+    letter-spacing: -0.03em;
+    margin: 0;
     color: var(--color-text);
   }
-
-  .hero__word--accent {
+  /* "Corporate" = white; "→ AI Entrepreneur" = brand blue. */
+  .hero__word {
+    color: var(--color-text);
+  }
+  .hero__arrow,
+  .hero__accent {
     color: var(--color-accent);
   }
-
   .hero__arrow {
-    height: 0.5em;
-    width: auto;
-    flex: 0 0 auto;
-    color: var(--color-accent);
+    display: inline-block;
+    margin: 0 0.1em;
   }
-
-  .hero__lede {
+  /* One line on desktop; break only on mobile. */
+  .hero__br {
+    display: none;
+  }
+  .hero__sub {
+    font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+    line-height: 1.45;
+    font-weight: 600;
+    color: var(--color-text);
     margin-top: var(--space-5);
-    font-size: var(--text-md);
-    line-height: var(--leading-normal);
+    max-width: 46ch;
+  }
+  .hero__micro {
+    font-size: var(--text-sm);
     color: var(--color-text-muted);
+    margin-top: var(--space-4);
   }
 
-  .hero__cta {
-    display: flex;
-    gap: var(--space-3);
-    justify-content: center;
-    flex-wrap: wrap;
+  /* ---------- two ways in ---------- */
+  .ways {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5);
     margin-top: var(--space-7);
   }
-
-  .hero__support {
-    margin-top: var(--space-5);
-    font-size: var(--text-sm);
+  .way {
+    background: color-mix(in srgb, var(--color-surface) 72%, transparent);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-card);
+    border-radius: var(--r-lg);
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.28);
+    transition:
+      transform var(--dur) var(--ease),
+      border-color var(--dur) var(--ease),
+      box-shadow var(--dur) var(--ease);
+  }
+  .way:hover {
+    transform: translateY(-3px);
+    border-color: var(--border-hover);
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.4);
+  }
+  .way__tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: var(--text-xs);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 600;
     color: var(--color-text-subtle);
   }
-
-  .hero__art {
-    width: 100%;
-    max-width: 34rem;
-    height: auto;
-    margin-top: var(--space-7);
-  }
-
-  .hero__art-ground {
-    stroke: var(--color-border);
-    stroke-width: 2;
-  }
-
-  .hero__art-mountain {
-    stroke: var(--color-text-subtle);
-    stroke-width: 2.25;
-  }
-
-  .hero__art-mountain--back {
-    stroke: color-mix(in srgb, var(--color-text-subtle) 75%, var(--color-accent));
-  }
-
-  .hero__art-sun {
-    stroke: color-mix(in srgb, var(--color-accent) 45%, var(--color-border));
-    stroke-width: 2.25;
-  }
-
-  .hero__art-path {
-    stroke: var(--color-accent);
-    stroke-width: 3;
-    stroke-dasharray: 1 9;
-  }
-
-  .hero__art-flag-pole {
-    stroke: var(--color-accent);
-    stroke-width: 2.5;
-  }
-
-  .hero__art-flag {
-    fill: var(--color-accent);
-  }
-
-  @media (max-width: 40rem) {
-    .hero__art {
-      max-width: 22rem;
-      margin-top: var(--space-6);
-    }
-  }
-
-  .section-block {
-    padding-block: var(--space-9);
-  }
-
-  .section-block--tight {
-    padding-block: var(--space-8);
-  }
-
-  .section-block__center {
-    text-align: center;
-  }
-
-  .section-block__heading {
-    font-size: var(--text-2xl);
-    font-weight: 800;
-    letter-spacing: -0.025em;
-    max-width: var(--readw);
-    margin-inline: auto;
-  }
-
-  .section-block__sub {
-    margin-top: var(--space-4);
-    margin-inline: auto;
-    font-size: var(--text-md);
-    line-height: var(--leading-normal);
-    color: var(--color-text-muted);
-  }
-
-  .card-grid {
-    list-style: none;
-    padding: 0;
-    margin: var(--space-7) 0 0;
-    display: grid;
-    gap: var(--space-5);
-  }
-
-  .card-grid--three {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .card-grid li {
-    height: 100%;
-  }
-
-  .card-grid li > :global(article) {
-    height: 100%;
-  }
-
-  .door-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-5);
-    margin-top: var(--space-7);
-    text-align: left;
-  }
-
-  .watch-head {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: var(--space-5);
-    flex-wrap: wrap;
-    margin-bottom: var(--space-6);
-  }
-
-  .watch-head h2 {
-    font-size: var(--text-2xl);
-    font-weight: 800;
-    margin-top: var(--space-3);
-  }
-
-  .watch-head__sub {
-    margin-top: var(--space-3);
-    font-size: var(--text-md);
-    color: var(--color-text-muted);
-    line-height: var(--leading-relaxed);
-  }
-
-  .watch-empty {
-    text-align: center;
-    padding: var(--space-7);
-    background: var(--color-bg-alt);
-    border: 1px solid var(--color-border-subtle);
-    border-radius: var(--r-lg);
-  }
-
-  .watch-empty__lead {
+  .way__title {
     font-size: var(--text-lg);
     font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .way__name {
+    color: var(--color-accent);
+  }
+  .way__lead {
+    color: var(--color-text-muted);
+    font-size: var(--text-base);
+    line-height: 1.6;
+  }
+  .way__list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    margin: 0.2rem 0;
+  }
+  .way__list li {
+    position: relative;
+    padding-left: 1.5rem;
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    line-height: 1.4;
+  }
+  .way__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.45em;
+    width: 7px;
+    height: 7px;
+    border-radius: 2px;
+    background: var(--color-accent);
+  }
+  .way__foot {
+    margin-top: auto;
+    padding-top: var(--space-2);
+  }
+  .way--advisory {
+    background: color-mix(in srgb, var(--color-surface) 60%, transparent);
+  }
+  .way--advisory .way__list li::before {
+    background: var(--color-text-subtle);
+    border-radius: 9999px;
+  }
+  .way--advisory .way__name {
     color: var(--color-text);
   }
 
-  .watch-empty__hint {
-    margin-top: var(--space-3);
-    font-size: var(--text-md);
-    color: var(--color-text-muted);
-    max-width: var(--readw);
-    margin-inline: auto;
-  }
-
-  .human-teaser {
-    background: var(--color-bg-alt);
-    border-block: 1px solid var(--color-border-subtle);
-  }
-
-  .human-teaser__grid {
+  /* ---------- community ---------- */
+  .proof {
     display: grid;
-    grid-template-columns: minmax(0, 14rem) 1fr;
-    gap: var(--space-7);
-    align-items: center;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
+    margin-top: var(--space-6);
   }
-
-  .human-teaser__photos {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-4);
+  .proof__item {
+    padding: var(--space-5);
+    border: 1px solid var(--border-card);
+    border-radius: var(--r);
+    background: color-mix(in srgb, var(--color-surface) 72%, transparent);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
   }
-
-  .human-teaser__photo {
-    aspect-ratio: 1;
-    border-radius: var(--r-lg);
-    overflow: hidden;
-    border: 1px solid var(--color-border);
-    background: var(--color-surface);
-    box-shadow: var(--shadow-md);
-  }
-
-  .human-teaser__copy h2 {
-    font-size: var(--text-2xl);
-    font-weight: 800;
-    max-width: 18ch;
-  }
-
-  .human-teaser__copy p {
-    margin-top: var(--space-5);
+  .proof__title {
     font-size: var(--text-md);
-    color: var(--color-text-muted);
-    line-height: var(--leading-relaxed);
-    max-width: 56ch;
-  }
-
-  .human-teaser__more {
-    margin-top: var(--space-5);
-  }
-
-  .human-teaser__more a {
     font-weight: 600;
   }
+  .proof__item p {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    line-height: 1.4;
+    margin-top: 0.5rem;
+  }
+  .proof__item a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 0.9rem;
+    color: var(--link);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .proof__item a:hover {
+    color: var(--link-hover);
+  }
 
-  @media (max-width: 55rem) {
-    .card-grid--three,
-    .door-grid,
-    .human-teaser__grid {
+  @media (max-width: 860px) {
+    .ways,
+    .proof {
       grid-template-columns: 1fr;
     }
-
-    .human-teaser__photos {
-      max-width: 14rem;
+    .hero__br {
+      display: inline;
     }
-
-    .section-block {
-      padding-block: var(--space-8);
+    /* Smaller on phones so "AI Entrepreneur" stays on one line. */
+    .hero__title {
+      font-size: clamp(1.9rem, 9vw, 2.8rem);
     }
-
-    .hero__leap-row {
-      flex-direction: column;
-      gap: var(--space-1);
+    /* Trim the oversized hero CTAs on mobile. */
+    .hero :global(.btn--lg) {
+      padding: var(--space-3) var(--space-5);
+      font-size: var(--text-sm);
     }
-
-    .hero__arrow {
-      transform: rotate(90deg);
-      height: 0.66em;
-      margin-block: var(--space-1);
+    /* Center the hero copy on mobile so it sits higher, off the busy lower image. */
+    .hero {
+      align-items: center;
+      min-height: 80vh;
+      padding-bottom: 0;
+    }
+    .hero::before {
+      background: linear-gradient(
+        180deg,
+        rgba(15, 20, 25, 0.2) 0%,
+        rgba(15, 20, 25, 0.5) 50%,
+        rgba(15, 20, 25, 0.85) 100%
+      );
+      -webkit-mask-image: none;
+      mask-image: none;
     }
   }
 </style>

@@ -2,7 +2,7 @@ import type { Env } from '../_lib/types';
 import { json, isValidEmail, isValidUrl, readBody, escapeHtml } from '../_lib/util';
 import { sendEmail } from '../_lib/ses';
 
-const STAGES = new Set(['inside', 'just_left', 'building', 'exploring']);
+const STAGES = new Set(['inside', 'just_left', 'building', 'traction']);
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   try {
@@ -62,7 +62,7 @@ const handleAdvisoryPost: PagesFunction<Env> = async ({ request, env }) => {
     );
   }
 
-  // Alert Sonia (reply-to the requester so she can respond directly).
+  // Alert the team (reply-to the requester so we can respond directly).
   try {
     await sendEmail(env, {
       to: env.CONTACT_TO,
@@ -99,16 +99,16 @@ ${message}`,
       subject: 'Thanks for reaching out to Freedom with AI',
       text: `Hi ${name},
 
-Thanks for reaching out. I read every message and reply if it is a fit.
+Thanks for reaching out. We read every message and reply if it is a fit.
 
-— Sonia, Freedom with AI`,
+Sonia & Cammie, Freedom with AI`,
       html: `<p>Hi ${escapeHtml(name)},</p>
-<p>Thanks for reaching out. I read every message and reply if it is a fit.</p>
-<p>&mdash; Sonia, Freedom with AI</p>`,
+<p>Thanks for reaching out. We read every message and reply if it is a fit.</p>
+<p>Sonia &amp; Cammie, Freedom with AI</p>`,
     });
   } catch {
     // Ignore: acknowledgement is non-critical.
   }
 
-  return json({ ok: true, message: 'Thanks for reaching out. I read every message and reply if it is a fit.' });
+  return json({ ok: true, message: 'Thanks for reaching out. We read every message and reply if it is a fit.' });
 };

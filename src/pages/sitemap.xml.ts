@@ -4,8 +4,9 @@ import type { APIRoute } from 'astro';
 const routes: { path: string; priority: string; changefreq: string }[] = [
   { path: '/', priority: '1.0', changefreq: 'weekly' },
   { path: '/advisory', priority: '0.9', changefreq: 'monthly' },
-  { path: '/watch', priority: '0.8', changefreq: 'weekly' },
-  { path: '/events', priority: '0.8', changefreq: 'weekly' },
+  // Hidden for now — Watch and Events pages temporarily removed from sitemap.
+  // { path: '/watch', priority: '0.8', changefreq: 'weekly' },
+  // { path: '/events', priority: '0.8', changefreq: 'weekly' },
   { path: '/about', priority: '0.7', changefreq: 'monthly' },
   { path: '/contact', priority: '0.7', changefreq: 'monthly' },
   { path: '/privacy', priority: '0.3', changefreq: 'yearly' },

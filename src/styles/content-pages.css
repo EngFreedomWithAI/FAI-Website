@@ -161,7 +161,7 @@
   line-height: var(--leading-relaxed);
 }
 
-.founder-card a {
+.founder-card > a {
   display: inline-block;
   margin-top: var(--space-4);
   font-weight: 600;
