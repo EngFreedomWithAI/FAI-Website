@@ -25,23 +25,23 @@ const enabled = Boolean(ga4Id || posthogKey);
 
       <script is:inline define:vars={{ ga4Id, posthogKey, posthogHost }}>
         // --- GA4 -------------------------------------------------------------
-        // client_storage 'none' stops GA4 writing its _ga cookie. The trade: no
-        // stable client id, so every pageview counts as a new user. Traffic,
-        // referrers, and page popularity stay accurate; "returning users" does not.
-        // PostHog is the tool that answers cross-visit questions.
+        // Cookieless is achieved by client_storage 'none' alone — GA4 generates
+        // an ephemeral client id per load and never writes the _ga cookie. The
+        // trade: every pageview counts as a new user, so treat GA4 as traffic /
+        // referrer / SEO baseline and use PostHog for cross-visit questions.
+        //
+        // We deliberately do NOT set Consent Mode to analytics_storage:'denied'.
+        // That would push every hit into Google's cookieless-modeling pipeline,
+        // where it is hidden from Realtime/DebugView and threshold-suppressed in
+        // reports at low volume — i.e. GA4 would show nothing. It also removes no
+        // cookie that client_storage:'none' hasn't already removed. Google signals
+        // and ad personalization are off, so no advertising cookies are set.
         if (ga4Id) {
           window.dataLayer = window.dataLayer || [];
           function gtag() {
             window.dataLayer.push(arguments);
           }
           window.gtag = gtag;
-
-          gtag('consent', 'default', {
-            ad_storage: 'denied',
-            ad_user_data: 'denied',
-            ad_personalization: 'denied',
-            analytics_storage: 'denied',
-          });
 
           gtag('js', new Date());
           gtag('config', ga4Id, {
