@@ -201,6 +201,7 @@ const pageDescription =
         form.reset();
         successBanner?.removeAttribute('hidden');
         successBanner?.focus();
+        window.faiTrack?.('contact_submitted');
       } catch {
         if (errorBanner) {
           errorBanner.textContent = 'We could not reach the server. Please try again in a moment.';

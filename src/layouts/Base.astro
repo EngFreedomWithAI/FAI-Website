@@ -2,6 +2,7 @@
 import '../styles/tokens.css';
 import '../styles/global.css';
 import { site } from '../config/site';
+import Analytics from '../components/Analytics.astro';
 
 interface Props {
   title?: string;
@@ -89,6 +90,8 @@ const jsonLd = {
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
+
+    <Analytics />
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>

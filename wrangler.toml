@@ -23,5 +23,12 @@ AWS_REGION = "us-east-2"
 SES_FROM = "hello@freedomwith.ai"
 CONTACT_TO = "soniasarao@freedomwith.ai"
 
+# Analytics. These are public by design — they ship in client-side JS and are
+# visible in view-source — so they are plain vars, not encrypted secrets.
+# Leave them empty and the analytics snippets are simply not injected.
+PUBLIC_GA4_ID = "G-468Q292Q89"
+PUBLIC_POSTHOG_KEY = ""
+PUBLIC_POSTHOG_HOST = "https://us.i.posthog.com"
+
 # Encrypted secrets only — set in Pages dashboard (Production + Preview), not in this file:
 #   AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY

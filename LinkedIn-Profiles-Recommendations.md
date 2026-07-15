@@ -6,42 +6,49 @@ For Sonia and Cammie. One brand, two jobs:
 
 Voice rules: personal and a little against-the-current, plain, confident, human.
 No em dashes. No LinkedIn cringe ("excited to share," "humbled," rocket emojis).
-faibuddy = our AI Advisor.
+faibuddy = our AI Advisor (never "AI co-founder"). No "building in the open" /
+build-in-public framing; it reads scrappy and clashes with the premium tone.
+
+Two principles that shape all of this:
+- PREMIUM + SELECTIVE SHOULD FEEL MAGNETIC, NOT GATED. State the standard once,
+  calmly, as the reason it's good ("I work closely with a few people at a time,
+  because depth takes focus"), then open the door warmly. No "apply," no "limited
+  spots," no "DM me." Confidence is the invitation; people should want in, not
+  feel pre-rejected. Still genuinely selective and paid, just never defensive about it.
+- CAMMIE: background is credibility, not identity. Her NYSE/FINRA/compliance past
+  is ONE line that earns trust (she operated in serious, high-stakes rooms and
+  knows how to cut to what's real), not the story she leads with. Her identity now
+  is co-founder, connector, someone living the leap and drawing people into it.
 
 ===============================================================
 SONIA
 ===============================================================
 
---- HEADLINE (pick one) ---
+--- HEADLINE (locked, with alts) ---
 
-Primary:
-Two-time VP of Product who left to build in AI. Now I help corporate professionals make the same leap, for real. Advisory at Freedom with AI.
+Primary (career-led, "a few at a time" carries the premium):
+A decade as a VP of Product (Groove, acquired by Clari) before I left to build in AI. Now I advise a few corporate professionals at a time through the same leap. Co-founder, Freedom with AI.
 
-Alt (companies named, Clari for recognition):
-VP of Product at Groove (acquired by Clari) and Fluxx. Left to build in AI. Now I help corporate professionals make the leap. Freedom with AI.
-
-Alt (lightest, titles dialed down):
-Ex-VP of Product, now building in AI. I help corporate professionals become AI entrepreneurs, for real. Freedom with AI.
+Alt (lighter, titles dialed down):
+Ex-VP of Product, now building in AI. I advise a few corporate professionals at a time through the leap. Co-founder, Freedom with AI.
 
 
---- ABOUT ---
+--- ABOUT (locked) ---
 
-For a decade I was a Product Exec. VP of Product at Groove. VP of Product and Engineering at Fluxx, where I was the first product hire. I was the person the team and the C-suite came to for the real answer, the de facto advisor to CEOs, COOs and CTOs. A startup once tried to pay me in equity just to keep getting my advice.
+For over a decade I was a Product Exec. Most recently VP of Product at Groove, through to its acquisition by Clari. Before that, nearly five years at Fluxx, where I was the first product hire and built the product and engineering teams from the ground up, rising to VP of Product and Engineering. I was the person the team and the C-suite came to for the real answer.
 
-Then I left to build in AI.
+Then I left to build in AI. Not for the status, for the freedom. The freedom to build things that are mine and stay ahead of where the tech is going.
 
-Not for the status. For the freedom. The freedom to build, to stay two steps ahead of where tech is going, and to do work that is mine.
+Here's what I've learned: advice is cheap now. An AI will hand you a plan in thirty seconds. What it can't give you is someone who sat in the same corporate chair, walked out, built the product herself, and is in the arena with you.
 
-Here is the thing about this moment: advice is cheap now. An LLM will hand you a plan in thirty seconds. What it cannot give you is someone who sat in the same corporate chair, walked out, built the product herself, and is in the arena with you while she does it.
+That's what I do at Freedom with AI. I help corporate professionals make the leap into AI entrepreneurship for real, and I'm building faibuddy, our AI Advisor.
 
-That is what I do at Freedom with AI. I help corporate professionals become AI entrepreneurs. Not the theory. The actual leap. I am building faibuddy, our AI Advisor, in the open, and I advise a small number of people making the same move.
-
-It is selective and it is paid, because depth takes time and I only take a few. If you feel the pull and you want someone a few steps ahead walking it with you, start here: freedomwith.ai/advisory
+I work closely with a few people at a time, because depth takes focus. If you feel the pull and want someone a few steps ahead walking it with you, come talk to me: freedomwith.ai/advisory
 
 The world needs more entrepreneurs. People still buy from people. Let's build something that's yours.
 
-(OPTIONAL proof line — only if you're comfortable. Drop in after the "first product hire" sentence. No exact ARR, just multiples + the acquisition:)
-First product hire at Fluxx, where my team grew recurring revenue roughly 10x. Played a major role scaling Groove to its acquisition by Clari.
+(OPTIONAL proof line — only if you're comfortable. No exact ARR, just the multiple + the acquisition. The companies are already named above, so this just adds the metric:)
+My team at Fluxx grew recurring revenue roughly 10x, and I played a major role scaling Groove to its acquisition.
 
 
 --- FEATURED (pinned cards + captions) ---
@@ -92,8 +99,8 @@ Humans doing meta-work. AI running the tactics. Tiny teams steering both. Whole 
 
 The skill that compounds is not "knows the current tools." It is "can steer the thing and work with it." Start practicing now, while it is still a choice and not a layoff.
 
-Post 4 (build in public):
-Building faibuddy in the open this week.
+Post 4 (build):
+Working on faibuddy this week.
 
 [one real, specific thing you learned from customer discovery]
 
@@ -111,38 +118,33 @@ Build accordingly. People still buy from people.
 
 Title: Co-Founder
 Blurb:
-I help corporate professionals become AI entrepreneurs. I advise a small number of people one on one through the leap, and I build faibuddy, our AI Advisor, in the open. Twelve years as a Product Exec before this (VP Product at Groove, first product hire at Fluxx). I left to build things that are mine, and now I help others do the same.
+I help corporate professionals become AI entrepreneurs. I advise a small number of people one on one through the leap, and I build faibuddy, our AI Advisor. A decade as a Product Exec before this (VP Product at Groove, first product hire at Fluxx). I left to build things that are mine, and now I help others do the same.
 
 
 ===============================================================
 CAMMIE
 ===============================================================
 
---- HEADLINE (pick one) ---
+--- HEADLINE (locked, with alt) ---
 
-Primary:
-Former VP of Compliance (NYSE and FINRA before that). I spent fifteen years getting people to tell the real story. Now I do it on camera, with founders. Freedom with AI.
+Primary (identity first, 15 years as one credibility beat):
+Co-founder at Freedom with AI, helping corporate professionals make the leap into AI entrepreneurship. Fifteen years at the NYSE and FINRA before this taught me to cut straight to what's real.
 
-Alt (institutions lead, staccato):
-NYSE. FINRA. Then VP of Compliance at First Republic. Fifteen years getting the real answer on the record. Now I host founder conversations. Freedom with AI.
-
-Alt (host-forward, VP lighter):
-I host founder conversations about the leap. Former VP of Compliance (NYSE, FINRA) who spent fifteen years getting people to the real answer. Co-Founder, Freedom with AI.
+Alt (purely present, background dropped to the About only):
+Co-founder at Freedom with AI. I help corporate professionals make the leap into AI entrepreneurship, and I love the real conversations that come with it.
 
 
---- ABOUT ---
+--- ABOUT (locked) ---
 
-I spent fifteen years in a world built on asking the hard question and waiting for the real answer. The New York Stock Exchange. FINRA. Compliance and investigations at the kind of firms where you learn to read people fast and get them on the record.
+I'm Co-Founder at Freedom with AI, and I spend my days on the part I love most: talking to the people making the leap.
 
-Turns out that is the same skill that makes a good conversation.
+Our mission is simple: help corporate professionals become AI entrepreneurs. I've lived the blindspots, the bad assumptions, the fragmented half-solutions you try before it clicks, so I know which questions actually matter.
 
-Now I am Co-Founder at Freedom with AI, and I get to do the part I love most: talk to people. I host founder conversations, the real ones, about the leap from a corporate paycheck to building something that is yours. The blindspots. The bad assumptions. The fragmented half-solutions everyone tries first. I have lived all of it, so I know which questions actually matter.
+Before this I spent fifteen years in high-stakes rooms at the New York Stock Exchange and FINRA. It taught me to read people fast and cut to the truth. I just point that at a better subject now: founders, and the path they're on.
 
-Our mission is simple: help corporate professionals become successful AI entrepreneurs. We are building faibuddy, an AI Advisor for people making that move, and we are building it in the open.
+We're building faibuddy, our AI Advisor, and we work with a small number of founders closely. If you feel the pull, or you just want to talk it through, reach out. I'd love to connect.
 
-If you are a founder with a story worth telling, or a corporate professional who feels the pull and wants to talk it through, reach out. I would love to have you on, or just to connect.
-
-Clarity, momentum, and a real person in your corner. That is the whole idea.
+Clarity, momentum, and a real person in your corner. That's the whole idea.
 
 
 --- FEATURED (pinned cards + captions) ---
@@ -206,7 +208,21 @@ So if we are connected here and we have never actually talked, fix that. Message
 
 Title: Co-Founder
 Blurb:
-I host the conversations. Founders telling the real story of the leap from corporate to building something of their own. Our mission is to help corporate professionals become successful AI entrepreneurs, and we build faibuddy, an AI Advisor, to make that path less lonely. Fifteen years in compliance and investigations before this taught me how to ask the question that actually matters.
+I'm the connector. I spend my days talking to the people making the leap from corporate to building something of their own. Our mission is to help corporate professionals become AI entrepreneurs, and we build faibuddy, our AI Advisor, to make that path less lonely. Fifteen years at the NYSE and FINRA before this taught me to read people fast and cut to what's real.
+
+
+===============================================================
+SKILLS
+===============================================================
+
+Trim hard, don't agonize. Skills and endorsements are mostly dead weight now;
+nobody engages off them, but a few still feed LinkedIn's internal search so you
+surface when someone searches a term. Keep 3-5 that match who you want to
+attract, drop the long tail.
+
+Sonia: Product Management, Go-to-Market, AI Products, Entrepreneurship.
+Cammie: Entrepreneurship, plus one signal of the connection/conversation angle.
+The compliance skill list does not serve the new positioning; let most of it go.
 
 
 ===============================================================

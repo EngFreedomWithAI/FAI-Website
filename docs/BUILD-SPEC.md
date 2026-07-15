@@ -224,8 +224,13 @@ From the tokens page, build these as Astro components driven by tokens:
 
 - Per page title and meta description. Add Open Graph and Twitter card tags and a canonical URL (all missing in the design exports).
 - Default OG image in `public/`.
-- GA4 via gtag, and PostHog snippet, both in `Base.astro`, loaded with the measurement id and project key from environment, not hardcoded.
+- GA4 via gtag, and PostHog snippet, both pulled into `Base.astro` from `src/components/Analytics.astro`, loaded with the measurement id and project key from environment, not hardcoded.
 - `lang="en"`, viewport, favicon, sensible robots.
+
+**Analytics implementation (built).** `src/components/Analytics.astro` owns both snippets.
+- **Config vars** (`wrangler.toml` `[vars]`, not secrets — a GA4 measurement id and a PostHog project key ship in client-side JS and are public by design): `PUBLIC_GA4_ID`, `PUBLIC_POSTHOG_KEY`, `PUBLIC_POSTHOG_HOST`. Empty or absent -> nothing is injected, so local dev and un-keyed previews stay clean and never pollute production data.
+- **Cookieless, no consent banner.** GA4 runs with `client_storage: 'none'`, consent mode denied across ad and analytics storage, and Google signals off. PostHog runs with `persistence: 'localStorage'` and session recording off. Neither sets a cookie. The trade: GA4 has no stable client id, so its "users" metric counts pageviews rather than people — treat GA4 as traffic/referrer/SEO baseline only, and use PostHog for anything about people and funnels. PostHog's localStorage id is what keeps multi-page funnels working. Note localStorage is still device storage, so a strict GDPR reading can still call for consent; revisit if EU traffic becomes material.
+- **Events.** `window.faiTrack(name, props)` fans an event out to whichever tools are live; always call it optionally (`window.faiTrack?.(...)`) since it is undefined when analytics is off. Currently fired: `outbound_click` (delegated listener on every external link — faibuddy, YouTube, X, LinkedIn — no per-link annotation needed), `newsletter_subscribed`, `contact_submitted`, `advisory_requested`. The three conversions fire only on a confirmed success response, not on submit.
 
 ---
 

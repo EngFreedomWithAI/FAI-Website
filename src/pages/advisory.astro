@@ -370,6 +370,7 @@ const pageDescription =
         form.reset();
         successBanner?.removeAttribute('hidden');
         successBanner?.focus();
+        window.faiTrack?.('advisory_requested');
       } catch {
         if (errorBanner) {
           errorBanner.textContent = 'We could not reach the server. Please try again in a moment.';

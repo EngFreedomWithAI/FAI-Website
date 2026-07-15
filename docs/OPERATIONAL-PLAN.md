@@ -223,10 +223,11 @@ Analytics events live in PostHog and GA4. D1 holds only what must be owned: the 
 
 ## 8. Operational flows
 
-### A. Visitor and analytics
+### A. Visitor and analytics (built)
 1. Visitor loads a Pages route.
-2. GA4 and PostHog fire, page and event data recorded.
-3. Clicks to faibuddy, YouTube, and CTAs tracked as events for discovery data.
+2. GA4 and PostHog fire a pageview, both cookieless. No consent banner — neither tool sets a cookie. See BUILD-SPEC section 4 for the config and its trade-offs.
+3. Clicks to faibuddy, YouTube, X, and LinkedIn are captured as `outbound_click` by a single delegated listener on every external link, giving discovery data without annotating each link.
+4. Conversions fire on confirmed success only: `newsletter_subscribed`, `contact_submitted`, `advisory_requested`.
 
 ### B. Email capture (single opt-in)
 1. Visitor submits the follow along form.
@@ -293,10 +294,11 @@ Zernio accounts (X, LinkedIn) are connected once in the Zernio dashboard. Start 
 Stored as Cloudflare Worker secrets and environment, never in the repo:
 - Stripe secret key and webhook signing secret
 - SES sending credentials
-- PostHog project key and GA4 measurement id
 - Zernio API key (social distribution adapter)
 - YouTube API key (feed ingest only)
 - An admin token to protect the manual send and request views
+
+Not secrets, despite an earlier draft listing them here: the **GA4 measurement id** and **PostHog project key** are public by design — they ship in client-side JS and are readable in view-source. They live as plain `[vars]` in `wrangler.toml` (`PUBLIC_GA4_ID`, `PUBLIC_POSTHOG_KEY`, `PUBLIC_POSTHOG_HOST`) so the static build can inline them. Encrypting them would buy no security and only complicate the build.
 
 ---
 

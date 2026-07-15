@@ -104,6 +104,7 @@ const {
 
         form.reset();
         setStatus(result.message ?? "You're on the list. Thanks for subscribing!", 'success');
+        window.faiTrack?.('newsletter_subscribed');
       } catch {
         setStatus('We could not reach the server. Please try again in a moment.', 'error');
       } finally {
