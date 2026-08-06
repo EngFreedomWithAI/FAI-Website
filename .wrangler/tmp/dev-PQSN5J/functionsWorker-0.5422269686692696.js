@@ -13,15 +13,21 @@ var html = /* @__PURE__ */ __name2((markup, status = 200) => new Response(markup
   headers: { "content-type": "text/html; charset=utf-8" }
 }), "html");
 var isValidEmail = /* @__PURE__ */ __name2((email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email), "isValidEmail");
-var isValidUrl = /* @__PURE__ */ __name2((value) => {
+var normalizeUrl = /* @__PURE__ */ __name2((value) => {
+  const trimmed = value.trim();
+  if (!trimmed) return "";
+  if (/^[a-z][a-z0-9+.-]*:/i.test(trimmed)) return trimmed;
+  return `https://${trimmed}`;
+}, "normalizeUrl");
+var isValidWebUrl = /* @__PURE__ */ __name2((value) => {
   if (!value) return true;
   try {
     const u = new URL(value);
-    return u.protocol === "http:" || u.protocol === "https:";
+    return (u.protocol === "http:" || u.protocol === "https:") && u.hostname.includes(".");
   } catch {
     return false;
   }
-}, "isValidUrl");
+}, "isValidWebUrl");
 var newToken = /* @__PURE__ */ __name2((bytes = 32) => {
   const arr = new Uint8Array(bytes);
   crypto.getRandomValues(arr);
@@ -432,14 +438,14 @@ var handleAdvisoryPost = /* @__PURE__ */ __name2(async ({ request, env }) => {
   const email = (data.email ?? "").toLowerCase();
   const stage = data.stage ?? "";
   const message = data.message ?? "";
-  const link = data.link ?? "";
+  const link = normalizeUrl(data.link ?? "");
   const errors = {};
   if (!name) errors.name = "Name is required.";
   if (!email) errors.email = "Email is required.";
   else if (!isValidEmail(email)) errors.email = "Enter a valid email address.";
   if (!stage || !STAGES.has(stage)) errors.stage = "Please choose what best describes you.";
   if (!message) errors.message = "Please tell us what you want to be different.";
-  if (link && !isValidUrl(link)) errors.link = "Enter a valid link starting with http:// or https://.";
+  if (link && !isValidWebUrl(link)) errors.link = "That does not look like a web address.";
   if (Object.keys(errors).length > 0) {
     return json({ ok: false, errors }, 400);
   }
@@ -652,7 +658,7 @@ var handleOfficeHoursPost = /* @__PURE__ */ __name2(async ({ request, env }) => 
   const name = data.name ?? "";
   const email = (data.email ?? "").toLowerCase();
   const goal = (data.goal ?? "").slice(0, MAX_GOAL);
-  const link = data.link ?? "";
+  const link = normalizeUrl(data.link ?? "");
   const source = (data.source ?? "direct").slice(0, 64);
   const errors = {};
   if (!eventSlug || !SLUG_PATTERN.test(eventSlug)) errors.event = "Please choose which session.";
@@ -661,7 +667,7 @@ var handleOfficeHoursPost = /* @__PURE__ */ __name2(async ({ request, env }) => 
   if (!email) errors.email = "Email is required.";
   else if (!isValidEmail(email)) errors.email = "Enter a valid email address.";
   if (!goal) errors.goal = "Tell us what you want to walk out with.";
-  if (link && !isValidUrl(link)) errors.link = "Enter a valid link starting with http:// or https://.";
+  if (link && !isValidWebUrl(link)) errors.link = "That does not look like a web address.";
   if (Object.keys(errors).length > 0) {
     return json({ ok: false, errors }, 400);
   }

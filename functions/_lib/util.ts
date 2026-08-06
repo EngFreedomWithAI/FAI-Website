@@ -23,6 +23,35 @@ export const isValidUrl = (value: string): boolean => {
   }
 };
 
+/**
+ * Accept what people actually type. "faibuddy.com" becomes "https://faibuddy.com".
+ *
+ * Anything already carrying a scheme is returned untouched rather than prefixed, so
+ * "javascript:..." stays invalid and gets rejected by isValidUrl instead of being
+ * quietly rewritten into something that passes.
+ */
+export const normalizeUrl = (value: string): string => {
+  const trimmed = value.trim();
+  if (!trimmed) return '';
+  if (/^[a-z][a-z0-9+.-]*:/i.test(trimmed)) return trimmed;
+  return `https://${trimmed}`;
+};
+
+/**
+ * isValidUrl plus a hostname dot, for fields fed through normalizeUrl. Without it a
+ * bare word like "hello" becomes "https://hello", which parses fine and would pass.
+ * Kept separate from isValidUrl so the older forms keep their existing behaviour.
+ */
+export const isValidWebUrl = (value: string): boolean => {
+  if (!value) return true;
+  try {
+    const u = new URL(value);
+    return (u.protocol === 'http:' || u.protocol === 'https:') && u.hostname.includes('.');
+  } catch {
+    return false;
+  }
+};
+
 /** URL-safe random token for confirm/unsubscribe links. */
 export const newToken = (bytes = 32): string => {
   const arr = new Uint8Array(bytes);

@@ -1,5 +1,5 @@
 import type { Env } from '../_lib/types';
-import { json, isValidEmail, isValidUrl, readBody, escapeHtml } from '../_lib/util';
+import { json, isValidEmail, isValidWebUrl, normalizeUrl, readBody, escapeHtml } from '../_lib/util';
 import { sendEmail } from '../_lib/ses';
 
 const STAGES = new Set(['inside', 'just_left', 'building', 'traction']);
@@ -23,7 +23,9 @@ const handleAdvisoryPost: PagesFunction<Env> = async ({ request, env }) => {
   const email = (data.email ?? '').toLowerCase();
   const stage = data.stage ?? '';
   const message = data.message ?? '';
-  const link = data.link ?? '';
+  // The browser normalizes too, but this endpoint is reachable directly, so it cannot
+  // trust that it happened.
+  const link = normalizeUrl(data.link ?? '');
 
   const errors: Record<string, string> = {};
   if (!name) errors.name = 'Name is required.';
@@ -31,7 +33,7 @@ const handleAdvisoryPost: PagesFunction<Env> = async ({ request, env }) => {
   else if (!isValidEmail(email)) errors.email = 'Enter a valid email address.';
   if (!stage || !STAGES.has(stage)) errors.stage = 'Please choose what best describes you.';
   if (!message) errors.message = 'Please tell us what you want to be different.';
-  if (link && !isValidUrl(link)) errors.link = 'Enter a valid link starting with http:// or https://.';
+  if (link && !isValidWebUrl(link)) errors.link = 'That does not look like a web address.';
 
   if (Object.keys(errors).length > 0) {
     return json({ ok: false, errors }, 400);

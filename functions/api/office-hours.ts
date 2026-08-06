@@ -1,5 +1,5 @@
 import type { Env } from '../_lib/types';
-import { json, isValidEmail, isValidUrl, readBody, escapeHtml } from '../_lib/util';
+import { json, isValidEmail, isValidWebUrl, normalizeUrl, readBody, escapeHtml } from '../_lib/util';
 import { sendEmail } from '../_lib/ses';
 
 // Slugs live in src/data/office-hours.ts. Rather than couple the worker to the site
@@ -45,7 +45,9 @@ const handleOfficeHoursPost: PagesFunction<Env> = async ({ request, env }) => {
   const name = data.name ?? '';
   const email = (data.email ?? '').toLowerCase();
   const goal = (data.goal ?? '').slice(0, MAX_GOAL);
-  const link = data.link ?? '';
+  // The browser normalizes too, but this endpoint is reachable directly, so it cannot
+  // trust that it happened.
+  const link = normalizeUrl(data.link ?? '');
   const source = (data.source ?? 'direct').slice(0, 64);
 
   const errors: Record<string, string> = {};
@@ -55,7 +57,7 @@ const handleOfficeHoursPost: PagesFunction<Env> = async ({ request, env }) => {
   if (!email) errors.email = 'Email is required.';
   else if (!isValidEmail(email)) errors.email = 'Enter a valid email address.';
   if (!goal) errors.goal = 'Tell us what you want to walk out with.';
-  if (link && !isValidUrl(link)) errors.link = 'Enter a valid link starting with http:// or https://.';
+  if (link && !isValidWebUrl(link)) errors.link = 'That does not look like a web address.';
 
   if (Object.keys(errors).length > 0) {
     return json({ ok: false, errors }, 400);

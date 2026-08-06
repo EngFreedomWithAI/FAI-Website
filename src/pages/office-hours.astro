@@ -283,7 +283,7 @@ const fallbackSlug = bookable[0]?.slug ?? '';
                 label="Link to what you are building"
                 type="url"
                 optional
-                placeholder="https://"
+                placeholder="yourproject.com"
               />
 
               <input type="hidden" name="source" id="oh-source" value="direct" />
@@ -343,6 +343,8 @@ const fallbackSlug = bookable[0]?.slug ?? '';
 </Base>
 
 <script>
+  import { normalizeUrl, isValidWebUrl, INVALID_URL_MESSAGE } from '../scripts/url';
+
   // ---------------------------------------------------------------------------
   // Everything date-related runs in the browser on purpose.
   //
@@ -474,15 +476,7 @@ const fallbackSlug = bookable[0]?.slug ?? '';
     });
   };
 
-  const isValidUrl = (value: string) => {
-    if (!value.trim()) return true;
-    try {
-      const url = new URL(value);
-      return url.protocol === 'http:' || url.protocol === 'https:';
-    } catch {
-      return false;
-    }
-  };
+  const isValidUrl = isValidWebUrl;
 
   const submitButton = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
 
@@ -507,7 +501,7 @@ const fallbackSlug = bookable[0]?.slug ?? '';
       const name = String(data.get('name') ?? '').trim();
       const email = String(data.get('email') ?? '').trim();
       const goal = String(data.get('goal') ?? '').trim();
-      const link = String(data.get('link') ?? '').trim();
+      const link = normalizeUrl(String(data.get('link') ?? ''));
       const source = String(data.get('source') ?? 'direct').trim();
 
       if (datePublished && !session) {
@@ -539,7 +533,7 @@ const fallbackSlug = bookable[0]?.slug ?? '';
       }
 
       if (link && !isValidUrl(link)) {
-        showFieldError('link', 'Enter a valid link starting with http:// or https://.');
+        showFieldError('link', INVALID_URL_MESSAGE);
         valid = false;
       }
 

@@ -210,7 +210,7 @@ const pageDescription =
             label="LinkedIn or what you are building"
             type="url"
             optional
-            placeholder="https://"
+            placeholder="linkedin.com/in/you"
           />
 
           <input
@@ -234,6 +234,8 @@ const pageDescription =
 </Base>
 
 <script>
+  import { normalizeUrl, isValidWebUrl, INVALID_URL_MESSAGE } from '../scripts/url';
+
   const form = document.getElementById('request-form') as HTMLFormElement | null;
   const successBanner = document.getElementById('form-success');
   const errorBanner = document.getElementById('form-error');
@@ -270,15 +272,7 @@ const pageDescription =
     });
   };
 
-  const isValidUrl = (value: string) => {
-    if (!value.trim()) return true;
-    try {
-      const url = new URL(value);
-      return url.protocol === 'http:' || url.protocol === 'https:';
-    } catch {
-      return false;
-    }
-  };
+  const isValidUrl = isValidWebUrl;
 
   const submitButton = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
 
@@ -296,7 +290,7 @@ const pageDescription =
       const email = String(data.get('email') ?? '').trim();
       const stage = String(data.get('stage') ?? '').trim();
       const message = String(data.get('message') ?? '').trim();
-      const link = String(data.get('link') ?? '').trim();
+      const link = normalizeUrl(String(data.get('link') ?? ''));
 
       if (!name) {
         showFieldError('name', `${fieldLabels.name} is required.`);
@@ -322,7 +316,7 @@ const pageDescription =
       }
 
       if (link && !isValidUrl(link)) {
-        showFieldError('link', 'Enter a valid link starting with http:// or https://.');
+        showFieldError('link', INVALID_URL_MESSAGE);
         valid = false;
       }
 
