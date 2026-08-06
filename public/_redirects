@@ -1,0 +1,7 @@
+# Cloudflare Pages redirects.
+# Short links for event signage, QR codes, and saying out loud from the front of a room.
+# 302 (not 301) so we can repoint a short link at the next event without fighting
+# browser caches. Query strings on the request are carried through, which is how the
+# QR code's ?utm_source=devx&utm_medium=qr survives to the signup form.
+
+/devx  /office-hours  302

@@ -13,6 +13,7 @@ Freedom with AI serves people across the whole journey: still inside a corporate
 
 - [Home](https://freedomwith.ai/): Overview of the mission and the two ways to move forward.
 - [Advisory](https://freedomwith.ai/advisory): How the 1:1 advisory works and how to request an engagement.
+- [Office Hours](https://freedomwith.ai/office-hours): Free 15 to 20 minute 1:1 sessions held at events we attend or host. No charge, no pitch. The lowest-commitment way to talk to the founders.
 - [Watch](https://freedomwith.ai/watch): Founder interviews and field notes (video and writing).
 - [Events](https://freedomwith.ai/events): In-person and online events, including AI showcases.
 - [About](https://freedomwith.ai/about): Who we are and our story.

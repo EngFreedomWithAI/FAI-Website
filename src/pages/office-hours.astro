@@ -1,0 +1,930 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Field from '../components/Field.astro';
+import FollowBand from '../components/FollowBand.astro';
+import {
+  officeHours,
+  formatSessionDate,
+  formatShortDate,
+  formatCompactDate,
+  formatLabel,
+  sortedDates,
+} from '../data/office-hours';
+import '../styles/content-pages.css';
+
+const pageTitle = 'Office Hours | Freedom with AI';
+const pageDescription =
+  'Free 15 to 20 minute one to one sessions, the third Saturday of every month at Weekend Function() in San Diego. Bring whatever you are stuck on, from an idea you cannot tell is real to a launch that keeps sliding.';
+
+// Draft series render locally so you can preview before details are locked, and stay
+// off the production page until you flip them to 'open'.
+const visible = officeHours.filter((s) => (import.meta.env.DEV ? true : s.status !== 'draft'));
+
+const running = visible
+  .filter((s) => s.status !== 'ended')
+  .sort((a, b) => (sortedDates(a)[0] ?? '9999').localeCompare(sortedDates(b)[0] ?? '9999'));
+
+const ended = visible.filter((s) => s.status === 'ended');
+
+// Only series actually taking signups get a slot in the form.
+const bookable = running.filter((s) => s.status === 'open' || s.status === 'draft');
+
+/**
+ * One combined "which session" control instead of an event picker plus a date picker.
+ * The value carries both, as `slug|date`, so a single choice covers a monthly series
+ * and a one-off equally well. The browser drops dates that have already passed, which
+ * is what keeps a stale static build from ever offering last month's date.
+ */
+const sessionOptions = bookable.flatMap((series) =>
+  sortedDates(series).map((date) => ({
+    value: `${series.slug}|${date}`,
+    label: `${series.event} on ${formatShortDate(date)}`,
+  }))
+);
+
+// Used when every published date has passed: we still take the signup and confirm by email.
+const fallbackSlug = bookable[0]?.slug ?? '';
+---
+
+<Base title={pageTitle} description={pageDescription}>
+  <Nav />
+
+  <main id="main-content">
+    <section class="page-hero page-hero--center" aria-labelledby="oh-heading">
+      <div class="container">
+        <SectionHeader label="Office hours" />
+        <h1 id="oh-heading" class="page-hero__title">Office hours. Free, 15 to 20 minutes.</h1>
+        <p class="page-hero__lede">
+          The third Saturday of every month we hold a room at Weekend Function(), the San Diego DEVx
+          meetup. Bring whatever you are stuck on, from an idea you cannot tell is real to a launch that
+          keeps sliding. We will find the one thing that matters most and what you do about it this week.
+        </p>
+        {
+          bookable.length > 0 ? (
+            <div class="page-hero__cta page-hero__cta--center">
+              <Button variant="primary" href="#signup" size="large">
+                Grab a spot
+              </Button>
+            </div>
+          ) : null
+        }
+        <p class="page-hero__micro">Free. Sign up ahead, or walk up on the day.</p>
+      </div>
+    </section>
+
+    {/*
+      One section, two columns: what it is on the left, when and where as a card aside
+      on the right. Same shape as the work-split on /advisory, so the page reuses a
+      pattern the site already has rather than inventing a third one.
+
+      On mobile it stacks, and the card is ordered FIRST. Most people hit this on a
+      phone, often standing in the room, and the date plus the button matter more to
+      them than the explanation they already got in the hero.
+    */}
+    <section class="page-section page-section--alt" aria-labelledby="oh-what-heading">
+      <div class="container oh-split">
+        <div class="oh-split__main">
+          <SectionHeader label="What this is" align="left" />
+          <h2 id="oh-what-heading" class="page-section__heading">
+            Fifteen minutes on wherever you are stuck
+          </h2>
+
+          <ul class="lede-list">
+            <li>
+              <span class="lede-list__lead">Wherever you are stuck</span>
+              <span class="lede-list__body">
+                Turning an idea over and not sure it is real. No clue where to start. A decision you keep
+                circling. A launch that keeps sliding a week. We find the one carrying the most weight, and
+                you leave with the smallest next move and when you are taking it.
+              </span>
+            </li>
+            <li>
+              <span class="lede-list__lead">It is not a sales call</span>
+              <span class="lede-list__body">
+                We are not going to spend your 15 minutes pitching you. If you want partners in the work
+                over months, that is our <a href="/advisory">paid advisory</a>, and it is deliberately few.
+              </span>
+            </li>
+          </ul>
+
+          <p class="rhythm-label">Make the 15 minutes count</p>
+          <ul class="check-list">
+            <li>One sentence on what you are building or thinking about</li>
+            <li>The decision or blocker you keep circling</li>
+            <li>What you have already tried, if anything</li>
+            <li>A link to anything live, rough is fine</li>
+          </ul>
+
+          <p class="page-section__sub page-section__sub--spaced">
+            We run these during the mingle time, so we get through a handful of people each month. Sign up
+            ahead and we will hold time for you. Walk up on the day and we will fit you in if there is room.
+          </p>
+        </div>
+
+        <aside class="oh-split__aside" aria-label="Where to find us">
+          {
+            running.length > 0 ? (
+              <ul class="session-list">
+                {running.map((series) => {
+                  const dates = sortedDates(series);
+                  return (
+                    <li>
+                      <article
+                        class="session-card"
+                        id={series.slug}
+                        data-oh-series
+                        data-oh-dates={JSON.stringify(dates)}
+                      >
+                        <div class="session-card__meta">
+                          <span class="session-card__format">{formatLabel[series.format]}</span>
+                          <span class="session-card__cadence">{series.cadence}</span>
+                        </div>
+
+                        <h3 class="session-card__name">
+                          {series.event}
+                          {series.host && series.host !== series.event ? (
+                            <span class="session-card__host"> with {series.host}</span>
+                          ) : null}
+                        </h3>
+
+                        <p class="session-card__next">
+                          <span class="session-card__next-label">Next</span>
+                          <span data-oh-next>
+                            {dates.length > 0 ? formatSessionDate(dates[0]) : 'Date coming soon'}
+                          </span>
+                        </p>
+
+                        <p class="session-card__where">
+                          {series.when}. {series.room ? `${series.room} at ` : ''}
+                          {series.location}.
+                        </p>
+
+                        {series.blurb ? <p class="session-card__blurb">{series.blurb}</p> : null}
+
+                        <p class="session-card__also" data-oh-also hidden={dates.length <= 1}>
+                          {dates.length > 1
+                            ? `Also on ${dates.slice(1).map((d) => formatCompactDate(d)).join(', ')}`
+                            : ''}
+                        </p>
+
+                        <div class="session-card__actions">
+                          {series.status === 'full' ? (
+                            <p class="session-card__full">
+                              Signups are closed for this one. Come find us anyway, we will fit you in if
+                              we can.
+                            </p>
+                          ) : (
+                            <Button variant="primary" href="#signup">
+                              Grab a spot
+                            </Button>
+                          )}
+                          {series.eventLink ? (
+                            <a
+                              class="session-card__link"
+                              href={series.eventLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {series.eventLinkLabel ?? 'About the event'}{' '}
+                              <span aria-hidden="true">→</span>
+                            </a>
+                          ) : null}
+                        </div>
+
+                        {series.status === 'draft' ? (
+                          <p class="session-card__draft">
+                            Draft. Only visible in local dev. Add dates and flip status to 'open' in
+                            src/data/office-hours.ts to publish.
+                          </p>
+                        ) : null}
+                      </article>
+                    </li>
+                  );
+                })}
+              </ul>
+            ) : (
+              <div class="empty-state" aria-live="polite">
+                <p class="empty-state__lead">Nothing on the calendar this minute.</p>
+                <p class="empty-state__hint">
+                  Join the list below and we will tell you when the next one opens.
+                </p>
+              </div>
+            )
+          }
+        </aside>
+      </div>
+    </section>
+
+    {
+      bookable.length > 0 ? (
+        <section
+          class="page-section page-section--alt page-section--center"
+          id="signup"
+          aria-labelledby="oh-signup-heading"
+        >
+          <div class="container">
+            <SectionHeader label="Grab a spot" />
+            <h2 id="oh-signup-heading" class="page-section__heading">Tell us what you are stuck on</h2>
+            <p class="page-section__sub">
+              We will email you back to confirm. Reply to that email with your one question and we will come
+              prepared.
+            </p>
+
+            <div
+              id="oh-success"
+              class="form-banner form-banner--success"
+              role="status"
+              tabindex="-1"
+              hidden
+            >
+              You are in. Check your email for the confirmation, and reply to it with the one question you
+              want answered.
+            </div>
+
+            <div id="oh-error" class="form-banner form-banner--error" role="alert" hidden>
+              Something went wrong. Please check the fields below and try again.
+            </div>
+
+            <form id="oh-form" class="contact-form" novalidate aria-label="Sign up for office hours">
+              {sessionOptions.length > 0 ? (
+                <Field
+                  id="oh-session"
+                  name="session"
+                  label="Which one"
+                  type="select"
+                  required
+                  options={sessionOptions}
+                />
+              ) : null}
+
+              <p class="form-note" id="oh-no-dates" hidden>
+                The next date is not published yet. Sign up anyway and we will email you as soon as it is
+                set.
+              </p>
+
+              <Field id="oh-name" name="name" label="Name" type="text" required />
+              <Field id="oh-email" name="email" label="Email" type="email" required />
+              <Field
+                id="oh-goal"
+                name="goal"
+                label="What do you want to walk out with"
+                type="textarea"
+                required
+                rows={3}
+                placeholder="One or two sentences. The more specific, the more useful the 15 minutes."
+              />
+              <Field
+                id="oh-link"
+                name="link"
+                label="Link to what you are building"
+                type="url"
+                optional
+                placeholder="https://"
+              />
+
+              <input type="hidden" name="source" id="oh-source" value="direct" />
+              <input type="hidden" name="fallbackSlug" id="oh-fallback-slug" value={fallbackSlug} />
+
+              <input
+                type="text"
+                name="company"
+                tabindex="-1"
+                autocomplete="off"
+                class="contact-form__hp"
+                aria-hidden="true"
+              />
+
+              <Button type="submit" variant="primary" size="large">
+                Sign me up
+              </Button>
+            </form>
+          </div>
+        </section>
+      ) : null
+    }
+
+    {
+      ended.length > 0 ? (
+        <section class="page-section" aria-labelledby="oh-past-heading">
+          <div class="container">
+            <SectionHeader label="Already done" align="left" />
+            <h2 id="oh-past-heading" class="page-section__heading">Where we have held these</h2>
+            <ul class="past-list">
+              {ended.map((series) => (
+                <li>
+                  <span class="past-list__event">
+                    {series.event}, {series.host}
+                  </span>
+                  <span class="past-list__date">
+                    {sortedDates(series).length > 0
+                      ? formatSessionDate(sortedDates(series)[sortedDates(series).length - 1])
+                      : series.cadence}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      ) : null
+    }
+
+    <FollowBand
+      heading="Know when the next one opens."
+      note="Join the list and we will tell you where we are showing up next."
+      inputId="oh-follow-email"
+    />
+  </main>
+
+  <Footer />
+</Base>
+
+<script>
+  // ---------------------------------------------------------------------------
+  // Everything date-related runs in the browser on purpose.
+  //
+  // The site builds to static HTML, so anything computed at build time freezes.
+  // For a monthly series that means a page that confidently advertises a date that
+  // has already been and gone. Filtering against the visitor's own clock instead
+  // means the worst case is a missing date, never a wrong one.
+  // ---------------------------------------------------------------------------
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const isUpcoming = (iso: string) => {
+    const parsed = new Date(`${iso}T00:00:00`);
+    return !Number.isNaN(parsed.getTime()) && parsed >= today;
+  };
+
+  const longDate = (iso: string) =>
+    new Intl.DateTimeFormat('en-US', {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    }).format(new Date(`${iso}T00:00:00`));
+
+  const compactDate = (iso: string) =>
+    new Intl.DateTimeFormat('en-US', {
+      month: 'long',
+      day: 'numeric',
+    }).format(new Date(`${iso}T00:00:00`));
+
+  // Card: show the real next date, and list the rest.
+  document.querySelectorAll<HTMLElement>('[data-oh-series]').forEach((card) => {
+    let dates: string[] = [];
+    try {
+      dates = JSON.parse(card.dataset.ohDates || '[]');
+    } catch {
+      dates = [];
+    }
+    const upcoming = dates.filter(isUpcoming).sort();
+
+    const nextEl = card.querySelector<HTMLElement>('[data-oh-next]');
+    if (nextEl) {
+      nextEl.textContent = upcoming.length > 0 ? longDate(upcoming[0]) : 'Date coming soon';
+    }
+
+    const alsoEl = card.querySelector<HTMLElement>('[data-oh-also]');
+    if (alsoEl) {
+      const rest = upcoming.slice(1);
+      if (rest.length > 0) {
+        alsoEl.textContent = `Also on ${rest.map(compactDate).join(', ')}`;
+        alsoEl.hidden = false;
+      } else {
+        alsoEl.hidden = true;
+      }
+    }
+  });
+
+  // Form: drop past dates from the picker. Option values are `slug|date`.
+  const sessionSelect = document.getElementById('oh-session') as HTMLSelectElement | null;
+  const sessionField = document.querySelector<HTMLElement>('[data-field="session"]');
+  const noDatesNote = document.getElementById('oh-no-dates');
+
+  if (sessionSelect) {
+    Array.from(sessionSelect.options)
+      .filter((option) => option.value.includes('|'))
+      .forEach((option) => {
+        const [, date] = option.value.split('|');
+        if (!isUpcoming(date)) option.remove();
+      });
+
+    const remaining = Array.from(sessionSelect.options).filter((o) => o.value.includes('|'));
+    if (remaining.length === 0) {
+      // Every published date has passed. Keep taking signups, confirm the date by email.
+      if (sessionField) sessionField.hidden = true;
+      sessionSelect.removeAttribute('required');
+      noDatesNote?.removeAttribute('hidden');
+    } else if (remaining.length === 1) {
+      sessionSelect.value = remaining[0].value;
+    }
+  } else {
+    noDatesNote?.removeAttribute('hidden');
+  }
+
+  // Deep link: /office-hours?event=<slug> preselects that series' soonest date.
+  const params = new URLSearchParams(window.location.search);
+  const requested = params.get('event');
+  if (requested && sessionSelect) {
+    const match = Array.from(sessionSelect.options).find((o) =>
+      o.value.startsWith(`${requested}|`)
+    );
+    if (match) sessionSelect.value = match.value;
+  }
+
+  // Attribution: the QR code in the room carries ?utm_source=devx&utm_medium=qr, so
+  // we can tell walk-in scans apart from people who signed up ahead of time.
+  const sourceInput = document.getElementById('oh-source') as HTMLInputElement | null;
+  if (sourceInput) {
+    const utm = params.get('utm_source');
+    const medium = params.get('utm_medium');
+    sourceInput.value = utm ? (medium ? `${utm}/${medium}` : utm) : 'direct';
+  }
+
+  const form = document.getElementById('oh-form') as HTMLFormElement | null;
+  const successBanner = document.getElementById('oh-success');
+  const errorBanner = document.getElementById('oh-error');
+  const fallbackSlugInput = document.getElementById('oh-fallback-slug') as HTMLInputElement | null;
+
+  const showFieldError = (name: string, message: string) => {
+    const wrapper = form?.querySelector(`[data-field="${name}"]`);
+    const control = wrapper?.querySelector<HTMLElement>('.field__control');
+    const errorEl = wrapper?.querySelector<HTMLElement>('.field__error');
+    if (!wrapper || !control || !errorEl) return;
+    wrapper.classList.add('field--invalid');
+    control.setAttribute('aria-invalid', 'true');
+    errorEl.textContent = message;
+    errorEl.hidden = false;
+  };
+
+  const clearFieldErrors = () => {
+    form?.querySelectorAll('[data-field]').forEach((wrapper) => {
+      wrapper.classList.remove('field--invalid');
+      const control = wrapper.querySelector<HTMLElement>('.field__control');
+      const errorEl = wrapper.querySelector<HTMLElement>('.field__error');
+      control?.removeAttribute('aria-invalid');
+      if (errorEl) {
+        errorEl.textContent = '';
+        errorEl.hidden = true;
+      }
+    });
+  };
+
+  const isValidUrl = (value: string) => {
+    if (!value.trim()) return true;
+    try {
+      const url = new URL(value);
+      return url.protocol === 'http:' || url.protocol === 'https:';
+    } catch {
+      return false;
+    }
+  };
+
+  const submitButton = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+  if (form) {
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      clearFieldErrors();
+      successBanner?.setAttribute('hidden', '');
+      errorBanner?.setAttribute('hidden', '');
+
+      const data = new FormData(form);
+      let valid = true;
+
+      // `slug|date`, or empty when no date is published yet.
+      const session = String(data.get('session') ?? '').trim();
+      const datePublished = !sessionField?.hidden && Boolean(sessionSelect);
+      const [selectedSlug, selectedDate] = session.includes('|') ? session.split('|') : ['', ''];
+
+      const eventSlug = selectedSlug || fallbackSlugInput?.value || '';
+      const sessionDate = selectedDate || '';
+
+      const name = String(data.get('name') ?? '').trim();
+      const email = String(data.get('email') ?? '').trim();
+      const goal = String(data.get('goal') ?? '').trim();
+      const link = String(data.get('link') ?? '').trim();
+      const source = String(data.get('source') ?? 'direct').trim();
+
+      if (datePublished && !session) {
+        showFieldError('session', 'Please choose which one you are coming to.');
+        valid = false;
+      }
+
+      if (!eventSlug) {
+        errorBanner?.removeAttribute('hidden');
+        valid = false;
+      }
+
+      if (!name) {
+        showFieldError('name', 'Name is required.');
+        valid = false;
+      }
+
+      if (!email) {
+        showFieldError('email', 'Email is required.');
+        valid = false;
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showFieldError('email', 'Enter a valid email address.');
+        valid = false;
+      }
+
+      if (!goal) {
+        showFieldError('goal', 'Tell us what you want to walk out with.');
+        valid = false;
+      }
+
+      if (link && !isValidUrl(link)) {
+        showFieldError('link', 'Enter a valid link starting with http:// or https://.');
+        valid = false;
+      }
+
+      if (!valid) {
+        errorBanner?.removeAttribute('hidden');
+        const firstInvalid = form.querySelector<HTMLElement>('.field--invalid .field__control');
+        firstInvalid?.focus();
+        return;
+      }
+
+      const originalLabel = submitButton?.textContent;
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Sending...';
+      }
+
+      try {
+        const res = await fetch('/api/office-hours', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ event: eventSlug, sessionDate, name, email, goal, link, source }),
+        });
+        const result = (await res.json().catch(() => ({}))) as {
+          ok?: boolean;
+          error?: string;
+          errors?: Record<string, string>;
+        };
+
+        if (!res.ok || !result.ok) {
+          if (result.errors) {
+            for (const [field, msg] of Object.entries(result.errors)) {
+              showFieldError(field, msg);
+            }
+          }
+          if (errorBanner) {
+            errorBanner.textContent =
+              result.error ?? 'Something went wrong. Please check the fields below and try again.';
+            errorBanner.removeAttribute('hidden');
+          }
+          const firstInvalid = form.querySelector<HTMLElement>('.field--invalid .field__control');
+          firstInvalid?.focus();
+          return;
+        }
+
+        form.reset();
+        // form.reset() wipes the hidden inputs, so put them back for a second signup.
+        if (sourceInput) sourceInput.value = source;
+        if (fallbackSlugInput) fallbackSlugInput.value = eventSlug;
+        successBanner?.removeAttribute('hidden');
+        successBanner?.focus();
+        window.faiTrack?.('office_hours_signup');
+      } catch {
+        if (errorBanner) {
+          errorBanner.textContent = 'We could not reach the server. Please try again in a moment.';
+          errorBanner.removeAttribute('hidden');
+        }
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = originalLabel ?? 'Sign me up';
+        }
+      }
+    });
+
+    form.querySelectorAll('.field__control').forEach((control) => {
+      control.addEventListener('input', () => {
+        const wrapper = control.closest('[data-field]');
+        if (!wrapper?.classList.contains('field--invalid')) return;
+        wrapper.classList.remove('field--invalid');
+        control.removeAttribute('aria-invalid');
+        const errorEl = wrapper.querySelector<HTMLElement>('.field__error');
+        if (errorEl) {
+          errorEl.textContent = '';
+          errorEl.hidden = true;
+        }
+      });
+    });
+  }
+</script>
+
+<style>
+  .page-hero__cta--center {
+    justify-content: center;
+  }
+
+  .page-hero__micro {
+    margin-top: var(--space-4);
+    font-size: var(--text-sm);
+    color: var(--color-text-subtle);
+  }
+
+  /* Copy left, card aside right. Mirrors .work-split on /advisory. */
+  .oh-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 23rem);
+    gap: var(--space-7);
+    align-items: start;
+  }
+
+  .oh-split__aside {
+    position: sticky;
+    top: var(--space-7);
+  }
+
+  .session-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .session-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--r-lg);
+    padding: var(--space-5);
+  }
+
+  .session-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: var(--text-sm);
+    color: var(--color-text-subtle);
+  }
+
+  .session-card__format {
+    font-weight: 700;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  /* No separator dot between format and cadence. In a 23rem aside this row wraps, and
+     a leading "·" orphaned at the start of the second line looks like a typo. The flex
+     gap does the separating on the lines where they do fit together. */
+  .session-card__cadence {
+    color: var(--color-text-subtle);
+  }
+
+  .session-card__name {
+    margin-top: var(--space-3);
+    font-size: var(--text-lg);
+    font-weight: 700;
+  }
+
+  .session-card__host {
+    font-weight: 500;
+    color: var(--color-text-muted);
+  }
+
+  /* The next date is the one thing someone scans this card for, so it carries the
+     weight and everything else stays a quiet supporting line. */
+  .session-card__next {
+    margin: var(--space-4) 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-2) var(--space-3);
+    font-size: var(--text-md);
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .session-card__next-label {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-text-subtle);
+  }
+
+  .session-card__where,
+  .session-card__blurb {
+    margin: var(--space-2) 0 0;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
+  }
+
+  .session-card__also {
+    margin: var(--space-3) 0 0;
+    font-size: var(--text-sm);
+    color: var(--color-text-subtle);
+  }
+
+  .session-card__also[hidden] {
+    display: none;
+  }
+
+  .session-card__actions {
+    margin-top: var(--space-5);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .session-card__link {
+    font-weight: 600;
+    font-size: var(--text-sm);
+    text-decoration: none;
+  }
+
+  .session-card__full {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
+  }
+
+  .session-card__draft {
+    margin: var(--space-5) 0 0;
+    padding: var(--space-3) var(--space-4);
+    border: 1px dashed var(--color-border);
+    border-radius: var(--r-sm);
+    font-size: var(--text-sm);
+    color: var(--color-text-subtle);
+  }
+
+  .form-note {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
+    max-width: var(--readw);
+  }
+
+  .form-note[hidden] {
+    display: none;
+  }
+
+  .lede-list {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-6) 0 0;
+    display: grid;
+    gap: var(--space-4);
+    max-width: var(--readw);
+  }
+
+  .lede-list li {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding-left: var(--space-4);
+    border-left: 2px solid var(--color-accent);
+  }
+
+  .lede-list__lead {
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .lede-list__body {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
+  }
+
+  .rhythm-label {
+    margin-top: var(--space-7);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-text-subtle);
+  }
+
+  .check-list {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-5) 0 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3) var(--space-5);
+    max-width: var(--readw);
+  }
+
+  .check-list li {
+    position: relative;
+    padding-left: var(--space-5);
+    font-size: var(--text-md);
+    color: var(--color-text);
+    line-height: var(--leading-relaxed);
+  }
+
+  .check-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--color-accent);
+  }
+
+  .past-list {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-6) 0 0;
+    display: grid;
+    gap: var(--space-3);
+    max-width: var(--readw);
+  }
+
+  .past-list li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .past-list__event {
+    font-weight: 600;
+  }
+
+  .past-list__date {
+    font-size: var(--text-sm);
+    color: var(--color-text-subtle);
+  }
+
+  /* Centred sections. Prose and headings centre; the form only centres as a block,
+     because centred labels and inputs are miserable to fill in, especially one-handed
+     on a phone in a noisy room. */
+  .page-section--center .page-section__heading,
+  .page-section--center .page-section__sub,
+  .page-section--center .form-note,
+  .page-section--center .rhythm-label {
+    text-align: center;
+  }
+
+  .page-section--center .page-section__sub,
+  .page-section--center .form-note,
+  .page-section--center .form-banner,
+  .page-section--center .contact-form {
+    margin-inline: auto;
+  }
+
+  .page-section--center .contact-form {
+    text-align: left;
+  }
+
+  .page-section .form-banner {
+    margin-top: var(--space-5);
+    max-width: var(--readw);
+  }
+
+  .page-section .form-banner:focus {
+    outline: none;
+    box-shadow: var(--ring-accent);
+  }
+
+  .contact-form__hp {
+    position: absolute !important;
+    left: -9999px !important;
+    width: 1px !important;
+    height: 1px !important;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  @media (max-width: 55rem) {
+    .oh-split {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+
+    /* Stacked, the card leads. On a phone the date and the button are what someone
+       came for, and the hero directly above has already explained the rest. Sticky is
+       dropped too: a pinned card eats scarce vertical space on a small screen. */
+    .oh-split__aside {
+      position: static;
+      order: -1;
+    }
+  }
+
+  @media (max-width: 40rem) {
+    .check-list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

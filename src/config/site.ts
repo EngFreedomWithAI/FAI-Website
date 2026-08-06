@@ -35,6 +35,7 @@ export const site = {
   },
   footerExplore: [
     { label: 'Advisory', href: '/advisory' },
+    { label: 'Office Hours', href: '/office-hours' },
     // Hidden for now — Watch and Events pages temporarily removed from footer.
     // { label: 'Watch', href: '/watch' },
     // { label: 'Events', href: '/events' },
