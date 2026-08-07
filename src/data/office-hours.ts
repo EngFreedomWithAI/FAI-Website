@@ -41,7 +41,7 @@ export interface OfficeHoursSeries {
    * but never a broken page.
    */
   dates: string[];
-  /** When during the event, e.g. "After the presenters, during mingle time". */
+  /** When during the event, e.g. "Before and after the presenters". */
   when: string;
   /** Where, e.g. "San Diego, CA". */
   location: string;
@@ -76,7 +76,7 @@ export interface OfficeHoursSeries {
  *   host: 'Who runs it',
  *   cadence: 'Every month',
  *   dates: ['2026-09-12', '2026-10-10'],
- *   when: 'After the presenters, during mingle time',
+ *   when: 'Before and after the presenters',
  *   location: 'San Diego, CA',
  *   room: 'The back conference room',   // optional
  *   format: 'office-hours',             // office-hours | workshop
@@ -99,7 +99,7 @@ export const officeHours: OfficeHoursSeries[] = [
      * Top up from Luma when the list runs low. Past ones drop off on their own.
      */
     dates: ['2026-08-15', '2026-09-19', '2026-10-17', '2026-11-21'],
-    when: 'After the presenters, during the mingle',
+    when: 'Before and after the presenters',
     location: '1495 Pacific Hwy #300, San Diego',
     room: 'The conference room',
     format: 'office-hours',

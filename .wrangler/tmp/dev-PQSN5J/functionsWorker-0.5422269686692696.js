@@ -742,7 +742,7 @@ Two things that make the time worth a lot more:
 1. Reply to this email with the one question you actually want answered.
 2. Bring a link to what you are building, even if it is rough.
 
-We run these during the mingle, so come find us and we will get to you.
+We run these during the networking time, so come find us and we will get to you.
 Room and timing are on https://freedomwith.ai/office-hours if you need them on the day.
 
 Sonia & Cammie, Freedom with AI`,
@@ -753,7 +753,7 @@ Sonia & Cammie, Freedom with AI`,
 <li>Reply to this email with the one question you actually want answered.</li>
 <li>Bring a link to what you are building, even if it is rough.</li>
 </ol>
-<p>We run these during the mingle, so come find us and we will get to you. Room and timing are on
+<p>We run these during the networking time, so come find us and we will get to you. Room and timing are on
 <a href="https://freedomwith.ai/office-hours">freedomwith.ai/office-hours</a> if you need them on the day.</p>
 <p>Sonia &amp; Cammie, Freedom with AI</p>`
     });

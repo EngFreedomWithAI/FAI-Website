@@ -740,7 +740,7 @@ Two things that make the time worth a lot more:
 1. Reply to this email with the one question you actually want answered.
 2. Bring a link to what you are building, even if it is rough.
 
-We run these during the mingle, so come find us and we will get to you.
+We run these during the networking time, so come find us and we will get to you.
 Room and timing are on https://freedomwith.ai/office-hours if you need them on the day.
 
 Sonia & Cammie, Freedom with AI`,
@@ -751,7 +751,7 @@ Sonia & Cammie, Freedom with AI`,
 <li>Reply to this email with the one question you actually want answered.</li>
 <li>Bring a link to what you are building, even if it is rough.</li>
 </ol>
-<p>We run these during the mingle, so come find us and we will get to you. Room and timing are on
+<p>We run these during the networking time, so come find us and we will get to you. Room and timing are on
 <a href="https://freedomwith.ai/office-hours">freedomwith.ai/office-hours</a> if you need them on the day.</p>
 <p>Sonia &amp; Cammie, Freedom with AI</p>`
     });
@@ -1364,7 +1364,7 @@ var jsonError = /* @__PURE__ */ __name(async (request, env, _ctx, middlewareCtx)
 }, "jsonError");
 var middleware_miniflare3_json_error_default = jsonError;
 
-// ../.wrangler/tmp/bundle-Hvkai0/middleware-insertion-facade.js
+// ../.wrangler/tmp/bundle-V3hSYD/middleware-insertion-facade.js
 var __INTERNAL_WRANGLER_MIDDLEWARE__ = [
   middleware_ensure_req_body_drained_default,
   middleware_miniflare3_json_error_default
@@ -1396,7 +1396,7 @@ function __facade_invoke__(request, env, ctx, dispatch, finalMiddleware) {
 }
 __name(__facade_invoke__, "__facade_invoke__");
 
-// ../.wrangler/tmp/bundle-Hvkai0/middleware-loader.entry.ts
+// ../.wrangler/tmp/bundle-V3hSYD/middleware-loader.entry.ts
 var __Facade_ScheduledController__ = class ___Facade_ScheduledController__ {
   constructor(scheduledTime, cron, noRetry) {
     this.scheduledTime = scheduledTime;
