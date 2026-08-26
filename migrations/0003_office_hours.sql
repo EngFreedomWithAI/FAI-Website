@@ -1,4 +1,4 @@
--- Freedom with AI — office hours signups (Cloudflare D1)
+-- Freedom with AI office hours signups (Cloudflare D1)
 -- Apply: npx wrangler d1 execute fai-website-db --remote --file=./migrations/0003_office_hours.sql
 -- Free 15-20 min 1:1s we run at events. Separate from advisory_requests so the paid
 -- pipeline stays clean.

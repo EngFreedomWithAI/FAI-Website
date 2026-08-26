@@ -23,7 +23,7 @@ const clean = (v: string): string => (v ?? '').replace(/\s+/g, '');
 export async function sendEmail(env: Env, msg: EmailMessage): Promise<void> {
   const region = clean(env.AWS_REGION);
   // The SES host is email.{region}.amazonaws.com but the SigV4 service name is "ses",
-  // so set both explicitly — otherwise aws4fetch infers service "email" and SES rejects (403).
+  // so set both explicitly. Otherwise aws4fetch infers service "email" and SES rejects (403).
   // retries: 0 so a rejected request fails fast instead of backing off ~10x and timing out.
   const client = new AwsClient({
     accessKeyId: clean(env.AWS_ACCESS_KEY_ID),

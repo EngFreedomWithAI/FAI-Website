@@ -1,11 +1,11 @@
 export type SessionFormat = 'office-hours' | 'workshop';
 
 /**
- * draft  — not rendered in production. Visible on `npm run dev` so you can preview
+ * draft: not rendered in production. Visible on `npm run dev` so you can preview
  *          before the details are locked.
- * open   — live on the page, accepting signups.
- * full   — live on the page, signups closed, shown as full.
- * ended  — a series we no longer run. Moves to the list at the bottom.
+ * open: live on the page, accepting signups.
+ * full: live on the page, signups closed, shown as full.
+ * ended: a series we no longer run. Moves to the list at the bottom.
  */
 export type SessionStatus = 'draft' | 'open' | 'full' | 'ended';
 

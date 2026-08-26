@@ -15,7 +15,7 @@ declare global {
     /**
      * Sends an event to whichever analytics tools are live (GA4, PostHog).
      * Defined by src/components/Analytics.astro, and absent when no analytics
-     * IDs are configured — always call it optionally: `window.faiTrack?.(...)`.
+     * IDs are configured. Always call it optionally: `window.faiTrack?.(...)`.
      */
     faiTrack?: (name: string, props?: Record<string, unknown>) => void;
     posthog?: Record<string, any>;

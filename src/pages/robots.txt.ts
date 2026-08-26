@@ -24,6 +24,8 @@ export const GET: APIRoute = ({ site }) => {
     '',
     ...aiAgents.flatMap((agent) => [`User-agent: ${agent}`, 'Allow: /', '']),
     `Sitemap: ${origin}/sitemap.xml`,
+    `# AI-readable site index: ${origin}/llms.txt`,
+    `# Complete AI-readable content: ${origin}/llms-full.txt`,
     '',
   ].join('\n');
 

@@ -1,15 +1,14 @@
 import type { APIRoute } from 'astro';
 
 // Public, indexable routes with a relative priority hint.
+// Advisory leads because it is the page that converts. /office-hours is
+// deliberately absent: it stays live on
+// a shared link but is noindex, so it must not appear here. /watch and /events
+// were deleted and redirect from public/_redirects.
 const routes: { path: string; priority: string; changefreq: string }[] = [
   { path: '/', priority: '1.0', changefreq: 'weekly' },
   { path: '/advisory', priority: '0.9', changefreq: 'monthly' },
-  { path: '/office-hours', priority: '0.8', changefreq: 'weekly' },
-  // Hidden for now — Watch and Events pages temporarily removed from sitemap.
-  // { path: '/watch', priority: '0.8', changefreq: 'weekly' },
-  // { path: '/events', priority: '0.8', changefreq: 'weekly' },
-  { path: '/about', priority: '0.7', changefreq: 'monthly' },
-  { path: '/contact', priority: '0.7', changefreq: 'monthly' },
+  { path: '/contact', priority: '0.5', changefreq: 'monthly' },
   { path: '/privacy', priority: '0.3', changefreq: 'yearly' },
   { path: '/terms', priority: '0.3', changefreq: 'yearly' },
 ];

@@ -1,0 +1,134 @@
+# Freedom with AI: Complete Site Content
+
+> Freedom with AI provides strategic advisory for founders leveraging AI while building and growing companies. Work directly with Sonia Sarao or Cammie Clay. Engagements are shaped around the company and the decision in front of it.
+
+Canonical website: https://freedomwith.ai/
+Primary advisory page: https://freedomwith.ai/advisory
+Contact page: https://freedomwith.ai/contact
+
+## Positioning
+
+Freedom with AI advises founders when the next move is not obvious. The firm works across industries with founders who are building AI-native companies or using AI to reshape products, operations and business models.
+
+Clients work directly with Sonia, Cammie or both based on the company and the work. Engagements begin with a three- or six-month term and are shaped around the company's priorities and level of involvement.
+
+## Where the firm helps
+
+### Finding the market
+
+For companies whose problem is not sharp yet or whose stated market is not the one buying:
+
+- Refine the problem and identify who actually has it
+- Competitive and market research
+- Business model decisions
+- The path to product-market fit
+- Positioning and company narrative
+
+### Building the product and the company
+
+For decisions about what to build, what to skip and what the team and cost structure should be:
+
+- Product and technology strategy
+- AI strategy and where AI genuinely helps
+- Roadmap, cost and runway decisions
+- Team and operating structure
+- New products and business lines
+
+### Reaching and expanding the market
+
+For companies with something that works and a need to identify the next specific source of growth:
+
+- Customer segmentation and verticalization
+- Enterprise personas and buying committees
+- Sales strategy and go-to-market motion
+- Partnerships and expansion
+- Pricing and packaging decisions
+
+### Navigating risk and regulation
+
+For companies that will be examined by regulators, acquirers or other stakeholders:
+
+- Determine which rules bind the company
+- Translate requirements into product and operating decisions
+- Build the compliance function early
+- Risk, governance and regulated-market entry
+- Diligence and transaction readiness
+
+## When founders bring the firm in
+
+- Product or business direction is no longer obvious
+- Early traction has exposed a positioning or go-to-market problem
+- Entering a regulated market is changing product and operating decisions
+- AI could change the product or cost structure, but the advantage is not yet clear
+- A raise, acquisition or diligence process is approaching
+- The company has outgrown the instincts that got it here
+
+## Advisors
+
+### Sonia Sarao
+
+Role: Strategic Advisor
+
+Additional depth: Product, technology, growth and AI
+
+Sonia advises founders on building and growing companies, with an operator's perspective on product, market, technology and AI. She has more than a decade of product and engineering operating experience, led products and teams through growth and acquisition, and now builds faibuddy, a live AI-native product for founders.
+
+Founders engage Sonia to refine markets and business models, reach product-market fit, make product and technology decisions, develop customer segments and new product lines, navigate enterprise buying committees, manage roadmaps and costs, and prepare for diligence.
+
+Her current work combines hands-on AI product building with experience in enterprise products, complex buying decisions and growth.
+
+LinkedIn: https://www.linkedin.com/in/sonia-sarao/
+
+### Cammie Clay
+
+Role: Strategic Advisor
+
+Additional depth: Regulation, risk, governance and stakeholder strategy
+
+Cammie advises founders on building and growing companies, with added perspective on regulation, risk, governance and stakeholder decisions. She worked on both sides of financial regulation as a regulator at the New York Stock Exchange and FINRA, then as a compliance executive at RS Investments and First Republic Bank. She holds a Series 7 and is a seasoned trader and public-markets investor.
+
+Founders engage Cammie to determine which requirements apply, translate regulation into product and operating decisions, establish the right compliance function, address risk and governance, enter regulated markets and prepare for scrutiny from regulators, examiners or acquirers.
+
+Her current work brings regulatory, risk and governance thinking into company strategy, especially where trust and scrutiny shape the market.
+
+LinkedIn: https://www.linkedin.com/in/cammieclay/
+
+## Selected advisory work
+
+- Early-stage FinTech: the company was refining its problem, target market and business model while regulatory requirements were shaping what the product could become.
+- Early-stage life sciences: the company needed to align its target market and business model with compliance requirements affecting the product and operating model.
+- Growth-stage services: the company needed a more focused path to growth. The work covered customer segmentation, verticalization, a new product line and the sales strategy around it.
+- Growth-stage B2B software: the company needed its enterprise segments, product strategy and AI direction to reinforce the same business model.
+
+These examples are anonymized and describe work actually performed. They are evidence of experience, not limits on the industries the firm will consider.
+
+## Engagement model
+
+- Company-level perspective across product, technology, growth, operations, regulation and risk
+- Regular working sessions focused on the decisions in motion
+- Direct access as questions surface between sessions
+- Continuity from decision through execution
+- Initial three- or six-month engagement
+- Scope and fee reflect the priorities and level of involvement
+
+To start a conversation, use https://freedomwith.ai/advisory#start and provide the company, its stage, what the company does and the decision currently in front of it.
+
+## Other work
+
+### faibuddy
+
+faibuddy is the firm's AI advisory product for founders: https://faibuddy.com
+
+### Investing
+
+Freedom with AI is beginning to make selective private-market investments in founder-led companies, funds and aligned special purpose vehicles. Investing is an emerging activity, not the firm's primary service.
+
+## General contact
+
+Use https://freedomwith.ai/contact for investing, deal flow, speaking, partnerships or other inquiries that are not advisory requests.
+
+## Important boundaries
+
+The firm is not limited to San Diego and does not limit its advisory work to FinTech, life sciences or SaaS. Experience claims above distinguish demonstrated depth from areas of interest. Content on the site is educational and is not individualized legal, financial, regulatory or investment advice.
+
+Last reviewed: 2026-08-24

@@ -1,4 +1,4 @@
--- Freedom with AI — initial schema (Cloudflare D1)
+-- Freedom with AI initial schema (Cloudflare D1)
 -- Apply: npx wrangler d1 execute fai-website-db --remote --file=./migrations/0001_init.sql
 
 CREATE TABLE IF NOT EXISTS subscribers (

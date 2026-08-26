@@ -1,7 +1,7 @@
 ---
-// GA4 + PostHog, configured to write no cookies (see docs/BUILD-SPEC.md section 4).
-// IDs come from the build environment; when they are absent — local dev, or a
-// preview built without them — nothing is injected and the site runs clean.
+// GA4 + PostHog, configured to write no cookies.
+// IDs come from the build environment. When they are absent in local dev or a
+// preview built without them, nothing is injected and the site runs clean.
 const ga4Id = import.meta.env.PUBLIC_GA4_ID ?? process.env.PUBLIC_GA4_ID ?? '';
 const posthogKey = import.meta.env.PUBLIC_POSTHOG_KEY ?? process.env.PUBLIC_POSTHOG_KEY ?? '';
 const posthogHost =
@@ -25,7 +25,7 @@ const enabled = Boolean(ga4Id || posthogKey);
 
       <script is:inline define:vars={{ ga4Id, posthogKey, posthogHost }}>
         // --- GA4 -------------------------------------------------------------
-        // Cookieless is achieved by client_storage 'none' alone — GA4 generates
+        // Cookieless is achieved by client_storage 'none' alone. GA4 generates
         // an ephemeral client id per load and never writes the _ga cookie. The
         // trade: every pageview counts as a new user, so treat GA4 as traffic /
         // referrer / SEO baseline and use PostHog for cross-visit questions.
@@ -33,7 +33,7 @@ const enabled = Boolean(ga4Id || posthogKey);
         // We deliberately do NOT set Consent Mode to analytics_storage:'denied'.
         // That would push every hit into Google's cookieless-modeling pipeline,
         // where it is hidden from Realtime/DebugView and threshold-suppressed in
-        // reports at low volume — i.e. GA4 would show nothing. It also removes no
+        // reports at low volume, meaning GA4 would show nothing. It also removes no
         // cookie that client_storage:'none' hasn't already removed. Google signals
         // and ad personalization are off, so no advertising cookies are set.
         if (ga4Id) {
@@ -125,8 +125,8 @@ const enabled = Boolean(ga4Id || posthogKey);
         };
 
         // --- Outbound link tracking -------------------------------------------
-        // Delegated so every external link is covered — faibuddy, YouTube, X, the
-        // LinkedIn profiles — without annotating each one at the call site.
+        // Delegated so every external link is covered without annotating each one
+        // at the call site.
         document.addEventListener(
           'click',
           function (event) {

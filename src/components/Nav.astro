@@ -29,8 +29,8 @@ const currentPath = Astro.url.pathname;
     </nav>
 
     <div class="site-header__cta">
-      <Button variant="primary" href={site.faibuddyUrl} external>
-        Try faibuddy
+      <Button variant="primary" href={site.cta.href}>
+        {site.cta.label}
       </Button>
     </div>
 
@@ -54,9 +54,7 @@ const currentPath = Astro.url.pathname;
     {site.nav.map((item) => (
       <a href={item.href}>{item.label}</a>
     ))}
-    <a href={site.faibuddyUrl} target="_blank" rel="noopener noreferrer">
-      Try faibuddy →
-    </a>
+    <a href={site.cta.href}>{site.cta.label} →</a>
   </nav>
 </header>
 
@@ -100,8 +98,10 @@ const currentPath = Astro.url.pathname;
     position: sticky;
     top: 0;
     z-index: 50;
-    /* Transparent: legibility comes from a tall, gradual page top-shade so there is no header bar. */
-    background: transparent;
+    /* Opaque on the light ground: content must not slide visibly under a
+       transparent bar. Hairline instead of a shadow keeps it quiet. */
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
   }
 
   .site-header__bar {

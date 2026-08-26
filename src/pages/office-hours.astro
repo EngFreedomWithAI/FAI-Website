@@ -50,7 +50,14 @@ const sessionOptions = bookable.flatMap((series) =>
 const fallbackSlug = bookable[0]?.slug ?? '';
 ---
 
-<Base title={pageTitle} description={pageDescription}>
+{/*
+  Kept live but deliberately unlisted: no nav link, no footer link, absent from
+  the sitemap, and noindex here. Office hours is a free community thing we run
+  at events and share by direct link. It should not sit in search results next
+  to paid advisory, where free 15 minute sessions and a longer engagement would
+  anchor against each other.
+*/}
+<Base title={pageTitle} description={pageDescription} noindex>
   <Nav />
 
   <main id="main-content">

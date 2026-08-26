@@ -84,7 +84,9 @@ export const readBody = async (
   }
   const form = await request.formData();
   const out: Record<string, string> = {};
-  for (const [k, v] of form.entries()) out[k] = String(v ?? '').trim();
+  form.forEach((value, key) => {
+    out[key] = String(value ?? '').trim();
+  });
   return out;
 };
 

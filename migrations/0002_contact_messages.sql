@@ -1,4 +1,4 @@
--- Freedom with AI — general contact messages (Cloudflare D1)
+-- Freedom with AI general contact messages (Cloudflare D1)
 -- Apply: npx wrangler d1 execute fai-website-db --remote --file=./migrations/0002_contact_messages.sql
 -- Separate from advisory_requests so qualified advisory leads stay clean of general inquiries.
 

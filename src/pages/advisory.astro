@@ -6,169 +6,175 @@ import Button from '../components/Button.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import Field from '../components/Field.astro';
 import TeamAvatar from '../components/TeamAvatar.astro';
-import { site } from '../config/site';
+import { advisors } from '../data/advisors';
+import { workAreas, engagementExamples } from '../data/engagements';
 import { advisoryStageOptions } from '../data/contact-form';
 import '../styles/content-pages.css';
 
 const pageTitle = 'Advisory | Freedom with AI';
 const pageDescription =
-  'Fractional co-founder advisory for founders who have left, or are about to. Two AI-native co-founders building with you from idea to first customers. Paid, deliberately few.';
+  'Ongoing strategic advisory for founders leveraging AI while building and growing companies.';
+
+const advisorySchema = {
+  '@type': 'Service',
+  name: 'Founder Advisory',
+  description: pageDescription,
+  provider: { '@id': `${Astro.site?.origin ?? 'https://freedomwith.ai'}/#organization` },
+  areaServed: 'Worldwide',
+  serviceType: [
+    'Product strategy',
+    'Technology strategy',
+    'Growth strategy',
+    'Regulatory strategy',
+    'Risk and governance',
+  ],
+};
 ---
 
-<Base title={pageTitle} description={pageDescription}>
+<Base title={pageTitle} description={pageDescription} schema={advisorySchema}>
   <Nav />
 
   <main id="main-content">
-    <section class="page-hero page-hero--center" aria-labelledby="advisory-heading">
+    <section class="page-hero" aria-labelledby="advisory-heading">
       <div class="container">
-        <SectionHeader label="Fractional co-founder advisory" />
+        <SectionHeader label="Advisory" align="left" />
         <h1 id="advisory-heading" class="page-hero__title">
-          The full arc. Idea to first customers.
+          Advisory shaped around momentum.
         </h1>
         <p class="page-hero__lede">
-          Validation. Positioning. The build. The path to revenue. We work it with you, adapted to where you
-          actually are.
+          Founders bring us in when the answer is not obvious, the decision is consequential and
+          generic advice is no longer useful.
         </p>
-        <div class="page-hero__cta page-hero__cta--center">
-          <Button variant="primary" href="#request" size="large">
-            Request an engagement
-          </Button>
+        <div class="page-hero__cta">
+          <Button variant="primary" href="#start" size="large">Start a conversation</Button>
+          <Button variant="secondary" href="#advisors" size="large">Meet the advisors</Button>
         </div>
-        <p class="page-hero__micro">
-          Hands-on, outcome-focused, all in. We win when you win.
-        </p>
       </div>
     </section>
 
-    <section class="page-section page-section--alt" aria-labelledby="who-heading">
+    <!-- The work, by problem -->
+    <section class="page-section page-section--alt" aria-labelledby="work-heading">
       <div class="container">
-        <SectionHeader label="Who this is for" align="left" />
-        <h2 id="who-heading" class="page-section__heading">You've made the leap. Or you're about to.</h2>
+        <SectionHeader label="Where we help" align="left" />
+        <h2 id="work-heading" class="page-section__heading">Four recurring company problems.</h2>
         <p class="page-section__sub">
-          You want partners who've done it. Who'll tell you the truth. Who'll do the hard parts with you. We
-          meet you where you are:
+          These problems appear across industries wherever products, buying decisions, operations
+          or regulation are complex.
         </p>
 
-        <ul class="lede-list">
-          <li>
-            <span class="lede-list__lead">Planning your exit</span>
-            <span class="lede-list__body">Line up the leap so day one is a business, not a blank page.</span>
-          </li>
-          <li>
-            <span class="lede-list__lead">Just left, finding your footing</span>
-            <span class="lede-list__body">Turn the leap into a business that actually pays.</span>
-          </li>
-          <li>
-            <span class="lede-list__lead">Building, but stuck</span>
-            <span class="lede-list__body">Get a sharper path and an honest second brain in your corner.</span>
-          </li>
-          <li>
-            <span class="lede-list__lead">Have traction, need leverage</span>
-            <span class="lede-list__body">
-              Add fractional technical and go-to-market firepower to move faster.
-            </span>
-          </li>
+        <div class="work-grid">
+          {workAreas.map((area) => (
+            <article class="work">
+              <h3 class="work__title">{area.title}</h3>
+              <p class="work__body">{area.body}</p>
+              <ul class="work__list">
+                {area.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section" id="advisors" aria-labelledby="practices-heading">
+      <div class="container">
+        <h2 id="practices-heading" class="page-section__heading">Advisors</h2>
+
+        <div class="practices practices--compact">
+          {advisors.map((advisor) => (
+            <article class="practice">
+              <div class="practice__head">
+                <TeamAvatar member={advisor.slug} class="practice__photo" />
+                <div>
+                  <h3 class="practice__name">{advisor.name}</h3>
+                  <p class="practice__role">{advisor.role}</p>
+                </div>
+              </div>
+              <p class="practice__strengths">{advisor.strengths}</p>
+              <p class="practice__credential">{advisor.credential}</p>
+              <p class="practice__depth">{advisor.depth}</p>
+              <a
+                class="practice__link"
+                href={advisor.linkedIn}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {advisor.name.split(' ')[0]} on LinkedIn <span aria-hidden="true">&nearr;</span>
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Proof -->
+    <section class="page-section page-section--alt" aria-labelledby="examples-heading">
+      <div class="container">
+        <SectionHeader label="Selected advisory work" align="left" />
+        <h2 id="examples-heading" class="page-section__heading">Recent problems we have worked through.</h2>
+
+        <ul class="examples">
+          {engagementExamples.map((example) => (
+            <li class="example">
+              <p class="example__meta">
+                <span class="example__stage">{example.stage}</span>
+                <span class="example__sector">{example.sector}</span>
+              </p>
+              <p class="example__body">{example.body}</p>
+            </li>
+          ))}
         </ul>
       </div>
     </section>
 
-    <section class="page-section" aria-label="Your advisors">
-      <div class="container">
-        <SectionHeader label="Your advisors" align="left" />
-        <p class="page-section__sub">
-          We're both AI-native. We run our business on AI, we build our own AI product,
-          <a href={site.faibuddyUrl} target="_blank" rel="noopener noreferrer">faibuddy</a>, and we help you
-          leverage it for your venture.
-        </p>
-
-        <div class="founder-grid">
-          <article class="founder-card">
-            <div class="founder-card__photo">
-              <TeamAvatar member="sonia" />
-            </div>
-            <h3>Sonia Sarao</h3>
-            <p class="founder-card__role">Product + Technical Advisor</p>
-            <p>
-              Product and engineering executive who has led teams through growth and a successful exit. She
-              now builds <a href={site.faibuddyUrl} target="_blank" rel="noopener noreferrer">faibuddy</a>
-              hands-on with AI and brings sharp technical judgment and strong product
-              instinct to every advisory engagement. She cuts through complexity fast. Whether she's building
-              with you, guiding your team, or helping you choose the right AI tools, her focus is always the
-              same: get to real value quickly without wasting time or money on the wrong path.
-            </p>
-            <a href={site.profiles.soniaLinkedIn} target="_blank" rel="noopener noreferrer">
-              Sonia on LinkedIn <span aria-hidden="true">→</span>
-            </a>
-          </article>
-
-          <article class="founder-card">
-            <div class="founder-card__photo">
-              <TeamAvatar member="cammie" />
-            </div>
-            <h3>Cammie Clay</h3>
-            <p class="founder-card__role">Customer Discovery + GTM Advisor</p>
-            <p>
-              High-stakes finance turned go-to-market operator and serious AI practitioner. She brings
-              customer signal, positioning clarity, and the relentless push that turns motion into traction.
-              She makes the hard parts feel doable, and won't let you avoid the work that creates real
-              momentum.
-            </p>
-            <a href={site.profiles.cammieLinkedIn} target="_blank" rel="noopener noreferrer">
-              Cammie on LinkedIn <span aria-hidden="true">→</span>
-            </a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="page-section page-section--alt" aria-labelledby="work-heading">
+    <!-- How it works -->
+    <section class="page-section" aria-labelledby="how-heading">
       <div class="container work-split">
         <div class="work-split__main">
-          <SectionHeader label="How we work" align="left" />
-          <h2 id="work-heading" class="page-section__heading">First chapter, then partnership</h2>
+          <SectionHeader label="How engagements work" align="left" />
+          <h2 id="how-heading" class="page-section__heading">
+            Decisions, carried through.
+          </h2>
           <p class="page-section__sub">
-            Every engagement is unique, so there's no fixed package. We start with a focused first chapter: a
-            defined opening phase on whatever matters most right now. Prove fit, build momentum, and grow into
-            an ongoing partnership from there.
+            Engagements are shaped around the company’s priorities and evolve as decisions are made
+            and new constraints emerge.
           </p>
 
-          <p class="rhythm-label">What stays constant</p>
           <ul class="check-list">
-            <li>Close to the work, not a monthly check-in</li>
-            <li>Accountability both ways</li>
-            <li>Momentum you can feel</li>
+            <li>
+              A company-level perspective across product, technology, growth, operations,
+              regulation and risk
+            </li>
+            <li>Regular working sessions focused on the decisions in motion</li>
+            <li>Direct access as questions surface between sessions</li>
+            <li>Continuity from decision through execution</li>
           </ul>
         </div>
 
         <aside class="fit-card">
           <h3 class="fit-card__title">Is this a fit?</h3>
           <p>
-            A dual commitment: we go all in, so do you. Engagements are paid and deliberately few, a handful
-            of founders at a time.
+            Best for founders actively building or growing a company, with meaningful decisions
+            already in motion.
           </p>
           <p>
-            This is for you if you're serious and ready to do the work: show up, make the calls, ship the
-            thing.
+            We begin with a three- or six-month engagement. Scope and fee reflect the priorities
+            and level of involvement.
           </p>
-          <Button variant="primary" href="#request" size="large">
-            Request an engagement
-          </Button>
-          <p class="fit-card__note">
-            Prefer to move at your own pace first? Start with
-            <a href={site.faibuddyUrl} target="_blank" rel="noopener noreferrer">faibuddy</a>, our AI
-            product, and bring us in when you're ready.
-          </p>
+          <Button variant="primary" href="#start" size="large">Start a conversation</Button>
         </aside>
       </div>
     </section>
 
-    <section class="page-section" id="request" aria-labelledby="request-heading">
+    <!-- Intake -->
+    <section class="page-section" id="start" aria-labelledby="start-heading">
       <div class="container">
-        <SectionHeader label="Request an engagement" align="left" />
-        <h2 id="request-heading" class="page-section__heading">Tell us where you are</h2>
+        <SectionHeader label="Start a conversation" align="left" />
+        <h2 id="start-heading" class="page-section__heading">Tell us about the company</h2>
         <p class="page-section__sub">
-          A few details so we can understand your stage and what you are building. We read every request and
-          reply if it is a fit.
+          Tell us what the company does and what decision is in front of you.
         </p>
 
         <div
@@ -178,20 +184,27 @@ const pageDescription =
           tabindex="-1"
           hidden
         >
-          Thanks for reaching out. We read every message and reply if it is a fit.
+          Thanks for getting in touch. We will reply within a few days.
         </div>
 
         <div id="form-error" class="form-banner form-banner--error" role="alert" hidden>
           Something went wrong. Please check the fields below and try again.
         </div>
 
-        <form id="request-form" class="contact-form" novalidate aria-label="Request an engagement">
+        <form id="request-form" class="contact-form" novalidate aria-label="Start a conversation">
           <Field id="advisory-name" name="name" label="Name" type="text" required />
           <Field id="advisory-email" name="email" label="Email" type="email" required />
           <Field
+            id="advisory-company-name"
+            name="company_name"
+            label="Company name"
+            type="text"
+            required
+          />
+          <Field
             id="advisory-stage"
             name="stage"
-            label="Which best describes you"
+            label="Where is the company"
             type="select"
             required
             options={advisoryStageOptions}
@@ -199,18 +212,18 @@ const pageDescription =
           <Field
             id="advisory-message"
             name="message"
-            label="What do you want to be different in 90 days, and why now"
+            label="What does the company do, and what decision is in front of you"
             type="textarea"
             required
-            placeholder="A few sentences on where you are, what you want to build, and why this is the moment."
+            placeholder="What you are building, who it is for, and the call you are trying to make in the next six months."
           />
           <Field
             id="advisory-link"
             name="link"
-            label="LinkedIn or what you are building"
+            label="Website, deck or LinkedIn"
             type="url"
             optional
-            placeholder="linkedin.com/in/you"
+            placeholder="yourcompany.com"
           />
 
           <input
@@ -222,9 +235,7 @@ const pageDescription =
             aria-hidden="true"
           />
 
-          <Button type="submit" variant="primary" size="large">
-            Send request
-          </Button>
+          <Button type="submit" variant="primary" size="large">Send</Button>
         </form>
       </div>
     </section>
@@ -232,6 +243,247 @@ const pageDescription =
 
   <Footer />
 </Base>
+
+<style>
+  /* "How engagements work": copy on the left, the fit/commercial aside on the
+     right, so the money question sits next to the description of the work
+     rather than buried under it. */
+  .work-split {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: var(--space-8);
+    align-items: start;
+  }
+
+  .check-list {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    max-width: var(--readw);
+  }
+
+  .check-list li {
+    position: relative;
+    padding-left: var(--space-6);
+    font-size: var(--text-md);
+    color: var(--color-text-muted);
+  }
+
+  .check-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 12px;
+    height: 1px;
+    background: var(--color-accent);
+  }
+
+  .fit-card {
+    padding: var(--space-6);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--r);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    align-items: flex-start;
+  }
+
+  .fit-card__title {
+    font-size: var(--text-lg);
+  }
+
+  .fit-card p {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
+  }
+
+  .practices {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+    margin-top: var(--space-7);
+  }
+
+  .practice {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: var(--space-6);
+    border: 1px solid var(--color-border);
+    border-radius: var(--r);
+  }
+
+  .practice__head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    min-height: 64px;
+  }
+
+  .practice :global(.practice__photo) {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex: none;
+  }
+
+  .practice__name {
+    font-size: var(--text-lg);
+  }
+
+  .practice__role {
+    margin-top: 2px;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-accent);
+  }
+
+  .practice__strengths {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .practice__credential {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
+  }
+
+  .practice__depth {
+    font-size: var(--text-sm);
+    color: var(--color-text-subtle);
+    line-height: var(--leading-relaxed);
+  }
+
+  .practice__link {
+    margin-top: auto;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+    margin-top: var(--space-7);
+  }
+
+  .work {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding-top: var(--space-5);
+    border-top: 2px solid var(--color-text);
+  }
+
+  .work__title {
+    font-size: var(--text-lg);
+  }
+
+  .work__body {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .work__list {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--space-2);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .work__list li {
+    position: relative;
+    padding-left: var(--space-4);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .work__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 5px;
+    height: 1px;
+    background: var(--color-text-subtle);
+  }
+
+  .examples {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--space-7);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+  }
+
+  .example {
+    padding: var(--space-5);
+    border: 1px solid var(--color-border);
+    border-radius: var(--r);
+  }
+
+  .example__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    align-items: center;
+  }
+
+  .example__stage,
+  .example__sector {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: var(--r-sm);
+  }
+
+  .example__stage {
+    background: var(--blue-soft);
+    color: var(--color-accent);
+  }
+
+  .example__sector {
+    background: var(--paper-3);
+    color: var(--color-text-muted);
+  }
+
+  .example__body {
+    margin-top: var(--space-4);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
+  }
+
+  @media (max-width: 880px) {
+    .practices,
+    .work-grid,
+    .examples,
+    .work-split {
+      grid-template-columns: 1fr;
+    }
+
+    .work-split {
+      gap: var(--space-7);
+    }
+  }
+</style>
 
 <script>
   import { normalizeUrl, isValidWebUrl, INVALID_URL_MESSAGE } from '../scripts/url';
@@ -243,9 +495,10 @@ const pageDescription =
   const fieldLabels: Record<string, string> = {
     name: 'Name',
     email: 'Email',
-    stage: 'Which best describes you',
-    message: 'What do you want to be different in 90 days, and why now',
-    link: 'LinkedIn or what you are building',
+    company_name: 'Company name',
+    stage: 'Where is the company',
+    message: 'What does the company do, and what decision is in front of you',
+    link: 'Website, deck or LinkedIn',
   };
 
   const showFieldError = (name: string, message: string) => {
@@ -272,8 +525,6 @@ const pageDescription =
     });
   };
 
-  const isValidUrl = isValidWebUrl;
-
   const submitButton = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
 
   if (form) {
@@ -288,6 +539,7 @@ const pageDescription =
 
       const name = String(data.get('name') ?? '').trim();
       const email = String(data.get('email') ?? '').trim();
+      const companyName = String(data.get('company_name') ?? '').trim();
       const stage = String(data.get('stage') ?? '').trim();
       const message = String(data.get('message') ?? '').trim();
       const link = normalizeUrl(String(data.get('link') ?? ''));
@@ -305,17 +557,22 @@ const pageDescription =
         valid = false;
       }
 
+      if (!companyName) {
+        showFieldError('company_name', `${fieldLabels.company_name} is required.`);
+        valid = false;
+      }
+
       if (!stage) {
-        showFieldError('stage', `${fieldLabels.stage} is required.`);
+        showFieldError('stage', 'Please choose the stage that fits best.');
         valid = false;
       }
 
       if (!message) {
-        showFieldError('message', `${fieldLabels.message} is required.`);
+        showFieldError('message', 'Please tell us what decision you are facing.');
         valid = false;
       }
 
-      if (link && !isValidUrl(link)) {
+      if (link && !isValidWebUrl(link)) {
         showFieldError('link', INVALID_URL_MESSAGE);
         valid = false;
       }
@@ -337,7 +594,7 @@ const pageDescription =
         const res = await fetch('/api/advisory', {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ name, email, stage, message, link }),
+          body: JSON.stringify({ name, email, company_name: companyName, stage, message, link }),
         });
         const result = (await res.json().catch(() => ({}))) as {
           ok?: boolean;
@@ -364,184 +621,17 @@ const pageDescription =
         form.reset();
         successBanner?.removeAttribute('hidden');
         successBanner?.focus();
-        window.faiTrack?.('advisory_requested');
       } catch {
         if (errorBanner) {
-          errorBanner.textContent = 'We could not reach the server. Please try again in a moment.';
+          errorBanner.textContent = 'Network error. Please try again.';
           errorBanner.removeAttribute('hidden');
         }
       } finally {
         if (submitButton) {
           submitButton.disabled = false;
-          submitButton.textContent = originalLabel ?? 'Send request';
+          submitButton.textContent = originalLabel ?? 'Send';
         }
       }
     });
-
-    form.querySelectorAll('.field__control').forEach((control) => {
-      control.addEventListener('input', () => {
-        const wrapper = control.closest('[data-field]');
-        if (!wrapper?.classList.contains('field--invalid')) return;
-        wrapper.classList.remove('field--invalid');
-        control.removeAttribute('aria-invalid');
-        const errorEl = wrapper.querySelector<HTMLElement>('.field__error');
-        if (errorEl) {
-          errorEl.textContent = '';
-          errorEl.hidden = true;
-        }
-      });
-    });
   }
 </script>
-
-<style>
-  .page-hero__cta--center {
-    justify-content: center;
-  }
-
-  .page-hero__micro {
-    margin-top: var(--space-4);
-    font-size: var(--text-sm);
-    color: var(--color-text-subtle);
-  }
-
-  .founder-card__role {
-    margin-top: var(--space-2) !important;
-    font-size: var(--text-sm);
-    font-weight: 600;
-    color: var(--color-accent);
-  }
-
-  .lede-list {
-    list-style: none;
-    padding: 0;
-    margin: var(--space-6) 0 0;
-    display: grid;
-    gap: var(--space-4);
-    max-width: var(--readw);
-  }
-
-  .lede-list li {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-1);
-    padding-left: var(--space-4);
-    border-left: 2px solid var(--color-accent);
-  }
-
-  .lede-list__lead {
-    font-weight: 700;
-    color: var(--color-text);
-  }
-
-  .lede-list__body {
-    font-size: var(--text-sm);
-    color: var(--color-text-muted);
-    line-height: var(--leading-relaxed);
-  }
-
-  .check-list {
-    list-style: none;
-    padding: 0;
-    margin: var(--space-6) 0 0;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-3) var(--space-5);
-    max-width: var(--readw);
-  }
-
-  .check-list li {
-    position: relative;
-    padding-left: var(--space-5);
-    font-size: var(--text-md);
-    color: var(--color-text);
-    line-height: var(--leading-relaxed);
-  }
-
-  .check-list li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.6em;
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 50%;
-    background: var(--color-accent);
-  }
-
-  .rhythm-label {
-    margin-top: var(--space-6);
-    font-size: var(--text-sm);
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--color-text-subtle);
-  }
-
-  .work-split {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 23rem);
-    gap: var(--space-7);
-    align-items: start;
-  }
-
-  .fit-card {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--r-lg);
-    padding: var(--space-6);
-  }
-
-  .fit-card__title {
-    font-size: var(--text-lg);
-    font-weight: 700;
-  }
-
-  .fit-card p {
-    margin-top: var(--space-3);
-    font-size: var(--text-md);
-    color: var(--color-text-muted);
-    line-height: var(--leading-relaxed);
-  }
-
-  .fit-card .btn {
-    margin-top: var(--space-5);
-  }
-
-  .fit-card__note {
-    margin-top: var(--space-4) !important;
-    font-size: var(--text-sm) !important;
-    color: var(--color-text-subtle) !important;
-  }
-
-  @media (max-width: 55rem) {
-    .work-split {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  @media (max-width: 40rem) {
-    .check-list {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .page-section .form-banner {
-    margin-top: var(--space-5);
-    max-width: var(--readw);
-  }
-
-  .page-section .form-banner:focus {
-    outline: none;
-    box-shadow: var(--ring-accent);
-  }
-
-  .contact-form__hp {
-    position: absolute !important;
-    left: -9999px !important;
-    width: 1px !important;
-    height: 1px !important;
-    opacity: 0;
-    pointer-events: none;
-  }
-</style>

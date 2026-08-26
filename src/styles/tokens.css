@@ -1,62 +1,71 @@
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
-  /* ---------- PRIMITIVES: color (faibuddy dark-first palette) ---------- */
-  --surface-primary:   #0f1419; /* main background — near-black, cool cast */
-  --surface-secondary: #1a1f26; /* cards, elevated surfaces */
-  --surface-tertiary:  #374151; /* hover / active items */
-  --surface-hover:        rgba(255, 255, 255, 0.02);
-  --surface-hover-strong: rgba(255, 255, 255, 0.05);
+  /* ---------- PRIMITIVES: color ----------
+   * Light-first advisory palette. Deliberately separate from faibuddy's dark
+   * product system: the firm and the product should not read as one thing.
+   * One accent, used sparingly. Everything else is ink, grey and hairline.
+   */
+  --paper:        #ffffff; /* main background */
+  --paper-2:      #f7f8fa; /* alternating sections, subtle fills */
+  --paper-3:      #eef0f4; /* hover / pressed */
 
-  --fg-primary:   #f4f6f8; /* primary text */
-  --fg-secondary: #b0b5bd; /* secondary text */
-  --fg-muted:     #8b919d; /* muted text */
-  --fg-dim:       #6b7280; /* decorative only */
-  --fg-on-interactive: #ffffff;
+  --ink:          #12151a; /* primary text, near-black with a cool cast */
+  --ink-2:        #555d68; /* secondary text */
+  --ink-3:        #838b96; /* muted / captions */
+  --ink-inverse:  #ffffff;
 
-  --border-default: #2d3748;
-  --border-subtle:  #1f2937;
-  --border-hover:   #4a5568;
-  --border-card:    rgba(255, 255, 255, 0.06);
+  --rule:         #e4e7ec; /* hairlines, card borders */
+  --rule-strong:  #cfd4dc; /* emphasised borders */
 
-  --blue:         #1a73e8;
-  --blue-2:       #1557b0;
-  --blue-soft:    rgba(26, 115, 232, 0.16);
-  --blue-glow:    rgba(26, 115, 232, 0.30);
-  --link:         #4285f4;
-  --link-hover:   #34a853;
+  /* Deep, desaturated institutional blue. Not Google's #1a73e8. */
+  --blue:         #1f4e79;
+  --blue-hover:   #163a5a;
+  --blue-soft:    #edf3f9;
+  --blue-ring:    rgba(31, 78, 121, 0.22);
+
+  /* Dark ground, used only for the footer and punctuation blocks. */
+  --ink-surface:   #12151a;
+  --ink-surface-2: #1b1f26;
 
   /* ---------- SEMANTIC: color (components use these) ---------- */
-  --color-bg:                var(--surface-primary);
-  --color-bg-alt:            var(--surface-secondary);
-  --color-surface:           var(--surface-secondary);
-  --color-text:              var(--fg-primary);
-  --color-text-muted:        var(--fg-secondary);
-  --color-text-subtle:       var(--fg-muted);
-  --color-border:            var(--border-default);
-  --color-border-subtle:     var(--border-subtle);
+  --color-bg:                var(--paper);
+  --color-bg-alt:            var(--paper-2);
+  --color-surface:           var(--paper);
+  --color-text:              var(--ink);
+  --color-text-muted:        var(--ink-2);
+  --color-text-subtle:       var(--ink-3);
+  --color-border:            var(--rule);
+  --color-border-subtle:     var(--rule);
   --color-accent:            var(--blue);
-  --color-accent-strong:     var(--blue-2);
-  --color-accent-soft:       var(--blue-glow);
-  --color-inverse-bg:        var(--surface-primary);
-  --color-inverse-surface:   var(--surface-secondary);
-  --color-inverse-surface-2: var(--surface-tertiary);
-  --color-on-inverse:        var(--fg-primary);
-  --color-on-inverse-muted:  var(--fg-secondary);
-  --color-on-inverse-border: var(--border-card);
-  --color-accent-on-inverse: var(--link);
+  --color-accent-strong:     var(--blue-hover);
+  --color-accent-soft:       var(--blue-ring);
+  --border-card:             var(--rule);
+  --border-hover:            var(--rule-strong);
+
+  --link:       var(--blue);
+  --link-hover: var(--blue-hover);
+
+  --color-inverse-bg:        var(--ink-surface);
+  --color-inverse-surface:   var(--ink-surface-2);
+  --color-inverse-surface-2: #262b33;
+  --color-on-inverse:        #f2f4f7;
+  --color-on-inverse-muted:  #a8afbb;
+  --color-on-inverse-border: rgba(255, 255, 255, 0.12);
+  --color-accent-on-inverse: #9dc0e0;
 
   /* ---------- TYPOGRAPHY ---------- */
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, -apple-system,
+    'Segoe UI', Helvetica, Arial, sans-serif;
   --text-xs:   .75rem;
-  --text-sm:   .85rem;
+  --text-sm:   .875rem;
   --text-base: 1rem;
-  --text-md:   1.15rem;
-  --text-lg:   1.4rem;
-  --text-xl:   clamp(1.5rem, 2.4vw, 2rem);
-  --text-2xl:  clamp(2rem, 5vw, 3.4rem);
-  --text-hero: clamp(2.5rem, 7.2vw, 5.1rem);
-  --leading-tight:   1.1;
+  --text-md:   1.125rem;
+  --text-lg:   1.375rem;
+  --text-xl:   clamp(1.4rem, 2.2vw, 1.85rem);
+  --text-2xl:  clamp(1.75rem, 4vw, 2.75rem);
+  --text-hero: clamp(2.25rem, 5vw, 3.75rem);
+  --leading-tight:   1.08;
   --leading-normal:  1.5;
   --leading-relaxed: 1.65;
 
@@ -71,16 +80,19 @@
   --space-8: 72px;
   --space-9: 96px;
 
-  /* ---------- RADII ---------- */
-  --r-sm: 9px;
-  --r:    14px;
-  --r-lg: 20px;
+  /* ---------- RADII ----------
+   * Tightened. Large radii read consumer-app; hairlines and near-square
+   * corners read editorial.
+   */
+  --r-sm: 4px;
+  --r:    6px;
+  --r-lg: 8px;
 
-  /* ---------- SHADOWS (tuned for dark ground) ---------- */
-  --shadow-sm:     0 12px 28px rgba(0, 0, 0, .35);
-  --shadow-md:     0 16px 34px rgba(0, 0, 0, .45);
-  --shadow-accent: 0 6px 18px rgba(26, 115, 232, .35);
-  --ring-accent:   0 0 0 3px var(--color-accent-soft);
+  /* ---------- SHADOWS (tuned for a white ground: barely there) ---------- */
+  --shadow-sm:     0 1px 2px rgba(18, 21, 26, .06);
+  --shadow-md:     0 4px 16px rgba(18, 21, 26, .08);
+  --shadow-accent: none;
+  --ring-accent:   0 0 0 3px var(--blue-ring);
 
   /* ---------- MOTION ---------- */
   --dur-fast: .15s;
@@ -88,22 +100,28 @@
   --ease:     ease;
 
   /* ---------- LAYOUT ---------- */
-  --maxw:  1320px;
-  --readw: 680px;
+  --maxw:  1180px;
+  --readw: 68ch;
 }
 
 /*
- * Dark-punctuation context. The whole site is dark-first now, so .on-dark
- * keeps backward compatibility for footer / CTA strips that opted in — it
- * simply pins the same dark surfaces explicitly.
+ * Dark punctuation. Used by the footer and any full-bleed dark block, so the
+ * light page has a base to sit on. Everything inside inherits the inverted
+ * token set rather than hardcoding colours.
  */
 .on-dark {
   --color-bg:            var(--color-inverse-bg);
+  --color-bg-alt:        var(--color-inverse-surface);
   --color-surface:       var(--color-inverse-surface);
   --color-text:          var(--color-on-inverse);
   --color-text-muted:    var(--color-on-inverse-muted);
+  --color-text-subtle:   var(--color-on-inverse-muted);
   --color-border:        var(--color-on-inverse-border);
+  --color-border-subtle: var(--color-on-inverse-border);
+  --border-card:         var(--color-on-inverse-border);
   --color-accent:        var(--color-accent-on-inverse);
+  --link:                var(--color-accent-on-inverse);
+  --link-hover:          #ffffff;
   background: var(--color-bg);
   color: var(--color-text);
 }

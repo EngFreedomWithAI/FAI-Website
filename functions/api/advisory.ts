@@ -2,7 +2,9 @@ import type { Env } from '../_lib/types';
 import { json, isValidEmail, isValidWebUrl, normalizeUrl, readBody, escapeHtml } from '../_lib/util';
 import { sendEmail } from '../_lib/ses';
 
-const STAGES = new Set(['inside', 'just_left', 'building', 'traction']);
+// Company stage, not career stage. The previous set described people who had
+// not started a company yet, which filtered for exactly the wrong buyer.
+const STAGES = new Set(['pre_product', 'early_revenue', 'scaling', 'new_stage']);
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   try {
@@ -21,6 +23,7 @@ const handleAdvisoryPost: PagesFunction<Env> = async ({ request, env }) => {
 
   const name = data.name ?? '';
   const email = (data.email ?? '').toLowerCase();
+  const companyName = data.company_name ?? '';
   const stage = data.stage ?? '';
   const message = data.message ?? '';
   // The browser normalizes too, but this endpoint is reachable directly, so it cannot
@@ -31,8 +34,9 @@ const handleAdvisoryPost: PagesFunction<Env> = async ({ request, env }) => {
   if (!name) errors.name = 'Name is required.';
   if (!email) errors.email = 'Email is required.';
   else if (!isValidEmail(email)) errors.email = 'Enter a valid email address.';
-  if (!stage || !STAGES.has(stage)) errors.stage = 'Please choose what best describes you.';
-  if (!message) errors.message = 'Please tell us what you want to be different.';
+  if (!companyName) errors.company_name = 'Company name is required.';
+  if (!stage || !STAGES.has(stage)) errors.stage = 'Please choose the stage that fits best.';
+  if (!message) errors.message = 'Please tell us what decision you are facing.';
   if (link && !isValidWebUrl(link)) errors.link = 'That does not look like a web address.';
 
   if (Object.keys(errors).length > 0) {
@@ -46,14 +50,25 @@ const handleAdvisoryPost: PagesFunction<Env> = async ({ request, env }) => {
 
   try {
     await env.DB.prepare(
-      `INSERT INTO advisory_requests (name, email, stage, message, link)
-       VALUES (?, ?, ?, ?, ?)`
+      `INSERT INTO advisory_requests (name, email, company_name, stage, message, link)
+       VALUES (?, ?, ?, ?, ?, ?)`
     )
-      .bind(name, email, stage, message, link || null)
+      .bind(name, email, companyName, stage, message, link || null)
       .run();
   } catch (err) {
-    console.error('advisory: D1 insert failed', err);
-    return json({ ok: false, error: 'Could not save your request. Please try again later.' }, 500);
+    // Keep the form available during the deployment window for the new column.
+    console.error('advisory: insert with company name failed, retrying without it', err);
+    try {
+      await env.DB.prepare(
+        `INSERT INTO advisory_requests (name, email, stage, message, link)
+         VALUES (?, ?, ?, ?, ?)`
+      )
+        .bind(name, email, stage, message, link || null)
+        .run();
+    } catch (fallbackErr) {
+      console.error('advisory: D1 insert failed', fallbackErr);
+      return json({ ok: false, error: 'Could not save your request. Please try again later.' }, 500);
+    }
   }
 
   if (!env.AWS_ACCESS_KEY_ID || !env.AWS_SECRET_ACCESS_KEY || !env.AWS_REGION || !env.SES_FROM || !env.CONTACT_TO) {
@@ -69,17 +84,19 @@ const handleAdvisoryPost: PagesFunction<Env> = async ({ request, env }) => {
     await sendEmail(env, {
       to: env.CONTACT_TO,
       replyTo: email,
-      subject: `New advisory request from ${name}`,
+      subject: `Advisory enquiry from ${name}`,
       text: `Name: ${name}
 Email: ${email}
+Company: ${companyName}
 Stage: ${stage}
 Link: ${link || '(none)'}
 
 Message:
 ${message}`,
-      html: `<h2>New advisory request</h2>
+      html: `<h2>New advisory enquiry</h2>
 <p><strong>Name:</strong> ${escapeHtml(name)}<br />
 <strong>Email:</strong> ${escapeHtml(email)}<br />
+<strong>Company:</strong> ${escapeHtml(companyName)}<br />
 <strong>Stage:</strong> ${escapeHtml(stage)}<br />
 <strong>Link:</strong> ${link ? `<a href="${escapeHtml(link)}">${escapeHtml(link)}</a>` : '(none)'}</p>
 <p><strong>Message:</strong></p>
@@ -101,16 +118,19 @@ ${message}`,
       subject: 'Thanks for reaching out to Freedom with AI',
       text: `Hi ${name},
 
-Thanks for reaching out. We read every message and reply if it is a fit.
+Thanks for getting in touch. We read these ourselves and will reply within a few days.
 
 Sonia & Cammie, Freedom with AI`,
       html: `<p>Hi ${escapeHtml(name)},</p>
-<p>Thanks for reaching out. We read every message and reply if it is a fit.</p>
+<p>Thanks for getting in touch. We read these ourselves and will reply within a few days.</p>
 <p>Sonia &amp; Cammie, Freedom with AI</p>`,
     });
   } catch {
     // Ignore: acknowledgement is non-critical.
   }
 
-  return json({ ok: true, message: 'Thanks for reaching out. We read every message and reply if it is a fit.' });
+  return json({
+    ok: true,
+    message: 'Thanks for getting in touch. We will reply within a few days.',
+  });
 };

@@ -9,19 +9,22 @@ interface Props {
   description?: string;
   image?: string;
   schema?: Record<string, unknown> | Record<string, unknown>[];
+  /** Keeps a page reachable by direct link but out of search results. */
+  noindex?: boolean;
 }
 
 const {
-  title = `${site.brand} | Corporate to AI Entrepreneur`,
-  description = `${site.mission} Start with faibuddy today, and work with us when you want a guide.`,
+  title = `${site.brand} | ${site.mission}`,
+  description = site.summary,
   image = '/images/og-default.png',
   schema,
+  noindex = false,
 } = Astro.props;
 
 const siteOrigin = Astro.site ?? Astro.url.origin;
 const canonicalURL = new URL(Astro.url.pathname, siteOrigin);
 const imageURL = new URL(image, siteOrigin);
-const ogImageAlt = `${site.brand}. Corporate to AI Entrepreneur.`;
+const ogImageAlt = `${site.brand}. ${site.mission}`;
 const origin = new URL(siteOrigin).origin;
 
 const organizationSchema = {
@@ -30,8 +33,22 @@ const organizationSchema = {
   name: site.brand,
   url: `${origin}/`,
   logo: new URL('/images/logo.svg', origin).href,
-  description: site.mission,
-  sameAs: [site.socials.youtube, site.socials.x],
+  description: site.summary,
+  areaServed: 'Worldwide',
+  knowsAbout: [
+    'Founder advisory',
+    'AI strategy',
+    'Product strategy',
+    'Technology strategy',
+    'Go-to-market strategy',
+    'Regulation',
+    'Risk and governance',
+  ],
+  sameAs: [
+    site.profiles.soniaLinkedIn,
+    site.profiles.cammieLinkedIn,
+    site.socials.x,
+  ],
   founder: [
     { '@type': 'Person', name: 'Sonia Sarao', sameAs: site.profiles.soniaLinkedIn },
     { '@type': 'Person', name: 'Cammie Clay', sameAs: site.profiles.cammieLinkedIn },
@@ -62,9 +79,11 @@ const jsonLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <title>{title}</title>
 
     <link rel="icon" href="/images/logo.svg" type="image/svg+xml" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="AI-readable site index" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={site.brand} />
@@ -87,7 +106,7 @@ const jsonLd = {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
 

@@ -11,13 +11,6 @@
 html {
   -webkit-text-size-adjust: 100%;
   background-color: var(--color-bg);
-  background-image: radial-gradient(
-    1100px 640px at 78% 14%,
-    rgba(26, 115, 232, 0.1),
-    transparent 60%
-  );
-  background-repeat: no-repeat;
-  background-attachment: fixed;
 }
 
 body {
@@ -48,14 +41,18 @@ select {
 }
 
 h1,
-h2,
-h3 {
+h2 {
+  font-family: var(--font-sans);
+  font-weight: 500;
   line-height: var(--leading-tight);
   color: var(--color-text);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
 }
 
 h1 {
   font-size: var(--text-hero);
+  letter-spacing: -0.025em;
 }
 
 h2 {
@@ -64,6 +61,11 @@ h2 {
 
 h3 {
   font-size: var(--text-xl);
+  font-weight: 600;
+  line-height: var(--leading-tight);
+  color: var(--color-text);
+  letter-spacing: -0.025em;
+  text-wrap: balance;
 }
 
 p {

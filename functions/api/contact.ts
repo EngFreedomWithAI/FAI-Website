@@ -2,12 +2,19 @@ import type { Env } from '../_lib/types';
 import { json, isValidEmail, readBody, escapeHtml } from '../_lib/util';
 import { sendEmail } from '../_lib/ses';
 
-const TOPICS = new Set(['general', 'speaking', 'events', 'partnership']);
+const TOPICS = new Set([
+  'advisory',
+  'investing',
+  'speaking',
+  'partnership',
+  'general',
+]);
 const TOPIC_LABELS: Record<string, string> = {
-  general: 'General question',
+  advisory: 'Advisory enquiry',
+  investing: 'Investing, SPV or deal flow',
   speaking: 'Speaking or podcast invitation',
-  events: 'Events',
   partnership: 'Partnership or collaboration',
+  general: 'General question',
 };
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
@@ -104,7 +111,7 @@ ${message}`,
 
 Thanks for your message. We read everything and will get back to you soon.
 
-— Freedom with AI`,
+- Freedom with AI`,
       html: `<p>Hi ${escapeHtml(name)},</p>
 <p>Thanks for your message. We read everything and will get back to you soon.</p>
 <p>&mdash; Freedom with AI</p>`,

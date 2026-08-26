@@ -3,18 +3,18 @@ export interface SelectOption {
   label: string;
 }
 
-/** Advisory request qualifier: where the person is in their journey. */
+/** Company stage, used to route the advisory inquiry. */
 export const advisoryStageOptions: SelectOption[] = [
-  { value: 'inside', label: 'Planning my exit' },
-  { value: 'just_left', label: 'Just left, finding my footing' },
-  { value: 'building', label: 'Building, but stuck' },
-  { value: 'traction', label: 'Have traction, need leverage' },
+  { value: 'pre_product', label: 'Pre-product, building toward a first release' },
+  { value: 'early_revenue', label: 'Early revenue, still finding the fit' },
+  { value: 'scaling', label: 'Growing, working on go-to-market' },
+  { value: 'new_stage', label: 'Established, entering a new market or stage' },
 ];
 
 /** General contact reason: routes the inquiry. */
 export const contactTopicOptions: SelectOption[] = [
-  { value: 'general', label: 'General question' },
+  { value: 'investing', label: 'Investing, SPV or deal flow' },
   { value: 'speaking', label: 'Speaking or podcast invitation' },
-  { value: 'events', label: 'Events (questions or hosting)' },
   { value: 'partnership', label: 'Partnership or collaboration' },
+  { value: 'general', label: 'General question' },
 ];
