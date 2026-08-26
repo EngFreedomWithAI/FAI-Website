@@ -11,7 +11,6 @@ import { inflectionPoints, engagementExamples } from '../data/engagements';
 
 const pageTitle = 'Advisory for founders leveraging AI | Freedom with AI';
 const pageDescription = site.summary;
-const homepageExamples = [engagementExamples[1], engagementExamples[2]];
 ---
 
 <Base title={pageTitle} description={pageDescription}>
@@ -98,7 +97,7 @@ const homepageExamples = [engagementExamples[1], engagementExamples[2]];
         <h2 id="proof-heading" class="block__title">Recent problems we have worked through.</h2>
 
         <ul class="examples">
-          {homepageExamples.map((example) => (
+          {engagementExamples.map((example) => (
             <li class="example">
               <p class="example__meta">
                 <span class="example__stage">{example.stage}</span>

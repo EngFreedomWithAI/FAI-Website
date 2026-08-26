@@ -7,8 +7,7 @@ import SectionHeader from '../components/SectionHeader.astro';
 import Field from '../components/Field.astro';
 import TeamAvatar from '../components/TeamAvatar.astro';
 import { advisors } from '../data/advisors';
-import { workAreas, engagementExamples } from '../data/engagements';
-import { advisoryStageOptions } from '../data/contact-form';
+import { workAreas } from '../data/engagements';
 import '../styles/content-pages.css';
 
 const pageTitle = 'Advisory | Freedom with AI';
@@ -109,28 +108,8 @@ const advisorySchema = {
       </div>
     </section>
 
-    <!-- Proof -->
-    <section class="page-section page-section--alt" aria-labelledby="examples-heading">
-      <div class="container">
-        <SectionHeader label="Selected advisory work" align="left" />
-        <h2 id="examples-heading" class="page-section__heading">Recent problems we have worked through.</h2>
-
-        <ul class="examples">
-          {engagementExamples.map((example) => (
-            <li class="example">
-              <p class="example__meta">
-                <span class="example__stage">{example.stage}</span>
-                <span class="example__sector">{example.sector}</span>
-              </p>
-              <p class="example__body">{example.body}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-
     <!-- How it works -->
-    <section class="page-section" aria-labelledby="how-heading">
+    <section class="page-section page-section--alt" aria-labelledby="how-heading">
       <div class="container work-split">
         <div class="work-split__main">
           <SectionHeader label="How engagements work" align="left" />
@@ -188,7 +167,7 @@ const advisorySchema = {
         </div>
 
         <div id="form-error" class="form-banner form-banner--error" role="alert" hidden>
-          Something went wrong. Please check the fields below and try again.
+          Please complete the highlighted fields.
         </div>
 
         <form id="request-form" class="contact-form" novalidate aria-label="Start a conversation">
@@ -199,15 +178,7 @@ const advisorySchema = {
             name="company_name"
             label="Company name"
             type="text"
-            required
-          />
-          <Field
-            id="advisory-stage"
-            name="stage"
-            label="Where is the company"
-            type="select"
-            required
-            options={advisoryStageOptions}
+            optional
           />
           <Field
             id="advisory-message"
@@ -422,59 +393,9 @@ const advisorySchema = {
     background: var(--color-text-subtle);
   }
 
-  .examples {
-    list-style: none;
-    padding: 0;
-    margin-top: var(--space-7);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-6);
-  }
-
-  .example {
-    padding: var(--space-5);
-    border: 1px solid var(--color-border);
-    border-radius: var(--r);
-  }
-
-  .example__meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2);
-    align-items: center;
-  }
-
-  .example__stage,
-  .example__sector {
-    font-size: var(--text-xs);
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border-radius: var(--r-sm);
-  }
-
-  .example__stage {
-    background: var(--blue-soft);
-    color: var(--color-accent);
-  }
-
-  .example__sector {
-    background: var(--paper-3);
-    color: var(--color-text-muted);
-  }
-
-  .example__body {
-    margin-top: var(--space-4);
-    font-size: var(--text-sm);
-    color: var(--color-text-muted);
-    line-height: var(--leading-relaxed);
-  }
-
   @media (max-width: 880px) {
     .practices,
     .work-grid,
-    .examples,
     .work-split {
       grid-template-columns: 1fr;
     }
@@ -495,8 +416,6 @@ const advisorySchema = {
   const fieldLabels: Record<string, string> = {
     name: 'Name',
     email: 'Email',
-    company_name: 'Company name',
-    stage: 'Where is the company',
     message: 'What does the company do, and what decision is in front of you',
     link: 'Website, deck or LinkedIn',
   };
@@ -540,7 +459,6 @@ const advisorySchema = {
       const name = String(data.get('name') ?? '').trim();
       const email = String(data.get('email') ?? '').trim();
       const companyName = String(data.get('company_name') ?? '').trim();
-      const stage = String(data.get('stage') ?? '').trim();
       const message = String(data.get('message') ?? '').trim();
       const link = normalizeUrl(String(data.get('link') ?? ''));
 
@@ -554,16 +472,6 @@ const advisorySchema = {
         valid = false;
       } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         showFieldError('email', 'Enter a valid email address.');
-        valid = false;
-      }
-
-      if (!companyName) {
-        showFieldError('company_name', `${fieldLabels.company_name} is required.`);
-        valid = false;
-      }
-
-      if (!stage) {
-        showFieldError('stage', 'Please choose the stage that fits best.');
         valid = false;
       }
 
@@ -594,7 +502,7 @@ const advisorySchema = {
         const res = await fetch('/api/advisory', {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ name, email, company_name: companyName, stage, message, link }),
+          body: JSON.stringify({ name, email, company_name: companyName, message, link }),
         });
         const result = (await res.json().catch(() => ({}))) as {
           ok?: boolean;
@@ -610,7 +518,10 @@ const advisorySchema = {
           }
           if (errorBanner) {
             errorBanner.textContent =
-              result.error ?? 'Something went wrong. Please check the fields below and try again.';
+              result.error ??
+              (result.errors
+                ? 'Please complete the highlighted fields.'
+                : 'Something went wrong. Please try again.');
             errorBanner.removeAttribute('hidden');
           }
           const firstInvalid = form.querySelector<HTMLElement>('.field--invalid .field__control');

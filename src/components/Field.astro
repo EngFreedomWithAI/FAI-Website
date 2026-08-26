@@ -31,6 +31,14 @@ const errorId = `${id}-error`;
 <div class="field" data-field={name}>
   <label class="field__label" for={id}>
     {label}
+    {
+      required && (
+        <>
+          <span class="field__required" aria-hidden="true"> *</span>
+          <span class="field__required-text"> (required)</span>
+        </>
+      )
+    }
     {optional && <span class="field__optional"> (optional)</span>}
   </label>
 
@@ -93,6 +101,22 @@ const errorId = `${id}-error`;
   .field__optional {
     font-weight: 500;
     color: var(--color-text-subtle);
+  }
+
+  .field__required {
+    color: var(--color-accent-strong);
+  }
+
+  .field__required-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 
   .field__control {

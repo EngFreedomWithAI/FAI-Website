@@ -2,10 +2,6 @@ import type { Env } from '../_lib/types';
 import { json, isValidEmail, isValidWebUrl, normalizeUrl, readBody, escapeHtml } from '../_lib/util';
 import { sendEmail } from '../_lib/ses';
 
-// Company stage, not career stage. The previous set described people who had
-// not started a company yet, which filtered for exactly the wrong buyer.
-const STAGES = new Set(['pre_product', 'early_revenue', 'scaling', 'new_stage']);
-
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   try {
     return await handleAdvisoryPost(context);
@@ -24,7 +20,6 @@ const handleAdvisoryPost: PagesFunction<Env> = async ({ request, env }) => {
   const name = data.name ?? '';
   const email = (data.email ?? '').toLowerCase();
   const companyName = data.company_name ?? '';
-  const stage = data.stage ?? '';
   const message = data.message ?? '';
   // The browser normalizes too, but this endpoint is reachable directly, so it cannot
   // trust that it happened.
@@ -34,8 +29,6 @@ const handleAdvisoryPost: PagesFunction<Env> = async ({ request, env }) => {
   if (!name) errors.name = 'Name is required.';
   if (!email) errors.email = 'Email is required.';
   else if (!isValidEmail(email)) errors.email = 'Enter a valid email address.';
-  if (!companyName) errors.company_name = 'Company name is required.';
-  if (!stage || !STAGES.has(stage)) errors.stage = 'Please choose the stage that fits best.';
   if (!message) errors.message = 'Please tell us what decision you are facing.';
   if (link && !isValidWebUrl(link)) errors.link = 'That does not look like a web address.';
 
@@ -50,20 +43,20 @@ const handleAdvisoryPost: PagesFunction<Env> = async ({ request, env }) => {
 
   try {
     await env.DB.prepare(
-      `INSERT INTO advisory_requests (name, email, company_name, stage, message, link)
-       VALUES (?, ?, ?, ?, ?, ?)`
+      `INSERT INTO advisory_requests (name, email, company_name, message, link)
+       VALUES (?, ?, ?, ?, ?)`
     )
-      .bind(name, email, companyName, stage, message, link || null)
+      .bind(name, email, companyName || null, message, link || null)
       .run();
   } catch (err) {
     // Keep the form available during the deployment window for the new column.
     console.error('advisory: insert with company name failed, retrying without it', err);
     try {
       await env.DB.prepare(
-        `INSERT INTO advisory_requests (name, email, stage, message, link)
-         VALUES (?, ?, ?, ?, ?)`
+        `INSERT INTO advisory_requests (name, email, message, link)
+         VALUES (?, ?, ?, ?)`
       )
-        .bind(name, email, stage, message, link || null)
+        .bind(name, email, message, link || null)
         .run();
     } catch (fallbackErr) {
       console.error('advisory: D1 insert failed', fallbackErr);
@@ -87,8 +80,7 @@ const handleAdvisoryPost: PagesFunction<Env> = async ({ request, env }) => {
       subject: `Advisory enquiry from ${name}`,
       text: `Name: ${name}
 Email: ${email}
-Company: ${companyName}
-Stage: ${stage}
+Company: ${companyName || '(not provided)'}
 Link: ${link || '(none)'}
 
 Message:
@@ -96,8 +88,7 @@ ${message}`,
       html: `<h2>New advisory enquiry</h2>
 <p><strong>Name:</strong> ${escapeHtml(name)}<br />
 <strong>Email:</strong> ${escapeHtml(email)}<br />
-<strong>Company:</strong> ${escapeHtml(companyName)}<br />
-<strong>Stage:</strong> ${escapeHtml(stage)}<br />
+<strong>Company:</strong> ${companyName ? escapeHtml(companyName) : '(not provided)'}<br />
 <strong>Link:</strong> ${link ? `<a href="${escapeHtml(link)}">${escapeHtml(link)}</a>` : '(none)'}</p>
 <p><strong>Message:</strong></p>
 <p>${escapeHtml(message).replace(/\n/g, '<br />')}</p>`,

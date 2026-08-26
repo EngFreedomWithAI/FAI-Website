@@ -111,7 +111,7 @@ These examples are anonymized and describe work actually performed. They are evi
 - Initial three- or six-month engagement
 - Scope and fee reflect the priorities and level of involvement
 
-To start a conversation, use https://freedomwith.ai/advisory#start and provide the company, its stage, what the company does and the decision currently in front of it.
+To start a conversation, use https://freedomwith.ai/advisory#start and provide what the company does and the decision currently in front of it. Company name and a supporting link are optional.
 
 ## Other work
 
