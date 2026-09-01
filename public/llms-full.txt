@@ -15,31 +15,33 @@ Clients work directly with Sonia, Cammie or both based on the company and the wo
 
 ## Thesis
 
-AI is not a software category. It is a stack: Energy, Chips, Infrastructure, Models and Applications. Push on one layer and the others move, and the constraint created in one layer is usually where the next company gets built. The Applications layer extends well beyond SaaS into robotics, autonomy, biology, manufacturing and machines that act in the world.
+AI is not a software category. AI companies depend on energy, chips, infrastructure, models and applications. A decision or constraint at one layer can change the opportunity at another.
 
-The five-layer framing follows Jensen Huang's description of AI infrastructure. The company-building overlay is Freedom with AI's own contribution to it.
+Each layer has different technology, capital needs, margins and paths to market. Models range from proprietary frontier systems to open-source and domain-specific alternatives. Applications include software as well as scientific tools, robots, vehicles and other systems that can sense, decide and act.
+
+The five-layer stack builds on Jensen Huang's framing of AI as infrastructure. The company-building layer reflects Freedom with AI's own work with founders.
 
 ### The company-building layer
 
-The firm does not design chips, build power plants or engineer data centres, and makes no claim to technical depth in those domains. It works on the part every company at every layer still has to get right, which looks remarkably similar whether the company sells software, robots or power:
+The firm does not design chips, build power plants or engineer data centres. Its work begins where technical capability has to become a product, earn customer trust and support a durable company. Those questions are similar across the stack, even when the technology is not:
 
-- Which problem is worth building the company around
-- Who the customer is and what they will actually pay for
-- How a technical breakthrough becomes a product someone can use
-- Which business model fits the economics of the technology
-- Which partnerships and dependencies decide whether it scales
-- What has to be true, on regulation, risk and governance, before anyone trusts it
-- What the company should deliberately not do
+- Which problem is important enough to build a company around
+- Who has it, how they solve it today and what they will pay for
+- Which technical capability creates a meaningful product advantage
+- Which business model works with the costs, margins and capital required
+- Which dependencies, partnerships or supply constraints determine scale
+- What evidence, safeguards, regulation and governance are required for trust
+- What should remain outside the company's scope
 
 The sequence is capability, then product, then market, then an enduring business. The technology changes by layer. The work of building a company repeats.
 
 ### How the firm participates
 
-- Build: faibuddy, the firm's AI advisor for founders. Shipping with AI weekly is what keeps the firm honest about what it can actually do.
-- Advise: direct work with founders on the calls that do not have an obvious answer.
-- Invest: a small number of angel investments in founders, where the firm has conviction and can be useful beyond the capital.
+- Build: faibuddy, the firm's AI advisor for founders. Working on a live AI product grounds the firm's view in product decisions, customer behaviour and the limits of current technology.
+- Advise: direct work with founders on decisions that shape the company, including which problem to pursue, what to build, who will buy, how to earn trust and where to focus.
+- Invest: a small number of angel investments where the firm has conviction and can contribute beyond the investment.
 
-Building keeps the firm honest. Advising broadens its pattern recognition. Investing aligns it with long-term outcomes.
+Building provides direct operating feedback. Advising brings exposure to different markets and company stages. Investing extends that perspective over a longer horizon.
 
 ## Where the firm helps
 
@@ -152,7 +154,7 @@ faibuddy is the firm's AI advisory product for founders: https://faibuddy.com
 
 Freedom with AI is beginning to make a small number of angel investments in founder-led companies building across the AI stack. Investing is an emerging activity, not the firm's primary service.
 
-The firm's macro view covers the whole stack; its direct investments are narrower. Direct investment focuses on areas it can genuinely underwrite and help with afterwards: infrastructure and tooling, deployment, evaluation, security and reliability, industry-specific and regulated AI, robotics and autonomy software, and products that connect models to real operational environments. For chips, energy and capital-intensive infrastructure, the firm follows the layer closely and would participate alongside specialists rather than lead.
+The firm's view spans the whole stack, but its direct investment focus is narrower. It looks at infrastructure and tooling, deployment, evaluation, security and reliability, industry-specific and regulated AI, robotics and autonomy software, and products that connect models to real operations. For semiconductors, energy and capital-intensive infrastructure, it may invest alongside specialists with deeper technical and project-finance expertise.
 
 Advisory and investment decisions are made independently. Working with Freedom with AI neither requires nor guarantees an investment.
 

@@ -15,7 +15,6 @@ import {
   participation,
   participationLine,
   stackLayers,
-  thesisLine,
 } from '../data/thesis';
 import '../styles/content-pages.css';
 
@@ -35,9 +34,9 @@ const pageDescription =
           AI is not a software category. It is a stack.
         </h1>
         <p class="page-hero__lede">
-          Energy, Chips, Infrastructure, Models, Applications. Push on one layer and the others
-          move. The companies worth building will get built in all five, and at the seams between
-          them.
+          AI companies depend on energy, chips, infrastructure, models and applications. A decision
+          or constraint at one layer can change the opportunity at another. We look for companies
+          within each layer and where those dependencies create a new market.
         </p>
       </div>
     </section>
@@ -54,8 +53,8 @@ const pageDescription =
         <SectionHeader label="The layers" align="left" />
         <h2 id="layers-heading" class="page-section__heading">Five layers, one system.</h2>
         <p class="page-section__sub">
-          None of these move alone. A breakthrough in one creates a bottleneck in another, and the
-          bottleneck is usually where the next company gets built.
+          Each layer has different technology, capital needs, margins and paths to market. Those
+          differences matter when deciding what kind of company can be built there.
         </p>
 
         <ol class="layers">
@@ -78,22 +77,21 @@ const pageDescription =
         <SectionHeader label="Where we work" align="left" />
         <h2 id="ours-heading" class="page-section__heading">{companyBuildingLayer.label}.</h2>
         <p class="page-section__sub">
-          We are not designing chips or building power plants. We work on the part every company at
-          every layer still has to get right, and it looks remarkably similar whether the company is
-          selling software, robots or power.
+          We do not design chips, build power plants or engineer data centres. Our work begins where
+          technical capability has to become a product, earn customer trust and support a durable
+          company. Those questions are similar across the stack, even when the technology is not.
         </p>
 
         <ul class="questions">
-          <li>Which problem is worth building the company around?</li>
-          <li>Who is the customer, and what will they actually pay for?</li>
-          <li>How does a technical breakthrough become a product someone can use?</li>
-          <li>Which business model fits the economics of this technology?</li>
-          <li>Which partnerships and dependencies decide whether this scales?</li>
-          <li>What has to be true, on regulation, risk and governance, before anyone trusts it?</li>
-          <li>What should the company deliberately not do?</li>
+          <li>Which problem is important enough to build a company around?</li>
+          <li>Who has it, how do they solve it today and what will they pay for?</li>
+          <li>Which technical capability creates a meaningful product advantage?</li>
+          <li>Which business model works with the costs, margins and capital required?</li>
+          <li>Which dependencies, partnerships or supply constraints determine scale?</li>
+          <li>What evidence, safeguards, regulation and governance are required for trust?</li>
+          <li>What should remain outside the company’s scope?</li>
         </ul>
 
-        <p class="pull">{thesisLine}</p>
       </div>
     </section>
 
@@ -102,7 +100,7 @@ const pageDescription =
       <div class="container">
         <SectionHeader label="How we participate" align="left" />
         <h2 id="participate-heading" class="page-section__heading">
-          Three ways in, one feedback loop.
+          Build, Advise and Invest
         </h2>
 
         <div class="modes">
@@ -128,17 +126,17 @@ const pageDescription =
         <p class="pull">{participationLine}</p>
 
         <div class="scope">
-          <h3 class="scope__title">Where we invest directly, and where we do not yet</h3>
+          <h3 class="scope__title">Where we invest</h3>
           <p>
-            Our view covers the whole stack. Our own money goes where we can genuinely judge the
-            opportunity and be useful afterwards: infrastructure and tooling, deployment,
-            evaluation, security and reliability, industry specific and regulated AI, robotics and
-            autonomy software, and products that connect models to real operations.
+            Our view spans the whole stack, but our direct investment focus is narrower. We look at
+            infrastructure and tooling, deployment, evaluation, security and reliability,
+            industry-specific and regulated AI, robotics and autonomy software, and products that
+            connect models to real operations.
           </p>
           <p>
-            For chips, energy and capital intensive infrastructure, we follow the layer closely and
-            would participate alongside specialists rather than lead. Follow the whole stack. Invest
-            directly where we can underwrite it.
+            For semiconductors, energy and capital-intensive infrastructure, we may invest
+            alongside specialists with deeper technical and project-finance expertise. We follow
+            the whole stack and invest directly where we can form an independent view.
           </p>
           <p class="scope__note">{investingBoundary}</p>
         </div>
@@ -165,7 +163,8 @@ const pageDescription =
 
 <style>
   .thesis-band {
-    padding-block: clamp(48px, 7vw, 88px);
+    padding-block: clamp(28px, 4vw, 48px);
+    background: #020812;
   }
 
   /* ---------- layers ---------- */

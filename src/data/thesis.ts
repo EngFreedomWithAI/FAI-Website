@@ -7,7 +7,7 @@
  * power or data centre engineering, and no line in this file should imply it.
  */
 
-export type LayerIcon = 'bot' | 'nodes' | 'server' | 'cpu' | 'zap';
+export type LayerIcon = 'cube' | 'nodes' | 'cloud' | 'chip' | 'bolt';
 
 export interface StackLayer {
   name: string;
@@ -20,34 +20,34 @@ export interface StackLayer {
 export const stackLayers: StackLayer[] = [
   {
     name: 'Applications & Embodied AI',
-    note: 'Software, yes. Also robotics, autonomy, biology, manufacturing and machines that act in the world. This layer is far bigger than SaaS.',
-    icon: 'bot',
+    note: 'Products at this layer are not limited to screens. They include software, scientific tools, robots, vehicles and other systems that can sense, decide and act.',
+    icon: 'cube',
   },
   {
     name: 'Models',
-    note: 'The frontier labs, and everyone fine tuning, distilling and serving on top of them.',
+    note: 'Models range from proprietary frontier systems to open-source and domain-specific alternatives. Their capability, cost, availability and deployment constraints shape what product teams can build.',
     icon: 'nodes',
   },
   {
     name: 'Infrastructure',
-    note: 'Data centres, networking, orchestration, evaluation, security. The plumbing that turns a model into something you can actually run a business on.',
-    icon: 'server',
+    note: 'Data centres, networking, cooling, orchestration, evaluation, security and deployment determine whether models can be used reliably and affordably at scale.',
+    icon: 'cloud',
   },
   {
     name: 'Chips & Compute',
-    note: 'The silicon, and the competition over who can get hold of it.',
-    icon: 'cpu',
+    note: 'Processors, memory, interconnects and access to supply shape performance, cost and who can compete.',
+    icon: 'chip',
   },
   {
     name: 'Energy',
-    note: 'The constraint underneath everything. Compute is a power problem before it is a chip problem.',
-    icon: 'zap',
+    note: 'Every workload consumes power and produces heat. Generation, transmission, siting and cooling affect where capacity can be built and how quickly it can grow.',
+    icon: 'bolt',
   },
 ];
 
 /** The overlay that runs alongside all five layers. Our part of the framework. */
 export const companyBuildingLayer = {
-  label: 'The company building layer',
+  label: 'The company-building layer',
   path: ['Capability', 'Product', 'Market', 'Enduring business'],
   disciplines: [
     'Product',
@@ -72,22 +72,22 @@ export interface Participation {
 export const participation: Participation[] = [
   {
     mode: 'Build',
-    body: 'We build faibuddy, our AI advisor for founders. Shipping with AI every week is what keeps us honest about what it can actually do.',
+    body: 'We build faibuddy, our AI advisor for founders. Working on a live AI product grounds our view in product decisions, customer behaviour and the limits of current technology.',
     link: { label: 'faibuddy', href: 'https://faibuddy.com', external: true },
   },
   {
     mode: 'Advise',
-    body: 'We work with founders on the calls that do not have an obvious answer. Which problem to build around, who will actually buy, what not to build, and what has to be true before anyone trusts you with it.',
+    body: 'We advise founders on decisions that shape the company: which problem to pursue, what to build, who will buy, how to earn trust and where to focus.',
     link: { label: 'How advisory works', href: '/advisory' },
   },
   {
     mode: 'Invest',
-    body: 'We are starting to back a small number of founders with our own capital, where we have conviction and can be useful beyond the money.',
+    body: 'We are beginning to back a small number of founders with our own capital when we have conviction and can contribute beyond the investment.',
   },
 ];
 
 export const participationLine =
-  'Building keeps us honest. Advising shows us the patterns. Investing puts us on the hook for the outcome.';
+  'Building gives us direct operating feedback. Advising exposes us to different markets and company stages. Investing extends that perspective over a longer horizon.';
 
 /**
  * Kept deliberately entity-neutral while the investing structure is being
@@ -98,7 +98,7 @@ export const investingBoundary =
   'Advisory and investing are separate decisions. Working with us does not require or promise an investment.';
 
 export const attribution = {
-  text: 'The five layer framing is drawn from Jensen Huang’s description of AI infrastructure. The company building layer is ours.',
+  text: 'The five-layer stack builds on Jensen Huang’s framing of AI as infrastructure. The company-building layer reflects our own work with founders.',
   sourceLabel: 'NVIDIA on the five layers of AI',
   sourceHref: 'https://blogs.nvidia.com/blog/ai-5-layer-cake/',
 } as const;

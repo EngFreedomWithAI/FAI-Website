@@ -6,7 +6,7 @@ The firm works across industries, especially where products, buying decisions, o
 
 ## Thesis
 
-[Thesis](https://freedomwith.ai/thesis): AI is not a software category, it is a stack. Energy, Chips, Infrastructure, Models and Applications form one interconnected system, and the Applications layer extends well beyond software into robotics, autonomy, biology and manufacturing. The firm works at the company-building layer that runs through every layer of that stack: turning technical capability into a product, a market and a business that lasts. The five-layer framing follows Jensen Huang's description of AI infrastructure; the company-building overlay is the firm's own. The firm does not claim technical depth in chip design, power generation or data centre engineering.
+[Thesis](https://freedomwith.ai/thesis): AI companies depend on energy, chips, infrastructure, models and applications. Each layer has different technology, capital needs, margins and paths to market. Models range from proprietary frontier systems to open-source and domain-specific alternatives. Applications include software as well as scientific tools, robots, vehicles and other systems that can sense, decide and act. Freedom with AI works at the company-building layer, helping founders turn technical capability into a product, a market and a durable business. The five-layer stack builds on Jensen Huang's framing of AI as infrastructure. The company-building layer reflects the firm's own work with founders.
 
 ## Advisory
 

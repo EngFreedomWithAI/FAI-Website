@@ -47,8 +47,8 @@ const pageDescription = site.summary;
       </div>
     </section>
 
-    <!-- Thesis. The one full-bleed dark block above the footer: this section
-         should read as a statement, not as another service description. -->
+    <!-- The diagram carries its own title and accessible outline, so the home
+         page presents the framework immediately after the thesis statement. -->
     <section class="thesis on-dark" aria-labelledby="thesis-heading">
       <div class="container">
         <p class="eyebrow">Our thesis</p>
@@ -81,7 +81,7 @@ const pageDescription = site.summary;
     <section class="block" aria-labelledby="participate-heading">
       <div class="container">
         <p class="eyebrow">How we participate</p>
-        <h2 id="participate-heading" class="block__title">We build, advise and invest.</h2>
+        <h2 id="participate-heading" class="block__title">Build, Advise and Invest</h2>
 
         <div class="modes">
           {participation.map((mode) => (
@@ -392,6 +392,7 @@ const pageDescription = site.summary;
   /* ---------- thesis ---------- */
   .thesis {
     padding-block: clamp(64px, 9vw, 112px);
+    background: #020812;
   }
 
   .thesis__title {
@@ -407,8 +408,8 @@ const pageDescription = site.summary;
     color: var(--color-text-muted);
   }
 
-  .thesis :global(.td) {
-    margin-top: clamp(40px, 6vw, 64px);
+  .thesis :global(.stack) {
+    margin-top: clamp(56px, 7vw, 80px);
   }
 
   .thesis__foot {
