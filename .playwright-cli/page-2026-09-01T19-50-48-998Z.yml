@@ -1,0 +1,218 @@
+- generic [active] [ref=f15e1]:
+  - link "Skip to content" [ref=f15e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=f15e3]:
+    - generic [ref=f15e4]:
+      - link "Freedom with AI home" [ref=f15e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f15e7]: Freedom with AI
+      - navigation "Primary" [ref=f15e8]:
+        - list [ref=f15e9]:
+          - listitem [ref=f15e10]:
+            - link "Advisory" [ref=f15e11] [cursor=pointer]:
+              - /url: /advisory
+          - listitem [ref=f15e12]:
+            - link "Thesis" [ref=f15e13] [cursor=pointer]:
+              - /url: /thesis
+      - link "Start a conversation" [ref=f15e15] [cursor=pointer]:
+        - /url: /advisory#start
+  - main [ref=f15e16]:
+    - region [ref=f15e17]:
+      - generic [ref=f15e18]:
+        - paragraph [ref=f15e19]: Advisory for founders building across the AI stack
+        - heading "When the next move is not obvious." [level=1] [ref=f15e20]
+        - paragraph [ref=f15e21]: Work directly with Sonia or Cammie on the strategic decisions involved in building and growing a company, with added depth across product, technology, growth, regulation and risk.
+        - generic [ref=f15e22]:
+          - link "Start a conversation" [ref=f15e23] [cursor=pointer]:
+            - /url: /advisory#start
+          - link "Meet the advisors" [ref=f15e24] [cursor=pointer]:
+            - /url: "#advisors"
+        - paragraph [ref=f15e25]: We work across industries, especially where products, buying decisions, operations or regulation are complex.
+    - region [ref=f15e26]:
+      - generic [ref=f15e27]:
+        - paragraph [ref=f15e28]: Our thesis
+        - heading "AI is not a software category. It is a stack." [level=2] [ref=f15e29]
+        - paragraph [ref=f15e30]: Energy, Chips, Infrastructure, Models, Applications. Push on one layer and the others move. The companies worth building will get built in all five, and at the seams between them.
+        - figure [ref=f15e31]:
+          - generic [ref=f15e32]:
+            - generic [ref=f15e33]:
+              - paragraph [ref=f15e34]: The AI industrial stack
+              - paragraph [ref=f15e35]: The technology changes by layer. The work of building an enduring company repeats.
+            - generic [ref=f15e36]:
+              - list [ref=f15e37]:
+                - listitem [ref=f15e38]:
+                  - generic [ref=f15e43]: Applications & Embodied AI
+                - listitem [ref=f15e44]:
+                  - generic [ref=f15e53]: Models
+                - listitem [ref=f15e54]:
+                  - generic [ref=f15e61]: Infrastructure
+                - listitem [ref=f15e62]:
+                  - generic [ref=f15e69]: Chips & Compute
+                - listitem [ref=f15e70]:
+                  - generic [ref=f15e74]: Energy
+              - generic [ref=f15e78]:
+                - paragraph [ref=f15e79]: The company-building layer
+                - list [ref=f15e80]:
+                  - listitem [ref=f15e81]:
+                    - generic [ref=f15e82]: Capability
+                  - listitem [ref=f15e85]:
+                    - generic [ref=f15e86]: Product
+                  - listitem [ref=f15e89]:
+                    - generic [ref=f15e90]: Market
+                  - listitem [ref=f15e93]:
+                    - generic [ref=f15e94]: Enduring business
+                - list [ref=f15e95]:
+                  - listitem [ref=f15e96]: Product·
+                  - listitem [ref=f15e97]: Business model·
+                  - listitem [ref=f15e98]: Go to market·
+                  - listitem [ref=f15e99]: Partnerships·
+                  - listitem [ref=f15e100]: Regulation·
+                  - listitem [ref=f15e101]: Governance
+            - generic [ref=f15e102]:
+              - paragraph [ref=f15e103]:
+                - generic [ref=f15e105]: Build
+                - generic [ref=f15e107]: Advise
+                - generic [ref=f15e109]: Invest
+              - paragraph [ref=f15e111]: Compounding cross-stack judgment.
+          - generic [ref=f15e112]:
+            - text: The five layer framing is drawn from Jensen Huang’s description of AI infrastructure. The company-building layer is ours.
+            - link "NVIDIA on the five layers of AI" [ref=f15e113] [cursor=pointer]:
+              - /url: https://blogs.nvidia.com/blog/ai-5-layer-cake/
+              - text: NVIDIA on the five layers of AI ↗
+        - generic [ref=f15e114]:
+          - paragraph [ref=f15e115]: "We are not designing chips or building power plants. We work on the part every company at every layer still has to get right: turning a technical breakthrough into a product, finding who will actually buy it, and building a business that holds up."
+          - link "Read the full thesis" [ref=f15e116] [cursor=pointer]:
+            - /url: /thesis
+            - text: Read the full thesis →
+    - region [ref=f15e117]:
+      - generic [ref=f15e118]:
+        - paragraph [ref=f15e119]: How we participate
+        - heading "We build, advise and invest." [level=2] [ref=f15e120]
+        - generic [ref=f15e121]:
+          - article [ref=f15e122]:
+            - heading "Build" [level=3] [ref=f15e123]
+            - paragraph [ref=f15e124]: We build faibuddy, our AI advisor for founders. Shipping with AI every week is what keeps us honest about what it can actually do.
+            - link "faibuddy" [ref=f15e125] [cursor=pointer]:
+              - /url: https://faibuddy.com
+              - text: faibuddy ↗
+          - article [ref=f15e126]:
+            - heading "Advise" [level=3] [ref=f15e127]
+            - paragraph [ref=f15e128]: We work with founders on the calls that do not have an obvious answer. Which problem to build around, who will actually buy, what not to build, and what has to be true before anyone trusts you with it.
+            - link "How advisory works" [ref=f15e129] [cursor=pointer]:
+              - /url: /advisory
+              - text: How advisory works →
+          - article [ref=f15e130]:
+            - heading "Invest" [level=3] [ref=f15e131]
+            - paragraph [ref=f15e132]: We are starting to back a small number of founders with our own capital, where we have conviction and can be useful beyond the money.
+        - paragraph [ref=f15e133]: Building keeps us honest. Advising shows us the patterns. Investing puts us on the hook for the outcome.
+        - paragraph [ref=f15e134]: Advisory and investing are separate decisions. Working with us does not require or promise an investment.
+    - region [ref=f15e135]:
+      - generic [ref=f15e136]:
+        - heading "Advisors" [level=2] [ref=f15e137]
+        - generic [ref=f15e138]:
+          - article [ref=f15e139]:
+            - generic [ref=f15e140]:
+              - img "Sonia Sarao" [ref=f15e141]
+              - generic [ref=f15e142]:
+                - heading "Sonia Sarao" [level=3] [ref=f15e143]
+                - paragraph [ref=f15e144]: Strategic Advisor
+            - paragraph [ref=f15e145]: Product, technology, growth and AI
+            - paragraph [ref=f15e146]: Advises founders on building and growing companies, with an operator's perspective on product, market, technology and AI.
+            - paragraph [ref=f15e147]: A product and engineering operator for over a decade, Sonia led products and teams through growth and acquisition. She now builds faibuddy, a live AI-native product for founders.
+            - link "Sonia on LinkedIn" [ref=f15e148] [cursor=pointer]:
+              - /url: https://www.linkedin.com/in/sonia-sarao/
+              - text: Sonia on LinkedIn ↗
+          - article [ref=f15e149]:
+            - generic [ref=f15e150]:
+              - img "Cammie Clay" [ref=f15e151]
+              - generic [ref=f15e152]:
+                - heading "Cammie Clay" [level=3] [ref=f15e153]
+                - paragraph [ref=f15e154]: Strategic Advisor
+            - paragraph [ref=f15e155]: Regulation, risk, governance and stakeholder strategy
+            - paragraph [ref=f15e156]: Advises founders on building and growing companies, with added perspective on regulation, risk, governance and stakeholder decisions.
+            - paragraph [ref=f15e157]: "She has been on both sides of financial regulation: a regulator at the New York Stock Exchange and FINRA, then a compliance executive at RS Investments and First Republic Bank."
+            - link "Cammie on LinkedIn" [ref=f15e158] [cursor=pointer]:
+              - /url: https://www.linkedin.com/in/cammieclay/
+              - text: Cammie on LinkedIn ↗
+    - region [ref=f15e159]:
+      - generic [ref=f15e160]:
+        - paragraph [ref=f15e161]: When founders bring us in
+        - heading "What worked before is no longer enough." [level=2] [ref=f15e162]
+        - list [ref=f15e163]:
+          - listitem [ref=f15e164]: The product or business direction is no longer obvious
+          - listitem [ref=f15e165]: Early traction has exposed a positioning or go-to-market problem
+          - listitem [ref=f15e166]: Entering a regulated market is changing product and operating decisions
+          - listitem [ref=f15e167]: AI could change the product or cost structure, but the advantage is not yet clear
+          - listitem [ref=f15e168]: A raise, acquisition or diligence process is approaching
+          - listitem [ref=f15e169]: The company has outgrown the instincts that got it here
+    - region [ref=f15e170]:
+      - generic [ref=f15e171]:
+        - paragraph [ref=f15e172]: Selected advisory work
+        - heading "Recent problems we have worked through." [level=2] [ref=f15e173]
+        - list [ref=f15e174]:
+          - listitem [ref=f15e175]:
+            - paragraph [ref=f15e176]:
+              - generic [ref=f15e177]: Early stage
+              - generic [ref=f15e178]: FinTech
+            - paragraph [ref=f15e179]: An early-stage FinTech company was refining its problem, target market and business model while regulatory requirements were shaping what the product could become.
+          - listitem [ref=f15e180]:
+            - paragraph [ref=f15e181]:
+              - generic [ref=f15e182]: Early stage
+              - generic [ref=f15e183]: Life Sciences
+            - paragraph [ref=f15e184]: An early-stage life sciences company needed to align its target market and business model with the compliance requirements affecting the product and operating model.
+          - listitem [ref=f15e185]:
+            - paragraph [ref=f15e186]:
+              - generic [ref=f15e187]: Growth stage
+              - generic [ref=f15e188]: Services
+            - paragraph [ref=f15e189]: A growth-stage services business needed a more focused path to growth. The work covered customer segmentation, verticalization, a new product line and the sales strategy around it.
+          - listitem [ref=f15e190]:
+            - paragraph [ref=f15e191]:
+              - generic [ref=f15e192]: Growth stage
+              - generic [ref=f15e193]: B2B software
+            - paragraph [ref=f15e194]: A growth-stage B2B software company needed its enterprise segments, product strategy and AI direction to reinforce the same business model.
+    - region [ref=f15e195]:
+      - generic [ref=f15e196]:
+        - heading "Tell us what decision is in front of you." [level=2] [ref=f15e197]
+        - link "Start a conversation" [ref=f15e199] [cursor=pointer]:
+          - /url: /advisory#start
+  - contentinfo [ref=f15e200]:
+    - generic [ref=f15e201]:
+      - generic [ref=f15e202]:
+        - generic [ref=f15e203]:
+          - link "Freedom with AI home" [ref=f15e204] [cursor=pointer]:
+            - /url: /
+            - text: Freedom with AI
+          - paragraph [ref=f15e205]: Freedom with AI. Advisory for founders building across the AI stack.
+        - generic [ref=f15e206]:
+          - heading "Explore" [level=2] [ref=f15e207]
+          - link "Advisory" [ref=f15e208] [cursor=pointer]:
+            - /url: /advisory
+          - link "Thesis" [ref=f15e209] [cursor=pointer]:
+            - /url: /thesis
+        - generic [ref=f15e210]:
+          - heading "Product" [level=2] [ref=f15e211]
+          - link "faibuddy ↗" [ref=f15e212] [cursor=pointer]:
+            - /url: https://faibuddy.com
+        - generic [ref=f15e213]:
+          - heading "Connect" [level=2] [ref=f15e214]
+          - link "Sonia on LinkedIn" [ref=f15e215] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/sonia-sarao/
+          - link "Cammie on LinkedIn" [ref=f15e216] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/cammieclay/
+          - link "X @FreedomWithAI" [ref=f15e217] [cursor=pointer]:
+            - /url: https://x.com/FreedomWithAI
+          - link "Contact" [ref=f15e218] [cursor=pointer]:
+            - /url: /contact
+      - generic [ref=f15e219]:
+        - paragraph [ref=f15e220]: © Freedom with AI 2026
+        - paragraph [ref=f15e221]:
+          - link "Privacy" [ref=f15e222] [cursor=pointer]:
+            - /url: /privacy
+          - text: ·
+          - link "Terms" [ref=f15e223] [cursor=pointer]:
+            - /url: /terms
+  - generic [ref=f15e226]:
+    - button [ref=f15e227]
+    - button [ref=f15e233]
+    - button [ref=f15e237]
+    - button [ref=f15e242]

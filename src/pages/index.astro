@@ -5,11 +5,13 @@ import Footer from '../components/Footer.astro';
 import Button from '../components/Button.astro';
 import CtaStrip from '../components/CtaStrip.astro';
 import TeamAvatar from '../components/TeamAvatar.astro';
+import ThesisDiagram from '../components/ThesisDiagram.astro';
 import { site } from '../config/site';
 import { advisors } from '../data/advisors';
 import { inflectionPoints, engagementExamples } from '../data/engagements';
+import { investingBoundary, participation, participationLine } from '../data/thesis';
 
-const pageTitle = 'Advisory for founders leveraging AI | Freedom with AI';
+const pageTitle = 'Founder advisory across the AI stack | Freedom with AI';
 const pageDescription = site.summary;
 ---
 
@@ -21,7 +23,7 @@ const pageDescription = site.summary;
          office, which was the retired positioning drawn as art. -->
     <section class="hero" aria-labelledby="hero-heading">
       <div class="container">
-        <p class="eyebrow">Advisory for founders leveraging AI</p>
+        <p class="eyebrow">Advisory for founders building across the AI stack</p>
         <h1 id="hero-heading" class="hero__title">
           When the next move is not obvious.
         </h1>
@@ -42,6 +44,67 @@ const pageDescription = site.summary;
           We work across industries, especially where products, buying decisions, operations or
           regulation are complex.
         </p>
+      </div>
+    </section>
+
+    <!-- Thesis. The one full-bleed dark block above the footer: this section
+         should read as a statement, not as another service description. -->
+    <section class="thesis on-dark" aria-labelledby="thesis-heading">
+      <div class="container">
+        <p class="eyebrow">Our thesis</p>
+        <h2 id="thesis-heading" class="thesis__title">
+          AI is not a software category. It is a stack.
+        </h2>
+        <p class="thesis__lede">
+          Energy, Chips, Infrastructure, Models, Applications. Push on one layer and the others
+          move. The companies worth building will get built in all five, and at the seams between
+          them.
+        </p>
+
+        <ThesisDiagram />
+
+        <div class="thesis__foot">
+          <p class="thesis__limit">
+            We are not designing chips or building power plants. We work on the part every company
+            at every layer still has to get right: turning a technical breakthrough into a product,
+            finding who will actually buy it, and building a business that holds up.
+          </p>
+          <p class="thesis__more">
+            <a href="/thesis">Read the full thesis <span aria-hidden="true">&rarr;</span></a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How we participate. Replaces the old "Beyond advisory" block, which
+         said the same thing without connecting it to anything. -->
+    <section class="block" aria-labelledby="participate-heading">
+      <div class="container">
+        <p class="eyebrow">How we participate</p>
+        <h2 id="participate-heading" class="block__title">We build, advise and invest.</h2>
+
+        <div class="modes">
+          {participation.map((mode) => (
+            <article class="mode">
+              <h3 class="mode__title">{mode.mode}</h3>
+              <p class="mode__body">{mode.body}</p>
+              {mode.link && (
+                <a
+                  class="mode__link"
+                  href={mode.link.href}
+                  target={mode.link.external ? '_blank' : undefined}
+                  rel={mode.link.external ? 'noopener noreferrer' : undefined}
+                >
+                  {mode.link.label}{' '}
+                  <span aria-hidden="true">{mode.link.external ? '↗' : '→'}</span>
+                </a>
+              )}
+            </article>
+          ))}
+        </div>
+
+        <p class="modes__line">{participationLine}</p>
+        <p class="modes__note">{investingBoundary}</p>
       </div>
     </section>
 
@@ -107,29 +170,6 @@ const pageDescription = site.summary;
             </li>
           ))}
         </ul>
-      </div>
-    </section>
-
-    <section class="block" aria-labelledby="beyond-heading">
-      <div class="container">
-        <p class="eyebrow">Beyond advisory</p>
-        <h2 id="beyond-heading" class="block__title">We build and invest too.</h2>
-        <div class="sidecards sidecards--row">
-          <div class="sidecard">
-            <h3 class="sidecard__title">faibuddy</h3>
-            <p>
-              <a href={site.faibuddyUrl} target="_blank" rel="noopener noreferrer">faibuddy</a> is
-              the AI advisory product we are building for founders.
-            </p>
-          </div>
-          <div class="sidecard">
-            <h3 class="sidecard__title">Investing</h3>
-            <p>
-              We are beginning to make selective private-market investments in founder-led
-              companies, funds and aligned SPVs.
-            </p>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -349,41 +389,107 @@ const pageDescription = site.summary;
     line-height: var(--leading-relaxed);
   }
 
-  .sidecards {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-5);
+  /* ---------- thesis ---------- */
+  .thesis {
+    padding-block: clamp(64px, 9vw, 112px);
   }
 
-  .sidecards--row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin-top: var(--space-7);
+  .thesis__title {
+    margin-top: var(--space-3);
+    max-width: 24ch;
   }
 
-  .sidecard {
-    padding: var(--space-5);
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: var(--r);
+  .thesis__lede {
+    margin-top: var(--space-5);
+    max-width: 62ch;
+    font-size: var(--text-md);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-muted);
   }
 
-  .sidecard__title {
-    font-size: var(--text-base);
+  .thesis :global(.td) {
+    margin-top: clamp(40px, 6vw, 64px);
+  }
+
+  .thesis__foot {
+    margin-top: clamp(40px, 6vw, 64px);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .thesis__limit {
+    max-width: var(--readw);
+    font-size: var(--text-md);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text);
+  }
+
+  .thesis__more {
+    margin-top: var(--space-4);
+    font-size: var(--text-sm);
     font-weight: 600;
   }
 
-  .sidecard p {
-    margin-top: var(--space-2);
-    font-size: var(--text-sm);
+  .thesis__more a {
+    text-decoration: none;
+  }
+
+  /* ---------- build, advise, invest ---------- */
+  .modes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+    margin-top: var(--space-7);
+  }
+
+  .mode {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding-top: var(--space-4);
+    border-top: 2px solid var(--color-accent);
+  }
+
+  .mode__title {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .mode__body {
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
     color: var(--color-text-muted);
+  }
+
+  .mode__link {
+    margin-top: auto;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .modes__line {
+    margin-top: var(--space-7);
+    max-width: var(--readw);
+    font-size: var(--text-md);
+    color: var(--color-text);
+  }
+
+  .modes__note {
+    margin-top: var(--space-4);
+    max-width: var(--readw);
+    font-size: var(--text-sm);
+    color: var(--color-text-subtle);
   }
 
   @media (max-width: 880px) {
     .advisor-grid,
     .examples,
     .moments,
-    .sidecards--row {
+    .modes {
       grid-template-columns: 1fr;
     }
 

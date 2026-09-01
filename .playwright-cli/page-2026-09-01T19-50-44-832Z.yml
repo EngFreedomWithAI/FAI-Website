@@ -1,0 +1,181 @@
+- generic [active] [ref=f14e1]:
+  - link "Skip to content" [ref=f14e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=f14e3]:
+    - generic [ref=f14e4]:
+      - link "Freedom with AI home" [ref=f14e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f14e7]: Freedom with AI
+      - navigation "Primary" [ref=f14e8]:
+        - list [ref=f14e9]:
+          - listitem [ref=f14e10]:
+            - link "Advisory" [ref=f14e11] [cursor=pointer]:
+              - /url: /advisory
+          - listitem [ref=f14e12]:
+            - link "Thesis" [ref=f14e13] [cursor=pointer]:
+              - /url: /thesis
+      - link "Start a conversation" [ref=f14e15] [cursor=pointer]:
+        - /url: /advisory#start
+  - main [ref=f14e16]:
+    - region [ref=f14e17]:
+      - generic [ref=f14e18]:
+        - generic [ref=f14e19]: Thesis
+        - heading "AI is not a software category. It is a stack." [level=1] [ref=f14e21]
+        - paragraph [ref=f14e22]: Energy, Chips, Infrastructure, Models, Applications. Push on one layer and the others move. The companies worth building will get built in all five, and at the seams between them.
+        - figure [ref=f14e24]:
+          - generic [ref=f14e25]:
+            - generic [ref=f14e26]:
+              - paragraph [ref=f14e27]: The AI industrial stack
+              - paragraph [ref=f14e28]: The technology changes by layer. The work of building an enduring company repeats.
+            - generic [ref=f14e29]:
+              - list [ref=f14e30]:
+                - listitem [ref=f14e31]:
+                  - generic [ref=f14e36]: Applications & Embodied AI
+                - listitem [ref=f14e37]:
+                  - generic [ref=f14e46]: Models
+                - listitem [ref=f14e47]:
+                  - generic [ref=f14e54]: Infrastructure
+                - listitem [ref=f14e55]:
+                  - generic [ref=f14e62]: Chips & Compute
+                - listitem [ref=f14e63]:
+                  - generic [ref=f14e67]: Energy
+              - generic [ref=f14e71]:
+                - paragraph [ref=f14e72]: The company-building layer
+                - list [ref=f14e73]:
+                  - listitem [ref=f14e74]:
+                    - generic [ref=f14e75]: Capability
+                  - listitem [ref=f14e78]:
+                    - generic [ref=f14e79]: Product
+                  - listitem [ref=f14e82]:
+                    - generic [ref=f14e83]: Market
+                  - listitem [ref=f14e86]:
+                    - generic [ref=f14e87]: Enduring business
+                - list [ref=f14e88]:
+                  - listitem [ref=f14e89]: Product·
+                  - listitem [ref=f14e90]: Business model·
+                  - listitem [ref=f14e91]: Go to market·
+                  - listitem [ref=f14e92]: Partnerships·
+                  - listitem [ref=f14e93]: Regulation·
+                  - listitem [ref=f14e94]: Governance
+            - generic [ref=f14e95]:
+              - paragraph [ref=f14e96]:
+                - generic [ref=f14e98]: Build
+                - generic [ref=f14e100]: Advise
+                - generic [ref=f14e102]: Invest
+              - paragraph [ref=f14e104]: Compounding cross-stack judgment.
+          - generic [ref=f14e105]:
+            - text: The five layer framing is drawn from Jensen Huang’s description of AI infrastructure. The company-building layer is ours.
+            - link "NVIDIA on the five layers of AI" [ref=f14e106] [cursor=pointer]:
+              - /url: https://blogs.nvidia.com/blog/ai-5-layer-cake/
+              - text: NVIDIA on the five layers of AI ↗
+    - region [ref=f14e107]:
+      - generic [ref=f14e108]:
+        - generic [ref=f14e109]: The layers
+        - heading "Five layers, one system." [level=2] [ref=f14e111]
+        - paragraph [ref=f14e112]: None of these move alone. A breakthrough in one creates a bottleneck in another, and the bottleneck is usually where the next company gets built.
+        - list [ref=f14e113]:
+          - listitem [ref=f14e114]:
+            - generic [ref=f14e119]:
+              - heading "Applications & Embodied AI" [level=3] [ref=f14e120]
+              - paragraph [ref=f14e121]: Software, yes. Also robotics, autonomy, biology, manufacturing and machines that act in the world. This layer is far bigger than SaaS.
+          - listitem [ref=f14e122]:
+            - generic [ref=f14e131]:
+              - heading "Models" [level=3] [ref=f14e132]
+              - paragraph [ref=f14e133]: The frontier labs, and everyone fine tuning, distilling and serving on top of them.
+          - listitem [ref=f14e134]:
+            - generic [ref=f14e141]:
+              - heading "Infrastructure" [level=3] [ref=f14e142]
+              - paragraph [ref=f14e143]: Data centres, networking, orchestration, evaluation, security. The plumbing that turns a model into something you can actually run a business on.
+          - listitem [ref=f14e144]:
+            - generic [ref=f14e151]:
+              - heading "Chips & Compute" [level=3] [ref=f14e152]
+              - paragraph [ref=f14e153]: The silicon, and the competition over who can get hold of it.
+          - listitem [ref=f14e154]:
+            - generic [ref=f14e158]:
+              - heading "Energy" [level=3] [ref=f14e159]
+              - paragraph [ref=f14e160]: The constraint underneath everything. Compute is a power problem before it is a chip problem.
+    - region [ref=f14e161]:
+      - generic [ref=f14e162]:
+        - generic [ref=f14e163]: Where we work
+        - heading "The company-building layer." [level=2] [ref=f14e165]
+        - paragraph [ref=f14e166]: We are not designing chips or building power plants. We work on the part every company at every layer still has to get right, and it looks remarkably similar whether the company is selling software, robots or power.
+        - list [ref=f14e167]:
+          - listitem [ref=f14e168]: Which problem is worth building the company around?
+          - listitem [ref=f14e169]: Who is the customer, and what will they actually pay for?
+          - listitem [ref=f14e170]: How does a technical breakthrough become a product someone can use?
+          - listitem [ref=f14e171]: Which business model fits the economics of this technology?
+          - listitem [ref=f14e172]: Which partnerships and dependencies decide whether this scales?
+          - listitem [ref=f14e173]: What has to be true, on regulation, risk and governance, before anyone trusts it?
+          - listitem [ref=f14e174]: What should the company deliberately not do?
+    - region [ref=f14e175]:
+      - generic [ref=f14e176]:
+        - generic [ref=f14e177]: How we participate
+        - heading "Three ways in, one feedback loop." [level=2] [ref=f14e179]
+        - generic [ref=f14e180]:
+          - article [ref=f14e181]:
+            - heading "Build" [level=3] [ref=f14e182]
+            - paragraph [ref=f14e183]: We build faibuddy, our AI advisor for founders. Shipping with AI every week is what keeps us honest about what it can actually do.
+            - link "faibuddy" [ref=f14e184] [cursor=pointer]:
+              - /url: https://faibuddy.com
+              - text: faibuddy ↗
+          - article [ref=f14e185]:
+            - heading "Advise" [level=3] [ref=f14e186]
+            - paragraph [ref=f14e187]: We work with founders on the calls that do not have an obvious answer. Which problem to build around, who will actually buy, what not to build, and what has to be true before anyone trusts you with it.
+            - link "How advisory works" [ref=f14e188] [cursor=pointer]:
+              - /url: /advisory
+              - text: How advisory works →
+          - article [ref=f14e189]:
+            - heading "Invest" [level=3] [ref=f14e190]
+            - paragraph [ref=f14e191]: We are starting to back a small number of founders with our own capital, where we have conviction and can be useful beyond the money.
+        - paragraph [ref=f14e192]: Building keeps us honest. Advising shows us the patterns. Investing puts us on the hook for the outcome.
+        - generic [ref=f14e193]:
+          - heading "Where we invest directly, and where we do not yet" [level=3] [ref=f14e194]
+          - paragraph [ref=f14e195]: "Our view covers the whole stack. Our own money goes where we can genuinely judge the opportunity and be useful afterwards: infrastructure and tooling, deployment, evaluation, security and reliability, industry specific and regulated AI, robotics and autonomy software, and products that connect models to real operations."
+          - paragraph [ref=f14e196]: For chips, energy and capital intensive infrastructure, we follow the layer closely and would participate alongside specialists rather than lead. Follow the whole stack. Invest directly where we can underwrite it.
+          - paragraph [ref=f14e197]: Advisory and investing are separate decisions. Working with us does not require or promise an investment.
+    - region [ref=f14e198]:
+      - generic [ref=f14e199]:
+        - heading "Building somewhere in this stack?" [level=2] [ref=f14e200]
+        - link "Start a conversation" [ref=f14e202] [cursor=pointer]:
+          - /url: /advisory#start
+  - contentinfo [ref=f14e203]:
+    - generic [ref=f14e204]:
+      - generic [ref=f14e205]:
+        - generic [ref=f14e206]:
+          - link "Freedom with AI home" [ref=f14e207] [cursor=pointer]:
+            - /url: /
+            - text: Freedom with AI
+          - paragraph [ref=f14e208]: Freedom with AI. Advisory for founders building across the AI stack.
+        - generic [ref=f14e209]:
+          - heading "Explore" [level=2] [ref=f14e210]
+          - link "Advisory" [ref=f14e211] [cursor=pointer]:
+            - /url: /advisory
+          - link "Thesis" [ref=f14e212] [cursor=pointer]:
+            - /url: /thesis
+        - generic [ref=f14e213]:
+          - heading "Product" [level=2] [ref=f14e214]
+          - link "faibuddy ↗" [ref=f14e215] [cursor=pointer]:
+            - /url: https://faibuddy.com
+        - generic [ref=f14e216]:
+          - heading "Connect" [level=2] [ref=f14e217]
+          - link "Sonia on LinkedIn" [ref=f14e218] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/sonia-sarao/
+          - link "Cammie on LinkedIn" [ref=f14e219] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/cammieclay/
+          - link "X @FreedomWithAI" [ref=f14e220] [cursor=pointer]:
+            - /url: https://x.com/FreedomWithAI
+          - link "Contact" [ref=f14e221] [cursor=pointer]:
+            - /url: /contact
+      - generic [ref=f14e222]:
+        - paragraph [ref=f14e223]: © Freedom with AI 2026
+        - paragraph [ref=f14e224]:
+          - link "Privacy" [ref=f14e225] [cursor=pointer]:
+            - /url: /privacy
+          - text: ·
+          - link "Terms" [ref=f14e226] [cursor=pointer]:
+            - /url: /terms
+  - generic [ref=f14e229]:
+    - button [ref=f14e230]
+    - button [ref=f14e236]
+    - button [ref=f14e240]
+    - button [ref=f14e245]

@@ -16,14 +16,15 @@ export const site = {
    * One line, used in the footer, the meta description fallback and the
    * Organization schema. It stays industry-open on purpose.
    */
-  mission: 'Advisory for founders leveraging AI.',
+  mission: 'Advisory for founders building across the AI stack.',
 
   /** Longer positioning line for meta descriptions and og:description. */
   summary:
-    'Sonia Sarao and Cammie Clay advise founders leveraging AI on the strategic decisions involved in building and growing companies.',
+    'Sonia Sarao and Cammie Clay advise founders building across the AI stack, on the decisions that turn technical capability into a real business.',
 
   nav: [
     { label: 'Advisory', href: '/advisory' },
+    { label: 'Thesis', href: '/thesis' },
   ] satisfies NavItem[],
 
   /** Primary action in the header and hero. */
@@ -47,6 +48,7 @@ export const site = {
 
   footerExplore: [
     { label: 'Advisory', href: '/advisory' },
+    { label: 'Thesis', href: '/thesis' },
   ] satisfies NavItem[],
 
   footerProduct: [

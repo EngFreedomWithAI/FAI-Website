@@ -1,8 +1,12 @@
 # Freedom with AI
 
-> Freedom with AI provides strategic advisory for founders leveraging AI while building and growing companies. Founders work directly with Sonia Sarao or Cammie Clay.
+> Freedom with AI provides strategic advisory for founders building across the AI stack. Founders work directly with Sonia Sarao or Cammie Clay.
 
 The firm works across industries, especially where products, buying decisions, operations or regulation are complex.
+
+## Thesis
+
+[Thesis](https://freedomwith.ai/thesis): AI is not a software category, it is a stack. Energy, Chips, Infrastructure, Models and Applications form one interconnected system, and the Applications layer extends well beyond software into robotics, autonomy, biology and manufacturing. The firm works at the company-building layer that runs through every layer of that stack: turning technical capability into a product, a market and a business that lasts. The five-layer framing follows Jensen Huang's description of AI infrastructure; the company-building overlay is the firm's own. The firm does not claim technical depth in chip design, power generation or data centre engineering.
 
 ## Advisory
 
@@ -16,12 +20,13 @@ The firm works across industries, especially where products, buying decisions, o
 ## Other work
 
 - [faibuddy](https://faibuddy.com) is the firm's AI advisory product for founders.
-- The firm is beginning to make selective private-market investments in founder-led companies, funds and aligned SPVs.
+- The firm is beginning to make a small number of angel investments in founder-led companies across the AI stack, where it has conviction and can be useful beyond the capital. Advisory and investment decisions are separate: working with the firm neither requires nor guarantees an investment.
 
 ## Key pages
 
 - [Home](https://freedomwith.ai/)
 - [Advisory](https://freedomwith.ai/advisory)
+- [Thesis](https://freedomwith.ai/thesis)
 - [Contact](https://freedomwith.ai/contact)
 - [Complete site content](https://freedomwith.ai/llms-full.txt)
 

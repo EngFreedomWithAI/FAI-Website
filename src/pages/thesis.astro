@@ -1,0 +1,321 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import CtaStrip from '../components/CtaStrip.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import StackIcon from '../components/StackIcon.astro';
+import ThesisDiagram from '../components/ThesisDiagram.astro';
+import { site } from '../config/site';
+import {
+  attribution,
+  companyBuildingLayer,
+  investingBoundary,
+  participation,
+  participationLine,
+  stackLayers,
+  thesisLine,
+} from '../data/thesis';
+import '../styles/content-pages.css';
+
+const pageTitle = 'Thesis | Freedom with AI';
+const pageDescription =
+  'AI is not a software category. It is a stack: Energy, Chips, Infrastructure, Models and Applications. We work at the layer that runs through all of it.';
+---
+
+<Base title={pageTitle} description={pageDescription}>
+  <Nav />
+
+  <main id="main-content">
+    <section class="page-hero" aria-labelledby="thesis-heading">
+      <div class="container">
+        <SectionHeader label="Thesis" align="left" />
+        <h1 id="thesis-heading" class="page-hero__title">
+          AI is not a software category. It is a stack.
+        </h1>
+        <p class="page-hero__lede">
+          Energy, Chips, Infrastructure, Models, Applications. Push on one layer and the others
+          move. The companies worth building will get built in all five, and at the seams between
+          them.
+        </p>
+      </div>
+    </section>
+
+    <section class="thesis-band on-dark" aria-label="The AI industrial stack">
+      <div class="container">
+        <ThesisDiagram />
+      </div>
+    </section>
+
+    <!-- The layers, said plainly. -->
+    <section class="page-section" aria-labelledby="layers-heading">
+      <div class="container">
+        <SectionHeader label="The layers" align="left" />
+        <h2 id="layers-heading" class="page-section__heading">Five layers, one system.</h2>
+        <p class="page-section__sub">
+          None of these move alone. A breakthrough in one creates a bottleneck in another, and the
+          bottleneck is usually where the next company gets built.
+        </p>
+
+        <ol class="layers">
+          {stackLayers.map((layer) => (
+            <li class="layer">
+              <span class="layer__icon"><StackIcon name={layer.icon} /></span>
+              <div>
+                <h3 class="layer__name">{layer.name}</h3>
+                <p class="layer__note">{layer.note}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- The part that is ours. -->
+    <section class="page-section page-section--alt" aria-labelledby="ours-heading">
+      <div class="container">
+        <SectionHeader label="Where we work" align="left" />
+        <h2 id="ours-heading" class="page-section__heading">{companyBuildingLayer.label}.</h2>
+        <p class="page-section__sub">
+          We are not designing chips or building power plants. We work on the part every company at
+          every layer still has to get right, and it looks remarkably similar whether the company is
+          selling software, robots or power.
+        </p>
+
+        <ul class="questions">
+          <li>Which problem is worth building the company around?</li>
+          <li>Who is the customer, and what will they actually pay for?</li>
+          <li>How does a technical breakthrough become a product someone can use?</li>
+          <li>Which business model fits the economics of this technology?</li>
+          <li>Which partnerships and dependencies decide whether this scales?</li>
+          <li>What has to be true, on regulation, risk and governance, before anyone trusts it?</li>
+          <li>What should the company deliberately not do?</li>
+        </ul>
+
+        <p class="pull">{thesisLine}</p>
+      </div>
+    </section>
+
+    <!-- Build, advise, invest. -->
+    <section class="page-section" aria-labelledby="participate-heading">
+      <div class="container">
+        <SectionHeader label="How we participate" align="left" />
+        <h2 id="participate-heading" class="page-section__heading">
+          Three ways in, one feedback loop.
+        </h2>
+
+        <div class="modes">
+          {participation.map((mode) => (
+            <article class="mode">
+              <h3 class="mode__title">{mode.mode}</h3>
+              <p class="mode__body">{mode.body}</p>
+              {mode.link && (
+                <a
+                  class="mode__link"
+                  href={mode.link.href}
+                  target={mode.link.external ? '_blank' : undefined}
+                  rel={mode.link.external ? 'noopener noreferrer' : undefined}
+                >
+                  {mode.link.label}{' '}
+                  <span aria-hidden="true">{mode.link.external ? '↗' : '→'}</span>
+                </a>
+              )}
+            </article>
+          ))}
+        </div>
+
+        <p class="pull">{participationLine}</p>
+
+        <div class="scope">
+          <h3 class="scope__title">Where we invest directly, and where we do not yet</h3>
+          <p>
+            Our view covers the whole stack. Our own money goes where we can genuinely judge the
+            opportunity and be useful afterwards: infrastructure and tooling, deployment,
+            evaluation, security and reliability, industry specific and regulated AI, robotics and
+            autonomy software, and products that connect models to real operations.
+          </p>
+          <p>
+            For chips, energy and capital intensive infrastructure, we follow the layer closely and
+            would participate alongside specialists rather than lead. Follow the whole stack. Invest
+            directly where we can underwrite it.
+          </p>
+          <p class="scope__note">{investingBoundary}</p>
+        </div>
+
+        <p class="credit">
+          {attribution.text}{' '}
+          <a href={attribution.sourceHref} target="_blank" rel="noopener noreferrer">
+            {attribution.sourceLabel} <span aria-hidden="true">&nearr;</span>
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <CtaStrip>
+      <span slot="heading">Building somewhere in this stack?</span>
+      <Button slot="actions" variant="primary" href={site.cta.href} size="large">
+        {site.cta.label}
+      </Button>
+    </CtaStrip>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  .thesis-band {
+    padding-block: clamp(48px, 7vw, 88px);
+  }
+
+  /* ---------- layers ---------- */
+  .layers {
+    list-style: none;
+    margin: var(--space-7) 0 0;
+    padding: 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .layer {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-5);
+    padding-block: var(--space-5);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .layer__icon {
+    flex: none;
+    width: 28px;
+    height: 28px;
+    margin-top: 2px;
+    color: var(--color-accent);
+  }
+
+  .layer__name {
+    font-size: var(--text-md);
+    font-weight: 600;
+  }
+
+  .layer__note {
+    margin-top: var(--space-2);
+    max-width: 62ch;
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
+  }
+
+  /* ---------- questions ---------- */
+  .questions {
+    list-style: none;
+    margin: var(--space-6) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 var(--space-6);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .questions li {
+    padding-block: var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+  }
+
+  .pull {
+    margin-top: var(--space-7);
+    max-width: 46ch;
+    font-size: var(--text-lg);
+    font-weight: 500;
+    line-height: var(--leading-normal);
+    color: var(--color-text);
+    text-wrap: balance;
+  }
+
+  /* ---------- modes ---------- */
+  .modes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+    margin-top: var(--space-6);
+  }
+
+  .mode {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding-top: var(--space-4);
+    border-top: 2px solid var(--color-accent);
+  }
+
+  .mode__title {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .mode__body {
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-muted);
+  }
+
+  .mode__link {
+    margin-top: auto;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  /* ---------- scope ---------- */
+  .scope {
+    margin-top: var(--space-7);
+    padding: var(--space-6);
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--r);
+  }
+
+  .scope__title {
+    font-size: var(--text-md);
+    font-weight: 600;
+  }
+
+  .scope p {
+    margin-top: var(--space-3);
+    max-width: 66ch;
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
+  }
+
+  .scope__note {
+    margin-top: var(--space-5);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+    font-size: var(--text-sm);
+    color: var(--color-text-subtle);
+  }
+
+  .credit {
+    margin-top: var(--space-7);
+    max-width: var(--readw);
+    font-size: var(--text-xs);
+    line-height: var(--leading-normal);
+    color: var(--color-text-subtle);
+  }
+
+  @media (max-width: 880px) {
+    .modes,
+    .questions {
+      grid-template-columns: 1fr;
+    }
+
+    .layer {
+      gap: var(--space-4);
+    }
+  }
+</style>

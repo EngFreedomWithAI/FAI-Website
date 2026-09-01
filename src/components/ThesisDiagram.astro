@@ -1,0 +1,341 @@
+---
+/**
+ * The AI industrial stack.
+ *
+ * Built as HTML plus inline SVG rather than a flat image on purpose: the text
+ * is real text, so it is selectable, readable by screen readers and crawlers,
+ * stays sharp at any zoom, reflows on a phone, and follows the colour tokens
+ * of whatever ground it sits on. Editing a layer name is a one line change.
+ *
+ * Designed for a dark ground (`.on-dark`), which is where it is used today.
+ * The light fallbacks below keep it legible if it is ever moved onto paper.
+ */
+import StackIcon from './StackIcon.astro';
+import { stackLayers, companyBuildingLayer, thesisLine } from '../data/thesis';
+---
+
+<figure class="td">
+  <p class="td__label">The AI industrial stack</p>
+
+  <div class="td__grid">
+    <ol class="td__layers">
+      {stackLayers.map((layer) => (
+        <li class="td__layer">
+          <span class="td__icon"><StackIcon name={layer.icon} /></span>
+          <span class="td__layer-rule" aria-hidden="true"></span>
+          <span class="td__layer-name">{layer.name}</span>
+        </li>
+      ))}
+    </ol>
+
+    <div class="td__overlay">
+      <p class="td__overlay-title">{companyBuildingLayer.label}</p>
+
+      <ol class="td__path">
+        {companyBuildingLayer.path.map((step, i) => (
+          <li class="td__step">
+            <span class="td__step-name">{step}</span>
+            {i < companyBuildingLayer.path.length - 1 && (
+              <svg class="td__arrow" viewBox="0 0 10 20" aria-hidden="true" focusable="false">
+                <path
+                  d="M5 1v15M1.4 12.6 5 16.2l3.6-3.6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.1"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            )}
+          </li>
+        ))}
+      </ol>
+
+      <ul class="td__disciplines">
+        {companyBuildingLayer.disciplines.map((d) => (
+          <li>{d}</li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
+  <div class="td__strip">
+    <p class="td__modes">
+      <span class="td__modes-line" aria-hidden="true"></span>
+      <span class="td__mode">Build</span>
+      <span class="td__dot" aria-hidden="true"></span>
+      <span class="td__mode">Advise</span>
+      <span class="td__dot" aria-hidden="true"></span>
+      <span class="td__mode">Invest</span>
+      <span class="td__modes-line" aria-hidden="true"></span>
+    </p>
+    <p class="td__line">{thesisLine}</p>
+  </div>
+</figure>
+
+<style>
+  .td {
+    /*
+     * Local aliases so the diagram follows whichever ground it is placed on.
+     * --dg-tint is an unwrapped rgb triplet so the layer ramp below can vary
+     * only the alpha, which keeps every bar the same hue.
+     */
+    --dg-accent: var(--color-accent);
+    --dg-line: var(--color-border);
+    --dg-tint: 31, 78, 121;
+    --dg-a1: 0.035;
+    --dg-a2: 0.055;
+    --dg-a3: 0.075;
+    --dg-a4: 0.095;
+    --dg-a5: 0.115;
+
+    margin: 0;
+  }
+
+  /* Dark ground: the intended treatment. */
+  :global(.on-dark) .td {
+    --dg-tint: 157, 192, 224;
+    --dg-a1: 0.05;
+    --dg-a2: 0.08;
+    --dg-a3: 0.11;
+    --dg-a4: 0.14;
+    --dg-a5: 0.17;
+  }
+
+  .td__label {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--dg-accent);
+  }
+
+  .td__grid {
+    margin-top: var(--space-5);
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.75fr);
+    column-gap: clamp(32px, 4.5vw, 68px);
+    align-items: stretch;
+  }
+
+  /* ---------- the five layers ---------- */
+  .td__layers {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  /*
+   * No layer is singled out. Highlighting one bar reads as "this is the part
+   * we do", which is the opposite of the thesis. Instead the five share one
+   * hue and step evenly in weight, so they read as a single system with a
+   * base at the bottom. Borderless bars separated by a hairline gap are also
+   * cleaner than five outlined boxes.
+   */
+  .td__layer {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-4) var(--space-5);
+    border-radius: var(--r-sm);
+    background: rgba(var(--dg-tint), var(--dg-a1));
+  }
+
+  .td__layer:nth-child(2) {
+    background: rgba(var(--dg-tint), var(--dg-a2));
+  }
+
+  .td__layer:nth-child(3) {
+    background: rgba(var(--dg-tint), var(--dg-a3));
+  }
+
+  .td__layer:nth-child(4) {
+    background: rgba(var(--dg-tint), var(--dg-a4));
+  }
+
+  .td__layer:nth-child(5) {
+    background: rgba(var(--dg-tint), var(--dg-a5));
+  }
+
+  .td__icon {
+    flex: none;
+    width: 30px;
+    height: 30px;
+    color: var(--dg-accent);
+  }
+
+  .td__layer-rule {
+    flex: none;
+    width: 1px;
+    align-self: stretch;
+    background: rgba(var(--dg-tint), 0.38);
+  }
+
+  .td__layer-name {
+    font-size: var(--text-md);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: var(--color-text);
+  }
+
+  /* ---------- the company building overlay ---------- */
+  .td__overlay {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding-block: var(--space-2);
+    width: 100%;
+    max-width: 330px;
+    margin-inline: auto;
+  }
+
+  .td__overlay-title {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dg-accent);
+  }
+
+  .td__path {
+    list-style: none;
+    margin: var(--space-5) 0 0;
+    padding: 0;
+  }
+
+  .td__step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .td__step-name {
+    font-size: var(--text-md);
+    font-weight: 500;
+    color: var(--color-text);
+  }
+
+  .td__arrow {
+    width: 10px;
+    height: 20px;
+    color: var(--dg-accent);
+    opacity: 0.7;
+  }
+
+  .td__disciplines {
+    list-style: none;
+    margin: var(--space-5) 0 0;
+    padding: var(--space-4) 0 0;
+    border-top: 1px solid var(--dg-line);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2px var(--space-3);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  /*
+   * Separator trails the item rather than leading the next one, so a wrapped
+   * line never begins with an orphaned middot.
+   */
+  .td__disciplines li:not(:last-child)::after {
+    content: '·';
+    margin-left: var(--space-3);
+    color: var(--dg-accent);
+    opacity: 0.6;
+  }
+
+  /* ---------- build, advise, invest ---------- */
+  .td__strip {
+    margin-top: var(--space-7);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--dg-line);
+    text-align: center;
+  }
+
+  .td__modes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+  }
+
+  .td__mode {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-text);
+  }
+
+  .td__modes-line {
+    flex: 1 1 auto;
+    max-width: 140px;
+    height: 1px;
+    background: var(--dg-accent);
+    opacity: 0.45;
+  }
+
+  .td__dot {
+    flex: none;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--dg-accent);
+  }
+
+  .td__line {
+    margin-top: var(--space-4);
+    font-size: var(--text-md);
+    color: var(--color-text-muted);
+    text-wrap: balance;
+  }
+
+  /* ---------- narrow ---------- */
+  @media (max-width: 860px) {
+    .td__grid {
+      grid-template-columns: 1fr;
+      row-gap: var(--space-6);
+    }
+
+    .td__overlay {
+      max-width: none;
+      padding: var(--space-5);
+      border-radius: var(--r-sm);
+      background: rgba(var(--dg-tint), var(--dg-a3));
+    }
+
+    .td__layer {
+      padding: var(--space-3) var(--space-4);
+      gap: var(--space-3);
+    }
+
+    .td__icon {
+      width: 24px;
+      height: 24px;
+    }
+
+    .td__layer-name {
+      font-size: var(--text-base);
+    }
+
+    .td__modes {
+      gap: var(--space-3);
+    }
+
+    .td__modes-line {
+      display: none;
+    }
+
+    .td__mode {
+      font-size: var(--text-base);
+      letter-spacing: 0.1em;
+    }
+  }
+</style>

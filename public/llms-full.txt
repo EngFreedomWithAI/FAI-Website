@@ -1,9 +1,10 @@
 # Freedom with AI: Complete Site Content
 
-> Freedom with AI provides strategic advisory for founders leveraging AI while building and growing companies. Work directly with Sonia Sarao or Cammie Clay. Engagements are shaped around the company and the decision in front of it.
+> Freedom with AI provides strategic advisory for founders building across the AI stack. Work directly with Sonia Sarao or Cammie Clay. Engagements are shaped around the company and the decision in front of it.
 
 Canonical website: https://freedomwith.ai/
 Primary advisory page: https://freedomwith.ai/advisory
+Thesis page: https://freedomwith.ai/thesis
 Contact page: https://freedomwith.ai/contact
 
 ## Positioning
@@ -11,6 +12,34 @@ Contact page: https://freedomwith.ai/contact
 Freedom with AI advises founders when the next move is not obvious. The firm works across industries with founders who are building AI-native companies or using AI to reshape products, operations and business models.
 
 Clients work directly with Sonia, Cammie or both based on the company and the work. Engagements begin with a three- or six-month term and are shaped around the company's priorities and level of involvement.
+
+## Thesis
+
+AI is not a software category. It is a stack: Energy, Chips, Infrastructure, Models and Applications. Push on one layer and the others move, and the constraint created in one layer is usually where the next company gets built. The Applications layer extends well beyond SaaS into robotics, autonomy, biology, manufacturing and machines that act in the world.
+
+The five-layer framing follows Jensen Huang's description of AI infrastructure. The company-building overlay is Freedom with AI's own contribution to it.
+
+### The company-building layer
+
+The firm does not design chips, build power plants or engineer data centres, and makes no claim to technical depth in those domains. It works on the part every company at every layer still has to get right, which looks remarkably similar whether the company sells software, robots or power:
+
+- Which problem is worth building the company around
+- Who the customer is and what they will actually pay for
+- How a technical breakthrough becomes a product someone can use
+- Which business model fits the economics of the technology
+- Which partnerships and dependencies decide whether it scales
+- What has to be true, on regulation, risk and governance, before anyone trusts it
+- What the company should deliberately not do
+
+The sequence is capability, then product, then market, then an enduring business. The technology changes by layer. The work of building a company repeats.
+
+### How the firm participates
+
+- Build: faibuddy, the firm's AI advisor for founders. Shipping with AI weekly is what keeps the firm honest about what it can actually do.
+- Advise: direct work with founders on the calls that do not have an obvious answer.
+- Invest: a small number of angel investments in founders, where the firm has conviction and can be useful beyond the capital.
+
+Building keeps the firm honest. Advising broadens its pattern recognition. Investing aligns it with long-term outcomes.
 
 ## Where the firm helps
 
@@ -121,7 +150,11 @@ faibuddy is the firm's AI advisory product for founders: https://faibuddy.com
 
 ### Investing
 
-Freedom with AI is beginning to make selective private-market investments in founder-led companies, funds and aligned special purpose vehicles. Investing is an emerging activity, not the firm's primary service.
+Freedom with AI is beginning to make a small number of angel investments in founder-led companies building across the AI stack. Investing is an emerging activity, not the firm's primary service.
+
+The firm's macro view covers the whole stack; its direct investments are narrower. Direct investment focuses on areas it can genuinely underwrite and help with afterwards: infrastructure and tooling, deployment, evaluation, security and reliability, industry-specific and regulated AI, robotics and autonomy software, and products that connect models to real operational environments. For chips, energy and capital-intensive infrastructure, the firm follows the layer closely and would participate alongside specialists rather than lead.
+
+Advisory and investment decisions are made independently. Working with Freedom with AI neither requires nor guarantees an investment.
 
 ## General contact
 
@@ -131,4 +164,4 @@ Use https://freedomwith.ai/contact for investing, deal flow, speaking, partnersh
 
 The firm is not limited to San Diego and does not limit its advisory work to FinTech, life sciences or SaaS. Experience claims above distinguish demonstrated depth from areas of interest. Content on the site is educational and is not individualized legal, financial, regulatory or investment advice.
 
-Last reviewed: 2026-08-24
+Last reviewed: 2026-09-01
