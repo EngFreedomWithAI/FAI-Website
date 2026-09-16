@@ -100,5 +100,7 @@ export const investingBoundary =
 export const attribution = {
   text: 'The five-layer stack builds on Jensen Huang’s framing of AI as infrastructure. The company-building layer reflects our own work with founders.',
   sourceLabel: 'NVIDIA on the five layers of AI',
+  /** Compact one-line form for the home page, where the full note is too heavy. */
+  shortLabel: 'Adapted from Jensen Huang’s five layers of AI',
   sourceHref: 'https://blogs.nvidia.com/blog/ai-5-layer-cake/',
 } as const;
