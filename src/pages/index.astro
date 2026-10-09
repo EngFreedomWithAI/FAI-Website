@@ -5,161 +5,176 @@ import Footer from '../components/Footer.astro';
 import Button from '../components/Button.astro';
 import CtaStrip from '../components/CtaStrip.astro';
 import TeamAvatar from '../components/TeamAvatar.astro';
-import ThesisDiagram from '../components/ThesisDiagram.astro';
+import ArcDiagram from '../components/ArcDiagram.astro';
 import { site } from '../config/site';
-import { advisors } from '../data/advisors';
-import { inflectionPoints, engagementExamples } from '../data/engagements';
-import { attribution, investingBoundary, participation, participationLine } from '../data/thesis';
+import { advisorBySlug } from '../data/advisors';
+import { inflectionPoints, engagementExamples, proofPoints } from '../data/engagements';
+import { arcLine, investingBoundary, participation, thesisPieces } from '../data/thesis';
 
-const pageTitle = 'Founder advisory across the AI stack | Freedom with AI';
+const pageTitle = 'Advising and investing in space founders | Freedom with AI';
 const pageDescription = site.summary;
+
+const sonia = advisorBySlug('sonia');
+const cammie = advisorBySlug('cammie');
+const build = participation.find((mode) => mode.mode === 'Build');
+const featuredPiece = thesisPieces[0];
 ---
 
 <Base title={pageTitle} description={pageDescription}>
   <Nav />
 
   <main id="main-content">
-    <!-- Hero: typographic. The old illustrated hero showed figures escaping an
-         office, which was the retired positioning drawn as art. -->
     <section class="hero" aria-labelledby="hero-heading">
       <div class="container">
-        <p class="eyebrow">Advisory for founders building across the AI stack</p>
+        <p class="eyebrow">Build. Advise. Invest.</p>
         <h1 id="hero-heading" class="hero__title">
-          When the next move is not obvious.
+          You’ve built the technology. Now build the company.
         </h1>
 
         <p class="hero__sub">
-          Work directly with Sonia or Cammie on the strategic decisions involved in building and
-          growing a company, with added depth across product, technology, growth, regulation and risk.
+          We accelerate entrepreneurs building in space and physical AI. We advise founders on turning
+          a working technology into a business, and invest our own capital in companies we believe in.
         </p>
 
         <div class="cta-row">
-          <Button variant="primary" href={site.cta.href} size="large">
-            {site.cta.label}
+          <Button
+            variant="primary"
+            href={site.cta.href}
+            size="large"
+            track="hero_advisory"
+          >
+            Start a conversation
           </Button>
-          <Button variant="secondary" href="#advisors" size="large">Meet the advisors</Button>
+          <Button variant="secondary" href="/thesis" size="large" track="hero_thesis">
+            Read our thesis
+          </Button>
         </div>
-
-        <p class="hero__fit">
-          We work across industries, especially where products, buying decisions, operations or
-          regulation are complex.
-        </p>
       </div>
     </section>
 
-    <!-- The diagram carries its own title and accessible outline, so the home
-         page presents the framework immediately after the thesis statement. -->
+    <!-- Proof strip: checkable facts only, no client or portfolio names. -->
+    <section class="proof" aria-label="Experience at a glance">
+      <div class="container">
+        <ul class="proof__list">
+          {proofPoints.map((point) => (
+            <li class="proof__item">
+              <span class="proof__figure">{point.figure}</span>
+              <span class="proof__label">{point.label}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
     <section class="thesis on-dark" aria-labelledby="thesis-heading">
       <div class="container">
         <p class="eyebrow">Our thesis</p>
         <h2 id="thesis-heading" class="thesis__title">
-          AI is not a software category. It is a stack.
+          AI is leaving the screen. Space is its hardest test.
         </h2>
         <p class="thesis__lede">
-          Energy, Chips, Infrastructure, Models, Applications. Push on one layer and the others
-          move. The companies worth building will get built in all five, and at the seams between
-          them.
+          The money followed software for a decade. Now it is buying atoms: chips, data centers and
+          power. Next it drives them, in robots, vehicles and machines that act in the world. Space is
+          where every layer of that stack runs under the hardest constraints, and where we focus.
         </p>
 
-        <ThesisDiagram />
+        <div class="thesis__arc">
+          <ArcDiagram />
+        </div>
 
         <div class="thesis__foot">
-          <p class="thesis__limit">
-            We are not designing chips or building power plants. We work on the part every company
-            at every layer still has to get right: turning a technical breakthrough into a product,
-            finding who will actually buy it, and building a business that holds up.
-          </p>
-          <p class="thesis__more">
+          <p class="thesis__limit">{arcLine}</p>
+          <div class="thesis__links">
             <a href="/thesis">Read the full thesis <span aria-hidden="true">&rarr;</span></a>
-          </p>
-          <p class="thesis__credit">
-            <a href={attribution.sourceHref} target="_blank" rel="noopener noreferrer">
-              {attribution.shortLabel} <span aria-hidden="true">&nearr;</span>
-            </a>
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- How we participate. Replaces the old "Beyond advisory" block, which
-         said the same thing without connecting it to anything. -->
-    <section class="block" aria-labelledby="participate-heading">
-      <div class="container">
-        <p class="eyebrow">How we participate</p>
-        <h2 id="participate-heading" class="block__title">Build, Advise and Invest</h2>
-
-        <div class="modes">
-          {participation.map((mode) => (
-            <article class="mode">
-              <h3 class="mode__title">{mode.mode}</h3>
-              <p class="mode__body">{mode.body}</p>
-              {mode.link && (
-                <a
-                  class="mode__link"
-                  href={mode.link.href}
-                  target={mode.link.external ? '_blank' : undefined}
-                  rel={mode.link.external ? 'noopener noreferrer' : undefined}
-                >
-                  {mode.link.label}{' '}
-                  <span aria-hidden="true">{mode.link.external ? '↗' : '→'}</span>
-                </a>
-              )}
-            </article>
-          ))}
-        </div>
-
-        <p class="modes__line">{participationLine}</p>
-        <p class="modes__note">{investingBoundary}</p>
-      </div>
-    </section>
-
-    <section class="block block--alt" id="advisors" aria-labelledby="advisors-heading">
-      <div class="container">
-        <h2 id="advisors-heading" class="block__title">Advisors</h2>
-
-        <div class="advisor-grid">
-          {advisors.map((advisor) => (
-            <article class="advisor">
-              <div class="advisor__head">
-                <TeamAvatar member={advisor.slug} class="advisor__photo" />
-                <div>
-                  <h3 class="advisor__name">{advisor.name}</h3>
-                  <p class="advisor__role">{advisor.role}</p>
-                </div>
-              </div>
-              <p class="advisor__strengths">{advisor.strengths}</p>
-              <p class="advisor__lede">{advisor.lede}</p>
-              <p class="advisor__credential">{advisor.credential}</p>
-              <a
-                class="advisor__link"
-                href={advisor.linkedIn}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {advisor.name.split(' ')[0]} on LinkedIn <span aria-hidden="true">&nearr;</span>
+            {featuredPiece && (
+              <a href={featuredPiece.href}>
+                {featuredPiece.title}, by {featuredPiece.author}{' '}
+                <span aria-hidden="true">&rarr;</span>
               </a>
-            </article>
-          ))}
+            )}
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- When founders call -->
-    <section class="block" aria-labelledby="when-heading">
+    <!-- Two clear paths: advisory with Sonia, investing with Cammie. -->
+    <section class="block" id="team" aria-labelledby="paths-heading">
+      <div class="container">
+        <p class="eyebrow">How we work with founders</p>
+        <h2 id="paths-heading" class="block__title">Two partners. Two ways in.</h2>
+
+        <div class="paths">
+          <article class="path">
+            <p class="path__mode">Advise</p>
+            <div class="path__head">
+              <TeamAvatar member={sonia.slug} class="path__photo" />
+              <div>
+                <h3 class="path__name">{sonia.name}</h3>
+                <p class="path__role">{sonia.role}</p>
+              </div>
+            </div>
+            <p class="path__lede">{sonia.lede}</p>
+            <div class="path__actions">
+              <Button variant="primary" href={site.cta.href} track="path_advisory">
+                Start a conversation
+              </Button>
+              <a class="path__link" href="/advisory">How advisory works <span aria-hidden="true">&rarr;</span></a>
+            </div>
+          </article>
+
+          <article class="path">
+            <p class="path__mode">Invest</p>
+            <div class="path__head">
+              <TeamAvatar member={cammie.slug} class="path__photo" />
+              <div>
+                <h3 class="path__name">{cammie.name}</h3>
+                <p class="path__role">{cammie.role}</p>
+              </div>
+            </div>
+            <p class="path__lede">{cammie.lede}</p>
+            <div class="path__actions">
+              <Button variant="secondary" href="/investing" track="path_investing">
+                How we invest
+              </Button>
+            </div>
+          </article>
+        </div>
+
+        {build && (
+          <div class="build">
+            <p class="build__mode">Build</p>
+            <p class="build__body">{build.body}</p>
+            {build.link && (
+              <a class="build__link" href={build.link.href} target="_blank" rel="noopener noreferrer">
+                {build.link.label} <span aria-hidden="true">&nearr;</span>
+              </a>
+            )}
+          </div>
+        )}
+
+        <p class="paths__note">{investingBoundary}</p>
+      </div>
+    </section>
+
+    <section class="block block--alt" aria-labelledby="when-heading">
       <div class="container">
         <p class="eyebrow">When founders bring us in</p>
-        <h2 id="when-heading" class="block__title">What worked before is no longer enough.</h2>
+        <h2 id="when-heading" class="block__title">The hard part is no longer the technology.</h2>
 
         <ul class="moments">
           {inflectionPoints.map((point) => (
             <li>{point}</li>
           ))}
         </ul>
+
+        <p class="honest">
+          We bring operating, product and commercial experience, not aerospace engineering. You know
+          the physics. We help with who buys it, and how.
+        </p>
       </div>
     </section>
 
-    <!-- Proof -->
-    <section class="block block--alt" aria-labelledby="proof-heading">
+    <section class="block" aria-labelledby="proof-heading">
       <div class="container">
         <p class="eyebrow">Selected advisory work</p>
         <h2 id="proof-heading" class="block__title">Recent problems we have worked through.</h2>
@@ -180,8 +195,8 @@ const pageDescription = site.summary;
 
     <CtaStrip>
       <span slot="heading">Tell us what decision is in front of you.</span>
-      <Button slot="actions" variant="primary" href={site.cta.href} size="large">
-        {site.cta.label}
+      <Button slot="actions" variant="primary" href={site.cta.href} size="large" track="footer_advisory">
+        Start a conversation
       </Button>
     </CtaStrip>
   </main>
@@ -209,14 +224,7 @@ const pageDescription = site.summary;
 
   .block__title {
     margin-top: var(--space-3);
-    max-width: 20ch;
-  }
-
-  .block__sub {
-    margin-top: var(--space-4);
-    max-width: var(--readw);
-    font-size: var(--text-md);
-    color: var(--color-text-muted);
+    max-width: 22ch;
   }
 
   .cta-row {
@@ -228,57 +236,142 @@ const pageDescription = site.summary;
 
   /* ---------- hero ---------- */
   .hero {
-    padding-block: clamp(72px, 12vw, 148px) clamp(56px, 8vw, 96px);
+    padding-block: clamp(72px, 12vw, 148px) clamp(48px, 6vw, 72px);
+  }
+
+  .hero .eyebrow {
+    color: var(--color-accent);
   }
 
   .hero__title {
     margin-top: var(--space-3);
-    max-width: 22ch;
+    max-width: 18ch;
   }
 
   .hero__sub {
     margin-top: var(--space-6);
-    max-width: 58ch;
+    max-width: 60ch;
     font-size: var(--text-md);
     line-height: var(--leading-relaxed);
     color: var(--color-text-muted);
   }
 
-  .hero__fit {
-    margin-top: var(--space-6);
-    padding-top: var(--space-5);
-    border-top: 1px solid var(--color-border);
-    max-width: 60ch;
-    font-size: var(--text-sm);
-    color: var(--color-text-subtle);
+  /* ---------- proof strip ---------- */
+  .proof {
+    padding-bottom: clamp(48px, 6vw, 72px);
   }
 
-  /* ---------- advisors ---------- */
-  .advisor-grid {
+  .proof__list {
+    list-style: none;
+    margin: 0;
+    padding: var(--space-5) 0 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--space-5);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .proof__item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .proof__figure {
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .proof__label {
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+    color: var(--color-text-muted);
+  }
+
+  /* ---------- thesis ---------- */
+  .thesis {
+    padding-block: clamp(64px, 9vw, 112px);
+    background: #020812;
+  }
+
+  .thesis__title {
+    margin-top: var(--space-3);
+    max-width: 22ch;
+  }
+
+  .thesis__lede {
+    margin-top: var(--space-5);
+    max-width: 64ch;
+    font-size: var(--text-md);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-muted);
+  }
+
+  .thesis__arc {
+    margin-top: clamp(48px, 6vw, 72px);
+  }
+
+  .thesis__foot {
+    margin-top: clamp(40px, 6vw, 64px);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .thesis__limit {
+    max-width: var(--readw);
+    font-size: var(--text-md);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text);
+  }
+
+  .thesis__links {
+    margin-top: var(--space-5);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3) var(--space-6);
+    font-size: var(--text-sm);
+    font-weight: 600;
+  }
+
+  .thesis__links a {
+    text-decoration: none;
+  }
+
+  /* ---------- paths ---------- */
+  .paths {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-6);
     margin-top: var(--space-7);
   }
 
-  .advisor {
+  .path {
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
     padding: var(--space-6);
     background: var(--color-bg);
     border: 1px solid var(--color-border);
+    border-top: 3px solid var(--color-accent);
     border-radius: var(--r);
   }
 
-  .advisor__head {
+  .path__mode {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .path__head {
     display: flex;
     align-items: center;
     gap: var(--space-4);
-    min-height: 64px;
   }
 
-  .advisor :global(.advisor__photo) {
+  .path :global(.path__photo) {
     width: 64px;
     height: 64px;
     border-radius: 50%;
@@ -286,44 +379,77 @@ const pageDescription = site.summary;
     flex: none;
   }
 
-  .advisor__name {
+  .path__name {
     font-size: var(--text-lg);
   }
 
-  .advisor__role {
+  .path__role {
     margin-top: 2px;
     font-size: var(--text-sm);
     font-weight: 500;
-    color: var(--color-accent);
+    color: var(--color-text-muted);
   }
 
-  .advisor__strengths {
-    font-size: var(--text-xs);
+  .path__lede {
+    font-size: var(--text-md);
+    line-height: var(--leading-normal);
+    color: var(--color-text);
+    min-height: 5.1rem;
+  }
+
+  .path__actions {
+    margin-top: auto;
+    padding-top: var(--space-3);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .path__link {
+    font-size: var(--text-sm);
     font-weight: 600;
-    letter-spacing: 0.06em;
+    text-decoration: none;
+  }
+
+  .build {
+    margin-top: var(--space-6);
+    padding: var(--space-5) var(--space-6);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: var(--space-3) var(--space-6);
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--r);
+  }
+
+  .build__mode {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--color-accent);
   }
 
-  .advisor__lede {
-    font-size: var(--text-base);
-    color: var(--color-text);
-    min-height: 4.5rem;
-  }
-
-  .advisor__credential {
+  .build__body {
     font-size: var(--text-sm);
-    color: var(--color-text-muted);
     line-height: var(--leading-relaxed);
-    min-height: 5.75rem;
+    color: var(--color-text-muted);
+    max-width: 78ch;
   }
 
-  .advisor__link {
-    margin-top: auto;
-    padding-top: var(--space-2);
+  .build__link {
     font-size: var(--text-sm);
     font-weight: 600;
     text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .paths__note {
+    margin-top: var(--space-5);
+    font-size: var(--text-sm);
+    color: var(--color-text-subtle);
   }
 
   /* ---------- moments ---------- */
@@ -333,7 +459,7 @@ const pageDescription = site.summary;
     margin-top: var(--space-6);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0;
+    gap: 0 var(--space-6);
     border-top: 1px solid var(--color-border);
   }
 
@@ -342,6 +468,16 @@ const pageDescription = site.summary;
     border-bottom: 1px solid var(--color-border);
     font-size: var(--text-md);
     color: var(--color-text-muted);
+  }
+
+  .honest {
+    margin-top: var(--space-6);
+    padding-left: var(--space-4);
+    border-left: 2px solid var(--color-accent);
+    max-width: 62ch;
+    font-size: var(--text-md);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text);
   }
 
   /* ---------- examples ---------- */
@@ -394,137 +530,35 @@ const pageDescription = site.summary;
     line-height: var(--leading-relaxed);
   }
 
-  /* ---------- thesis ---------- */
-  .thesis {
-    padding-block: clamp(64px, 9vw, 112px);
-    background: #020812;
-  }
-
-  .thesis__title {
-    margin-top: var(--space-3);
-    max-width: 24ch;
-  }
-
-  .thesis__lede {
-    margin-top: var(--space-5);
-    max-width: 62ch;
-    font-size: var(--text-md);
-    line-height: var(--leading-relaxed);
-    color: var(--color-text-muted);
-  }
-
-  .thesis :global(.stack) {
-    margin-top: clamp(56px, 7vw, 80px);
-  }
-
-  .thesis__foot {
-    margin-top: clamp(40px, 6vw, 64px);
-    padding-top: var(--space-6);
-    border-top: 1px solid var(--color-border);
-  }
-
-  .thesis__limit {
-    max-width: var(--readw);
-    font-size: var(--text-md);
-    line-height: var(--leading-relaxed);
-    color: var(--color-text);
-  }
-
-  .thesis__more {
-    margin-top: var(--space-4);
-    font-size: var(--text-sm);
-    font-weight: 600;
-  }
-
-  .thesis__more a {
-    text-decoration: none;
-  }
-
-  /* Source credit for the diagram. Deliberately the quietest type on the
-     section: present for anyone checking, invisible to anyone skimming. */
-  .thesis__credit {
-    margin-top: var(--space-5);
-    font-size: var(--text-xs);
-    line-height: var(--leading-normal);
-    color: var(--color-text-subtle);
-  }
-
-  .thesis__credit a {
-    color: inherit;
-    text-decoration: none;
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .thesis__credit a:hover {
-    color: var(--color-text);
-  }
-
-  /* ---------- build, advise, invest ---------- */
-  .modes {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-6);
-    margin-top: var(--space-7);
-  }
-
-  .mode {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-    padding-top: var(--space-4);
-    border-top: 2px solid var(--color-accent);
-  }
-
-  .mode__title {
-    font-size: var(--text-xs);
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--color-accent);
-  }
-
-  .mode__body {
-    font-size: var(--text-base);
-    line-height: var(--leading-relaxed);
-    color: var(--color-text-muted);
-  }
-
-  .mode__link {
-    margin-top: auto;
-    font-size: var(--text-sm);
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  .modes__line {
-    margin-top: var(--space-7);
-    max-width: var(--readw);
-    font-size: var(--text-md);
-    color: var(--color-text);
-  }
-
-  .modes__note {
-    margin-top: var(--space-4);
-    max-width: var(--readw);
-    font-size: var(--text-sm);
-    color: var(--color-text-subtle);
+  @media (max-width: 1040px) {
+    .proof__list {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 
   @media (max-width: 880px) {
-    .advisor-grid,
+    .paths,
     .examples,
-    .moments,
-    .modes {
+    .moments {
       grid-template-columns: 1fr;
+    }
+
+    .build {
+      grid-template-columns: 1fr;
+    }
+
+    .path__lede {
+      min-height: 0;
     }
 
     .hero__title {
       max-width: none;
     }
+  }
 
-    .advisor__lede,
-    .advisor__credential {
-      min-height: 0;
+  @media (max-width: 560px) {
+    .proof__list {
+      grid-template-columns: 1fr 1fr;
     }
   }
 </style>

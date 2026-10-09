@@ -2,6 +2,22 @@ import type { Env } from '../_lib/types';
 import { json, isValidEmail, isValidWebUrl, normalizeUrl, readBody, escapeHtml } from '../_lib/util';
 import { sendEmail } from '../_lib/ses';
 
+const STAGES: Record<string, string> = {
+  'pre-seed': 'Idea or pre-seed',
+  seed: 'Seed',
+  'series-a': 'Series A',
+  'series-b-plus': 'Series B or later',
+  established: 'Established company',
+};
+
+const FOCUSES: Record<string, string> = {
+  market: 'First customers and the market',
+  product: 'Product and company building',
+  gtm: 'Go-to-market and sales',
+  raise: 'Fundraising narrative or diligence',
+  other: 'Something else',
+};
+
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   try {
     return await handleAdvisoryPost(context);
@@ -21,6 +37,9 @@ const handleAdvisoryPost: PagesFunction<Env> = async ({ request, env }) => {
   const email = (data.email ?? '').toLowerCase();
   const companyName = data.company_name ?? '';
   const message = data.message ?? '';
+  // Both selects are optional; unknown values are dropped rather than rejected.
+  const stage = Object.hasOwn(STAGES, data.stage ?? '') ? data.stage : '';
+  const focus = Object.hasOwn(FOCUSES, data.focus ?? '') ? data.focus : '';
   // The browser normalizes too, but this endpoint is reachable directly, so it cannot
   // trust that it happened.
   const link = normalizeUrl(data.link ?? '');
@@ -41,22 +60,30 @@ const handleAdvisoryPost: PagesFunction<Env> = async ({ request, env }) => {
     return json({ ok: false, error: 'Server misconfigured (database). Please try again later.' }, 500);
   }
 
+  const stageLabel = stage ? STAGES[stage] : '';
+  const focusLabel = focus ? FOCUSES[focus] : '';
+
   try {
     await env.DB.prepare(
-      `INSERT INTO advisory_requests (name, email, company_name, message, link)
-       VALUES (?, ?, ?, ?, ?)`
+      `INSERT INTO advisory_requests (name, email, company_name, stage, focus, message, link)
+       VALUES (?, ?, ?, ?, ?, ?, ?)`
     )
-      .bind(name, email, companyName || null, message, link || null)
+      .bind(name, email, companyName || null, stage || null, focus || null, message, link || null)
       .run();
   } catch (err) {
-    // Keep the form available during the deployment window for the new column.
-    console.error('advisory: insert with company name failed, retrying without it', err);
+    // Keep the form available until migration 0006 has run: fold the new
+    // fields into the message so nothing the founder told us is lost.
+    console.error('advisory: insert with stage/focus failed, retrying without them', err);
+    const extras = [stageLabel && `Stage: ${stageLabel}`, focusLabel && `Focus: ${focusLabel}`]
+      .filter(Boolean)
+      .join('\n');
+    const storedMessage = extras ? `${extras}\n\n${message}` : message;
     try {
       await env.DB.prepare(
-        `INSERT INTO advisory_requests (name, email, message, link)
-         VALUES (?, ?, ?, ?)`
+        `INSERT INTO advisory_requests (name, email, company_name, message, link)
+         VALUES (?, ?, ?, ?, ?)`
       )
-        .bind(name, email, message, link || null)
+        .bind(name, email, companyName || null, storedMessage, link || null)
         .run();
     } catch (fallbackErr) {
       console.error('advisory: D1 insert failed', fallbackErr);
@@ -81,6 +108,8 @@ const handleAdvisoryPost: PagesFunction<Env> = async ({ request, env }) => {
       text: `Name: ${name}
 Email: ${email}
 Company: ${companyName || '(not provided)'}
+Stage: ${stageLabel || '(not provided)'}
+Focus: ${focusLabel || '(not provided)'}
 Link: ${link || '(none)'}
 
 Message:
@@ -89,6 +118,8 @@ ${message}`,
 <p><strong>Name:</strong> ${escapeHtml(name)}<br />
 <strong>Email:</strong> ${escapeHtml(email)}<br />
 <strong>Company:</strong> ${companyName ? escapeHtml(companyName) : '(not provided)'}<br />
+<strong>Stage:</strong> ${stageLabel || '(not provided)'}<br />
+<strong>Focus:</strong> ${focusLabel || '(not provided)'}<br />
 <strong>Link:</strong> ${link ? `<a href="${escapeHtml(link)}">${escapeHtml(link)}</a>` : '(none)'}</p>
 <p><strong>Message:</strong></p>
 <p>${escapeHtml(message).replace(/\n/g, '<br />')}</p>`,

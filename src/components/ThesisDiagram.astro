@@ -1,44 +1,36 @@
 ---
 /**
- * The AI industrial stack.
+ * The AI industrial stack, mapped to space.
  *
- * Desktop is a single, responsive SVG intentionally redrawn from
- * public/images/FAI-Thesis.png. Keeping all geometry in one viewBox prevents
- * the alignment drift that occurred when the artwork was assembled from
- * independently sized HTML boxes.
+ * Desktop is a single, responsive SVG. Keeping all geometry in one viewBox
+ * prevents the alignment drift that occurs when artwork is assembled from
+ * independently sized HTML boxes. Each layer row lines up with its space
+ * counterpart in the right-hand column.
  *
  * Mobile is a purpose-built semantic layout rather than a shrunken desktop
  * poster. The visually hidden outline remains the canonical accessible and
  * machine-readable description for both versions.
  */
 import StackIcon from './StackIcon.astro';
-import {
-  companyBuildingLayer,
-  stackLayers,
-  thesisLine,
-} from '../data/thesis';
+import { stackLayers, thesisLine } from '../data/thesis';
 
 const layerY = [112, 182, 252, 322, 392];
 ---
 
 <figure class="stack" aria-labelledby="stack-accessible-title">
   <div class="stack__meaning">
-    <h2 id="stack-accessible-title">The AI industrial stack</h2>
+    <h2 id="stack-accessible-title">The AI industrial stack, in space</h2>
     <p>{thesisLine}</p>
     <ol>
-      {stackLayers.map((layer) => <li>{layer.name}</li>)}
+      {stackLayers.map((layer) => <li>{layer.name}. In space: {layer.space}.</li>)}
     </ol>
-    <h3>{companyBuildingLayer.label}</h3>
-    <p>{companyBuildingLayer.path.join(' to ')}.</p>
-    <p>Disciplines: {companyBuildingLayer.disciplines.join(', ')}.</p>
     <p>Freedom with AI participates in three ways: Build, Advise and Invest.</p>
-    <p>{thesisLine}</p>
   </div>
 
   <!-- One coordinate system keeps the desktop composition precise at any size. -->
   <svg
     class="stack__desktop"
-    viewBox="32 72 960 504"
+    viewBox="105 72 845 504"
     role="img"
     aria-hidden="true"
     focusable="false"
@@ -139,59 +131,57 @@ const layerY = [112, 182, 252, 322, 392];
       </g>
     ))}
 
-    <!-- Continuous brace: one path avoids seams at the centre point. -->
-    <path
-      d="M643 115h5c7 0 11 4 11 12v131c0 9 4 14 15 14-11 0-15 5-15 14v150c0 8-4 12-11 12h-5"
-      fill="none"
-      stroke="#79a9ef"
-      stroke-width="1.8"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    />
-
     <text
       class="svg-column-title"
-      x="829"
+      x="660"
       y="96"
-      text-anchor="middle"
       style="fill:#81adfa;font-size:15px;font-weight:700;letter-spacing:1.15px"
     >
-      {companyBuildingLayer.label.toUpperCase()}
+      IN SPACE
     </text>
 
-    <text class="svg-path" x="829" y="145" text-anchor="middle">Capability</text>
-    <path class="svg-arrow" d="M829 154v18m-5-5 5 5 5-5" />
-    <text class="svg-path" x="829" y="203" text-anchor="middle">Product</text>
-    <path class="svg-arrow" d="M829 212v18m-5-5 5 5 5-5" />
-    <text class="svg-path" x="829" y="261" text-anchor="middle">Market</text>
-    <path class="svg-arrow" d="M829 270v18m-5-5 5 5 5-5" />
-    <text class="svg-path" x="829" y="328" text-anchor="middle">Enduring business</text>
+    <!-- Orbit line tying the space column together. -->
+    <line x1="634" y1="145" x2="634" y2="425" stroke="#79a9ef" stroke-opacity=".35" />
 
-    <line x1="706" y1="363" x2="946" y2="363" stroke="#7391b5" stroke-opacity=".72" />
-    <text class="svg-disciplines" x="826" y="389" text-anchor="middle">
-      Product · Business model · GTM ·
-    </text>
-    <text class="svg-disciplines" x="826" y="410" text-anchor="middle">
-      Partnerships · Regulation · Governance
-    </text>
+    {stackLayers.map((layer, index) => (
+      <g class="svg-space">
+        <line
+          x1="607"
+          y1={layerY[index] + 33}
+          x2="634"
+          y2={layerY[index] + 33}
+          stroke="#79a9ef"
+          stroke-opacity=".6"
+        />
+        <circle
+          cx="634"
+          cy={layerY[index] + 33}
+          r={index === 0 ? 4.5 : 3.5}
+          fill="#020812"
+          stroke="#81adfa"
+          stroke-width="1.5"
+        />
+        <text class="svg-space-name" x="660" y={layerY[index] + 39}>{layer.space}</text>
+      </g>
+    ))}
 
-    <line x1="0" y1="474" x2="1024" y2="474" stroke="#527aa8" stroke-opacity=".62" />
+    <line x1="105" y1="474" x2="950" y2="474" stroke="#527aa8" stroke-opacity=".62" />
     <g class="svg-modes">
-      <line x1="45" y1="508" x2="227" y2="508" />
-      <circle cx="46" cy="508" r="2" />
-      <circle cx="226" cy="508" r="2" />
-      <text x="264" y="518">BUILD</text>
-      <circle cx="409" cy="508" r="2.5" />
-      <text x="447" y="518">ADVISE</text>
-      <circle cx="620" cy="508" r="2.5" />
-      <text x="660" y="518">INVEST</text>
-      <line x1="827" y1="508" x2="979" y2="508" />
-      <circle cx="828" cy="508" r="2" />
-      <circle cx="978" cy="508" r="2" />
+      <line x1="112" y1="508" x2="235" y2="508" />
+      <circle cx="113" cy="508" r="2" />
+      <circle cx="234" cy="508" r="2" />
+      <text x="335" y="518" text-anchor="middle">BUILD</text>
+      <circle cx="425" cy="508" r="2.5" />
+      <text x="527" y="518" text-anchor="middle">ADVISE</text>
+      <circle cx="627" cy="508" r="2.5" />
+      <text x="728" y="518" text-anchor="middle">INVEST</text>
+      <line x1="826" y1="508" x2="943" y2="508" />
+      <circle cx="827" cy="508" r="2" />
+      <circle cx="942" cy="508" r="2" />
     </g>
     <text
       class="svg-thesis-line"
-      x="512"
+      x="527"
       y="550"
       text-anchor="middle"
       style="fill:#b7cee6;font-size:16px;letter-spacing:.2px"
@@ -203,30 +193,20 @@ const layerY = [112, 182, 252, 322, 392];
   <!-- A deliberate mobile composition: readable, touch-scale, and not a tiny poster. -->
   <div class="stack__mobile on-dark" aria-hidden="true">
     <header class="mobile-head">
-      <p class="mobile-title">The AI industrial stack</p>
+      <p class="mobile-title">The AI industrial stack, in space</p>
     </header>
 
     <ol class="mobile-layers">
       {stackLayers.map((layer) => (
         <li>
           <span class="mobile-icon"><StackIcon name={layer.icon} /></span>
-          <span>{layer.name}</span>
+          <span class="mobile-layer-text">
+            <span>{layer.name}</span>
+            <span class="mobile-space">{layer.space}</span>
+          </span>
         </li>
       ))}
     </ol>
-
-    <section class="mobile-company">
-      <p class="mobile-label">{companyBuildingLayer.label}</p>
-      <ol class="mobile-path">
-        {companyBuildingLayer.path.map((step, index) => (
-          <li>
-            <span>{step}</span>
-            {index < companyBuildingLayer.path.length - 1 && <span class="mobile-arrow">↓</span>}
-          </li>
-        ))}
-      </ol>
-      <p class="mobile-disciplines">{companyBuildingLayer.disciplines.join(' · ')}</p>
-    </section>
 
     <footer class="mobile-footer">
       <p class="mobile-modes">Build <span>·</span> Advise <span>·</span> Invest</p>
@@ -273,23 +253,10 @@ const layerY = [112, 182, 252, 322, 392];
     letter-spacing: 1.15px;
   }
 
-  .svg-path {
-    fill: #f7f8fa;
-    font-size: 18px;
+  .svg-space-name {
+    fill: #dbe6f3;
+    font-size: 17px;
     font-weight: 500;
-  }
-
-  .svg-arrow {
-    fill: none;
-    stroke: #76a9f9;
-    stroke-width: 1.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-
-  .svg-disciplines {
-    fill: #b5bac4;
-    font-size: 13px;
   }
 
   .svg-modes {
@@ -382,48 +349,19 @@ const layerY = [112, 182, 252, 322, 392];
       height: 27px;
     }
 
-    .mobile-company {
-      margin: 34px 14px 0;
-      padding: 24px 18px;
-      border-block: 1px solid rgba(129, 173, 250, 0.25);
-      text-align: center;
-    }
-
-    .mobile-label {
-      font-size: var(--text-xs);
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #81adfa;
-    }
-
-    .mobile-path {
-      margin: 18px 0 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .mobile-path li {
+    .mobile-layer-text {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      color: var(--color-text);
-      font-size: var(--text-base);
+      gap: 3px;
+      padding-block: 10px;
+    }
+
+    .mobile-space {
+      font-size: var(--text-sm);
       font-weight: 500;
-    }
-
-    .mobile-arrow {
-      padding: 2px 0;
-      color: #72a9ff;
-      font-weight: 400;
-    }
-
-    .mobile-disciplines {
-      margin: 20px auto 0;
-      max-width: 32ch;
-      font-size: var(--text-xs);
-      line-height: 1.7;
-      color: var(--color-text-muted);
+      letter-spacing: 0;
+      text-transform: none;
+      color: #9dc0e0;
     }
 
     .mobile-footer {

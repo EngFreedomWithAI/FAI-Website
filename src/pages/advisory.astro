@@ -6,26 +6,29 @@ import Button from '../components/Button.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import Field from '../components/Field.astro';
 import TeamAvatar from '../components/TeamAvatar.astro';
-import { advisors } from '../data/advisors';
+import { advisorBySlug } from '../data/advisors';
 import { workAreas } from '../data/engagements';
+import { advisoryFocusOptions, advisoryStageOptions } from '../data/contact-form';
 import '../styles/content-pages.css';
 
 const pageTitle = 'Advisory | Freedom with AI';
 const pageDescription =
-  'Ongoing strategic advisory for founders building across the AI stack, focused on the decisions that turn technical capability into a business.';
+  'Advisory for space and deep-tech founders with Sonia Sarao: first customers, product strategy, go-to-market and fundraising, from someone who has built and sold enterprise technology.';
+
+const sonia = advisorBySlug('sonia');
 
 const advisorySchema = {
   '@type': 'Service',
-  name: 'Founder Advisory',
+  name: 'Founder Advisory for Space and Deep-Tech Companies',
   description: pageDescription,
   provider: { '@id': `${Astro.site?.origin ?? 'https://freedomwith.ai'}/#organization` },
   areaServed: 'Worldwide',
   serviceType: [
+    'Commercialization strategy',
     'Product strategy',
-    'Technology strategy',
-    'Growth strategy',
-    'Regulatory strategy',
-    'Risk and governance',
+    'Go-to-market strategy',
+    'Fundraising strategy',
+    'Diligence readiness',
   ],
 };
 ---
@@ -38,15 +41,18 @@ const advisorySchema = {
       <div class="container">
         <SectionHeader label="Advisory" align="left" />
         <h1 id="advisory-heading" class="page-hero__title">
-          Advisory shaped around momentum.
+          Advisory for founders building in space.
         </h1>
         <p class="page-hero__lede">
-          Founders bring us in when the answer is not obvious, the decision is consequential and
-          generic advice is no longer useful.
+          We work with space and deep-tech founders on the decisions that turn a working
+          technology into a business: who buys it, what to build next, how to sell it and how to
+          raise.
         </p>
         <div class="page-hero__cta">
-          <Button variant="primary" href="#start" size="large">Start a conversation</Button>
-          <Button variant="secondary" href="#advisors" size="large">Meet the advisors</Button>
+          <Button variant="primary" href="#start" size="large" track="advisory_hero_start">
+            Start a conversation
+          </Button>
+          <Button variant="secondary" href="#advisor" size="large">Meet the advisor</Button>
         </div>
       </div>
     </section>
@@ -55,10 +61,10 @@ const advisorySchema = {
     <section class="page-section page-section--alt" aria-labelledby="work-heading">
       <div class="container">
         <SectionHeader label="Where we help" align="left" />
-        <h2 id="work-heading" class="page-section__heading">Four recurring company problems.</h2>
+        <h2 id="work-heading" class="page-section__heading">Four problems between a breakthrough and a business.</h2>
         <p class="page-section__sub">
-          These problems appear across industries wherever products, buying decisions, operations
-          or regulation are complex.
+          They show up most sharply in space, and in any company where the technology is hard, the
+          buyers are complex and the timelines are long.
         </p>
 
         <div class="work-grid">
@@ -77,33 +83,36 @@ const advisorySchema = {
       </div>
     </section>
 
-    <section class="page-section" id="advisors" aria-labelledby="practices-heading">
-      <div class="container">
-        <h2 id="practices-heading" class="page-section__heading">Advisors</h2>
+    <section class="page-section" id="advisor" aria-labelledby="advisor-heading">
+      <div class="container profile">
+        <div class="profile__side">
+          <TeamAvatar member={sonia.slug} class="profile__photo" />
+          <h2 id="advisor-heading" class="profile__name">{sonia.name}</h2>
+          <p class="profile__role">{sonia.role}</p>
+          <p class="profile__strengths">{sonia.strengths}</p>
+          <a
+            class="profile__link"
+            href={sonia.linkedIn}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Sonia on LinkedIn <span aria-hidden="true">&nearr;</span>
+          </a>
+        </div>
 
-        <div class="practices practices--compact">
-          {advisors.map((advisor) => (
-            <article class="practice">
-              <div class="practice__head">
-                <TeamAvatar member={advisor.slug} class="practice__photo" />
-                <div>
-                  <h3 class="practice__name">{advisor.name}</h3>
-                  <p class="practice__role">{advisor.role}</p>
-                </div>
-              </div>
-              <p class="practice__strengths">{advisor.strengths}</p>
-              <p class="practice__credential">{advisor.credential}</p>
-              <p class="practice__depth">{advisor.depth}</p>
-              <a
-                class="practice__link"
-                href={advisor.linkedIn}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {advisor.name.split(' ')[0]} on LinkedIn <span aria-hidden="true">&nearr;</span>
-              </a>
-            </article>
-          ))}
+        <div class="profile__main">
+          {sonia.bio.map((paragraph) => <p class="profile__bio">{paragraph}</p>)}
+
+          <ul class="profile__proof">
+            {sonia.proof.map((item) => <li>{item}</li>)}
+          </ul>
+
+          <p class="profile__depth">{sonia.depth}</p>
+
+          <p class="profile__also">
+            Investing questions go to Cammie Clay, who leads our investing.{' '}
+            <a href="/investing">How we invest <span aria-hidden="true">&rarr;</span></a>
+          </p>
         </div>
       </div>
     </section>
@@ -123,8 +132,7 @@ const advisorySchema = {
 
           <ul class="check-list">
             <li>
-              A company-level perspective across product, technology, growth, operations,
-              regulation and risk
+              A company-level perspective across market, product, go-to-market and fundraising
             </li>
             <li>Regular working sessions focused on the decisions in motion</li>
             <li>Direct access as questions surface between sessions</li>
@@ -135,14 +143,19 @@ const advisorySchema = {
         <aside class="fit-card">
           <h3 class="fit-card__title">Is this a fit?</h3>
           <p>
-            Best for founders actively building or growing a company, with meaningful decisions
-            already in motion.
+            Best for founders in space, physical AI and deep tech with a working technology and a
+            commercial decision in front of them.
+          </p>
+          <p>
+            We also take a small number of FinTech, B2B software and life sciences engagements.
           </p>
           <p>
             We begin with a three- or six-month engagement. Scope and fee reflect the priorities
             and level of involvement.
           </p>
-          <Button variant="primary" href="#start" size="large">Start a conversation</Button>
+          <Button variant="primary" href="#start" size="large" track="advisory_fit_start">
+            Start a conversation
+          </Button>
         </aside>
       </div>
     </section>
@@ -153,7 +166,7 @@ const advisorySchema = {
         <SectionHeader label="Start a conversation" align="left" />
         <h2 id="start-heading" class="page-section__heading">Tell us about the company</h2>
         <p class="page-section__sub">
-          Tell us what the company does and what decision is in front of you.
+          A few lines is enough. We will reply within a few days.
         </p>
 
         <div
@@ -179,6 +192,22 @@ const advisorySchema = {
             label="Company name"
             type="text"
             optional
+          />
+          <Field
+            id="advisory-stage"
+            name="stage"
+            label="Stage"
+            type="select"
+            optional
+            options={advisoryStageOptions}
+          />
+          <Field
+            id="advisory-focus"
+            name="focus"
+            label="What you are working through"
+            type="select"
+            optional
+            options={advisoryFocusOptions}
           />
           <Field
             id="advisory-message"
@@ -274,71 +303,13 @@ const advisorySchema = {
     line-height: var(--leading-relaxed);
   }
 
-  .practices {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-6);
-    margin-top: var(--space-7);
-  }
-
-  .practice {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-    padding: var(--space-6);
-    border: 1px solid var(--color-border);
-    border-radius: var(--r);
-  }
-
-  .practice__head {
-    display: flex;
-    align-items: center;
-    gap: var(--space-4);
-    min-height: 64px;
-  }
-
-  .practice :global(.practice__photo) {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    object-fit: cover;
-    flex: none;
-  }
-
-  .practice__name {
-    font-size: var(--text-lg);
-  }
-
-  .practice__role {
-    margin-top: 2px;
-    font-size: var(--text-sm);
-    font-weight: 500;
-    color: var(--color-accent);
-  }
-
-  .practice__strengths {
-    font-size: var(--text-xs);
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--color-accent);
-  }
-
-  .practice__credential {
-    font-size: var(--text-sm);
-    color: var(--color-text-muted);
-    line-height: var(--leading-relaxed);
-  }
-
-  .practice__depth {
+  .profile__also {
+    margin-top: var(--space-5);
     font-size: var(--text-sm);
     color: var(--color-text-subtle);
-    line-height: var(--leading-relaxed);
   }
 
-  .practice__link {
-    margin-top: auto;
-    font-size: var(--text-sm);
+  .profile__also a {
     font-weight: 600;
     text-decoration: none;
   }
@@ -394,7 +365,6 @@ const advisorySchema = {
   }
 
   @media (max-width: 880px) {
-    .practices,
     .work-grid,
     .work-split {
       grid-template-columns: 1fr;
@@ -459,6 +429,8 @@ const advisorySchema = {
       const name = String(data.get('name') ?? '').trim();
       const email = String(data.get('email') ?? '').trim();
       const companyName = String(data.get('company_name') ?? '').trim();
+      const stage = String(data.get('stage') ?? '').trim();
+      const focus = String(data.get('focus') ?? '').trim();
       const message = String(data.get('message') ?? '').trim();
       const link = normalizeUrl(String(data.get('link') ?? ''));
 
@@ -502,7 +474,15 @@ const advisorySchema = {
         const res = await fetch('/api/advisory', {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ name, email, company_name: companyName, message, link }),
+          body: JSON.stringify({
+            name,
+            email,
+            company_name: companyName,
+            stage,
+            focus,
+            message,
+            link,
+          }),
         });
         const result = (await res.json().catch(() => ({}))) as {
           ok?: boolean;
@@ -532,6 +512,7 @@ const advisorySchema = {
         form.reset();
         successBanner?.removeAttribute('hidden');
         successBanner?.focus();
+        window.faiTrack?.('advisory_submitted', { stage, focus });
       } catch {
         if (errorBanner) {
           errorBanner.textContent = 'Network error. Please try again.';

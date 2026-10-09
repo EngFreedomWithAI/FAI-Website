@@ -6,21 +6,15 @@ import Button from '../components/Button.astro';
 import CtaStrip from '../components/CtaStrip.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import StackIcon from '../components/StackIcon.astro';
+import ArcDiagram from '../components/ArcDiagram.astro';
 import ThesisDiagram from '../components/ThesisDiagram.astro';
 import { site } from '../config/site';
-import {
-  attribution,
-  companyBuildingLayer,
-  investingBoundary,
-  participation,
-  participationLine,
-  stackLayers,
-} from '../data/thesis';
+import { arcLine, attribution, companyBuildingLayer, stackLayers, thesisPieces } from '../data/thesis';
 import '../styles/content-pages.css';
 
 const pageTitle = 'Thesis | Freedom with AI';
 const pageDescription =
-  'AI is not a software category. It is a stack: Energy, Chips, Infrastructure, Models and Applications. We work at the layer that runs through all of it.';
+  'AI is leaving the screen. The money has moved from software to chips, data centers and power, and next into machines that act in the world. Space is the whole AI stack under its hardest constraints.';
 ---
 
 <Base title={pageTitle} description={pageDescription}>
@@ -31,39 +25,63 @@ const pageDescription =
       <div class="container">
         <SectionHeader label="Thesis" align="left" />
         <h1 id="thesis-heading" class="page-hero__title">
-          AI is not a software category. It is a stack.
+          AI is leaving the screen. Space is its hardest test.
         </h1>
         <p class="page-hero__lede">
-          AI companies depend on energy, chips, infrastructure, models and applications. A decision
-          or constraint at one layer can change the opportunity at another. We look for companies
-          within each layer and where those dependencies create a new market.
+          Software captured the last decade. The money is now moving into atoms: chips, data
+          centers, power, and machines that act in the world. Space is where every layer of that
+          stack runs under the hardest constraints, and it is where we focus our advising and
+          investing.
         </p>
       </div>
     </section>
 
-    <section class="thesis-band on-dark" aria-label="The AI industrial stack">
+    <!-- The arc: where the money has moved, and where it goes next. -->
+    <section class="arc-band on-dark" aria-labelledby="arc-heading">
+      <div class="container">
+        <SectionHeader label="Follow the money" align="left" />
+        <h2 id="arc-heading" class="page-section__heading">From bits, to atoms, to orbit.</h2>
+        <div class="arc-band__diagram">
+          <ArcDiagram showRewards />
+        </div>
+        <p class="arc-band__line">{arcLine}</p>
+      </div>
+    </section>
+
+    <!-- The stack, mapped to space. -->
+    <section class="page-section" aria-labelledby="layers-heading">
+      <div class="container">
+        <SectionHeader label="The stack in space" align="left" />
+        <h2 id="layers-heading" class="page-section__heading">Five layers, one system, no slack.</h2>
+        <p class="page-section__sub">
+          AI depends on energy, chips, infrastructure, models and applications. Push on one layer and
+          the others move. Each layer has a space version, and each one is harder.
+        </p>
+      </div>
+    </section>
+
+    <section class="thesis-band on-dark" aria-label="The AI industrial stack, in space">
       <div class="container">
         <ThesisDiagram />
       </div>
     </section>
 
-    <!-- The layers, said plainly. -->
-    <section class="page-section" aria-labelledby="layers-heading">
+    <section class="page-section" aria-label="Each layer, on Earth and in space">
       <div class="container">
-        <SectionHeader label="The layers" align="left" />
-        <h2 id="layers-heading" class="page-section__heading">Five layers, one system.</h2>
-        <p class="page-section__sub">
-          Each layer has different technology, capital needs, margins and paths to market. Those
-          differences matter when deciding what kind of company can be built there.
-        </p>
-
         <ol class="layers">
           {stackLayers.map((layer) => (
             <li class="layer">
               <span class="layer__icon"><StackIcon name={layer.icon} /></span>
-              <div>
-                <h3 class="layer__name">{layer.name}</h3>
-                <p class="layer__note">{layer.note}</p>
+              <h3 class="layer__name">{layer.name}</h3>
+              <div class="layer__cols">
+                <p class="layer__note">
+                  <span class="layer__tag">On Earth</span>
+                  {layer.note}
+                </p>
+                <p class="layer__note layer__note--space">
+                  <span class="layer__tag">In space</span>
+                  {layer.spaceNote}
+                </p>
               </div>
             </li>
           ))}
@@ -71,75 +89,78 @@ const pageDescription =
       </div>
     </section>
 
+    <!-- Why space, said plainly. -->
+    <section class="page-section page-section--alt" aria-labelledby="why-heading">
+      <div class="container">
+        <SectionHeader label="Why space" align="left" />
+        <h2 id="why-heading" class="page-section__heading">Where hard technology needs company builders.</h2>
+
+        <div class="why">
+          <article>
+            <h3>The moat is physical</h3>
+            <p>
+              Hardware in orbit, real-world data and hard-won licenses take years to replicate. That
+              is the kind of advantage investors will reward next.
+            </p>
+          </article>
+          <article>
+            <h3>Every AI constraint is sharper</h3>
+            <p>
+              Power, compute, bandwidth and latency are the limits of AI on Earth. In space they are
+              tighter, so the companies that solve them build things others cannot.
+            </p>
+          </article>
+          <article>
+            <h3>The business is the bottleneck</h3>
+            <p>
+              Many space companies have the engineering. Fewer have a clear first customer, a sales
+              motion that survives procurement, and a story investors outside the sector can follow.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <!-- The part that is ours. -->
-    <section class="page-section page-section--alt" aria-labelledby="ours-heading">
+    <section class="page-section" aria-labelledby="ours-heading">
       <div class="container">
         <SectionHeader label="Where we work" align="left" />
         <h2 id="ours-heading" class="page-section__heading">{companyBuildingLayer.label}.</h2>
         <p class="page-section__sub">
-          We do not design chips, build power plants or engineer data centres. Our work begins where
-          technical capability has to become a product, earn customer trust and support a durable
-          company. Those questions are similar across the stack, even when the technology is not.
+          We do not design spacecraft, chips or power systems. Our work begins where a technical
+          capability has to become a product, find a buyer and support a durable company. Those
+          questions repeat across the stack, even when the technology does not.
         </p>
 
-        <ul class="questions">
-          <li>Which problem is important enough to build a company around?</li>
-          <li>Who has it, how do they solve it today and what will they pay for?</li>
-          <li>Which technical capability creates a meaningful product advantage?</li>
-          <li>Which business model works with the costs, margins and capital required?</li>
-          <li>Which dependencies, partnerships or supply constraints determine scale?</li>
-          <li>What evidence, safeguards, regulation and governance are required for trust?</li>
-          <li>What should remain outside the company’s scope?</li>
-        </ul>
+        <ol class="path" aria-label="From capability to business">
+          {companyBuildingLayer.path.map((step) => <li>{step}</li>)}
+        </ol>
 
+        <div class="ours__links">
+          <a href="/advisory">Where we help founders <span aria-hidden="true">&rarr;</span></a>
+          <a href="/investing">What we invest in <span aria-hidden="true">&rarr;</span></a>
+        </div>
       </div>
     </section>
 
-    <!-- Build, advise, invest. -->
-    <section class="page-section" aria-labelledby="participate-heading">
+    <!-- Long-form pieces behind the thesis. -->
+    <section class="page-section page-section--alt" id="pieces" aria-labelledby="pieces-heading">
       <div class="container">
-        <SectionHeader label="How we participate" align="left" />
-        <h2 id="participate-heading" class="page-section__heading">
-          Build, Advise and Invest
-        </h2>
+        <SectionHeader label="Pieces" align="left" />
+        <h2 id="pieces-heading" class="page-section__heading">Behind the thesis.</h2>
 
-        <div class="modes">
-          {participation.map((mode) => (
-            <article class="mode">
-              <h3 class="mode__title">{mode.mode}</h3>
-              <p class="mode__body">{mode.body}</p>
-              {mode.link && (
-                <a
-                  class="mode__link"
-                  href={mode.link.href}
-                  target={mode.link.external ? '_blank' : undefined}
-                  rel={mode.link.external ? 'noopener noreferrer' : undefined}
-                >
-                  {mode.link.label}{' '}
-                  <span aria-hidden="true">{mode.link.external ? '↗' : '→'}</span>
-                </a>
-              )}
-            </article>
+        <ul class="pieces">
+          {thesisPieces.map((piece) => (
+            <li>
+              <a class="piece" href={piece.href}>
+                <span class="piece__meta">{piece.author} · {piece.date}</span>
+                <span class="piece__title">{piece.title}</span>
+                <span class="piece__summary">{piece.summary}</span>
+                <span class="piece__cta">Read <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </li>
           ))}
-        </div>
-
-        <p class="pull">{participationLine}</p>
-
-        <div class="scope">
-          <h3 class="scope__title">Where we invest</h3>
-          <p>
-            Our view spans the whole stack, but our direct investment focus is narrower. We look at
-            infrastructure and tooling, deployment, evaluation, security and reliability,
-            industry-specific and regulated AI, robotics and autonomy software, and products that
-            connect models to real operations.
-          </p>
-          <p>
-            For semiconductors, energy and capital-intensive infrastructure, we may invest
-            alongside specialists with deeper technical and project-finance expertise. We follow
-            the whole stack and invest directly where we can form an independent view.
-          </p>
-          <p class="scope__note">{investingBoundary}</p>
-        </div>
+        </ul>
 
         <p class="credit">
           {attribution.text}{' '}
@@ -152,8 +173,8 @@ const pageDescription =
 
     <CtaStrip>
       <span slot="heading">Building somewhere in this stack?</span>
-      <Button slot="actions" variant="primary" href={site.cta.href} size="large">
-        {site.cta.label}
+      <Button slot="actions" variant="primary" href={site.cta.href} size="large" track="thesis_advisory">
+        Start a conversation
       </Button>
     </CtaStrip>
   </main>
@@ -162,6 +183,25 @@ const pageDescription =
 </Base>
 
 <style>
+  .arc-band {
+    padding-block: clamp(64px, 9vw, 112px);
+    background: #020812;
+  }
+
+  .arc-band__diagram {
+    margin-top: clamp(40px, 5vw, 64px);
+  }
+
+  .arc-band__line {
+    margin-top: clamp(40px, 5vw, 64px);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--color-border);
+    max-width: var(--readw);
+    font-size: var(--text-md);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text);
+  }
+
   .thesis-band {
     padding-block: clamp(28px, 4vw, 48px);
     background: #020812;
@@ -170,21 +210,21 @@ const pageDescription =
   /* ---------- layers ---------- */
   .layers {
     list-style: none;
-    margin: var(--space-7) 0 0;
+    margin: 0;
     padding: 0;
     border-top: 1px solid var(--color-border);
   }
 
   .layer {
-    display: flex;
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: 28px 14rem 1fr;
     gap: var(--space-5);
+    align-items: start;
     padding-block: var(--space-5);
     border-bottom: 1px solid var(--color-border);
   }
 
   .layer__icon {
-    flex: none;
     width: 28px;
     height: 28px;
     margin-top: 2px;
@@ -196,107 +236,153 @@ const pageDescription =
     font-weight: 600;
   }
 
+  .layer__cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+  }
+
   .layer__note {
-    margin-top: var(--space-2);
-    max-width: 62ch;
     font-size: var(--text-base);
     color: var(--color-text-muted);
     line-height: var(--leading-relaxed);
   }
 
-  /* ---------- questions ---------- */
-  .questions {
-    list-style: none;
-    margin: var(--space-6) 0 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0 var(--space-6);
-    border-top: 1px solid var(--color-border);
-  }
-
-  .questions li {
-    padding-block: var(--space-4);
-    border-bottom: 1px solid var(--color-border);
-    font-size: var(--text-base);
-    color: var(--color-text-muted);
-  }
-
-  .pull {
-    margin-top: var(--space-7);
-    max-width: 46ch;
-    font-size: var(--text-lg);
-    font-weight: 500;
-    line-height: var(--leading-normal);
+  .layer__note--space {
     color: var(--color-text);
-    text-wrap: balance;
   }
 
-  /* ---------- modes ---------- */
-  .modes {
+  .layer__tag {
+    display: block;
+    margin-bottom: var(--space-1);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-subtle);
+  }
+
+  .layer__note--space .layer__tag {
+    color: var(--color-accent);
+  }
+
+  /* ---------- why space ---------- */
+  .why {
+    margin-top: var(--space-7);
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-6);
-    margin-top: var(--space-6);
   }
 
-  .mode {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
+  .why article {
     padding-top: var(--space-4);
     border-top: 2px solid var(--color-accent);
   }
 
-  .mode__title {
-    font-size: var(--text-xs);
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--color-accent);
-  }
-
-  .mode__body {
-    font-size: var(--text-base);
-    line-height: var(--leading-relaxed);
-    color: var(--color-text-muted);
-  }
-
-  .mode__link {
-    margin-top: auto;
-    font-size: var(--text-sm);
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  /* ---------- scope ---------- */
-  .scope {
-    margin-top: var(--space-7);
-    padding: var(--space-6);
-    background: var(--color-bg-alt);
-    border: 1px solid var(--color-border);
-    border-radius: var(--r);
-  }
-
-  .scope__title {
+  .why h3 {
     font-size: var(--text-md);
     font-weight: 600;
   }
 
-  .scope p {
+  .why p {
     margin-top: var(--space-3);
-    max-width: 66ch;
     font-size: var(--text-base);
-    color: var(--color-text-muted);
     line-height: var(--leading-relaxed);
+    color: var(--color-text-muted);
   }
 
-  .scope__note {
-    margin-top: var(--space-5);
-    padding-top: var(--space-4);
-    border-top: 1px solid var(--color-border);
+  /* ---------- capability to business ---------- */
+  .path {
+    list-style: none;
+    margin: var(--space-6) 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .path li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
     font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+
+  .path li:not(:last-child)::after {
+    content: '→';
     color: var(--color-text-subtle);
+    font-weight: 400;
+  }
+
+  .ours__links {
+    margin-top: var(--space-6);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3) var(--space-6);
+    font-size: var(--text-sm);
+    font-weight: 600;
+  }
+
+  .ours__links a {
+    text-decoration: none;
+  }
+
+  /* ---------- pieces ---------- */
+  .pieces {
+    list-style: none;
+    margin: var(--space-6) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+  }
+
+  .piece {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    height: 100%;
+    padding: var(--space-6);
+    border: 1px solid var(--color-border);
+    border-top: 3px solid var(--color-accent);
+    border-radius: var(--r);
+    color: var(--color-text);
+    text-decoration: none;
+    transition: border-color var(--dur) var(--ease);
+  }
+
+  .piece:hover {
+    border-color: var(--color-accent);
+    color: var(--color-text);
+  }
+
+  .piece__meta {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-subtle);
+  }
+
+  .piece__title {
+    font-size: var(--text-xl);
+    font-weight: 500;
+  }
+
+  .piece__summary {
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-muted);
+  }
+
+  .piece__cta {
+    margin-top: auto;
+    padding-top: var(--space-2);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-accent);
   }
 
   .credit {
@@ -307,13 +393,24 @@ const pageDescription =
     color: var(--color-text-subtle);
   }
 
+  @media (max-width: 1040px) {
+    .layer {
+      grid-template-columns: 28px 1fr;
+    }
+
+    .layer__cols {
+      grid-column: 2;
+    }
+  }
+
   @media (max-width: 880px) {
-    .modes,
-    .questions {
+    .why,
+    .pieces,
+    .layer__cols {
       grid-template-columns: 1fr;
     }
 
-    .layer {
+    .layer__cols {
       gap: var(--space-4);
     }
   }

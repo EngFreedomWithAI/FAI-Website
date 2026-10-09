@@ -11,7 +11,7 @@ const TOPICS = new Set([
 ]);
 const TOPIC_LABELS: Record<string, string> = {
   advisory: 'Advisory enquiry',
-  investing: 'Investing, SPV or deal flow',
+  investing: 'Investing, co-investing or an introduction',
   speaking: 'Speaking or podcast invitation',
   partnership: 'Partnership or collaboration',
   general: 'General question',

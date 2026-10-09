@@ -1,169 +1,139 @@
 # Freedom with AI: Complete Site Content
 
-> Freedom with AI provides strategic advisory for founders building across the AI stack. Work directly with Sonia Sarao or Cammie Clay. Engagements are shaped around the company and the decision in front of it.
+> Freedom with AI accelerates entrepreneurs building in space and physical AI. Build. Advise. Invest. Sonia Sarao leads advisory. Cammie Clay leads investing.
 
 Canonical website: https://freedomwith.ai/
-Primary advisory page: https://freedomwith.ai/advisory
-Thesis page: https://freedomwith.ai/thesis
-Contact page: https://freedomwith.ai/contact
+Advisory: https://freedomwith.ai/advisory
+Investing: https://freedomwith.ai/investing
+Thesis: https://freedomwith.ai/thesis
+State of AI: Investing: https://freedomwith.ai/thesis/state-of-ai-investing
+Contact: https://freedomwith.ai/contact
 
 ## Positioning
 
-Freedom with AI advises founders when the next move is not obvious. The firm works across industries with founders who are building AI-native companies or using AI to reshape products, operations and business models.
+Mission: Accelerate Entrepreneurs. Build. Advise. Invest.
 
-Clients work directly with Sonia, Cammie or both based on the company and the work. Engagements begin with a three- or six-month term and are shaped around the company's priorities and level of involvement.
+Freedom with AI works with founders who have built the technology and now need to build the company. Space is the focus for both advising and investing. Advisory is also open to physical AI and deep-tech founders, and to a small number of FinTech, B2B software and life sciences engagements.
+
+The firm brings operating, product and commercial experience, not aerospace engineering. Founders know the physics; the firm helps with who buys it, and how.
 
 ## Thesis
 
-AI is not a software category. AI companies depend on energy, chips, infrastructure, models and applications. A decision or constraint at one layer can change the opportunity at another.
+AI is leaving the screen, and space is its hardest test.
 
-Each layer has different technology, capital needs, margins and paths to market. Models range from proprietary frontier systems to open-source and domain-specific alternatives. Applications include software as well as scientific tools, robots, vehicles and other systems that can sense, decide and act.
+The money has moved in three steps, following Cammie Clay's State of AI: Investing talk:
 
-The five-layer stack builds on Jensen Huang's framing of AI as infrastructure. The company-building layer reflects Freedom with AI's own work with founders.
+- Bits (2010s to 2024): software eats the world through SaaS, apps and per-seat pricing. Investors rewarded growth and seats.
+- Bits buy atoms (2025 to 2026): AI money pours into chips, data centers and power. Investors reward revenue and retention, not demos.
+- Bits drive atoms (2027 and beyond): AI goes into the real world through robotaxis, robots, devices and AI-designed drugs. Investors will reward a physical moat: hardware, real-world data and regulation.
+
+The firm's focus is the next step: space. Software alone gets copied in months. Software plus the real world is hard to copy, and space is the hardest real world there is.
+
+### The stack in space
+
+The five-layer stack builds on Jensen Huang's framing of AI as infrastructure. The space mapping is the firm's own.
+
+- Applications and embodied AI. On Earth: robots, vehicles, scientific tools and other systems that sense, decide and act. In space: imagery, connectivity, logistics and servicing in orbit.
+- Models. On Earth: frontier, open-source and domain-specific models. In space: onboard autonomy, because spacecraft cannot wait for a round trip to Earth to make every decision.
+- Infrastructure. On Earth: data centers, networking, cooling, orchestration and security. In space: downlinks, ground networks and compute in orbit.
+- Chips and compute. On Earth: processors, memory, interconnects and supply. In space: compute that survives radiation, heat and a tight power budget.
+- Energy. On Earth: the constraint under everything. In orbit: literally finite, with every subsystem competing for it.
+
+### Why space
+
+- The moat is physical. Hardware in orbit, real-world data and hard-won licenses are hard to copy.
+- Every AI constraint is sharper. Power, compute, bandwidth and latency are tighter in space.
+- The business is the bottleneck. Many space companies have the engineering; fewer have a clear first customer, a sales motion that survives procurement, and a story investors outside the sector can follow.
 
 ### The company-building layer
 
-The firm does not design chips, build power plants or engineer data centres. Its work begins where technical capability has to become a product, earn customer trust and support a durable company. Those questions are similar across the stack, even when the technology is not:
+The firm does not design spacecraft, chips or power systems. Its work begins where a technical capability has to become a product, find a buyer and support a durable company. The sequence is capability, then product, then market, then an enduring business. Questions it works through:
 
-- Which problem is important enough to build a company around
-- Who has it, how they solve it today and what they will pay for
+- Which customer needs this capability badly enough to pay, and when
+- Commercial, civil government or defense: which comes first
 - Which technical capability creates a meaningful product advantage
-- Which business model works with the costs, margins and capital required
-- Which dependencies, partnerships or supply constraints determine scale
-- What evidence, safeguards, regulation and governance are required for trust
+- Which business model works with the costs, timelines and capital required
+- Which partners, primes or supply constraints determine scale
+- What investors and acquirers will examine, and whether the story is ready
 - What should remain outside the company's scope
-
-The sequence is capability, then product, then market, then an enduring business. The technology changes by layer. The work of building a company repeats.
 
 ### How the firm participates
 
-- Build: faibuddy, the firm's AI advisor for founders. Working on a live AI product grounds the firm's view in product decisions, customer behaviour and the limits of current technology.
-- Advise: direct work with founders on decisions that shape the company, including which problem to pursue, what to build, who will buy, how to earn trust and where to focus.
-- Invest: a small number of angel investments where the firm has conviction and can contribute beyond the investment.
+- Advise, led by Sonia Sarao: hands-on advisory for space and deep-tech founders turning a working technology into a business.
+- Invest, led by Cammie Clay: the firm's own capital in early-stage space companies, and physical AI where it meets space.
+- Build: the firm's own products for entrepreneurs, starting with faibuddy, and AI agents that run new products end to end.
 
-Building provides direct operating feedback. Advising brings exposure to different markets and company stages. Investing extends that perspective over a longer horizon.
+## Advisory
 
-## Where the firm helps
+### Where the firm helps
 
-### Finding the market
+Finding the market: commercial, civil government or defense customers first; mapping the capability to concrete customer problems; market and competitive research; business model and pricing on long timelines; positioning and the company narrative.
 
-For companies whose problem is not sharp yet or whose stated market is not the one buying:
+Building the product and the company: product strategy built around a core technology; the software, data and AI layer around the hardware; roadmap, cost and runway decisions; team and operating structure, including distributed teams; new products and business lines.
 
-- Refine the problem and identify who actually has it
-- Competitive and market research
-- Business model decisions
-- The path to product-market fit
-- Positioning and company narrative
+Selling into complex buyers: buying committees, champions and decision-makers; go-to-market motion and sales strategy; partnerships, primes and channels; customer segmentation and verticalization; pricing and packaging.
 
-### Building the product and the company
+Raising and diligence: a fundraising narrative for investors new to the sector; Series A and B preparation; what investors and acquirers examine in diligence; regulatory and risk questions that shape the plan; transaction readiness.
 
-For decisions about what to build, what to skip and what the team and cost structure should be:
+### When founders bring the firm in
 
-- Product and technology strategy
-- AI strategy and where AI genuinely helps
-- Roadmap, cost and runway decisions
-- Team and operating structure
-- New products and business lines
+- The technology works, but the first commercial customer has not signed
+- Government or commercial first, and the answer changes the whole roadmap
+- Engineers understand the capability; buyers do not yet
+- Investors outside the sector do not understand the market
+- Sales run through buying committees, primes and procurement
+- A raise, partnership or acquisition is approaching and the story is not ready
 
-### Reaching and expanding the market
+### Engagement model
 
-For companies with something that works and a need to identify the next specific source of growth:
+Regular working sessions on the decisions in motion, direct access between sessions, and continuity from decision through execution. Engagements begin with a three- or six-month term; scope and fee reflect the priorities and level of involvement. Start at https://freedomwith.ai/advisory#start.
 
-- Customer segmentation and verticalization
-- Enterprise personas and buying committees
-- Sales strategy and go-to-market motion
-- Partnerships and expansion
-- Pricing and packaging decisions
+### Selected advisory work
 
-### Navigating risk and regulation
+- Early-stage space: the company is connecting its technical capabilities to customer needs and commercial opportunities. The firm advises the founders and is an investor in the company.
+- Early-stage FinTech: the company was refining its problem, target market and business model while regulatory requirements shaped what the product could become.
+- Growth-stage B2B software: the company needed its enterprise segments, product strategy and AI direction to reinforce the same business model.
+- Early-stage life sciences: the company needed to align its target market and business model with the compliance requirements affecting the product and operating model.
 
-For companies that will be examined by regulators, acquirers or other stakeholders:
+These examples are anonymized and describe work actually performed.
 
-- Determine which rules bind the company
-- Translate requirements into product and operating decisions
-- Build the compliance function early
-- Risk, governance and regulated-market entry
-- Diligence and transaction readiness
+## Investing
 
-## When founders bring the firm in
+The firm writes early, small checks with its own money in space companies, and in physical AI where it meets space. Where a company needs deep aerospace or hardware diligence, it invests alongside specialist investors.
 
-- Product or business direction is no longer obvious
-- Early traction has exposed a positioning or go-to-market problem
-- Entering a regulated market is changing product and operating decisions
-- AI could change the product or cost structure, but the advantage is not yet clear
-- A raise, acquisition or diligence process is approaching
-- The company has outgrown the instincts that got it here
+What it looks for:
 
-## Advisors
+- Technology that works, or is close, with a clear path to a paying customer
+- Founders who know the physics and want help with the business
+- Markets where software, data and AI compound a hardware advantage
+- A round where the firm can be useful beyond the capital
 
-### Sonia Sarao
+Advisory and investing are separate decisions. Working with the firm does not require or promise an investment. Investing enquiries and introductions: https://freedomwith.ai/contact?topic=investing
 
-Role: Strategic Advisor
+## Partners
 
-Additional depth: Product, technology, growth and AI
+### Sonia Sarao, Co-founder, Advisory
 
-Sonia advises founders on building and growing companies, with an operator's perspective on product, market, technology and AI. She has more than a decade of product and engineering operating experience, led products and teams through growth and acquisition, and now builds faibuddy, a live AI-native product for founders.
-
-Founders engage Sonia to refine markets and business models, reach product-market fit, make product and technology decisions, develop customer segments and new product lines, navigate enterprise buying committees, manage roadmaps and costs, and prepare for diligence.
-
-Her current work combines hands-on AI product building with experience in enterprise products, complex buying decisions and growth.
+Sonia has spent more than 20 years in enterprise software and financial-market infrastructure. She was the first product hire at Fluxx and rose to VP of Product and Engineering as recurring revenue grew roughly tenfold, then led product at Groove through its acquisition by Clari. She helped win multimillion-dollar enterprise deals, developed new product lines and vertical strategies, and supported Series A and B fundraising and three M&A diligence processes. She has built and led technical teams across India, Kenya, Canada and Europe, and holds degrees in computer science and software engineering. She brings software, product and commercial experience to space companies, not aerospace engineering.
 
 LinkedIn: https://www.linkedin.com/in/sonia-sarao/
 
-### Cammie Clay
+### Cammie Clay, Co-founder, Investing
 
-Role: Strategic Advisor
-
-Additional depth: Regulation, risk, governance and stakeholder strategy
-
-Cammie advises founders on building and growing companies, with added perspective on regulation, risk, governance and stakeholder decisions. She worked on both sides of financial regulation as a regulator at the New York Stock Exchange and FINRA, then as a compliance executive at RS Investments and First Republic Bank. She holds a Series 7 and is a seasoned trader and public-markets investor.
-
-Founders engage Cammie to determine which requirements apply, translate regulation into product and operating decisions, establish the right compliance function, address risk and governance, enter regulated markets and prepare for scrutiny from regulators, examiners or acquirers.
-
-Her current work brings regulatory, risk and governance thinking into company strategy, especially where trust and scrutiny shape the market.
+Cammie leads investing at Freedom with AI. She is a seasoned trader and public markets investor. She worked on both sides of financial regulation: enforcement and investigations at the New York Stock Exchange and FINRA, then compliance leadership at RS Investments and First Republic Bank, where she was VP of Compliance in private wealth management. She holds a Series 7. Her regulatory background is in financial markets; in space she brings a diligence, risk and governance lens rather than sector-specific licensing expertise.
 
 LinkedIn: https://www.linkedin.com/in/cammieclay/
 
-## Selected advisory work
+## Build
 
-- Early-stage FinTech: the company was refining its problem, target market and business model while regulatory requirements were shaping what the product could become.
-- Early-stage life sciences: the company needed to align its target market and business model with compliance requirements affecting the product and operating model.
-- Growth-stage services: the company needed a more focused path to growth. The work covered customer segmentation, verticalization, a new product line and the sales strategy around it.
-- Growth-stage B2B software: the company needed its enterprise segments, product strategy and AI direction to reinforce the same business model.
-
-These examples are anonymized and describe work actually performed. They are evidence of experience, not limits on the industries the firm will consider.
-
-## Engagement model
-
-- Company-level perspective across product, technology, growth, operations, regulation and risk
-- Regular working sessions focused on the decisions in motion
-- Direct access as questions surface between sessions
-- Continuity from decision through execution
-- Initial three- or six-month engagement
-- Scope and fee reflect the priorities and level of involvement
-
-To start a conversation, use https://freedomwith.ai/advisory#start and provide what the company does and the decision currently in front of it. Company name and a supporting link are optional.
-
-## Other work
-
-### faibuddy
-
-faibuddy is the firm's AI advisory product for founders: https://faibuddy.com
-
-### Investing
-
-Freedom with AI is beginning to make a small number of angel investments in founder-led companies building across the AI stack. Investing is an emerging activity, not the firm's primary service.
-
-The firm's view spans the whole stack, but its direct investment focus is narrower. It looks at infrastructure and tooling, deployment, evaluation, security and reliability, industry-specific and regulated AI, robotics and autonomy software, and products that connect models to real operations. For semiconductors, energy and capital-intensive infrastructure, it may invest alongside specialists with deeper technical and project-finance expertise.
-
-Advisory and investment decisions are made independently. Working with Freedom with AI neither requires nor guarantees an investment.
+faibuddy helps aspiring entrepreneurs develop their business ideas: https://faibuddy.com. The firm also builds AI agents that run new products end to end.
 
 ## General contact
 
-Use https://freedomwith.ai/contact for investing, deal flow, speaking, partnerships or other inquiries that are not advisory requests.
+Use https://freedomwith.ai/contact for investing, introductions, speaking, partnerships or other inquiries that are not advisory requests.
 
 ## Important boundaries
 
-The firm is not limited to San Diego and does not limit its advisory work to FinTech, life sciences or SaaS. Experience claims above distinguish demonstrated depth from areas of interest. Content on the site is educational and is not individualized legal, financial, regulatory or investment advice.
+Experience claims above distinguish demonstrated depth from areas of interest. No portfolio or client company is named. Content on the site is educational and is not individualized legal, financial, regulatory or investment advice.
 
-Last reviewed: 2026-09-01
+Last reviewed: 2026-10-08

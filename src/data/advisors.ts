@@ -1,25 +1,27 @@
 /**
- * Single source of truth for both advisors.
+ * Single source of truth for both partners.
  *
- * Every public surface renders advisor information from here.
+ * Every public surface renders partner information from here.
  *
  * Rule for editing: nothing goes in this file that cannot be said out loud in
- * a first meeting. No invented metrics, no client names without permission,
- * and no implied expertise in a rulebook we have not actually worked in.
+ * a first meeting. No invented metrics, no client or portfolio names without
+ * permission, and no implied expertise in a rulebook we have not actually
+ * worked in. Neither partner claims aerospace engineering expertise.
  */
 
 export interface Advisor {
   slug: 'sonia' | 'cammie';
   name: string;
-  /** Shared role. Both advisors work across company strategy. */
+  /** Which side of the firm this partner leads. */
+  leads: 'advise' | 'invest';
   role: string;
-  /** Additional perspective this advisor brings to the shared work. */
+  /** Short uppercase strengths line. */
   strengths: string;
   /** One line, used in cards and as the page lede. */
   lede: string;
   /** The credential that earns the room, in one sentence. */
   credential: string;
-  /** What a founder actually hires this person to work on. */
+  /** What a founder actually works with this person on. */
   works_on: string[];
   /** Longer bio, one paragraph per entry. */
   bio: string[];
@@ -37,64 +39,66 @@ export const advisors: Advisor[] = [
   {
     slug: 'sonia',
     name: 'Sonia Sarao',
-    role: 'Strategic Advisor',
-    strengths: 'Product, technology, growth and AI',
-    lede: 'Advises founders on building and growing companies, with an operator\'s perspective on product, market, technology and AI.',
+    leads: 'advise',
+    role: 'Co-founder, Advisory',
+    strengths: 'Commercialization, product, go-to-market and fundraising',
+    lede: 'Advises space and deep-tech founders on turning a working technology into a business: who buys it, what to build, how to sell it and how to raise.',
     credential:
-      'A product and engineering operator for over a decade, Sonia led products and teams through growth and acquisition. She now builds faibuddy, a live AI-native product for founders.',
+      '20+ years in enterprise software and financial-market infrastructure. She helped win multimillion-dollar enterprise deals at Fluxx and Groove, and led product at Groove through its acquisition by Clari.',
     works_on: [
-      'Refining the problem, the target market and the business model',
-      'Getting from an idea to product-market fit without burning the runway',
-      'Customer segmentation, verticalization and new product lines',
-      'Enterprise go-to-market: users, decision-makers, champions, buying committees',
-      'AI and technology strategy, including what not to build',
-      'Roadmap, cost and operating decisions under real constraints',
-      'Preparing a company for diligence, and knowing what buyers actually examine',
+      'Connecting a technical capability to a customer who will pay for it',
+      'Choosing between commercial, civil government and defense customers',
+      'Product strategy built around a core technology',
+      'Selling to buying committees, primes and enterprise procurement',
+      'Fundraising narratives for investors who are new to the sector',
+      'Preparing for diligence, and knowing what buyers and investors examine',
     ],
     bio: [
-      'Sonia spent more than a decade as a product and engineering executive. She was the first product hire at Fluxx, built its product and engineering organisation and rose to VP of Product and Engineering as recurring revenue grew roughly tenfold. She later led product at Groove, a sales engagement platform, through its acquisition by Clari.',
-      'Her last two B2B SaaS companies sold into enterprises and were acquired. She has worked through long sales cycles, complex buying committees and three M&A diligence processes. Today she builds faibuddy and advises founders when product, market and technology decisions need to move together.',
+      'Sonia has spent more than 20 years in enterprise software and financial-market infrastructure. She was the first product hire at Fluxx and rose to VP of Product and Engineering as recurring revenue grew roughly tenfold, then led product at Groove through its acquisition by Clari. Along the way she helped win multimillion-dollar enterprise deals, developed new product lines and vertical strategies, and supported Series A and B fundraising and acquisition diligence.',
+      'She has built and led technical teams across India, Kenya, Canada and Europe, and holds degrees in computer science and software engineering. Today she leads the firm\'s advisory work, with a focus on space, and builds the firm\'s own products.',
+      'Her strength is translation: between engineers, customers, executives and investors. She works from first principles to find the underlying problem and how the parts of a business fit together.',
     ],
     proof: [
-      'VP of Product at Groove, through to its acquisition by Clari',
+      '20+ years in enterprise software and financial-market infrastructure',
+      'VP of Product at Groove, through its acquisition by Clari',
       'First product hire at Fluxx, later VP of Product and Engineering',
-      'Built a product and engineering organisation of roughly 50 people',
-      'Core participant in three M&A diligence processes',
-      'Builds faibuddy, the firm\'s AI advisory product',
+      'Supported Series A and B fundraising and three M&A diligence processes',
+      'Built and led technical teams across India, Kenya, Canada and Europe',
+      'Degrees in computer science and software engineering',
     ],
     depth:
-      'Her current work combines hands-on AI product building with experience in enterprise products, complex buying decisions and growth.',
+      'She brings software, product and commercial experience to space companies, not aerospace engineering. You know the physics. She helps with who buys it and how.',
     linkedIn: 'https://www.linkedin.com/in/sonia-sarao/',
   },
   {
     slug: 'cammie',
     name: 'Cammie Clay',
-    role: 'Strategic Advisor',
-    strengths: 'Regulation, risk, governance and stakeholder strategy',
-    lede: 'Advises founders on building and growing companies, with added perspective on regulation, risk, governance and stakeholder decisions.',
+    leads: 'invest',
+    role: 'Co-founder, Investing',
+    strengths: 'Investing, diligence, risk and governance',
+    lede: 'Leads the firm\'s investing, with a trader\'s read on where capital is moving and a regulator\'s eye for diligence.',
     credential:
-      'She has been on both sides of financial regulation: a regulator at the New York Stock Exchange and FINRA, then a compliance executive at RS Investments and First Republic Bank.',
+      'A seasoned trader and public markets investor, she spent years in enforcement and investigations at the New York Stock Exchange and FINRA before becoming a compliance executive at RS Investments and First Republic Bank.',
     works_on: [
-      'Working out which rules actually bind this company, and which do not',
-      'Translating regulatory requirements into product and operating decisions',
-      'Building the compliance function before it becomes a crisis',
-      'Risk and governance for companies entering a regulated market',
-      'What acquirers, regulators and examiners will look at, and how to be ready',
+      'Where capital is moving across AI, physical AI and space',
+      'Diligence: what will be examined, and what could break',
+      'Risk and governance that hold up as a company scales',
       'Reading stakeholders and getting to what is actually true',
     ],
     bio: [
-      'Cammie has worked on both sides of financial regulation. She spent years in enforcement and investigations at the New York Stock Exchange and FINRA, then became a compliance executive at RS Investments and First Republic Bank, where she was VP of Compliance in private wealth management. She holds a Series 7.',
-      'Today she helps founders identify the requirements that apply to their companies, translate them into product and operating decisions and build the right controls early. She is also a seasoned trader and public markets investor who is helping lead the firm\'s exploration of private investing.',
+      'Cammie leads investing at Freedom with AI. She is a seasoned trader and public markets investor who follows where capital is moving across AI and the physical economy. Her talk, State of AI: Investing, traces that money from software into chips, data centers, power and now the real world.',
+      'Before investing, she worked on both sides of financial regulation: enforcement and investigations at the New York Stock Exchange and FINRA, then compliance leadership at RS Investments and First Republic Bank, where she was VP of Compliance in private wealth management. She holds a Series 7.',
+      'That background shapes how she looks at a company: what an examiner, acquirer or investor will scrutinize, where the risk sits, and whether the governance will hold as the company grows.',
     ],
     proof: [
+      'Seasoned trader and public markets investor',
       'Regulator at the New York Stock Exchange and FINRA',
       'Compliance executive at RS Investments',
       'VP of Compliance, private wealth management, at First Republic Bank',
       'Series 7',
-      'Seasoned trader and public markets investor',
     ],
     depth:
-      'Her current work brings regulatory, risk and governance thinking into company strategy, especially where trust and scrutiny shape the market.',
+      'Her regulatory background is in financial markets. In space she brings a diligence, risk and governance lens rather than sector-specific licensing expertise.',
     linkedIn: 'https://www.linkedin.com/in/cammieclay/',
   },
 ];

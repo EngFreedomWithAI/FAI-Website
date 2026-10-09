@@ -1,31 +1,37 @@
 # Freedom with AI
 
-> Freedom with AI provides strategic advisory for founders building across the AI stack. Founders work directly with Sonia Sarao or Cammie Clay.
+> Freedom with AI accelerates entrepreneurs building in space and physical AI. Build. Advise. Invest. Sonia Sarao leads advisory. Cammie Clay leads investing.
 
-The firm works across industries, especially where products, buying decisions, operations or regulation are complex.
+Advisory is space-led, and also open to physical AI, deep-tech, FinTech, B2B software and life sciences founders. Investing focuses on early-stage space companies, and physical AI where it meets space.
 
 ## Thesis
 
-[Thesis](https://freedomwith.ai/thesis): AI companies depend on energy, chips, infrastructure, models and applications. Each layer has different technology, capital needs, margins and paths to market. Models range from proprietary frontier systems to open-source and domain-specific alternatives. Applications include software as well as scientific tools, robots, vehicles and other systems that can sense, decide and act. Freedom with AI works at the company-building layer, helping founders turn technical capability into a product, a market and a durable business. The five-layer stack builds on Jensen Huang's framing of AI as infrastructure. The company-building layer reflects the firm's own work with founders.
+[Thesis](https://freedomwith.ai/thesis): AI is leaving the screen. The money moved from software (bits) into chips, data centers and power (bits buy atoms), and next into machines that act in the world (bits drive atoms). Space is the whole AI stack under its hardest constraints: energy, chips, infrastructure, models and applications, each with less power, bandwidth and room for error. Freedom with AI works at the company-building layer, helping founders turn technical capability into a product, a market and a durable business. The five-layer stack builds on Jensen Huang's framing of AI as infrastructure.
+
+[State of AI: Investing](https://freedomwith.ai/thesis/state-of-ai-investing): Cammie Clay's October 2026 talk following the money from software to the real world.
 
 ## Advisory
 
-[Advisory](https://freedomwith.ai/advisory) is the main business. Engagements begin with a three- or six-month term and are shaped around the company's priorities and the decisions in motion.
+[Advisory](https://freedomwith.ai/advisory) with Sonia Sarao covers finding the market, building the product and company, selling into complex buyers, and raising and diligence. Engagements begin with a three- or six-month term.
 
-## Advisors
+## Investing
 
-- Sonia Sarao: Strategic advisor with additional depth across product, technology, growth and AI. She led products and teams through growth and acquisition and now builds faibuddy, a live AI-native product for founders. LinkedIn: https://www.linkedin.com/in/sonia-sarao/
-- Cammie Clay: Strategic advisor with additional depth across regulation, risk, governance and stakeholder strategy. She was a regulator at the New York Stock Exchange and FINRA, then a compliance executive at RS Investments and First Republic Bank. LinkedIn: https://www.linkedin.com/in/cammieclay/
+[Investing](https://freedomwith.ai/investing): early, small checks of the firm's own capital, alongside specialist investors where deep aerospace or hardware diligence is needed. Advisory and investment decisions are separate.
 
-## Other work
+## Partners
 
-- [faibuddy](https://faibuddy.com) is the firm's AI advisory product for founders.
-- The firm is beginning to make a small number of angel investments in founder-led companies across the AI stack, where it has conviction and can be useful beyond the capital. Advisory and investment decisions are separate: working with the firm neither requires nor guarantees an investment.
+- Sonia Sarao, Co-founder, Advisory: 20+ years in enterprise software and financial-market infrastructure. Led product at Groove through its acquisition by Clari; first product hire at Fluxx, later VP of Product and Engineering. Brings software, product and commercial experience, not aerospace engineering. LinkedIn: https://www.linkedin.com/in/sonia-sarao/
+- Cammie Clay, Co-founder, Investing: seasoned trader and public markets investor. Formerly a regulator at the New York Stock Exchange and FINRA, then a compliance executive at RS Investments and First Republic Bank. LinkedIn: https://www.linkedin.com/in/cammieclay/
+
+## Build
+
+- [faibuddy](https://faibuddy.com) helps aspiring entrepreneurs develop their business ideas. The firm also builds AI agents that run new products end to end.
 
 ## Key pages
 
 - [Home](https://freedomwith.ai/)
 - [Advisory](https://freedomwith.ai/advisory)
+- [Investing](https://freedomwith.ai/investing)
 - [Thesis](https://freedomwith.ai/thesis)
 - [Contact](https://freedomwith.ai/contact)
 - [Complete site content](https://freedomwith.ai/llms-full.txt)

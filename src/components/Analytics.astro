@@ -124,6 +124,21 @@ const enabled = Boolean(ga4Id || posthogKey);
           }
         };
 
+        // --- CTA tracking ------------------------------------------------------
+        // Buttons opt in with a `track` prop, which renders as data-track.
+        document.addEventListener(
+          'click',
+          function (event) {
+            var el = event.target instanceof Element ? event.target.closest('[data-track]') : null;
+            if (!el) return;
+            window.faiTrack('cta_click', {
+              cta: el.getAttribute('data-track'),
+              source_path: window.location.pathname,
+            });
+          },
+          { capture: true }
+        );
+
         // --- Outbound link tracking -------------------------------------------
         // Delegated so every external link is covered without annotating each one
         // at the call site.

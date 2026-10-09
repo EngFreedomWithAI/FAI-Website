@@ -1,0 +1,226 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import CtaStrip from '../components/CtaStrip.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import TeamAvatar from '../components/TeamAvatar.astro';
+import { advisorBySlug } from '../data/advisors';
+import { investCriteria, investingBoundary, thesisPieces } from '../data/thesis';
+import '../styles/content-pages.css';
+
+const pageTitle = 'Investing | Freedom with AI';
+const pageDescription =
+  'Freedom with AI invests its own capital in early-stage space companies, and in physical AI where it meets space. Cammie Clay leads our investing.';
+
+const cammie = advisorBySlug('cammie');
+const featuredPiece = thesisPieces[0];
+---
+
+<Base title={pageTitle} description={pageDescription}>
+  <Nav />
+
+  <main id="main-content">
+    <section class="page-hero" aria-labelledby="investing-heading">
+      <div class="container">
+        <SectionHeader label="Investing" align="left" />
+        <h1 id="investing-heading" class="page-hero__title">Investing in the space economy.</h1>
+        <p class="page-hero__lede">
+          We invest our own capital in early-stage space companies, and in physical AI where it meets
+          space. We back founders where we have conviction and can be useful beyond the check.
+        </p>
+      </div>
+    </section>
+
+    <section class="page-section page-section--alt" aria-labelledby="look-heading">
+      <div class="container invest-split">
+        <div>
+          <SectionHeader label="What we look for" align="left" />
+          <h2 id="look-heading" class="page-section__heading">Hard technology, a real buyer.</h2>
+          <ul class="criteria">
+            {investCriteria.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+
+        <div>
+          <SectionHeader label="How we invest" align="left" />
+          <h2 class="page-section__heading">Early, and alongside specialists.</h2>
+          <div class="how">
+            <p>
+              We write early, small checks with our own money. Where a company needs deep aerospace or
+              hardware diligence, we invest alongside specialist investors rather than pretending to
+              be one.
+            </p>
+            <p>
+              Founders we back can draw on the whole firm: Cammie’s diligence, risk and governance
+              lens, and Sonia’s product, go-to-market and fundraising experience.
+            </p>
+            <p class="how__note">{investingBoundary}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section" id="cammie" aria-labelledby="cammie-heading">
+      <div class="container profile">
+        <div class="profile__side">
+          <TeamAvatar member={cammie.slug} class="profile__photo" />
+          <h2 id="cammie-heading" class="profile__name">{cammie.name}</h2>
+          <p class="profile__role">{cammie.role}</p>
+          <p class="profile__strengths">{cammie.strengths}</p>
+          <a class="profile__link" href={cammie.linkedIn} target="_blank" rel="noopener noreferrer">
+            Cammie on LinkedIn <span aria-hidden="true">&nearr;</span>
+          </a>
+        </div>
+
+        <div class="profile__main">
+          {cammie.bio.map((paragraph) => <p class="profile__bio">{paragraph}</p>)}
+
+          <ul class="profile__proof">
+            {cammie.proof.map((item) => <li>{item}</li>)}
+          </ul>
+
+          <p class="profile__depth">{cammie.depth}</p>
+        </div>
+      </div>
+    </section>
+
+    {featuredPiece && (
+      <section class="page-section page-section--alt" aria-labelledby="piece-heading">
+        <div class="container">
+          <SectionHeader label="From Cammie" align="left" />
+          <a class="piece" href={featuredPiece.href}>
+            <span class="piece__meta">{featuredPiece.date}</span>
+            <h2 id="piece-heading" class="piece__title">{featuredPiece.title}</h2>
+            <p class="piece__summary">{featuredPiece.summary}</p>
+            <span class="piece__cta">Read the piece <span aria-hidden="true">&rarr;</span></span>
+          </a>
+        </div>
+      </section>
+    )}
+
+    <CtaStrip>
+      <span slot="heading">Investing in space, or being introduced to us?</span>
+      <Button
+        slot="actions"
+        variant="primary"
+        href="/contact?topic=investing"
+        size="large"
+        track="investing_contact"
+      >
+        Get in touch
+      </Button>
+    </CtaStrip>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  .invest-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+    align-items: start;
+  }
+
+  .criteria {
+    list-style: none;
+    margin: var(--space-6) 0 0;
+    padding: 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .criteria li {
+    position: relative;
+    padding: var(--space-4) 0 var(--space-4) var(--space-6);
+    border-bottom: 1px solid var(--color-border);
+    font-size: var(--text-md);
+    color: var(--color-text);
+  }
+
+  .criteria li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: calc(var(--space-4) + 0.62em);
+    width: 12px;
+    height: 1px;
+    background: var(--color-accent);
+  }
+
+  .how {
+    margin-top: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .how p {
+    font-size: var(--text-md);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-muted);
+  }
+
+  .how .how__note {
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+    font-size: var(--text-sm);
+    color: var(--color-text-subtle);
+  }
+
+  /* ---------- featured piece ---------- */
+  .piece {
+    display: block;
+    max-width: 52rem;
+    padding: var(--space-6);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--r);
+    color: var(--color-text);
+    text-decoration: none;
+    transition: border-color var(--dur) var(--ease);
+  }
+
+  .piece:hover {
+    border-color: var(--color-accent);
+    color: var(--color-text);
+  }
+
+  .piece__meta {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-subtle);
+  }
+
+  .piece__title {
+    margin-top: var(--space-2);
+    font-size: var(--text-xl);
+    font-weight: 500;
+  }
+
+  .piece__summary {
+    margin-top: var(--space-3);
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-muted);
+  }
+
+  .piece__cta {
+    display: inline-block;
+    margin-top: var(--space-4);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+
+  @media (max-width: 880px) {
+    .invest-split {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+  }
+</style>

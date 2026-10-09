@@ -1,0 +1,157 @@
+---
+/**
+ * Small vertical bar chart. Pure HTML and CSS, so it inherits the light or
+ * dark token set of whatever band it sits in. The bars are decorative; the
+ * visually hidden table carries the data for screen readers.
+ */
+import type { Chart } from '../data/state-of-ai';
+
+interface Props {
+  chart: Chart;
+}
+
+const { chart } = Astro.props;
+const max = Math.max(...chart.bars.map((bar) => bar.value));
+const last = chart.bars.length - 1;
+// Leave headroom above the tallest bar for its value label.
+const scale = (value: number) => `${Math.max((value / max) * 82, 2)}%`;
+---
+
+<figure class="chart">
+  <figcaption class="chart__head">
+    <span class="chart__title">{chart.title}</span>
+    <span class="chart__unit">{chart.unit}</span>
+  </figcaption>
+
+  <div aria-hidden="true">
+    <div class="chart__plot">
+      {chart.bars.map((bar, index) => (
+        <div class="chart__col">
+          <span class="chart__value">{bar.display}</span>
+          <span
+            class:list={[
+              'chart__bar',
+              index === last && 'chart__bar--latest',
+              bar.estimate && 'chart__bar--estimate',
+            ]}
+            style={`height: ${scale(bar.value)}`}
+          ></span>
+        </div>
+      ))}
+    </div>
+    <div class="chart__labels">
+      {chart.bars.map((bar) => <span>{bar.label}</span>)}
+    </div>
+  </div>
+
+  <table class="chart__data">
+    <caption>{chart.title}: {chart.unit}</caption>
+    <tbody>
+      {chart.bars.map((bar) => (
+        <tr>
+          <th scope="row">{bar.label}</th>
+          <td>{bar.display}{bar.estimate ? ' (estimate)' : ''}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</figure>
+
+<style>
+  .chart {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    position: relative;
+  }
+
+  .chart__head {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .chart__title {
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .chart__unit {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .chart__plot,
+  .chart__labels {
+    display: flex;
+    gap: var(--space-3);
+  }
+
+  .chart__plot {
+    height: 200px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .chart__col {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: stretch;
+    gap: var(--space-1);
+  }
+
+  .chart__value {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+    color: var(--color-text);
+  }
+
+  .chart__bar {
+    display: block;
+    background: color-mix(in srgb, var(--color-accent) 35%, transparent);
+    border-radius: 2px 2px 0 0;
+  }
+
+  .chart__bar--latest {
+    background: var(--color-accent);
+  }
+
+  .chart__bar--estimate {
+    background: repeating-linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--color-accent) 80%, transparent) 0 4px,
+      color-mix(in srgb, var(--color-accent) 30%, transparent) 4px 8px
+    );
+  }
+
+  .chart__labels {
+    margin-top: var(--space-2);
+  }
+
+  .chart__labels span {
+    flex: 1;
+    min-width: 0;
+    font-size: var(--text-xs);
+    line-height: 1.35;
+    text-align: center;
+    color: var(--color-text-muted);
+  }
+
+  .chart__data {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>

@@ -6,6 +6,8 @@ interface Props {
   size?: 'default' | 'large';
   external?: boolean;
   class?: string;
+  /** Analytics name. Clicks are reported as a cta_click event. */
+  track?: string;
 }
 
 const {
@@ -15,6 +17,7 @@ const {
   size = 'default',
   external = false,
   class: className = '',
+  track,
 } = Astro.props;
 
 const classes = [
@@ -31,11 +34,11 @@ const target = external ? '_blank' : undefined;
 ---
 
 {href ? (
-  <a href={href} class={classes} rel={rel} target={target}>
+  <a href={href} class={classes} rel={rel} target={target} data-track={track}>
     <slot />
   </a>
 ) : (
-  <button type={type} class={classes}>
+  <button type={type} class={classes} data-track={track}>
     <slot />
   </button>
 )}

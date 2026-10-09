@@ -1,0 +1,846 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import Button from '../../components/Button.astro';
+import CtaStrip from '../../components/CtaStrip.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import TeamAvatar from '../../components/TeamAvatar.astro';
+import BarChart from '../../components/BarChart.astro';
+import {
+  audiences,
+  biggestBets,
+  cake,
+  cakeSource,
+  curves,
+  curvesLine,
+  eras,
+  erasLine,
+  meta,
+  moneyCharts,
+  moneySources,
+  physicalChart,
+  physicalSources,
+  softwareSources,
+  softwareStats,
+} from '../../data/state-of-ai';
+import '../../styles/content-pages.css';
+
+const pageTitle = `${meta.title} | Freedom with AI`;
+const pageDescription = `${meta.subtitle} By ${meta.author}, ${meta.date}.`;
+
+const articleSchema = {
+  '@type': 'Article',
+  headline: meta.title,
+  description: meta.subtitle,
+  datePublished: '2026-10-01',
+  author: { '@type': 'Person', name: meta.author, sameAs: 'https://www.linkedin.com/in/cammieclay/' },
+  publisher: { '@id': `${Astro.site?.origin ?? 'https://freedomwith.ai'}/#organization` },
+};
+
+/** Each wave spikes higher and fades faster. Bell-ish curves on one baseline. */
+const waves = [
+  { c: 130, w: 110, h: 60, label: 'Then' },
+  { c: 320, w: 78, h: 110, label: 'Now' },
+  { c: 488, w: 50, h: 165, label: 'Next' },
+];
+const wavePath = ({ c, w, h }: { c: number; w: number; h: number }) =>
+  `M${c - w} 190 C${c - w / 2} 190 ${c - w / 3} ${190 - h} ${c} ${190 - h} C${c + w / 3} ${190 - h} ${c + w / 2} 190 ${c + w} 190`;
+---
+
+<Base title={pageTitle} description={pageDescription} schema={articleSchema}>
+  <Nav />
+
+  <main id="main-content">
+    <article>
+      <header class="page-hero" aria-labelledby="piece-heading">
+        <div class="container">
+          <p class="crumb"><a href="/thesis#pieces">Thesis</a> <span aria-hidden="true">/</span> Pieces</p>
+          <h1 id="piece-heading" class="page-hero__title">{meta.title}</h1>
+          <p class="page-hero__lede">{meta.subtitle}</p>
+          <div class="byline">
+            <TeamAvatar member="cammie" class="byline__photo" />
+            <div>
+              <p class="byline__name">{meta.author}</p>
+              <p class="byline__meta">{meta.authorRole} · {meta.date}</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- 1. Who this is for -->
+      <section class="page-section page-section--alt" aria-labelledby="hands-heading">
+        <div class="container">
+          <SectionHeader label="Quick show of hands" align="left" />
+          <h2 id="hands-heading" class="page-section__heading">Who here…</h2>
+          <ul class="hands">
+            {audiences.map((a) => (
+              <li class="hand">
+                <span class="hand__who">…{a.who}?</span>
+                <span class="hand__stake">{a.stake}</span>
+              </li>
+            ))}
+          </ul>
+          <p class="line">That’s everyone. Where the money moves decides all three.</p>
+        </div>
+      </section>
+
+      <!-- 2. The five-layer cake -->
+      <section class="band on-dark" aria-labelledby="cake-heading">
+        <div class="container">
+          <SectionHeader label="The map · Jensen’s five-layer cake" align="left" />
+          <h2 id="cake-heading" class="page-section__heading">AI starts physical, and ends physical.</h2>
+
+          <ol class="cake">
+            {cake.map((layer) => (
+              <li class:list={['cake__layer', `cake__layer--${layer.kind === 'Bits' ? 'bits' : layer.kind === 'Atoms' ? 'atoms' : 'next'}`]}>
+                <span class="cake__name">{layer.name}</span>
+                <span class="cake__tag">{layer.when} · {layer.kind}</span>
+                <span class="cake__note">{layer.note}</span>
+              </li>
+            ))}
+          </ol>
+
+          <p class="source">
+            <a href={cakeSource.href} target="_blank" rel="noopener noreferrer">
+              {cakeSource.label} <span aria-hidden="true">&nearr;</span>
+            </a>
+          </p>
+        </div>
+      </section>
+
+      <!-- 3. Follow the money -->
+      <section class="page-section" aria-labelledby="money-heading">
+        <div class="container">
+          <SectionHeader label="Follow the money · 2022 to 2026" align="left" />
+          <h2 id="money-heading" class="page-section__heading">The biggest buildout in history.</h2>
+
+          <div class="charts">
+            {moneyCharts.map((chart) => <BarChart chart={chart} />)}
+          </div>
+
+          <p class="line">Most of this money buys atoms: chips, buildings, power.</p>
+          <p class="source">{moneySources} Hatched bars are plans or estimates.</p>
+        </div>
+      </section>
+
+      <!-- 4. Meanwhile, in software -->
+      <section class="page-section page-section--alt" aria-labelledby="software-heading">
+        <div class="container software">
+          <div>
+            <SectionHeader label="Meanwhile, in software" align="left" />
+            <h2 id="software-heading" class="page-section__heading">Software’s shelf life is shrinking.</h2>
+            <ul class="stats">
+              {softwareStats.map((stat) => (
+                <li>
+                  <span class="stats__figure">{stat.figure}</span>
+                  <span class="stats__body">{stat.body}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <figure class="waves">
+            <figcaption class="waves__title">
+              <span>The pattern</span>
+              Each wave spikes higher, and fades faster.
+            </figcaption>
+            <svg viewBox="0 0 600 230" role="img" aria-label="Illustrative: three waves, each taller and narrower than the last">
+              <line x1="10" y1="190" x2="590" y2="190" class="waves__axis" />
+              {waves.map((wave, index) => (
+                <g>
+                  <path d={wavePath(wave)} class:list={['waves__curve', index === waves.length - 1 && 'waves__curve--next']} />
+                  <text x={wave.c} y="215" text-anchor="middle" class="waves__label">{wave.label}</text>
+                </g>
+              ))}
+            </svg>
+            <p class="waves__note">Illustrative</p>
+          </figure>
+        </div>
+        <div class="container">
+          <p class="source">{softwareSources}</p>
+        </div>
+      </section>
+
+      <!-- 5. From digital to IRL -->
+      <section class="band on-dark" aria-labelledby="irl-heading">
+        <div class="container">
+          <SectionHeader label="From digital to IRL" align="left" />
+          <h2 id="irl-heading" class="page-section__heading">The money is moving into the real world.</h2>
+
+          <div class="irl">
+            <div>
+              <p class="callout"><strong>3×</strong> a normal year, in 6 months.</p>
+              <BarChart chart={physicalChart} />
+            </div>
+
+            <div>
+              <h3 class="bets__title">Biggest bets on atoms, 2026</h3>
+              <ul class="bets">
+                {biggestBets.map((bet) => (
+                  <li>
+                    <span class="bets__name">{bet.name}</span>
+                    <span class="bets__detail">{bet.detail}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <p class="source">{physicalSources}</p>
+        </div>
+      </section>
+
+      <!-- 6. Was, is, will be -->
+      <section class="page-section" aria-labelledby="eras-heading">
+        <div class="container">
+          <SectionHeader label="What was, what is, what’s coming" align="left" />
+          <h2 id="eras-heading" class="page-section__heading">Where bits meet atoms.</h2>
+
+          <ol class="eras">
+            {eras.map((era, index) => (
+              <li class:list={['era', index === eras.length - 1 && 'era--next']}>
+                <p class="era__tag">{era.tag} · {era.when}</p>
+                <h3 class="era__name">{era.name}</h3>
+                <p class="era__body">{era.body}</p>
+                <p class="era__vcs">
+                  <span>{index === eras.length - 1 ? 'VCs will want' : 'VCs want'}</span>
+                  {era.vcs}
+                </p>
+              </li>
+            ))}
+          </ol>
+
+          <p class="line">{erasLine}</p>
+        </div>
+      </section>
+
+      <!-- 7. What it means for you -->
+      <section class="page-section page-section--alt" aria-labelledby="curves-heading">
+        <div class="container">
+          <SectionHeader label="So what does it mean for you?" align="left" />
+          <h2 id="curves-heading" class="page-section__heading">Get on the rising curve.</h2>
+
+          <div class="curves">
+            {curves.map((curve) => (
+              <article class="curve">
+                <h3 class="curve__who">{curve.who}</h3>
+                <p class="curve__row curve__row--rising">
+                  <span>Rising</span>
+                  {curve.rising}
+                </p>
+                <p class="curve__row curve__row--fading">
+                  <span>Fading</span>
+                  {curve.fading}
+                </p>
+                <p class="curve__ask">
+                  <span>Ask</span>
+                  {curve.ask}
+                </p>
+              </article>
+            ))}
+          </div>
+
+          <p class="line">{curvesLine}</p>
+          <p class="source">{meta.disclaimer}</p>
+        </div>
+      </section>
+
+      <!-- 8. Close -->
+      <section class="band band--close on-dark" aria-labelledby="close-heading">
+        <div class="container close">
+          <div>
+            <SectionHeader label="One last question" align="left" />
+            <h2 id="close-heading" class="close__title">Which curve are you on?</h2>
+            <p class="close__line">Your money. Your product. Your career. Follow the money.</p>
+          </div>
+
+          <svg class="close__chart" viewBox="0 0 420 240" role="img" aria-label="Two curves: one rising as money flows in, one fading as money flows out">
+            <path d="M20 200 C140 196 230 150 300 90 S380 30 400 24" class="close__rising" />
+            <path d="M20 120 C120 112 200 130 270 168 S370 210 400 214" class="close__fading" />
+            <circle cx="300" cy="90" r="6" class="close__dot" />
+            <text x="312" y="80" class="close__label close__label--rising">Move here, before the crowd</text>
+            <text x="404" y="18" text-anchor="end" class="close__legend close__legend--rising">Rising · money flowing in</text>
+            <text x="404" y="234" text-anchor="end" class="close__legend">Fading · money flowing out</text>
+          </svg>
+        </div>
+      </section>
+
+      <!-- Bridge to our own thesis -->
+      <section class="page-section" aria-labelledby="next-heading">
+        <div class="container next">
+          <SectionHeader label="Where we take it" align="left" />
+          <h2 id="next-heading" class="page-section__heading">Bits driving atoms, all the way to orbit.</h2>
+          <p class="page-section__sub">
+            This talk ends where bits start driving atoms. Our thesis takes it one step further, to
+            space, which is where we focus our advising and investing.
+          </p>
+          <div class="next__links">
+            <a href="/thesis">Read our thesis <span aria-hidden="true">&rarr;</span></a>
+            <a href="/investing">How we invest <span aria-hidden="true">&rarr;</span></a>
+          </div>
+        </div>
+      </section>
+    </article>
+
+    <CtaStrip>
+      <span slot="heading">Building where bits drive atoms?</span>
+      <Button slot="actions" variant="primary" href="/advisory#start" size="large" track="piece_advisory">
+        Start a conversation
+      </Button>
+    </CtaStrip>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  .crumb {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-subtle);
+    margin-bottom: var(--space-5);
+  }
+
+  .crumb a {
+    text-decoration: none;
+  }
+
+  .byline {
+    margin-top: var(--space-6);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .byline :global(.byline__photo) {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .byline__name {
+    font-weight: 600;
+  }
+
+  .byline__meta {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .band {
+    padding-block: var(--space-8);
+    background: #020812;
+  }
+
+  .line {
+    margin-top: var(--space-7);
+    max-width: var(--readw);
+    font-size: var(--text-lg);
+    font-weight: 500;
+    line-height: var(--leading-normal);
+    color: var(--color-text);
+    text-wrap: balance;
+  }
+
+  .source {
+    margin-top: var(--space-5);
+    max-width: 90ch;
+    font-size: var(--text-xs);
+    line-height: var(--leading-normal);
+    color: var(--color-text-subtle);
+  }
+
+  .source a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  /* ---------- show of hands ---------- */
+  .hands {
+    list-style: none;
+    margin: var(--space-6) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
+  }
+
+  .hand {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-5);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--r);
+  }
+
+  .hand__who {
+    font-size: var(--text-lg);
+    font-weight: 500;
+    color: var(--color-text);
+  }
+
+  .hand__stake {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  /* ---------- cake ---------- */
+  .cake {
+    list-style: none;
+    margin: var(--space-7) 0 0;
+    padding: 0;
+    display: grid;
+    gap: 6px;
+  }
+
+  .cake__layer {
+    display: grid;
+    grid-template-columns: 12rem 14rem 1fr;
+    align-items: center;
+    gap: var(--space-5);
+    padding: var(--space-4) var(--space-5);
+    border: 1px solid rgba(129, 173, 250, 0.2);
+    border-radius: 2px;
+    background: linear-gradient(90deg, rgba(42, 57, 73, 0.7), rgba(25, 36, 49, 0.5));
+  }
+
+  .cake__layer--next {
+    background: linear-gradient(90deg, rgba(8, 40, 84, 0.95), rgba(8, 22, 42, 0.8));
+    border-color: rgba(129, 173, 250, 0.5);
+  }
+
+  .cake__layer--bits {
+    background: linear-gradient(90deg, rgba(14, 30, 56, 0.85), rgba(12, 22, 38, 0.6));
+  }
+
+  .cake__name {
+    font-size: var(--text-md);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text);
+  }
+
+  .cake__tag {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #81adfa;
+  }
+
+  .cake__note {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+  }
+
+  /* ---------- charts ---------- */
+  .charts {
+    margin-top: var(--space-7);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-7);
+  }
+
+  /* ---------- software ---------- */
+  .software {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+    align-items: center;
+  }
+
+  .stats {
+    list-style: none;
+    margin: var(--space-6) 0 0;
+    padding: 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .stats li {
+    display: grid;
+    grid-template-columns: 9rem 1fr;
+    gap: var(--space-4);
+    align-items: baseline;
+    padding-block: var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .stats__figure {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+
+  .stats__body {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+  }
+
+  .waves {
+    margin: 0;
+    padding: var(--space-6);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--r);
+  }
+
+  .waves__title {
+    font-size: var(--text-md);
+    font-weight: 500;
+    color: var(--color-text);
+  }
+
+  .waves__title span {
+    display: block;
+    margin-bottom: var(--space-1);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-subtle);
+  }
+
+  .waves svg {
+    margin-top: var(--space-5);
+    width: 100%;
+    height: auto;
+  }
+
+  .waves__axis {
+    stroke: var(--color-border);
+  }
+
+  .waves__curve {
+    fill: color-mix(in srgb, var(--color-accent) 10%, transparent);
+    stroke: color-mix(in srgb, var(--color-accent) 55%, transparent);
+    stroke-width: 2;
+  }
+
+  .waves__curve--next {
+    fill: color-mix(in srgb, var(--color-accent) 18%, transparent);
+    stroke: var(--color-accent);
+  }
+
+  .waves__label {
+    font-size: 13px;
+    font-weight: 600;
+    fill: var(--color-text-muted);
+  }
+
+  .waves__note {
+    margin-top: var(--space-2);
+    font-size: var(--text-xs);
+    color: var(--color-text-subtle);
+  }
+
+  /* ---------- IRL ---------- */
+  .irl {
+    margin-top: var(--space-7);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+    align-items: start;
+  }
+
+  .callout {
+    margin-bottom: var(--space-6);
+    font-size: var(--text-lg);
+    color: var(--color-text);
+  }
+
+  .callout strong {
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    color: #81adfa;
+    margin-right: var(--space-2);
+  }
+
+  .bets__title {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #81adfa;
+  }
+
+  .bets {
+    list-style: none;
+    margin: var(--space-4) 0 0;
+    padding: 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .bets li {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-block: var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .bets__name {
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .bets__detail {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+  }
+
+  /* ---------- eras ---------- */
+  .eras {
+    list-style: none;
+    margin: var(--space-7) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+
+  .era {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-6);
+    border: 1px solid var(--color-border);
+    border-radius: var(--r);
+  }
+
+  .era--next {
+    border-color: var(--color-accent);
+    background: var(--blue-soft);
+  }
+
+  .era__tag {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .era__name {
+    font-size: var(--text-lg);
+  }
+
+  .era__body {
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-muted);
+  }
+
+  .era__vcs {
+    margin-top: auto;
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--color-border);
+    font-size: var(--text-sm);
+    color: var(--color-text);
+  }
+
+  .era__vcs span,
+  .curve__row span,
+  .curve__ask span {
+    display: block;
+    margin-bottom: 2px;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-subtle);
+  }
+
+  /* ---------- curves ---------- */
+  .curves {
+    margin-top: var(--space-7);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+
+  .curve {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: var(--space-6);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--r);
+  }
+
+  .curve__who {
+    font-size: var(--text-lg);
+  }
+
+  .curve__row {
+    padding-left: var(--space-3);
+    border-left: 2px solid var(--color-border);
+    font-size: var(--text-base);
+    color: var(--color-text);
+  }
+
+  .curve__row--rising {
+    border-left-color: var(--color-accent);
+  }
+
+  .curve__row--rising span {
+    color: var(--color-accent);
+  }
+
+  .curve__row--fading {
+    color: var(--color-text-muted);
+  }
+
+  .curve__ask {
+    margin-top: auto;
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+    font-size: var(--text-sm);
+    font-style: italic;
+    color: var(--color-text);
+  }
+
+  .curve__ask span {
+    font-style: normal;
+  }
+
+  /* ---------- close ---------- */
+  .band--close {
+    padding-block: clamp(72px, 10vw, 128px);
+  }
+
+  .close {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+    align-items: center;
+  }
+
+  .close__title {
+    font-size: var(--text-hero);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: var(--leading-tight);
+    max-width: 12ch;
+  }
+
+  .close__line {
+    margin-top: var(--space-5);
+    font-size: var(--text-md);
+    color: var(--color-text-muted);
+  }
+
+  .close__chart {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .close__rising,
+  .close__fading {
+    fill: none;
+    stroke-width: 3;
+    stroke-linecap: round;
+  }
+
+  .close__rising {
+    stroke: #81adfa;
+  }
+
+  .close__fading {
+    stroke: rgba(168, 175, 187, 0.45);
+    stroke-dasharray: 6 6;
+  }
+
+  .close__dot {
+    fill: #ffffff;
+    stroke: #81adfa;
+    stroke-width: 3;
+  }
+
+  .close__label {
+    font-size: 13px;
+    font-weight: 600;
+    fill: #ffffff;
+  }
+
+  .close__label--rising {
+    text-anchor: end;
+    transform: translate(-20px, 4px);
+  }
+
+  .close__legend {
+    font-size: 12px;
+    fill: var(--color-text-muted);
+  }
+
+  .close__legend--rising {
+    fill: #81adfa;
+  }
+
+  /* ---------- next ---------- */
+  .next__links {
+    margin-top: var(--space-5);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3) var(--space-6);
+    font-size: var(--text-sm);
+    font-weight: 600;
+  }
+
+  .next__links a {
+    text-decoration: none;
+  }
+
+  @media (max-width: 1040px) {
+    .cake__layer {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .cake__note {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 880px) {
+    .hands,
+    .charts,
+    .software,
+    .irl,
+    .eras,
+    .curves,
+    .close {
+      grid-template-columns: 1fr;
+    }
+
+    .software,
+    .irl,
+    .close {
+      gap: var(--space-7);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .cake__layer {
+      grid-template-columns: 1fr;
+      gap: var(--space-1);
+    }
+
+    .stats li {
+      grid-template-columns: 1fr;
+      gap: var(--space-1);
+    }
+  }
+</style>

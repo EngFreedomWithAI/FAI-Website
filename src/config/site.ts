@@ -12,18 +12,16 @@ export interface FooterLink {
 export const site = {
   brand: 'Freedom with AI',
 
-  /**
-   * One line, used in the footer, the meta description fallback and the
-   * Organization schema. It stays industry-open on purpose.
-   */
-  mission: 'Advisory for founders building across the AI stack.',
+  /** One line, used in the footer, the default title and the Organization schema. */
+  mission: 'Accelerate Entrepreneurs. Build. Advise. Invest.',
 
   /** Longer positioning line for meta descriptions and og:description. */
   summary:
-    'Sonia Sarao and Cammie Clay advise founders building across the AI stack, on the decisions that turn technical capability into a real business.',
+    'Freedom with AI accelerates entrepreneurs building in space and physical AI. Sonia Sarao advises founders on turning a working technology into a business. Cammie Clay leads our investing.',
 
   nav: [
     { label: 'Advisory', href: '/advisory' },
+    { label: 'Investing', href: '/investing' },
     { label: 'Thesis', href: '/thesis' },
   ] satisfies NavItem[],
 
@@ -48,7 +46,9 @@ export const site = {
 
   footerExplore: [
     { label: 'Advisory', href: '/advisory' },
+    { label: 'Investing', href: '/investing' },
     { label: 'Thesis', href: '/thesis' },
+    { label: 'State of AI: Investing', href: '/thesis/state-of-ai-investing' },
   ] satisfies NavItem[],
 
   footerProduct: [
