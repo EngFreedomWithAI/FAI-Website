@@ -25,7 +25,7 @@ The money has moved in three steps, following Cammie Clay's State of AI: Investi
 
 - Bits (2010s to 2024): software eats the world through SaaS, apps and per-seat pricing. Investors rewarded growth and seats.
 - Bits buy atoms (2025 to 2026): AI money pours into chips, data centers and power. Investors reward revenue and retention, not demos.
-- Bits drive atoms (2027 and beyond): AI goes into the real world through robotaxis, robots, devices and AI-designed drugs. Investors will reward a physical moat: hardware, real-world data and regulation.
+- Bits drive atoms (2027 and beyond): AI goes into the real world through robotaxis already on the road, then robots, devices and AI-designed drugs. Investors will reward a physical moat: hardware, real-world data and regulation.
 
 The firm's focus is the next step: space. Software alone gets copied in months. Software plus the real world is hard to copy, and space is the hardest real world there is.
 
@@ -59,9 +59,9 @@ The firm does not design spacecraft, chips or power systems. Its work begins whe
 
 ### How the firm participates
 
-- Advise, led by Sonia Sarao: hands-on advisory for space and deep-tech founders turning a working technology into a business.
+- Advise, led by Sonia Sarao: hands-on advisory for ISAM, space and deep-tech founders turning a working technology into a business.
 - Invest, led by Cammie Clay: the firm's own capital in early-stage space companies, and physical AI where it meets space.
-- Build: the firm's own products for entrepreneurs, starting with faibuddy, and AI agents that run new products end to end.
+- Build: AI-native products run end to end by AI agents: faibuddy, plus gosolokit and advising.space (coming soon).
 
 ## Advisory
 
@@ -114,7 +114,7 @@ Advisory and investing are separate decisions. Working with the firm does not re
 
 ### Sonia Sarao, Co-founder, Advisory
 
-Sonia has spent more than 20 years in enterprise software and financial-market infrastructure. She was the first product hire at Fluxx and rose to VP of Product and Engineering as recurring revenue grew roughly tenfold, then led product at Groove through its acquisition by Clari. She helped win multimillion-dollar enterprise deals, developed new product lines and vertical strategies, and supported Series A and B fundraising and three M&A diligence processes. She has built and led technical teams across India, Kenya, Canada and Europe, and holds degrees in computer science and software engineering. She brings software, product and commercial experience to space companies, not aerospace engineering.
+Sonia has spent more than 20 years in enterprise software and financial-market infrastructure, including a decade at NYSE. She was the first product hire at Fluxx and rose to VP of Product and Engineering as recurring revenue grew roughly tenfold, then led product at Groove through its acquisition by Clari. She helped win multimillion-dollar enterprise deals, developed new product lines and vertical strategies, and supported Series A and B fundraising and three M&A diligence processes. She has built and led technical teams across the US, India, Kenya, Canada and Europe, and holds degrees in computer science and software engineering. She brings software, product and commercial experience to space companies, not aerospace engineering.
 
 LinkedIn: https://www.linkedin.com/in/sonia-sarao/
 
@@ -126,7 +126,7 @@ LinkedIn: https://www.linkedin.com/in/cammieclay/
 
 ## Build
 
-faibuddy helps aspiring entrepreneurs develop their business ideas: https://faibuddy.com. The firm also builds AI agents that run new products end to end.
+faibuddy helps early-stage entrepreneurs develop their business ideas: https://faibuddy.com. gosolokit and advising.space (strategic intelligence for space founders) are coming soon. Each product is run end to end by AI agents.
 
 ## General contact
 

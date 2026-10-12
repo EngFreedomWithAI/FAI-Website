@@ -69,7 +69,7 @@ export interface ProofPoint {
 export const proofPoints: ProofPoint[] = [
   { figure: '20+ years', label: 'in enterprise software and financial-market infrastructure' },
   { figure: 'Groove to Clari', label: 'product leadership through the acquisition' },
-  { figure: 'NYSE and FINRA', label: 'regulator experience behind our diligence' },
+  { figure: 'NYSE and FINRA', label: 'inside the exchange and the regulator, behind our diligence' },
   { figure: '4 continents', label: 'of technical teams built and led' },
   { figure: 'Our own capital', label: 'invested in the space companies we back' },
 ];
@@ -101,8 +101,8 @@ export interface EngagementExample {
 export const engagementExamples: EngagementExample[] = [
   {
     stage: 'Early stage',
-    sector: 'Space',
-    body: 'An early-stage space company is connecting its technical capabilities to customer needs and commercial opportunities. We advise the founders and are investors in the company.',
+    sector: 'Space · ISAM',
+    body: 'An early-stage in-space servicing, assembly and manufacturing (ISAM) company is connecting its technical capabilities to customer needs and commercial opportunities. We advise the founders and are investors in the company.',
   },
   {
     stage: 'Early stage',

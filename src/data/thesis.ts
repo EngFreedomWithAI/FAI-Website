@@ -98,7 +98,7 @@ export const arc: ArcStep[] = [
   {
     when: '2027 and beyond',
     name: 'Bits drive atoms',
-    body: 'AI goes into the real world: robotaxis, robots, devices, AI-designed drugs.',
+    body: 'AI goes into the real world: robotaxis already on the road, then robots, devices, AI-designed drugs.',
     rewards: 'A physical moat: hardware, real-world data, regulation',
   },
   {
@@ -125,7 +125,7 @@ export const participation: Participation[] = [
   {
     mode: 'Advise',
     lead: 'Sonia Sarao',
-    body: 'Hands-on advisory for space and deep-tech founders turning a working technology into a business: who buys it, what to build next, how to sell it and how to raise.',
+    body: 'Hands-on advisory for ISAM, space and deep-tech founders turning a working technology into a business: who buys it, what to build next, how to sell it and how to get ready to raise.',
     link: { label: 'How advisory works', href: '/advisory' },
   },
   {
@@ -136,7 +136,7 @@ export const participation: Participation[] = [
   },
   {
     mode: 'Build',
-    body: 'We build our own products for entrepreneurs, starting with faibuddy, and AI agents that run new products end to end. Building keeps our advice grounded in what actually works.',
+    body: 'We build AI-native products, run end to end by AI agents: faibuddy for early-stage entrepreneurs, with gosolokit and advising.space, strategic intelligence for space founders, coming soon. Building keeps our advice grounded in what actually works.',
     link: { label: 'faibuddy', href: 'https://faibuddy.com', external: true },
   },
 ];

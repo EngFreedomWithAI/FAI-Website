@@ -12,7 +12,7 @@ Advisory is space-led, and also open to physical AI, deep-tech, FinTech, B2B sof
 
 ## Advisory
 
-[Advisory](https://freedomwith.ai/advisory) with Sonia Sarao covers finding the market, building the product and company, selling into complex buyers, and raising and diligence. Engagements begin with a three- or six-month term.
+[Advisory](https://freedomwith.ai/advisory) with Sonia Sarao is space-led, with the deepest focus on in-space servicing, assembly and manufacturing (ISAM). It covers finding the market, building the product and company, selling into complex buyers, and raising and diligence. Engagements begin with a three- or six-month term.
 
 ## Investing
 
@@ -20,12 +20,15 @@ Advisory is space-led, and also open to physical AI, deep-tech, FinTech, B2B sof
 
 ## Partners
 
-- Sonia Sarao, Co-founder, Advisory: 20+ years in enterprise software and financial-market infrastructure. Led product at Groove through its acquisition by Clari; first product hire at Fluxx, later VP of Product and Engineering. Brings software, product and commercial experience, not aerospace engineering. LinkedIn: https://www.linkedin.com/in/sonia-sarao/
+- Sonia Sarao, Co-founder, Advisory: 20+ years in enterprise software and financial-market infrastructure, including a decade at NYSE. Led product at Groove through its acquisition by Clari; first product hire at Fluxx, later VP of Product and Engineering. Brings software, product and commercial experience, not aerospace engineering. LinkedIn: https://www.linkedin.com/in/sonia-sarao/
 - Cammie Clay, Co-founder, Investing: seasoned trader and public markets investor. Formerly a regulator at the New York Stock Exchange and FINRA, then a compliance executive at RS Investments and First Republic Bank. LinkedIn: https://www.linkedin.com/in/cammieclay/
 
 ## Build
 
-- [faibuddy](https://faibuddy.com) helps aspiring entrepreneurs develop their business ideas. The firm also builds AI agents that run new products end to end.
+- [faibuddy](https://faibuddy.com) helps early-stage entrepreneurs develop their business ideas.
+- gosolokit (coming soon).
+- advising.space (coming soon): strategic intelligence for space founders.
+- Each product is run end to end by AI agents.
 
 ## Key pages
 

@@ -42,7 +42,7 @@ export const advisors: Advisor[] = [
     leads: 'advise',
     role: 'Co-founder, Advisory',
     strengths: 'Commercialization, product, go-to-market and fundraising',
-    lede: 'Advises space and deep-tech founders on turning a working technology into a business: who buys it, what to build, how to sell it and how to raise.',
+    lede: 'Advises ISAM, space and deep-tech founders on turning a working technology into a business: who buys it, what to build, how to sell it and how to get ready to raise.',
     credential:
       '20+ years in enterprise software and financial-market infrastructure. She helped win multimillion-dollar enterprise deals at Fluxx and Groove, and led product at Groove through its acquisition by Clari.',
     works_on: [
@@ -54,16 +54,17 @@ export const advisors: Advisor[] = [
       'Preparing for diligence, and knowing what buyers and investors examine',
     ],
     bio: [
-      'Sonia has spent more than 20 years in enterprise software and financial-market infrastructure. She was the first product hire at Fluxx and rose to VP of Product and Engineering as recurring revenue grew roughly tenfold, then led product at Groove through its acquisition by Clari. Along the way she helped win multimillion-dollar enterprise deals, developed new product lines and vertical strategies, and supported Series A and B fundraising and acquisition diligence.',
-      'She has built and led technical teams across India, Kenya, Canada and Europe, and holds degrees in computer science and software engineering. Today she leads the firm\'s advisory work, with a focus on space, and builds the firm\'s own products.',
+      'Sonia has spent more than 20 years in enterprise software and financial-market infrastructure, including a decade at NYSE. She was the first product hire at Fluxx and rose to VP of Product and Engineering as recurring revenue grew roughly tenfold, then led product at Groove through its acquisition by Clari. Along the way she helped win multimillion-dollar enterprise deals, developed new product lines and vertical strategies, and supported Series A and B fundraising and acquisition diligence.',
+      'She has built and led technical teams across the US, India, Kenya, Canada and Europe, and holds degrees in computer science and software engineering. Today she leads the firm\'s advisory work, with a focus on space and in-space servicing, assembly and manufacturing (ISAM), and builds the firm\'s own products.',
       'Her strength is translation: between engineers, customers, executives and investors. She works from first principles to find the underlying problem and how the parts of a business fit together.',
     ],
     proof: [
       '20+ years in enterprise software and financial-market infrastructure',
+      'A decade at NYSE',
       'VP of Product at Groove, through its acquisition by Clari',
       'First product hire at Fluxx, later VP of Product and Engineering',
       'Supported Series A and B fundraising and three M&A diligence processes',
-      'Built and led technical teams across India, Kenya, Canada and Europe',
+      'Built and led technical teams across the US, India, Kenya, Canada and Europe',
       'Degrees in computer science and software engineering',
     ],
     depth:
