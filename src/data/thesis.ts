@@ -60,10 +60,15 @@ export const stackLayers: StackLayer[] = [
   },
 ];
 
-/** The overlay that runs alongside all five layers. Our part of the framework. */
-export const companyBuildingLayer = {
-  label: 'The company-building layer',
-  path: ['Capability', 'Product', 'Market', 'Enduring business'],
+/** The "Where we contribute" section on /thesis. Our part of the framework. */
+export const contribution = {
+  label: 'Where we contribute',
+  heading: 'Technology creates possibilities. Leadership determines how a company puts them to work.',
+  body: [
+    'We advise founders, CEOs and leadership teams on AI, product and technology strategy, connecting technical capabilities with customer needs, business priorities and organizational capability.',
+    'Our work spans building new products and businesses, adopting AI across functions, developing leaders and identifying opportunities in proprietary data.',
+    'We bring an ongoing outside perspective while helping companies strengthen the capabilities of their own people.',
+  ],
 } as const;
 
 /** The line the whole thesis rests on. */
@@ -125,7 +130,7 @@ export const participation: Participation[] = [
   {
     mode: 'Advise',
     lead: 'Sonia Sarao',
-    body: 'Hands-on advisory for ISAM, space and deep-tech founders turning a working technology into a business: who buys it, what to build next, how to sell it and how to get ready to raise.',
+    body: 'Executive advisory for founders, CEOs and leadership teams in space, defense and complex technology businesses, on AI strategy, adoption and company growth.',
     link: { label: 'How advisory works', href: '/advisory' },
   },
   {
@@ -136,15 +141,15 @@ export const participation: Participation[] = [
   },
   {
     mode: 'Build',
-    body: 'We build AI-native products, run end to end by AI agents: faibuddy for early-stage entrepreneurs, with gosolokit and advising.space, strategic intelligence for space founders, coming soon. Building keeps our advice grounded in what actually works.',
-    link: { label: 'faibuddy', href: 'https://faibuddy.com', external: true },
+    body: 'We build AI products as well as advise on them. faibuddy.com is live, and building it keeps our advice grounded in what works in practice.',
+    link: { label: 'faibuddy.com', href: 'https://faibuddy.com', external: true },
   },
 ];
 
 /** What we look for in an investment. Rendered on /investing. */
 export const investCriteria: string[] = [
   'Technology that works, or is close, with a clear path to a paying customer',
-  'Technical founders who want a partner on the business side',
+  'Founders who want a partner in AI strategy, product and company growth, as well as capital',
   'Markets where software, data and AI compound a hardware advantage',
   'A round where we can be useful beyond the capital',
 ];
@@ -153,7 +158,7 @@ export const investingBoundary =
   'Advisory and investing are separate decisions. Working with us does not require or promise an investment.';
 
 export const attribution = {
-  text: 'The five-layer stack builds on Jensen Huang’s framing of AI as infrastructure. The space mapping and the company-building layer are our own.',
+  text: 'The five-layer stack builds on Jensen Huang’s framing of AI as infrastructure. The space mapping is our own.',
   sourceLabel: 'NVIDIA on the five layers of AI',
   /** Compact one-line form for the home page, where the full note is too heavy. */
   shortLabel: 'Adapted from Jensen Huang’s five layers of AI',

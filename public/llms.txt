@@ -1,18 +1,18 @@
 # Freedom with AI
 
-> Freedom with AI accelerates entrepreneurs building in space and physical AI. Build. Advise. Invest. Sonia Sarao leads advisory. Cammie Clay leads investing.
+> Freedom with AI helps founders, CEOs and leadership teams build AI capability from within. Build. Advise. Invest. Sonia Sarao leads executive advisory. Cammie Clay leads investing.
 
-Advisory is space-led, and also open to physical AI, deep-tech, FinTech, B2B software and life sciences founders. Investing focuses on early-stage space companies, and physical AI where it meets space.
+Advisory serves founders, CEOs and leadership teams in space, defense and complex technology businesses, on AI strategy, adoption and company growth. Investing focuses on early-stage space companies, and physical AI where it meets space.
 
 ## Thesis
 
-[Thesis](https://freedomwith.ai/thesis): AI is leaving the screen. The money moved from software (bits) into chips, data centers and power (bits buy atoms), and next into machines that act in the world (bits drive atoms). Space is the whole AI stack under its hardest constraints: energy, chips, infrastructure, models and applications, each with less power, bandwidth and room for error. Freedom with AI works at the company-building layer, helping founders turn technical capability into a product, a market and a durable business. The five-layer stack builds on Jensen Huang's framing of AI as infrastructure.
+[Thesis](https://freedomwith.ai/thesis): AI is leaving the screen. The money moved from software (bits) into chips, data centers and power (bits buy atoms), and next into machines that act in the world (bits drive atoms). Space is the whole AI stack under its hardest constraints: energy, chips, infrastructure, models and applications, each with less power, bandwidth and room for error. Freedom with AI advises leadership teams on AI, product and technology strategy, connecting technical capabilities with customer needs, business priorities and organizational capability, while helping companies strengthen the capabilities of their own people. The five-layer stack builds on Jensen Huang's framing of AI as infrastructure.
 
 [State of AI: Investing](https://freedomwith.ai/thesis/state-of-ai-investing): Cammie Clay's October 2026 talk following the money from software to the real world.
 
 ## Advisory
 
-[Advisory](https://freedomwith.ai/advisory) with Sonia Sarao is space-led, with the deepest focus on in-space servicing, assembly and manufacturing (ISAM). It covers finding the market, building the product and company, selling into complex buyers, and raising and diligence. Engagements begin with a three- or six-month term.
+[Advisory](https://freedomwith.ai/advisory): executive advisory for AI strategy with Sonia Sarao. Three focus areas: AI strategy and executive leadership, AI adoption across functions, and product and data strategy. Supported by experience in product direction, customer discovery, new business lines, enterprise growth, global teams, fundraising and acquisition diligence, plus executive leadership coaching for founders and CEOs. Engagements are ongoing executive advisory and fractional leadership; scope, cadence and fee reflect the priorities and level of involvement.
 
 ## Investing
 
@@ -20,15 +20,12 @@ Advisory is space-led, and also open to physical AI, deep-tech, FinTech, B2B sof
 
 ## Partners
 
-- Sonia Sarao, Co-founder, Advisory: 20+ years in enterprise software and financial-market infrastructure, including a decade at NYSE. Led product at Groove through its acquisition by Clari; first product hire at Fluxx, later VP of Product and Engineering. Brings software, product and commercial experience, not aerospace engineering. LinkedIn: https://www.linkedin.com/in/sonia-sarao/
-- Cammie Clay, Co-founder, Investing: seasoned trader and public markets investor. Formerly a regulator at the New York Stock Exchange and FINRA, then a compliance executive at RS Investments and First Republic Bank. LinkedIn: https://www.linkedin.com/in/cammieclay/
+- Sonia Sarao, Co-Founder & Executive Advisor: advises founders, CEOs and leadership teams on AI, product and technology strategy, executive leadership and growth. Former VP of Product at Groove (through its acquisition by Clari) and VP of Product and Engineering at Fluxx, with earlier leadership experience at NYSE. Built and launched faibuddy.com, an AI-native advisory product for entrepreneurs. LinkedIn: https://www.linkedin.com/in/sonia-sarao/
+- Cammie Clay, Co-Founder, Investing: seasoned trader and public markets investor. Formerly a regulator at the New York Stock Exchange and FINRA, then a compliance executive at RS Investments and First Republic Bank. LinkedIn: https://www.linkedin.com/in/cammieclay/
 
 ## Build
 
-- [faibuddy](https://faibuddy.com) helps early-stage entrepreneurs develop their business ideas.
-- gosolokit (coming soon).
-- advising.space (coming soon): strategic intelligence for space founders.
-- Each product is run end to end by AI agents.
+- [faibuddy.com](https://faibuddy.com): an AI-native advisory product for entrepreneurs, built and launched by Sonia Sarao.
 
 ## Key pages
 

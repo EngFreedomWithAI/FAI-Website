@@ -1,11 +1,11 @@
 # Freedom with AI website
 
-The current Freedom with AI site is an Astro static site with Cloudflare Pages Functions. Mission: Accelerate Entrepreneurs. Build. Advise. Invest. Space is the focus for advising and investing. Sonia leads advisory, Cammie leads investing, and faibuddy sits under Build.
+The current Freedom with AI site is an Astro static site with Cloudflare Pages Functions. Build. Advise. Invest. The lead message is building AI capability from within, for founders, CEOs and leadership teams in space, defense and complex technology businesses. Sonia leads executive advisory, Cammie leads investing in space and physical AI, and faibuddy.com sits under Build.
 
 ## Public site
 
-- `/`: positioning, proof strip, thesis arc, the advise and invest paths, decision points and selected work
-- `/advisory`: Sonia's advisory: work areas, profile, engagement model and advisory intake
+- `/`: positioning, proof strip, the advisory offer, partner profiles, thesis arc, decision points and selected work
+- `/advisory`: Sonia's executive advisory: focus areas, supporting experience, profile, how we work and advisory intake
 - `/investing`: Cammie's investing: focus, criteria, profile and a contact link
 - `/thesis`: the thesis (bits to atoms to space) and the list of long-form pieces
 - `/thesis/state-of-ai-investing`: Cammie's State of AI: Investing talk, rebuilt as a page
@@ -25,8 +25,8 @@ Retired public URLs are handled in `public/_redirects`. The old pages and assets
 
 - `src/config/site.ts`: brand, navigation, profiles and global links
 - `src/data/advisors.ts`: partner positioning and credentials
-- `src/data/engagements.ts`: advisory capabilities, proof strip, decision points and examples
-- `src/data/thesis.ts`: arc, stack-in-space mapping, participation, investing criteria and pieces
+- `src/data/engagements.ts`: advisory focus areas, supporting experience, proof strip, decision points and examples
+- `src/data/thesis.ts`: arc, stack-in-space mapping, where we contribute, participation, investing criteria and pieces
 - `src/data/state-of-ai.ts`: figures and sources from Cammie's talk
 - `src/data/contact-form.ts`: advisory and contact form options
 - `src/data/office-hours.ts`: hidden Office Hours sessions

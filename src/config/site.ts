@@ -13,11 +13,11 @@ export const site = {
   brand: 'Freedom with AI',
 
   /** One line, used in the footer, the default title and the Organization schema. */
-  mission: 'Accelerate Entrepreneurs. Build. Advise. Invest.',
+  mission: 'Build. Advise. Invest.',
 
   /** Longer positioning line for meta descriptions and og:description. */
   summary:
-    'Freedom with AI accelerates entrepreneurs building in space and physical AI. Sonia Sarao advises founders on turning a working technology into a business. Cammie Clay leads our investing.',
+    'Freedom with AI helps founders, CEOs and leadership teams in space, defense and complex technology businesses build AI capability from within. Sonia Sarao leads executive advisory on AI strategy, adoption and company growth. Cammie Clay leads our investing in space and physical AI companies.',
 
   nav: [
     { label: 'Advisory', href: '/advisory' },

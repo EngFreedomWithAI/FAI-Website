@@ -9,7 +9,7 @@ import StackIcon from '../components/StackIcon.astro';
 import ArcDiagram from '../components/ArcDiagram.astro';
 import ThesisDiagram from '../components/ThesisDiagram.astro';
 import { site } from '../config/site';
-import { arcLine, attribution, companyBuildingLayer, stackLayers, thesisPieces } from '../data/thesis';
+import { arcLine, attribution, contribution, stackLayers, thesisPieces } from '../data/thesis';
 import '../styles/content-pages.css';
 
 const pageTitle = 'Thesis | Freedom with AI';
@@ -30,8 +30,8 @@ const pageDescription =
         <p class="page-hero__lede">
           Software captured the last decade. The money is now moving into atoms: chips, data
           centers, power, and machines that act in the world. Space is where every layer of that
-          stack runs under the hardest constraints, and it is where we focus our advising and
-          investing.
+          stack runs under the hardest constraints, and it is a focus of both our investing and our
+          advising.
         </p>
       </div>
     </section>
@@ -93,7 +93,7 @@ const pageDescription =
     <section class="page-section page-section--alt" aria-labelledby="why-heading">
       <div class="container">
         <SectionHeader label="Why space" align="left" />
-        <h2 id="why-heading" class="page-section__heading">Where hard technology needs company builders.</h2>
+        <h2 id="why-heading" class="page-section__heading">Where hard technology needs strong leadership.</h2>
 
         <div class="why">
           <article>
@@ -111,10 +111,10 @@ const pageDescription =
             </p>
           </article>
           <article>
-            <h3>The business is the bottleneck</h3>
+            <h3>Leadership is the bottleneck</h3>
             <p>
-              Many space companies have the engineering. Fewer have a clear first customer, a sales
-              motion that survives procurement, and a story investors outside the sector can follow.
+              Many space companies have the engineering. Fewer have the leadership, product direction
+              and internal capability to turn it into a durable business.
             </p>
           </article>
         </div>
@@ -124,20 +124,12 @@ const pageDescription =
     <!-- The part that is ours. -->
     <section class="page-section" aria-labelledby="ours-heading">
       <div class="container">
-        <SectionHeader label="Where we work" align="left" />
-        <h2 id="ours-heading" class="page-section__heading">{companyBuildingLayer.label}.</h2>
-        <p class="page-section__sub">
-          We do not design spacecraft, chips or power systems. Our work begins where a technical
-          capability has to become a product, find a buyer and support a durable company. Those
-          questions repeat across the stack, even when the technology does not.
-        </p>
-
-        <ol class="path" aria-label="From capability to business">
-          {companyBuildingLayer.path.map((step) => <li>{step}</li>)}
-        </ol>
+        <SectionHeader label={contribution.label} align="left" />
+        <h2 id="ours-heading" class="page-section__heading ours__heading">{contribution.heading}</h2>
+        {contribution.body.map((paragraph) => <p class="page-section__sub">{paragraph}</p>)}
 
         <div class="ours__links">
-          <a href="/advisory">Where we help founders <span aria-hidden="true">&rarr;</span></a>
+          <a href="/advisory">How advisory works <span aria-hidden="true">&rarr;</span></a>
           <a href="/investing">What we invest in <span aria-hidden="true">&rarr;</span></a>
         </div>
       </div>
@@ -172,7 +164,7 @@ const pageDescription =
     </section>
 
     <CtaStrip>
-      <span slot="heading">Building somewhere in this stack?</span>
+      <span slot="heading">Leading a company in this stack?</span>
       <Button slot="actions" variant="primary" href={site.cta.href} size="large" track="thesis_advisory">
         Start a conversation
       </Button>
@@ -291,29 +283,9 @@ const pageDescription =
     color: var(--color-text-muted);
   }
 
-  /* ---------- capability to business ---------- */
-  .path {
-    list-style: none;
-    margin: var(--space-6) 0 0;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2);
-  }
-
-  .path li {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    font-size: var(--text-sm);
-    font-weight: 600;
-    color: var(--color-accent);
-  }
-
-  .path li:not(:last-child)::after {
-    content: '→';
-    color: var(--color-text-subtle);
-    font-weight: 400;
+  /* ---------- where we contribute ---------- */
+  .ours__heading {
+    max-width: 30ch;
   }
 
   .ours__links {

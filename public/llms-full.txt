@@ -1,6 +1,6 @@
 # Freedom with AI: Complete Site Content
 
-> Freedom with AI accelerates entrepreneurs building in space and physical AI. Build. Advise. Invest. Sonia Sarao leads advisory. Cammie Clay leads investing.
+> Freedom with AI helps founders, CEOs and leadership teams build AI capability from within. Build. Advise. Invest. Sonia Sarao leads executive advisory. Cammie Clay leads investing.
 
 Canonical website: https://freedomwith.ai/
 Advisory: https://freedomwith.ai/advisory
@@ -11,11 +11,11 @@ Contact: https://freedomwith.ai/contact
 
 ## Positioning
 
-Mission: Accelerate Entrepreneurs. Build. Advise. Invest.
+Mission: Build AI capability from within. Build. Advise. Invest.
 
-Freedom with AI works with founders who have built the technology and now need to build the company. Space is the focus for both advising and investing. Advisory is also open to physical AI and deep-tech founders, and to a small number of FinTech, B2B software and life sciences engagements.
+Freedom with AI advises founders, CEOs and leadership teams in space, defense and complex technology businesses on AI strategy, adoption and company growth. Its work combines executive experience, practical AI product building and an ongoing outside perspective, helping leaders set direction and their teams put it into practice. The firm also invests its own capital in space and physical AI companies.
 
-The firm brings operating, product and commercial experience, not aerospace engineering. Founders know the physics; the firm helps with who buys it, and how.
+The firm's depth is in software, product, AI and executive leadership, not aerospace engineering.
 
 ## Thesis
 
@@ -43,57 +43,52 @@ The five-layer stack builds on Jensen Huang's framing of AI as infrastructure. T
 
 - The moat is physical. Hardware in orbit, real-world data and hard-won licenses are hard to copy.
 - Every AI constraint is sharper. Power, compute, bandwidth and latency are tighter in space.
-- The business is the bottleneck. Many space companies have the engineering; fewer have a clear first customer, a sales motion that survives procurement, and a story investors outside the sector can follow.
+- Leadership is the bottleneck. Many space companies have the engineering; fewer have the leadership, product direction and internal capability to turn it into a durable business.
 
-### The company-building layer
+### Where the firm contributes
 
-The firm does not design spacecraft, chips or power systems. Its work begins where a technical capability has to become a product, find a buyer and support a durable company. The sequence is capability, then product, then market, then an enduring business. Questions it works through:
+Technology creates possibilities. Leadership determines how a company puts them to work.
 
-- Which customer needs this capability badly enough to pay, and when
-- Commercial, civil government or defense: which comes first
-- Which technical capability creates a meaningful product advantage
-- Which business model works with the costs, timelines and capital required
-- Which partners, primes or supply constraints determine scale
-- What investors and acquirers will examine, and whether the story is ready
-- What should remain outside the company's scope
+The firm advises founders, CEOs and leadership teams on AI, product and technology strategy, connecting technical capabilities with customer needs, business priorities and organizational capability. Its work spans building new products and businesses, adopting AI across functions, developing leaders and identifying opportunities in proprietary data. It brings an ongoing outside perspective while helping companies strengthen the capabilities of their own people.
 
 ### How the firm participates
 
-- Advise, led by Sonia Sarao: hands-on advisory for ISAM, space and deep-tech founders turning a working technology into a business.
+- Advise, led by Sonia Sarao: executive advisory for founders, CEOs and leadership teams in space, defense and complex technology businesses, on AI strategy, adoption and company growth.
 - Invest, led by Cammie Clay: the firm's own capital in early-stage space companies, and physical AI where it meets space.
-- Build: AI-native products run end to end by AI agents: faibuddy, plus gosolokit and advising.space (coming soon).
+- Build: the firm builds AI products as well as advising on them. faibuddy.com, an AI-native advisory product for entrepreneurs, is live.
 
 ## Advisory
 
-### Where the firm helps
+Executive advisory for AI strategy: build AI capability from within. Clients work directly with Sonia Sarao to connect AI opportunities with business priorities, executive leadership and the capabilities of their internal teams. For founders, CEOs and leadership teams in space, defense and complex technology businesses.
 
-Finding the market: commercial, civil government or defense customers first; mapping the capability to concrete customer problems; market and competitive research; business model and pricing on long timelines; positioning and the company narrative.
+### Focus areas
 
-Building the product and the company: product strategy built around a core technology; the software, data and AI layer around the hardware; roadmap, cost and runway decisions; team and operating structure, including distributed teams; new products and business lines.
+- AI strategy and executive leadership: identify where AI can create business value, establish priorities and help leaders shape the organization and culture to support them.
+- AI adoption across functions: help teams evaluate tools, improve workflows and build skills and systems that can evolve as AI advances.
+- Product and data strategy: identify opportunities for AI in products and services, and how proprietary data can strengthen customer value and competitive advantage.
 
-Selling into complex buyers: buying committees, champions and decision-makers; go-to-market motion and sales strategy; partnerships, primes and channels; customer segmentation and verticalization; pricing and packaging.
+### Experience across the business
 
-Raising and diligence: a fundraising narrative for investors new to the sector; Series A and B preparation; what investors and acquirers examine in diligence; regulatory and risk questions that shape the plan; transaction readiness.
+Sonia's advisory work draws on experience with product direction, customer discovery, new business lines, enterprise growth, global teams, fundraising and acquisition diligence. She also coaches founders and CEOs on executive leadership, organizational development and culture.
 
-### When founders bring the firm in
+### When leaders bring the firm in
 
-- The technology works, but the first commercial customer has not signed
-- Government or commercial first, and the answer changes the whole roadmap
-- Engineers understand the capability; buyers do not yet
-- Investors outside the sector do not understand the market
-- Sales run through buying committees, primes and procurement
-- A raise, partnership or acquisition is approaching and the story is not ready
+- AI is on the leadership agenda, and the priorities are not yet set
+- Teams are trying AI tools, but the way work gets done has not changed
+- Proprietary data could strengthen the product, and no one owns that decision
+- A new product or business line needs direction and an owner
+- The company is growing faster than its leadership structure
+- An acquisition, partnership or raise is on the horizon, and the plan has to hold up to scrutiny
 
-### Engagement model
+### How the firm works
 
-Regular working sessions on the decisions in motion, direct access between sessions, and continuity from decision through execution. Engagements begin with a three- or six-month term; scope and fee reflect the priorities and level of involvement. Start at https://freedomwith.ai/advisory#start.
+Ongoing executive advisory and fractional leadership engagements, shaped around the company's priorities. Regular working sessions and direct access provide continuity as decisions move into practice. Sonia brings an ongoing outside perspective on AI while working alongside the company's leadership and internal teams. The scope, cadence and fee reflect the priorities and level of involvement. Start at https://freedomwith.ai/advisory#start.
 
 ### Selected advisory work
 
-- Early-stage space: the company is connecting its technical capabilities to customer needs and commercial opportunities. The firm advises the founders and is an investor in the company.
-- Early-stage FinTech: the company was refining its problem, target market and business model while regulatory requirements shaped what the product could become.
-- Growth-stage B2B software: the company needed its enterprise segments, product strategy and AI direction to reinforce the same business model.
-- Early-stage life sciences: the company needed to align its target market and business model with the compliance requirements affecting the product and operating model.
+- B2B software: a growth-stage company needed its enterprise segments, product strategy and AI direction to reinforce the same business model.
+- FinTech: the company was shaping its product, target market and business model around the regulatory requirements that defined what the product could become.
+- Life sciences: the company needed to align its target market, product and operating model with the compliance requirements affecting them.
 
 These examples are anonymized and describe work actually performed.
 
@@ -104,21 +99,21 @@ The firm writes early, small checks with its own money in space companies, and i
 What it looks for:
 
 - Technology that works, or is close, with a clear path to a paying customer
-- Founders who know the physics and want help with the business
+- Founders who want a partner in AI strategy, product and company growth, as well as capital
 - Markets where software, data and AI compound a hardware advantage
 - A round where the firm can be useful beyond the capital
 
-Advisory and investing are separate decisions. Working with the firm does not require or promise an investment. Investing enquiries and introductions: https://freedomwith.ai/contact?topic=investing
+Founders the firm backs can draw on Cammie's experience in diligence, risk and governance, and Sonia's experience in AI strategy, product, executive leadership and company growth. Advisory and investing are separate decisions. Working with the firm does not require or promise an investment. Investing enquiries and introductions: https://freedomwith.ai/contact?topic=investing
 
 ## Partners
 
-### Sonia Sarao, Co-founder, Advisory
+### Sonia Sarao, Co-Founder & Executive Advisor
 
-Sonia has spent more than 20 years in enterprise software and financial-market infrastructure, including a decade at NYSE. She was the first product hire at Fluxx and rose to VP of Product and Engineering as recurring revenue grew roughly tenfold, then led product at Groove through its acquisition by Clari. She helped win multimillion-dollar enterprise deals, developed new product lines and vertical strategies, and supported Series A and B fundraising and three M&A diligence processes. She has built and led technical teams across the US, India, Kenya, Canada and Europe, and holds degrees in computer science and software engineering. She brings software, product and commercial experience to space companies, not aerospace engineering.
+Sonia advises founders, CEOs and leadership teams on AI, product and technology strategy, executive leadership and growth. She has spent more than 20 years in enterprise software and financial-market infrastructure, including a decade at NYSE. She was the first product hire at Fluxx and rose to VP of Product and Engineering as recurring revenue grew roughly tenfold, then became VP of Product at Groove. She helped win multimillion-dollar enterprise deals alongside Sales, developed new products and business lines, and supported Series A and B fundraising. She worked through diligence on three potential transactions at Fluxx, and led product at Groove through its completed acquisition by Clari. She has built and led technical teams across the US, India, Kenya, Canada and Europe, and holds degrees in computer science and software engineering. She built and launched faibuddy.com, an AI-native advisory product for entrepreneurs. Her depth is in software, product, AI and executive leadership, not aerospace engineering.
 
 LinkedIn: https://www.linkedin.com/in/sonia-sarao/
 
-### Cammie Clay, Co-founder, Investing
+### Cammie Clay, Co-Founder, Investing
 
 Cammie leads investing at Freedom with AI. She is a seasoned trader and public markets investor. She worked on both sides of financial regulation: enforcement and investigations at the New York Stock Exchange and FINRA, then compliance leadership at RS Investments and First Republic Bank, where she was VP of Compliance in private wealth management. She holds a Series 7. Her regulatory background is in financial markets; in space she brings a diligence, risk and governance lens rather than sector-specific licensing expertise.
 
@@ -126,7 +121,7 @@ LinkedIn: https://www.linkedin.com/in/cammieclay/
 
 ## Build
 
-faibuddy helps early-stage entrepreneurs develop their business ideas: https://faibuddy.com. gosolokit and advising.space (strategic intelligence for space founders) are coming soon. Each product is run end to end by AI agents.
+faibuddy.com is an AI-native advisory product for entrepreneurs, built and launched by Sonia Sarao: https://faibuddy.com. Building the firm's own AI products keeps its advice grounded in what works in practice.
 
 ## General contact
 
@@ -136,4 +131,4 @@ Use https://freedomwith.ai/contact for investing, introductions, speaking, partn
 
 Experience claims above distinguish demonstrated depth from areas of interest. No portfolio or client company is named. Content on the site is educational and is not individualized legal, financial, regulatory or investment advice.
 
-Last reviewed: 2026-10-08
+Last reviewed: 2026-11-08

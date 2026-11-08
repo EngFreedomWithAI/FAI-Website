@@ -3,18 +3,17 @@ import { json, isValidEmail, isValidWebUrl, normalizeUrl, readBody, escapeHtml }
 import { sendEmail } from '../_lib/ses';
 
 const STAGES: Record<string, string> = {
-  'pre-seed': 'Idea or pre-seed',
-  seed: 'Seed',
-  'series-a': 'Series A',
-  'series-b-plus': 'Series B or later',
+  'early-stage': 'Early stage',
+  'growth-stage': 'Growth stage',
   established: 'Established company',
+  enterprise: 'Enterprise or public company',
 };
 
 const FOCUSES: Record<string, string> = {
-  market: 'First customers and the market',
-  product: 'Product and company building',
-  gtm: 'Go-to-market and sales',
-  raise: 'Fundraising narrative or diligence',
+  'ai-strategy': 'AI strategy and executive leadership',
+  'ai-adoption': 'AI adoption across functions',
+  'product-data': 'Product and data strategy',
+  growth: 'Growth, fundraising or diligence',
   other: 'Something else',
 };
 
@@ -72,7 +71,7 @@ const handleAdvisoryPost: PagesFunction<Env> = async ({ request, env }) => {
       .run();
   } catch (err) {
     // Keep the form available until migration 0006 has run: fold the new
-    // fields into the message so nothing the founder told us is lost.
+    // fields into the message so nothing the requester told us is lost.
     console.error('advisory: insert with stage/focus failed, retrying without them', err);
     const extras = [stageLabel && `Stage: ${stageLabel}`, focusLabel && `Focus: ${focusLabel}`]
       .filter(Boolean)

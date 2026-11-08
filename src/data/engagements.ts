@@ -1,61 +1,36 @@
 /**
- * The advisory work, organised by the problem a founder actually has. Space
- * leads because it is the focus, but the problems are written so a physical
- * AI, deep-tech or B2B founder can still recognise their own situation.
+ * The advisory offer, led by executive AI advisory. Rendered on /advisory and
+ * on the homepage. Product, growth and leadership experience sits underneath
+ * as supporting strength rather than as separate service lines.
  */
 
-export interface WorkArea {
+export interface FocusArea {
   title: string;
   body: string;
-  items: string[];
 }
 
-export const workAreas: WorkArea[] = [
+export const focusAreas: FocusArea[] = [
   {
-    title: 'Finding the market',
-    body: 'The technology works. The open question is who needs it badly enough to pay, and when.',
-    items: [
-      'Commercial, civil government or defense: which customer first',
-      'Mapping the capability to concrete customer problems',
-      'Market and competitive research',
-      'Business model and pricing on long timelines',
-      'Positioning and the company narrative',
-    ],
+    title: 'AI strategy & executive leadership',
+    body: 'Identify where AI can create business value, establish priorities and help leaders shape the organization and culture to support them.',
   },
   {
-    title: 'Building the product and the company',
-    body: 'Turning a core capability into a product, and deciding what the team and cost structure need to look like.',
-    items: [
-      'Product strategy built around a core technology',
-      'The software, data and AI layer around the hardware',
-      'Roadmap, cost and runway decisions',
-      'Team and operating structure, including distributed teams',
-      'New products and business lines',
-    ],
+    title: 'AI adoption across functions',
+    body: 'Help teams evaluate tools, improve workflows and build skills and systems that can evolve as AI advances.',
   },
   {
-    title: 'Selling into complex buyers',
-    body: 'Enterprise and government customers buy through committees. Someone has to map who decides, who blocks and who champions.',
-    items: [
-      'Buying committees, champions and decision-makers',
-      'Go-to-market motion and sales strategy',
-      'Partnerships, primes and channels',
-      'Customer segmentation and verticalization',
-      'Pricing and packaging decisions',
-    ],
-  },
-  {
-    title: 'Raising and diligence',
-    body: 'A raise, partnership or acquisition is coming, and the story has to hold up under scrutiny.',
-    items: [
-      'A fundraising narrative for investors new to the sector',
-      'Series A and B preparation',
-      'What investors and acquirers examine in diligence',
-      'Regulatory and risk questions that shape the plan',
-      'Transaction readiness',
-    ],
+    title: 'Product & data strategy',
+    body: 'Identify opportunities for AI in products and services, and how proprietary data can strengthen customer value and competitive advantage.',
   },
 ];
+
+export const supportingExperience = {
+  title: 'Experience across the business',
+  body: [
+    'Sonia’s advisory work draws on experience with product direction, customer discovery, new business lines, enterprise growth, global teams, fundraising and acquisition diligence.',
+    'She also coaches founders and CEOs on executive leadership, organizational development and culture.',
+  ],
+} as const;
 
 /**
  * The homepage proof strip. Each item must be checkable, and none may name a
@@ -71,20 +46,20 @@ export const proofPoints: ProofPoint[] = [
   { figure: 'Groove to Clari', label: 'product leadership through the acquisition' },
   { figure: 'NYSE and FINRA', label: 'inside the exchange and the regulator, behind our diligence' },
   { figure: '4 continents', label: 'of technical teams built and led' },
-  { figure: 'Our own capital', label: 'invested in the space companies we back' },
+  { figure: 'Our own capital', label: 'invested in space and physical AI companies' },
 ];
 
 /**
  * The moments that tend to trigger a call. Written as situations rather than
- * services, because that is how founders describe them.
+ * services, because that is how leaders describe them.
  */
 export const inflectionPoints: string[] = [
-  'The technology works, but the first commercial customer has not signed',
-  'Government or commercial first, and the answer changes the whole roadmap',
-  'Engineers understand the capability. Buyers do not yet',
-  'Investors outside the sector do not understand the market',
-  'Sales run through buying committees, primes and procurement',
-  'A raise, partnership or acquisition is approaching and the story is not ready',
+  'AI is on the leadership agenda, and the priorities are not yet set',
+  'Teams are trying AI tools, but the way work gets done has not changed',
+  'Proprietary data could strengthen the product, and no one owns that decision',
+  'A new product or business line needs direction and an owner',
+  'The company is growing faster than its leadership structure',
+  'An acquisition, partnership or raise is on the horizon, and the plan has to hold up to scrutiny',
 ];
 
 /**
@@ -93,30 +68,21 @@ export const inflectionPoints: string[] = [
  * Upgrade these to named case studies as clients give permission.
  */
 export interface EngagementExample {
-  stage: 'Early stage' | 'Growth stage';
   sector: string;
   body: string;
 }
 
 export const engagementExamples: EngagementExample[] = [
   {
-    stage: 'Early stage',
-    sector: 'Space · ISAM',
-    body: 'An early-stage in-space servicing, assembly and manufacturing (ISAM) company is connecting its technical capabilities to customer needs and commercial opportunities. We advise the founders and are investors in the company.',
-  },
-  {
-    stage: 'Early stage',
-    sector: 'FinTech',
-    body: 'An early-stage FinTech company was refining its problem, target market and business model while regulatory requirements were shaping what the product could become.',
-  },
-  {
-    stage: 'Growth stage',
     sector: 'B2B software',
     body: 'A growth-stage B2B software company needed its enterprise segments, product strategy and AI direction to reinforce the same business model.',
   },
   {
-    stage: 'Early stage',
-    sector: 'Life Sciences',
-    body: 'An early-stage life sciences company needed to align its target market and business model with the compliance requirements affecting the product and operating model.',
+    sector: 'FinTech',
+    body: 'A FinTech company was shaping its product, target market and business model around the regulatory requirements that defined what the product could become.',
+  },
+  {
+    sector: 'Life sciences',
+    body: 'A life sciences company needed to align its target market, product and operating model with the compliance requirements affecting them.',
   },
 ];

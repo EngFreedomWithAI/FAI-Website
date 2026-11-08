@@ -13,18 +13,17 @@ export const contactTopicOptions: SelectOption[] = [
 
 /** Advisory intake: company stage. */
 export const advisoryStageOptions: SelectOption[] = [
-  { value: 'pre-seed', label: 'Idea or pre-seed' },
-  { value: 'seed', label: 'Seed' },
-  { value: 'series-a', label: 'Series A' },
-  { value: 'series-b-plus', label: 'Series B or later' },
+  { value: 'early-stage', label: 'Early stage' },
+  { value: 'growth-stage', label: 'Growth stage' },
   { value: 'established', label: 'Established company' },
+  { value: 'enterprise', label: 'Enterprise or public company' },
 ];
 
-/** Advisory intake: what the founder is working through. Mirrors the work areas. */
+/** Advisory intake: what the company is working through. Mirrors the focus areas. */
 export const advisoryFocusOptions: SelectOption[] = [
-  { value: 'market', label: 'First customers and the market' },
-  { value: 'product', label: 'Product and company building' },
-  { value: 'gtm', label: 'Go-to-market and sales' },
-  { value: 'raise', label: 'Fundraising narrative or diligence' },
+  { value: 'ai-strategy', label: 'AI strategy and executive leadership' },
+  { value: 'ai-adoption', label: 'AI adoption across functions' },
+  { value: 'product-data', label: 'Product and data strategy' },
+  { value: 'growth', label: 'Growth, fundraising or diligence' },
   { value: 'other', label: 'Something else' },
 ];

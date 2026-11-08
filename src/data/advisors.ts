@@ -19,9 +19,11 @@ export interface Advisor {
   strengths: string;
   /** One line, used in cards and as the page lede. */
   lede: string;
+  /** Short profile under the lede on the homepage, one paragraph per entry. */
+  summary: string[];
   /** The credential that earns the room, in one sentence. */
   credential: string;
-  /** What a founder actually works with this person on. */
+  /** What a client actually works with this person on. */
   works_on: string[];
   /** Longer bio, one paragraph per entry. */
   bio: string[];
@@ -40,22 +42,26 @@ export const advisors: Advisor[] = [
     slug: 'sonia',
     name: 'Sonia Sarao',
     leads: 'advise',
-    role: 'Co-founder, Advisory',
-    strengths: 'Commercialization, product, go-to-market and fundraising',
-    lede: 'Advises ISAM, space and deep-tech founders on turning a working technology into a business: who buys it, what to build, how to sell it and how to get ready to raise.',
+    role: 'Co-Founder & Executive Advisor',
+    strengths: 'AI strategy, product, executive leadership and growth',
+    lede: 'Advises founders, CEOs and leadership teams on AI, product and technology strategy, executive leadership and growth.',
+    summary: [
+      'Former VP of Product at Groove and VP of Product & Engineering at Fluxx, with earlier leadership experience at NYSE. Sonia brings experience building global teams, winning enterprise customers alongside Sales, developing new products, fundraising and acquisition diligence.',
+      'She built and launched faibuddy.com, an AI-native advisory product for entrepreneurs.',
+    ],
     credential:
-      '20+ years in enterprise software and financial-market infrastructure. She helped win multimillion-dollar enterprise deals at Fluxx and Groove, and led product at Groove through its acquisition by Clari.',
+      '20+ years in enterprise software and financial-market infrastructure. Former VP of Product at Groove, through its acquisition by Clari, and VP of Product and Engineering at Fluxx.',
     works_on: [
-      'Connecting a technical capability to a customer who will pay for it',
-      'Choosing between commercial, civil government and defense customers',
-      'Product strategy built around a core technology',
-      'Selling to buying committees, primes and enterprise procurement',
-      'Fundraising narratives for investors who are new to the sector',
-      'Preparing for diligence, and knowing what buyers and investors examine',
+      'Where AI can create business value, and which priorities come first',
+      'Shaping the organization and culture to support those priorities',
+      'Evaluating AI tools and improving workflows across functions',
+      'AI opportunities in products and services',
+      'Using proprietary data to strengthen customer value and competitive advantage',
+      'Executive leadership, organizational development and culture',
     ],
     bio: [
-      'Sonia has spent more than 20 years in enterprise software and financial-market infrastructure, including a decade at NYSE. She was the first product hire at Fluxx and rose to VP of Product and Engineering as recurring revenue grew roughly tenfold, then led product at Groove through its acquisition by Clari. Along the way she helped win multimillion-dollar enterprise deals, developed new product lines and vertical strategies, and supported Series A and B fundraising and acquisition diligence.',
-      'She has built and led technical teams across the US, India, Kenya, Canada and Europe, and holds degrees in computer science and software engineering. Today she leads the firm\'s advisory work, with a focus on space and in-space servicing, assembly and manufacturing (ISAM), and builds the firm\'s own products.',
+      'Sonia has spent more than 20 years in enterprise software and financial-market infrastructure, including a decade at NYSE. She was the first product hire at Fluxx and rose to VP of Product and Engineering as recurring revenue grew roughly tenfold, then became VP of Product at Groove. Along the way she helped win multimillion-dollar enterprise deals alongside Sales, developed new products and business lines, and supported Series A and B fundraising. She worked through diligence on three potential transactions at Fluxx, and led product at Groove through its completed acquisition by Clari.',
+      'She has built and led technical teams across the US, India, Kenya, Canada and Europe, and holds degrees in computer science and software engineering. Today she leads the firm\'s executive advisory work and builds its AI products. She built and launched faibuddy.com, an AI-native advisory product for entrepreneurs.',
       'Her strength is translation: between engineers, customers, executives and investors. She works from first principles to find the underlying problem and how the parts of a business fit together.',
     ],
     proof: [
@@ -63,21 +69,26 @@ export const advisors: Advisor[] = [
       'A decade at NYSE',
       'VP of Product at Groove, through its acquisition by Clari',
       'First product hire at Fluxx, later VP of Product and Engineering',
-      'Supported Series A and B fundraising and three M&A diligence processes',
+      'Diligence on three potential transactions at Fluxx',
+      'Supported Series A and B fundraising',
+      'Built and launched faibuddy.com, an AI-native advisory product',
       'Built and led technical teams across the US, India, Kenya, Canada and Europe',
       'Degrees in computer science and software engineering',
     ],
     depth:
-      'She brings software, product and commercial experience to space companies, not aerospace engineering. You know the physics. She helps with who buys it and how.',
+      'Her depth is in software, product, AI and executive leadership, not aerospace engineering.',
     linkedIn: 'https://www.linkedin.com/in/sonia-sarao/',
   },
   {
     slug: 'cammie',
     name: 'Cammie Clay',
     leads: 'invest',
-    role: 'Co-founder, Investing',
+    role: 'Co-Founder, Investing',
     strengths: 'Investing, diligence, risk and governance',
     lede: 'Leads the firm\'s investing, with a trader\'s read on where capital is moving and a regulator\'s eye for diligence.',
+    summary: [
+      'A seasoned trader and public markets investor, she spent years in enforcement and investigations at the New York Stock Exchange and FINRA before becoming a compliance executive at RS Investments and First Republic Bank.',
+    ],
     credential:
       'A seasoned trader and public markets investor, she spent years in enforcement and investigations at the New York Stock Exchange and FINRA before becoming a compliance executive at RS Investments and First Republic Bank.',
     works_on: [

@@ -10,7 +10,7 @@ export const meta = {
   title: 'State of AI: Investing',
   subtitle: 'Following the money from software to the real world, and what it means for you.',
   author: 'Cammie Clay',
-  authorRole: 'Co-founder, Investing, Freedom with AI',
+  authorRole: 'Co-Founder, Investing, Freedom with AI',
   date: 'October 2026',
   disclaimer: 'For discussion only. Not investment or career advice.',
 };

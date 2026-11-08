@@ -7,28 +7,28 @@ import SectionHeader from '../components/SectionHeader.astro';
 import Field from '../components/Field.astro';
 import TeamAvatar from '../components/TeamAvatar.astro';
 import { advisorBySlug } from '../data/advisors';
-import { workAreas } from '../data/engagements';
+import { focusAreas, supportingExperience } from '../data/engagements';
 import { advisoryFocusOptions, advisoryStageOptions } from '../data/contact-form';
 import '../styles/content-pages.css';
 
 const pageTitle = 'Advisory | Freedom with AI';
 const pageDescription =
-  'Advisory for ISAM, space and deep-tech founders with Sonia Sarao: first customers, product strategy, go-to-market and fundraising, from someone who has built and sold enterprise technology.';
+  'Executive AI advisory with Sonia Sarao for founders, CEOs and leadership teams in space, defense and complex technology businesses: AI strategy and executive leadership, AI adoption across functions, and product and data strategy.';
 
 const sonia = advisorBySlug('sonia');
 
 const advisorySchema = {
   '@type': 'Service',
-  name: 'Founder Advisory for Space and Deep-Tech Companies',
+  name: 'Executive Advisory for AI Strategy',
   description: pageDescription,
   provider: { '@id': `${Astro.site?.origin ?? 'https://freedomwith.ai'}/#organization` },
   areaServed: 'Worldwide',
   serviceType: [
-    'Commercialization strategy',
-    'Product strategy',
-    'Go-to-market strategy',
-    'Fundraising strategy',
-    'Diligence readiness',
+    'AI strategy',
+    'AI adoption',
+    'Product and data strategy',
+    'Executive leadership coaching',
+    'Fractional product and technology leadership',
   ],
 };
 ---
@@ -41,12 +41,16 @@ const advisorySchema = {
       <div class="container">
         <SectionHeader label="Advisory" align="left" />
         <h1 id="advisory-heading" class="page-hero__title">
-          Advisory for founders building in space.
+          Executive advisory for AI strategy.
         </h1>
+        <p class="page-hero__tagline">Build AI capability from within.</p>
         <p class="page-hero__lede">
-          We work with ISAM, space and deep-tech founders on the decisions that turn a working
-          technology into a business: who buys it, what to build next, how to sell it and how to
-          get ready to raise.
+          Work directly with Sonia Sarao to connect AI opportunities with business priorities,
+          executive leadership and the capabilities of your internal teams.
+        </p>
+        <p class="page-hero__audience">
+          For founders, CEOs and leadership teams in space, defense and complex technology
+          businesses.
         </p>
         <div class="page-hero__cta">
           <Button variant="primary" href="#start" size="large" track="advisory_hero_start">
@@ -57,28 +61,26 @@ const advisorySchema = {
       </div>
     </section>
 
-    <!-- The work, by problem -->
+    <!-- The focus areas, with product, growth and leadership as supporting strength. -->
     <section class="page-section page-section--alt" aria-labelledby="work-heading">
       <div class="container">
-        <SectionHeader label="Where we help" align="left" />
-        <h2 id="work-heading" class="page-section__heading">Four problems between a breakthrough and a business.</h2>
-        <p class="page-section__sub">
-          They show up most sharply in space, and in any company where the technology is hard, the
-          buyers are complex and the timelines are long.
-        </p>
+        <SectionHeader label="Focus areas" align="left" />
+        <h2 id="work-heading" class="page-section__heading">Where AI meets the business.</h2>
 
-        <div class="work-grid">
-          {workAreas.map((area) => (
-            <article class="work">
-              <h3 class="work__title">{area.title}</h3>
-              <p class="work__body">{area.body}</p>
-              <ul class="work__list">
-                {area.items.map((item) => (
-                  <li>{item}</li>
-                ))}
-              </ul>
+        <div class="focus-grid">
+          {focusAreas.map((area) => (
+            <article class="focus">
+              <h3 class="focus__title">{area.title}</h3>
+              <p class="focus__body">{area.body}</p>
             </article>
           ))}
+        </div>
+
+        <div class="experience">
+          <h3 class="experience__title">{supportingExperience.title}</h3>
+          <div class="experience__body">
+            {supportingExperience.body.map((paragraph) => <p>{paragraph}</p>)}
+          </div>
         </div>
       </div>
     </section>
@@ -121,39 +123,28 @@ const advisorySchema = {
     <section class="page-section page-section--alt" aria-labelledby="how-heading">
       <div class="container work-split">
         <div class="work-split__main">
-          <SectionHeader label="How engagements work" align="left" />
+          <SectionHeader label="How we work" align="left" />
           <h2 id="how-heading" class="page-section__heading">
-            Decisions, carried through.
+            Decisions, carried into practice.
           </h2>
           <p class="page-section__sub">
-            Engagements are shaped around the company’s priorities and evolve as decisions are made
-            and new constraints emerge.
+            Ongoing executive advisory and fractional leadership engagements, shaped around your
+            company’s priorities.
           </p>
-
-          <ul class="check-list">
-            <li>
-              A company-level perspective across market, product, go-to-market and fundraising
-            </li>
-            <li>Regular working sessions focused on the decisions in motion</li>
-            <li>Direct access as questions surface between sessions</li>
-            <li>Continuity from decision through execution</li>
-          </ul>
+          <p class="page-section__sub">
+            Regular working sessions and direct access provide continuity as decisions move into
+            practice. Sonia brings an ongoing outside perspective on AI while working alongside your
+            leadership and internal teams.
+          </p>
         </div>
 
         <aside class="fit-card">
           <h3 class="fit-card__title">Is this a fit?</h3>
           <p>
-            Best for founders in space, physical AI and deep tech with a working technology and a
-            commercial decision in front of them. In-space servicing, assembly and manufacturing
-            (ISAM) is where we go deepest.
+            For founders, CEOs and leadership teams in space, defense and complex technology
+            businesses.
           </p>
-          <p>
-            We also take a small number of FinTech, B2B software and life sciences engagements.
-          </p>
-          <p>
-            We begin with a three- or six-month engagement. Scope and fee reflect the priorities
-            and level of involvement.
-          </p>
+          <p>The scope, cadence and fee reflect the priorities and level of involvement.</p>
           <Button variant="primary" href="#start" size="large" track="advisory_fit_start">
             Start a conversation
           </Button>
@@ -197,7 +188,7 @@ const advisorySchema = {
           <Field
             id="advisory-stage"
             name="stage"
-            label="Stage"
+            label="Company stage"
             type="select"
             optional
             options={advisoryStageOptions}
@@ -216,12 +207,12 @@ const advisorySchema = {
             label="What does the company do, and what decision is in front of you"
             type="textarea"
             required
-            placeholder="What you are building, who it is for, and the call you are trying to make in the next six months."
+            placeholder="What the company does, where AI fits today, and the decision you are working through."
           />
           <Field
             id="advisory-link"
             name="link"
-            label="Website, deck or LinkedIn"
+            label="Website or LinkedIn"
             type="url"
             optional
             placeholder="yourcompany.com"
@@ -246,7 +237,7 @@ const advisorySchema = {
 </Base>
 
 <style>
-  /* "How engagements work": copy on the left, the fit/commercial aside on the
+  /* "How we work": copy on the left, the fit/commercial aside on the
      right, so the money question sits next to the description of the work
      rather than buried under it. */
   .work-split {
@@ -254,33 +245,6 @@ const advisorySchema = {
     grid-template-columns: 1.1fr 0.9fr;
     gap: var(--space-8);
     align-items: start;
-  }
-
-  .check-list {
-    list-style: none;
-    padding: 0;
-    margin-top: var(--space-5);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-    max-width: var(--readw);
-  }
-
-  .check-list li {
-    position: relative;
-    padding-left: var(--space-6);
-    font-size: var(--text-md);
-    color: var(--color-text-muted);
-  }
-
-  .check-list li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.62em;
-    width: 12px;
-    height: 1px;
-    background: var(--color-accent);
   }
 
   .fit-card {
@@ -304,6 +268,16 @@ const advisorySchema = {
     line-height: var(--leading-relaxed);
   }
 
+  /* Spam trap: kept off screen so only bots fill it in. */
+  .contact-form__hp {
+    position: absolute !important;
+    left: -9999px !important;
+    width: 1px !important;
+    height: 1px !important;
+    opacity: 0;
+    pointer-events: none;
+  }
+
   .profile__also {
     margin-top: var(--space-5);
     font-size: var(--text-sm);
@@ -315,14 +289,29 @@ const advisorySchema = {
     text-decoration: none;
   }
 
-  .work-grid {
+  .page-hero__tagline {
+    margin-top: var(--space-4);
+    font-size: var(--text-lg);
+    font-weight: 500;
+    color: var(--color-accent);
+  }
+
+  .page-hero__audience {
+    margin-top: var(--space-4);
+    max-width: var(--readw);
+    font-size: var(--text-base);
+    font-weight: 500;
+    color: var(--color-text);
+  }
+
+  .focus-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--space-6);
     margin-top: var(--space-7);
   }
 
-  .work {
+  .focus {
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
@@ -330,43 +319,46 @@ const advisorySchema = {
     border-top: 2px solid var(--color-text);
   }
 
-  .work__title {
+  .focus__title {
     font-size: var(--text-lg);
   }
 
-  .work__body {
+  .focus__body {
     font-size: var(--text-sm);
+    line-height: var(--leading-relaxed);
     color: var(--color-text-muted);
   }
 
-  .work__list {
-    list-style: none;
-    padding: 0;
-    margin-top: var(--space-2);
+  .experience {
+    margin-top: var(--space-7);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--color-border);
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: var(--space-6);
+  }
+
+  .experience__title {
+    font-size: var(--text-md);
+    font-weight: 600;
+  }
+
+  .experience__body {
     display: flex;
     flex-direction: column;
-    gap: var(--space-2);
+    gap: var(--space-3);
+    max-width: var(--readw);
   }
 
-  .work__list li {
-    position: relative;
-    padding-left: var(--space-4);
-    font-size: var(--text-sm);
+  .experience__body p {
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
     color: var(--color-text-muted);
-  }
-
-  .work__list li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.6em;
-    width: 5px;
-    height: 1px;
-    background: var(--color-text-subtle);
   }
 
   @media (max-width: 880px) {
-    .work-grid,
+    .focus-grid,
+    .experience,
     .work-split {
       grid-template-columns: 1fr;
     }
@@ -388,7 +380,7 @@ const advisorySchema = {
     name: 'Name',
     email: 'Email',
     message: 'What does the company do, and what decision is in front of you',
-    link: 'Website, deck or LinkedIn',
+    link: 'Website or LinkedIn',
   };
 
   const showFieldError = (name: string, message: string) => {
