@@ -1,19 +1,21 @@
 import type { APIRoute } from 'astro';
 
-// Public, indexable routes with a relative priority hint.
+// Public, indexable routes with a relative priority hint. Paths carry the
+// trailing slash because that is the canonical URL each page declares;
+// Cloudflare Pages 308-redirects the slashless form.
 // Advisory leads because it is the page that converts. /office-hours is
 // deliberately absent: it stays live on
 // a shared link but is noindex, so it must not appear here. /watch and /events
 // were deleted and redirect from public/_redirects.
 const routes: { path: string; priority: string; changefreq: string }[] = [
   { path: '/', priority: '1.0', changefreq: 'weekly' },
-  { path: '/advisory', priority: '0.9', changefreq: 'monthly' },
-  { path: '/investing', priority: '0.8', changefreq: 'monthly' },
-  { path: '/thesis', priority: '0.8', changefreq: 'monthly' },
-  { path: '/thesis/state-of-ai-investing', priority: '0.7', changefreq: 'yearly' },
-  { path: '/contact', priority: '0.5', changefreq: 'monthly' },
-  { path: '/privacy', priority: '0.3', changefreq: 'yearly' },
-  { path: '/terms', priority: '0.3', changefreq: 'yearly' },
+  { path: '/advisory/', priority: '0.9', changefreq: 'monthly' },
+  { path: '/investing/', priority: '0.8', changefreq: 'monthly' },
+  { path: '/thesis/', priority: '0.8', changefreq: 'monthly' },
+  { path: '/thesis/state-of-ai-investing/', priority: '0.7', changefreq: 'yearly' },
+  { path: '/contact/', priority: '0.5', changefreq: 'monthly' },
+  { path: '/privacy/', priority: '0.3', changefreq: 'yearly' },
+  { path: '/terms/', priority: '0.3', changefreq: 'yearly' },
 ];
 
 export const GET: APIRoute = ({ site }) => {

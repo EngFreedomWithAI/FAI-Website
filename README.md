@@ -14,6 +14,9 @@ The current Freedom with AI site is an Astro static site with Cloudflare Pages F
 - `/llms.txt`: concise AI-readable site index
 - `/llms-full.txt`: complete canonical firm and site content for AI agents
 - `/robots.txt` and `/sitemap.xml`: crawler discovery
+- `404.html`: served with a real 404 status for any unknown path. Without it Cloudflare Pages returns the homepage with a 200, so guessed URLs look real to crawlers and AI agents. It is noindex and stays out of the sitemap and AI-readable files.
+
+The sitemap and AI-readable files list canonical URLs with a trailing slash (`/advisory/`), matching each page's canonical tag. The slashless form 308-redirects.
 
 Retired public URLs are handled in `public/_redirects`. The old pages and assets are not kept in the source tree.
 

@@ -2,6 +2,7 @@
 import '../styles/tokens.css';
 import '../styles/global.css';
 import { site } from '../config/site';
+import { advisors } from '../data/advisors';
 import Analytics from '../components/Analytics.astro';
 
 interface Props {
@@ -52,10 +53,17 @@ const organizationSchema = {
     site.profiles.cammieLinkedIn,
     site.socials.x,
   ],
-  founder: [
-    { '@type': 'Person', name: 'Sonia Sarao', sameAs: site.profiles.soniaLinkedIn },
-    { '@type': 'Person', name: 'Cammie Clay', sameAs: site.profiles.cammieLinkedIn },
-  ],
+  founder: advisors.map((partner) => ({
+    '@type': 'Person',
+    '@id': `${origin}/#${partner.slug}`,
+    name: partner.name,
+    jobTitle: partner.role,
+    description: partner.lede,
+    image: new URL(site.teamPhotos[partner.slug], origin).href,
+    knowsAbout: partner.strengths,
+    worksFor: { '@id': `${origin}/#organization` },
+    sameAs: partner.linkedIn,
+  })),
 };
 
 const websiteSchema = {

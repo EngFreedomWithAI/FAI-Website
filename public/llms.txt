@@ -6,17 +6,17 @@ Advisory serves founders, CEOs and leadership teams in space, defense and comple
 
 ## Thesis
 
-[Thesis](https://freedomwith.ai/thesis): AI is leaving the screen. The money moved from software (bits) into chips, data centers and power (bits buy atoms), and next into machines that act in the world (bits drive atoms). Space is the whole AI stack under its hardest constraints: energy, chips, infrastructure, models and applications, each with less power, bandwidth and room for error. Freedom with AI advises leadership teams on AI, product and technology strategy, connecting technical capabilities with customer needs, business priorities and organizational capability, while helping companies strengthen the capabilities of their own people. The five-layer stack builds on Jensen Huang's framing of AI as infrastructure.
+[Thesis](https://freedomwith.ai/thesis/): AI is leaving the screen. The money moved from software (bits) into chips, data centers and power (bits buy atoms), and next into machines that act in the world (bits drive atoms). Space is the whole AI stack under its hardest constraints: energy, chips, infrastructure, models and applications, each with less power, bandwidth and room for error. Freedom with AI advises leadership teams on AI, product and technology strategy, connecting technical capabilities with customer needs, business priorities and organizational capability, while helping companies strengthen the capabilities of their own people. The five-layer stack builds on Jensen Huang's framing of AI as infrastructure.
 
-[State of AI: Investing](https://freedomwith.ai/thesis/state-of-ai-investing): Cammie Clay's October 2026 talk following the money from software to the real world.
+[State of AI: Investing](https://freedomwith.ai/thesis/state-of-ai-investing/): Cammie Clay's October 2026 talk following the money from software to the real world.
 
 ## Advisory
 
-[Advisory](https://freedomwith.ai/advisory): executive advisory for AI strategy with Sonia Sarao. Three focus areas: AI strategy and executive leadership, AI adoption across functions, and product and data strategy. Supported by experience in product direction, customer discovery, new business lines, enterprise growth, global teams, fundraising and acquisition diligence, plus executive leadership coaching for founders and CEOs. Engagements are ongoing executive advisory and fractional leadership; scope, cadence and fee reflect the priorities and level of involvement.
+[Advisory](https://freedomwith.ai/advisory/): executive advisory for AI strategy with Sonia Sarao. Three focus areas: AI strategy and executive leadership, AI adoption across functions, and product and data strategy. Supported by experience in product direction, customer discovery, new business lines, enterprise growth, global teams, fundraising and acquisition diligence, plus executive leadership coaching for founders and CEOs. Engagements are ongoing executive advisory and fractional leadership; scope, cadence and fee reflect the priorities and level of involvement.
 
 ## Investing
 
-[Investing](https://freedomwith.ai/investing): early, small checks of the firm's own capital, alongside specialist investors where deep aerospace or hardware diligence is needed. Advisory and investment decisions are separate.
+[Investing](https://freedomwith.ai/investing/): early, small checks of the firm's own capital, alongside specialist investors where deep aerospace or hardware diligence is needed. Advisory and investment decisions are separate.
 
 ## Partners
 
@@ -30,10 +30,10 @@ Advisory serves founders, CEOs and leadership teams in space, defense and comple
 ## Key pages
 
 - [Home](https://freedomwith.ai/)
-- [Advisory](https://freedomwith.ai/advisory)
-- [Investing](https://freedomwith.ai/investing)
-- [Thesis](https://freedomwith.ai/thesis)
-- [Contact](https://freedomwith.ai/contact)
+- [Advisory](https://freedomwith.ai/advisory/)
+- [Investing](https://freedomwith.ai/investing/)
+- [Thesis](https://freedomwith.ai/thesis/)
+- [Contact](https://freedomwith.ai/contact/)
 - [Complete site content](https://freedomwith.ai/llms-full.txt)
 
 Content on the site is educational and is not individualised legal, financial, regulatory or investment advice.

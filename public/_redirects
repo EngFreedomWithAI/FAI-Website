@@ -4,7 +4,7 @@
 # browser caches. Query strings on the request are carried through, which is how the
 # QR code's ?utm_source=devx&utm_medium=qr survives to the signup form.
 
-/devx  /office-hours  302
+/devx  /office-hours/  302
 
 # Retired pages. /watch was permanently empty and /events carried the old
 # positioning, so both were removed rather than left orphaned.
@@ -13,8 +13,8 @@
 # back, and a cached 301 would be painful to undo.
 /watch   /  301
 /events  /  302
-/advisors  /advisory  301
-/about     /advisory  301
-/about/    /advisory  301
+/advisors  /advisory/  301
+/about     /advisory/  301
+/about/    /advisory/  301
 /advisors/sonia  https://www.linkedin.com/in/sonia-sarao/  302
 /advisors/cammie  https://www.linkedin.com/in/cammieclay/  302
