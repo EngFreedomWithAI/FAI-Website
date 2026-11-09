@@ -87,10 +87,10 @@ export const advisors: Advisor[] = [
     strengths: 'Investing, diligence, risk and governance',
     lede: 'Leads the firm\'s investing, with a trader\'s read on where capital is moving and a regulator\'s eye for diligence.',
     summary: [
-      'A seasoned trader and public markets investor, she spent years in enforcement and investigations at the New York Stock Exchange and FINRA before becoming a compliance executive at RS Investments and First Republic Bank.',
+      'A seasoned trader and public markets investor, she spent years in enforcement and investigations at the New York Stock Exchange and FINRA before becoming a compliance executive at RS Investments and First Republic Bank, Private Wealth Management.',
     ],
     credential:
-      'A seasoned trader and public markets investor, she spent years in enforcement and investigations at the New York Stock Exchange and FINRA before becoming a compliance executive at RS Investments and First Republic Bank.',
+      'A seasoned trader and public markets investor, she spent years in enforcement and investigations at the New York Stock Exchange and FINRA before becoming a compliance executive at RS Investments and First Republic Bank, Private Wealth Management.',
     works_on: [
       'Where capital is moving across AI, physical AI and space',
       'Diligence: what will be examined, and what could break',
@@ -99,14 +99,14 @@ export const advisors: Advisor[] = [
     ],
     bio: [
       'Cammie leads investing at Freedom with AI. She is a seasoned trader and public markets investor who follows where capital is moving across AI and the physical economy. Her talk, State of AI: Investing, traces that money from software into chips, data centers, power and now the real world.',
-      'Before investing, she worked on both sides of financial regulation: enforcement and investigations at the New York Stock Exchange and FINRA, then compliance leadership at RS Investments and First Republic Bank, where she was VP of Compliance in private wealth management. She holds a Series 7.',
+      'Before investing, she worked on both sides of financial regulation: enforcement and investigations at the New York Stock Exchange and FINRA, then compliance leadership at RS Investments and First Republic Bank, Private Wealth Management, where she was VP of Compliance. She holds a Series 7.',
       'That background shapes how she looks at a company: what an examiner, acquirer or investor will scrutinize, where the risk sits, and whether the governance will hold as the company grows.',
     ],
     proof: [
       'Seasoned trader and public markets investor',
       'Regulator at the New York Stock Exchange and FINRA',
       'Compliance executive at RS Investments',
-      'VP of Compliance, private wealth management, at First Republic Bank',
+      'VP of Compliance at First Republic Bank, Private Wealth Management',
       'Series 7',
     ],
     depth:
